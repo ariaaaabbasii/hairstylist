@@ -1,0 +1,20 @@
+{
+  "name": "opvoedmaatje-netlify",
+  "version": "1.0.0",
+  "description": "Opvoedmaatje chatbot with secure API key handling through Netlify Functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "netlify",
+    "serverless",
+    "openai",
+    "chatbot"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.7"
+  }
+}
