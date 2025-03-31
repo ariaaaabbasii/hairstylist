@@ -1,1538 +1,4 @@
-<!DOCTYPE html>
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luminous - Uw premium haarsalon in Nederland. Ontdek onze professionele haarstyling, kleurbehandelingen en meer.">
-    <title>Luminous | Premium Haarstyling</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            lightest: '#FFF8E1',
-                            lighter: '#F5EAC1',
-                            light: '#E6D090',
-                            DEFAULT: '#D4AF37',
-                            dark: '#B8860B',
-                            darker: '#96700D',
-                        },
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'serif'],
-                        'sans': ['Montserrat', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-        }
-        .gold-text {
-            color: #D4AF37;
-        }
-        .gold-border {
-            border-color: #D4AF37;
-        }
-        .gold-bg {
-            background-color: #D4AF37;
-        }
-        .gold-light-bg {
-            background-color: #F5EAC1;
-        }
-        .gold-gradient {
-            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
-        }
-        .hero-pattern {
-            background-color: white;
-            background-image: radial-gradient(#D4AF37 0.5px, transparent 0.5px), radial-gradient(#D4AF37 0.5px, white 0.5px);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            opacity: 0.08;
-        }
-        .text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .img-shadow {
-            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3);
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #D4AF37;
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #B8860B;
-        }
-        
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .hover-grow {
-            transition: transform 0.3s ease;
-        }
-        .hover-grow:hover {
-            transform: scale(1.03);
-        }
-        
-        /* Mobile menu */
-        .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.3s ease-in-out;
-        }
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
-        
-        /* Placeholder images styling */
-        .placeholder-image {
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .placeholder-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(255,255,255,0) 50%, rgba(212,175,55,0.2) 100%);
-            z-index: 1;
-        }
-        
-        /* Wavy divider */
-        .wave-divider {
-            position: relative;
-            height: 70px;
-            overflow: hidden;
-        }
-        .wave-divider::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 10px;
-            background-size: 20px 40px;
-            background-image: radial-gradient(circle at 10px -15px, transparent 20px, white 20px);
-        }
-        
-        /* Photo overlay */
-        .photo-overlay {
-            position: relative;
-        }
-        .photo-overlay::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 100%);
-            pointer-events: none;
-        }
-        
-        /* Service hover effect */
-        .service-card {
-            transition: all 0.3s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 22px 40px rgba(0,0,0,0.15);
-        }
-        
-        /* Fancy border */
-        .fancy-border {
-            position: relative;
-        }
-        .fancy-border::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: linear-gradient(45deg, #D4AF37, transparent, #D4AF37, transparent);
-            z-index: -1;
-            border-radius: 8px;
-            animation: animatedBorder 4s linear infinite;
-        }
-        @keyframes animatedBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Style for cookie consent */
-        .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(255, 255, 255, 0.95);
-            padding: 1rem;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transform: translateY(100%);
-            transition: transform 0.3s ease-in-out;
-        }
-        .cookie-banner.show {
-            transform: translateY(0);
-        }
-        
-        /* Chat Widget Styles */
-        .chat-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .chat-widget-toggle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: transform 0.2s ease;
-        }
-        
-        .chat-widget-toggle:hover {
-            transform: scale(1.05);
-        }
-        
-        .chat-widget-container {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 350px;
-            max-height: 500px;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            pointer-events: none;
-        }
-        
-        .chat-widget-container.open {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: all;
-        }
-        
-        .chat-widget-header {
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: white;
-        }
-        
-        .chat-widget-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            max-height: 350px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .chat-message {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            margin-bottom: 5px;
-            word-break: break-word;
-            position: relative;
-            animation: message-pop 0.3s forwards;
-        }
-        
-        .chat-message.assistant {
-            align-self: flex-start;
-            background: #F3F4F6;
-            color: #1F2937;
-            border-bottom-left-radius: 4px;
-        }
-        
-        .chat-message.user {
-            align-self: flex-end;
-            background: #D4AF37;
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-        
-        .chat-widget-input {
-            padding: 10px 15px;
-            border-top: 1px solid rgba(229, 231, 235, 0.8);
-            display: flex;
-            gap: 10px;
-        }
-        
-        .chat-widget-input textarea {
-            flex: 1;
-            border: 1px solid #E5E7EB;
-            border-radius: 20px;
-            padding: 10px 15px;
-            resize: none;
-            font-family: 'Montserrat', sans-serif;
-            max-height: 100px;
-            outline: none;
-        }
-        
-        .chat-widget-input button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: opacity 0.2s ease;
-        }
-        
-        .chat-widget-input button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        
-        .scale-on-click:active {
-            transform: scale(0.95);
-        }
-        
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 12px 16px;
-            background: #F3F4F6;
-            border-radius: 18px;
-            border-bottom-left-radius: 4px;
-            width: fit-content;
-            margin-bottom: 5px;
-            align-self: flex-start;
-        }
-        
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #D4AF37;
-            border-radius: 50%;
-            animation: typing-dot 1.4s infinite both;
-        }
-        
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes typing-dot {
-            0%, 100% {
-                opacity: 0.4;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-        
-        @keyframes message-pop {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .chat-widget-container {
-                width: calc(100vw - 40px);
-                max-height: 60vh;
-                bottom: 70px;
-            }
-            
-            .chat-widget-toggle {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-        }
-    </style>
-</head>
-<body class="bg-white text-gray-800 overflow-x-hidden">
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold gold-text font-serif">Luminous</a>
-            <div class="hidden lg:flex space-x-8">
-                <a href="#home" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold">HOME</a>
-                <a href="#about" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold">OVER ONS</a>
-                <a href="#services" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold">DIENSTEN</a>
-                <a href="#gallery" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold">GALERIE</a>
-                <a href="#testimonials" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold">RECENSIES</a>
-                <a href="#contact" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold">CONTACT</a>
-            </div>
-            <button id="mobileMenuToggle" class="lg:hidden gold-text focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
-        </div>
-    </nav>
-    
-    <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 overflow-y-auto lg:hidden">
-        <div class="p-6">
-            <div class="flex justify-between items-center mb-8">
-                <a href="#" class="text-2xl font-bold gold-text font-serif">Luminous</a>
-                <button id="closeMenu" class="focus:outline-none">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">HOME</a>
-                <a href="#about" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">OVER ONS</a>
-                <a href="#services" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">DIENSTEN</a>
-                <a href="#gallery" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">GALERIE</a>
-                <a href="#testimonials" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">RECENSIES</a>
-                <a href="#contact" class="py-2 text-sm font-medium hover:gold-text transition duration-300">CONTACT</a>
-            </div>
-            <div class="mt-8 pt-6 border-t border-gray-100">
-                <a href="tel:+31627403860" class="block w-full py-3 gold-bg text-white text-center font-medium rounded-sm hover:bg-gold-dark transition duration-300">BEL VOOR EEN AFSPRAAK</a>
-            </div>
-            <div class="mt-6 flex justify-center space-x-4">
-                <a href="#" class="text-gray-400 hover:gold-text transition duration-300"><i class="fab fa-instagram text-lg"></i></a>
-                <a href="#" class="text-gray-400 hover:gold-text transition duration-300"><i class="fab fa-facebook-f text-lg"></i></a>
-                <a href="#" class="text-gray-400 hover:gold-text transition duration-300"><i class="fab fa-pinterest text-lg"></i></a>
-                <a href="#" class="text-gray-400 hover:gold-text transition duration-300"><i class="fab fa-tiktok text-lg"></i></a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center pt-16">
-        <div class="absolute inset-0 hero-pattern"></div>
-        <div class="container mx-auto px-4 py-16 flex flex-col md:flex-row items-center justify-between relative z-10">
-            <div class="md:w-1/2 mb-10 md:mb-0 fade-in">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold mb-4 leading-tight text-shadow">Verander Je Look met <span class="gold-text italic">Uitzonderlijke Styling</span></h1>
-                <p class="text-lg mb-8 text-gray-600">Waar vakmanschap expertise ontmoet. Premium haarstyling die jouw unieke schoonheid viert.</p>
-                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="tel:+31627403860" class="px-8 py-3 bg-black text-white font-medium rounded-sm hover:opacity-90 transition duration-300 text-center shadow-md">BEL VOOR EEN AFSPRAAK</a>
-                    <a href="#services" class="px-8 py-3 border border-black text-black font-medium rounded-sm hover:bg-black hover:text-white transition duration-300 text-center">ONZE DIENSTEN</a>
-                </div>
-                <div class="mt-8 inline-flex items-center p-2 bg-gold-lightest rounded-full">
-                    <span class="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-gold opacity-75"></span>
-                    <span class="relative flex rounded-full h-3 w-3 bg-gold"></span>
-                    <span class="ml-3 text-sm font-medium">Nu open voor nieuwe klanten</span>
-                </div>
-            </div>
-            <div class="md:w-1/2 fade-in" style="animation-delay: 0.3s;">
-                <div class="relative">
-                    <img src="/api/placeholder/600/800" alt="Elegante haarstyling" class="rounded-md img-shadow w-full max-w-lg mx-auto object-cover">
-                    <div class="absolute -bottom-6 -left-6 w-32 h-32 gold-bg rounded-full flex items-center justify-center p-4 shadow-lg hidden md:flex">
-                        <div class="text-white text-center">
-                            <p class="font-serif text-sm">GROTE</p>
-                            <p class="font-bold text-xl">OPENING</p>
-                            <p class="text-xs mt-1">SPECIALE AANBIEDING</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl font-semibold mb-2 gold-text">Over Ons</h2>
-                <div class="w-24 h-1 gold-gradient mx-auto"></div>
-                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">Ervaar het vakmanschap en de luxe van onze eersteklas haarstyling salon.</p>
-            </div>
-            <div class="flex flex-col md:flex-row items-center gap-10">
-                <div class="md:w-1/2 fade-in">
-                    <div class="relative">
-                        <img src="/api/placeholder/600/800" alt="Onze salon" class="rounded-md img-shadow w-full object-cover">
-                        <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-white p-4 shadow-lg hidden md:block">
-                            <div class="w-full h-full border-2 gold-border flex items-center justify-center">
-                                <div class="text-center">
-                                    <p class="font-serif gold-text">SINDS</p>
-                                    <p class="font-bold text-2xl">2015</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:w-1/2 fade-in" style="animation-delay: 0.3s;">
-                    <h3 class="text-3xl font-semibold mb-6">Onze Passie voor Prachtig Haar</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Opgericht in 2015 heeft Luminous zich gevestigd als een vooraanstaande bestemming voor mensen die op zoek zijn naar uitzonderlijke haarverzorging en styling. Ons team van bekwame stylisten combineert artistieke visie met technische precisie om looks te creëren die je natuurlijke schoonheid versterken.
-                    </p>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Wij geloven dat mooi haar meer is dan alleen esthetiek—het gaat over zelfvertrouwen, zelfexpressie en je op je best voelen. Elke klant ontvangt persoonlijke aandacht en maatwerk oplossingen die zijn afgestemd op hun unieke haartype, gezichtsvorm en levensstijl.
-                    </p>
-                    <div class="flex flex-wrap gap-8 mt-8">
-                        <div class="hover-grow">
-                            <h4 class="gold-text text-5xl font-semibold mb-2">10+</h4>
-                            <p class="text-sm text-gray-500">JAREN ERVARING</p>
-                        </div>
-                        <div class="hover-grow">
-                            <h4 class="gold-text text-5xl font-semibold mb-2">15k+</h4>
-                            <p class="text-sm text-gray-500">TEVREDEN KLANTEN</p>
-                        </div>
-                        <div class="hover-grow">
-                            <h4 class="gold-text text-5xl font-semibold mb-2">12</h4>
-                            <p class="text-sm text-gray-500">EXPERT STYLISTEN</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl font-semibold mb-2 gold-text">Onze Diensten</h2>
-                <div class="w-24 h-1 gold-gradient mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto">Ontdek ons assortiment premium diensten, ontworpen om je natuurlijke schoonheid te versterken en je vol zelfvertrouwen en verfrist te laten voelen.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="service-card bg-white p-8 rounded-md shadow-md border-t-4 gold-border">
-                    <div class="gold-text text-4xl mb-4">
-                        <i class="fas fa-cut"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Precisie Knipbeurten</h3>
-                    <p class="text-gray-600 mb-4">Op maat gemaakte kapsels die je kenmerken versterken en bij je levensstijl passen, uitgevoerd met deskundige precisie.</p>
-                    <p class="font-semibold gold-text">Vanaf €65</p>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <a href="tel:+31627403860" class="inline-flex items-center text-sm gold-text hover:underline">
-                            Bel voor een afspraak <i class="fas fa-phone ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card bg-white p-8 rounded-md shadow-md border-t-4 gold-border">
-                    <div class="gold-text text-4xl mb-4">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Luxe Kleurbehandelingen</h3>
-                    <p class="text-gray-600 mb-4">Van subtiele highlights tot gedurfde transformaties, onze kleurspecialisten creëren dimensie en levendigheid.</p>
-                    <p class="font-semibold gold-text">Vanaf €85</p>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <a href="tel:+31627403860" class="inline-flex items-center text-sm gold-text hover:underline">
-                            Bel voor een afspraak <i class="fas fa-phone ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card bg-white p-8 rounded-md shadow-md border-t-4 gold-border">
-                    <div class="gold-text text-4xl mb-4">
-                        <i class="fas fa-fire"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Styling & Blowouts</h3>
-                    <p class="text-gray-600 mb-4">Perfect voor speciale gelegenheden of wanneer je er buitengewoon goed uit wilt zien en voelen.</p>
-                    <p class="font-semibold gold-text">Vanaf €55</p>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <a href="tel:+31627403860" class="inline-flex items-center text-sm gold-text hover:underline">
-                            Bel voor een afspraak <i class="fas fa-phone ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="service-card bg-white p-8 rounded-md shadow-md border-t-4 gold-border">
-                    <div class="gold-text text-4xl mb-4">
-                        <i class="fas fa-magic"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Haarbehandelingen</h3>
-                    <p class="text-gray-600 mb-4">Revitaliseer en herstel de gezondheid van je haar met onze voedende, professionele behandelingen.</p>
-                    <p class="font-semibold gold-text">Vanaf €75</p>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <a href="tel:+31627403860" class="inline-flex items-center text-sm gold-text hover:underline">
-                            Bel voor een afspraak <i class="fas fa-phone ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="service-card bg-white p-8 rounded-md shadow-md border-t-4 gold-border">
-                    <div class="gold-text text-4xl mb-4">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Extensions & Textuur</h3>
-                    <p class="text-gray-600 mb-4">Voeg lengte, volume en dimensie toe met onze premium extension- en texturiseringsdiensten.</p>
-                    <p class="font-semibold gold-text">Vanaf €150</p>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <a href="tel:+31627403860" class="inline-flex items-center text-sm gold-text hover:underline">
-                            Bel voor een afspraak <i class="fas fa-phone ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="service-card bg-white p-8 rounded-md shadow-md border-t-4 gold-border">
-                    <div class="gold-text text-4xl mb-4">
-                        <i class="fas fa-crown"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3">Bruiloft & Speciale Evenementen</h3>
-                    <p class="text-gray-600 mb-4">Uitgebreide stylingpakketten om ervoor te zorgen dat je er onvergetelijk uitziet op je speciale dag.</p>
-                    <p class="font-semibold gold-text">Vanaf €120</p>
-                    <div class="mt-4 pt-4 border-t border-gray-100">
-                        <a href="tel:+31627403860" class="inline-flex items-center text-sm gold-text hover:underline">
-                            Bel voor een afspraak <i class="fas fa-phone ml-1 text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="tel:+31627403860" class="inline-block px-8 py-3 gold-gradient text-white font-medium rounded-sm hover:opacity-90 transition duration-300 shadow-md">BEL VOOR EEN AFSPRAAK: +31 6 27 40 38 60</a>
-            </div>
-            
-            <!-- Price List Button -->
-            <div class="text-center mt-8">
-                <button id="priceListBtn" class="inline-flex items-center px-6 py-2 border gold-border text-gray-800 font-medium rounded-sm hover:bg-gold-lightest transition duration-300">
-                    <i class="fas fa-list-ul mr-2"></i> Bekijk onze volledige prijslijst
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Price List Modal -->
-    <div id="priceListModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-md max-w-4xl w-full max-h-screen overflow-y-auto m-4">
-            <div class="p-6 border-b border-gray-200">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-2xl font-semibold gold-text">Volledige Prijslijst</h3>
-                    <button id="closePriceList" class="text-gray-500 hover:text-gray-700 focus:outline-none">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="p-6">
-                <!-- Haircuts -->
-                <div class="mb-8">
-                    <h4 class="text-xl font-semibold mb-4 pb-2 border-b">Knipbeurten</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span>Dames Knipbeurt</span>
-                            <span class="font-medium">€65 - €85</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Heren Knipbeurt</span>
-                            <span class="font-medium">€45 - €65</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Kinderen Knipbeurt (tot 12 jaar)</span>
-                            <span class="font-medium">€35 - €45</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Pony Knippen</span>
-                            <span class="font-medium">€20</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Styling Consultatie</span>
-                            <span class="font-medium">€35</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Color -->
-                <div class="mb-8">
-                    <h4 class="text-xl font-semibold mb-4 pb-2 border-b">Kleurbehandelingen</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span>Uitgroei Bijwerken</span>
-                            <span class="font-medium">€85 - €95</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Volledige Kleuring</span>
-                            <span class="font-medium">€110 - €140</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Highlights (Half Hoofd)</span>
-                            <span class="font-medium">€120 - €140</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Highlights (Vol Hoofd)</span>
-                            <span class="font-medium">€150 - €180</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Balayage / Ombre</span>
-                            <span class="font-medium">€170 - €220</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Toner</span>
-                            <span class="font-medium">€40 - €60</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Styling -->
-                <div class="mb-8">
-                    <h4 class="text-xl font-semibold mb-4 pb-2 border-b">Styling & Blowouts</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span>Blowout - Kort Haar</span>
-                            <span class="font-medium">€55</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Blowout - Middellang Haar</span>
-                            <span class="font-medium">€65</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Blowout - Lang Haar</span>
-                            <span class="font-medium">€75</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Stijlen met Krultang/Stijltang</span>
-                            <span class="font-medium">€35 - €55</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Feestkapsel / Opsteekkapsel</span>
-                            <span class="font-medium">€85 - €120</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Treatments -->
-                <div class="mb-8">
-                    <h4 class="text-xl font-semibold mb-4 pb-2 border-b">Haarbehandelingen</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span>Diepe Voedende Behandeling</span>
-                            <span class="font-medium">€75</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Keratine Behandeling</span>
-                            <span class="font-medium">€180 - €250</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Olaplex Behandeling</span>
-                            <span class="font-medium">€90</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Hoofdhuidbehandeling</span>
-                            <span class="font-medium">€65</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Extensions -->
-                <div class="mb-8">
-                    <h4 class="text-xl font-semibold mb-4 pb-2 border-b">Extensions & Textuur</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span>Consultatie Extensions</span>
-                            <span class="font-medium">€50</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Extensions Plaatsen (Half Hoofd)</span>
-                            <span class="font-medium">€350 - €550</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Extensions Plaatsen (Vol Hoofd)</span>
-                            <span class="font-medium">€650 - €950</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Extensions Onderhoud (per uur)</span>
-                            <span class="font-medium">€95</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Extensions Verwijderen</span>
-                            <span class="font-medium">€150 - €250</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Permanente Wave</span>
-                            <span class="font-medium">€140 - €220</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Bridal -->
-                <div>
-                    <h4 class="text-xl font-semibold mb-4 pb-2 border-b">Bruiloft & Speciale Evenementen</h4>
-                    <div class="space-y-3">
-                        <div class="flex justify-between">
-                            <span>Bruid Proefkapsel</span>
-                            <span class="font-medium">€120</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Bruid Kapsel op de Dag</span>
-                            <span class="font-medium">€180</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Bruidsmeisje/Gast Kapsel</span>
-                            <span class="font-medium">€95 - €120</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Bruidegom Styling</span>
-                            <span class="font-medium">€65</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Op Locatie Toeslag</span>
-                            <span class="font-medium">Vanaf €150</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="p-6 border-t border-gray-200 text-center">
-                <p class="text-sm text-gray-500 mb-4">Alle prijzen zijn inclusief BTW. Prijzen kunnen variëren afhankelijk van haarlengte, dikte en gebruikte producten.</p>
-                <button id="closePriceListBtn" class="px-6 py-2 bg-gold text-white font-medium rounded-sm hover:bg-gold-dark transition duration-300">Sluiten</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Gallery Section -->
-    <section id="gallery" class="py-20 gold-light-bg">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl font-semibold mb-2 gold-text">Ons Werk</h2>
-                <div class="w-24 h-1 gold-gradient mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto">Bekijk onze galerij van transformaties en laat je inspireren voor je volgende bezoek.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Gallery images with mockup styling -->
-                <div class="relative overflow-hidden rounded-md shadow-md group photo-overlay">
-                    <div class="placeholder-image bg-gray-100 w-full h-80 md:h-96">
-                        <img src="/api/placeholder/400/700" alt="Kapsel 1" class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                        <div class="p-6 text-white">
-                            <h3 class="font-semibold text-lg">Luxueuze Golven</h3>
-                            <p class="text-sm text-white/80">Kleur & Styling</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative overflow-hidden rounded-md shadow-md group photo-overlay">
-                    <div class="placeholder-image bg-gray-100 w-full h-80 md:h-96">
-                        <img src="/api/placeholder/400/700" alt="Kapsel 2" class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                        <div class="p-6 text-white">
-                            <h3 class="font-semibold text-lg">Moderne Bob</h3>
-                            <p class="text-sm text-white/80">Precisie Knipbeurt</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative overflow-hidden rounded-md shadow-md group photo-overlay">
-                    <div class="placeholder-image bg-gray-100 w-full h-80 md:h-96">
-                        <img src="/api/placeholder/400/700" alt="Kapsel 3" class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                        <div class="p-6 text-white">
-                            <h3 class="font-semibold text-lg">Balayage Highlights</h3>
-                            <p class="text-sm text-white/80">Kleur Transformatie</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative overflow-hidden rounded-md shadow-md group photo-overlay sm:col-span-2 lg:col-span-1">
-                    <div class="placeholder-image bg-gray-100 w-full h-80">
-                        <img src="/api/placeholder/800/500" alt="Kapsel 4" class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                        <div class="p-6 text-white">
-                            <h3 class="font-semibold text-lg">Klassiek Opgestoken Haar</h3>
-                            <p class="text-sm text-white/80">Bruids Styling</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="relative overflow-hidden rounded-md shadow-md group photo-overlay lg:col-span-2">
-                    <div class="placeholder-image bg-gray-100 w-full h-80">
-                        <img src="/api/placeholder/900/500" alt="Kapsel 5" class="w-full h-full object-cover">
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                        <div class="p-6 text-white">
-                            <h3 class="font-semibold text-lg">Platina Transformatie</h3>
-                            <p class="text-sm text-white/80">Kleurcorrectie & Styling</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Before & After Section -->
-                <div class="sm:col-span-2 lg:col-span-3 mt-8">
-                    <h3 class="text-2xl font-semibold mb-6 text-center">Voor & Na Transformaties</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-                        <div class="bg-white p-4 rounded-md shadow-md">
-                            <div class="flex flex-col sm:flex-row gap-2">
-                                <div class="flex-1">
-                                    <div class="relative w-full h-40 overflow-hidden rounded">
-                                        <img src="/api/placeholder/300/300" alt="Voor" class="w-full h-full object-cover">
-                                        <div class="absolute top-2 left-2 px-2 py-1 bg-black text-white text-xs rounded">VOOR</div>
-                                    </div>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="relative w-full h-40 overflow-hidden rounded">
-                                        <img src="/api/placeholder/300/300" alt="Na" class="w-full h-full object-cover">
-                                        <div class="absolute top-2 left-2 px-2 py-1 gold-bg text-white text-xs rounded">NA</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center mt-4">
-                                <h4 class="font-medium">Donker naar Blond</h4>
-                                <p class="text-sm text-gray-600">Kleurcorrectie & Highlights</p>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-4 rounded-md shadow-md">
-                            <div class="flex flex-col sm:flex-row gap-2">
-                                <div class="flex-1">
-                                    <div class="relative w-full h-40 overflow-hidden rounded">
-                                        <img src="/api/placeholder/300/300" alt="Voor" class="w-full h-full object-cover">
-                                        <div class="absolute top-2 left-2 px-2 py-1 bg-black text-white text-xs rounded">VOOR</div>
-                                    </div>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="relative w-full h-40 overflow-hidden rounded">
-                                        <img src="/api/placeholder/300/300" alt="Na" class="w-full h-full object-cover">
-                                        <div class="absolute top-2 left-2 px-2 py-1 gold-bg text-white text-xs rounded">NA</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center mt-4">
-                                <h4 class="font-medium">Lang naar Bob</h4>
-                                <p class="text-sm text-gray-600">Transformerende Knipbeurt</p>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white p-4 rounded-md shadow-md">
-                            <div class="flex flex-col sm:flex-row gap-2">
-                                <div class="flex-1">
-                                    <div class="relative w-full h-40 overflow-hidden rounded">
-                                        <img src="/api/placeholder/300/300" alt="Voor" class="w-full h-full object-cover">
-                                        <div class="absolute top-2 left-2 px-2 py-1 bg-black text-white text-xs rounded">VOOR</div>
-                                    </div>
-                                </div>
-                                <div class="flex-1">
-                                    <div class="relative w-full h-40 overflow-hidden rounded">
-                                        <img src="/api/placeholder/300/300" alt="Na" class="w-full h-full object-cover">
-                                        <div class="absolute top-2 left-2 px-2 py-1 gold-bg text-white text-xs rounded">NA</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-center mt-4">
-                                <h4 class="font-medium">Volume & Balayage</h4>
-                                <p class="text-sm text-gray-600">Highlights & Styling</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-10">
-                <a href="#" class="inline-block px-8 py-3 bg-white text-black font-medium rounded-sm hover:bg-black hover:text-white transition duration-300 shadow-md">
-                    BEKIJK AL ONS WERK <i class="fas fa-arrow-right ml-2"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-gold-lightest rounded-full -mr-32 -mt-32 opacity-50"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-gold-lightest rounded-full -ml-32 -mb-32 opacity-50"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl font-semibold mb-2 gold-text">Klantrecensies</h2>
-                <div class="w-24 h-1 gold-gradient mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto">Hier is wat onze klanten te zeggen hebben over hun ervaring bij ons.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white p-8 rounded-md shadow-md hover:shadow-lg transition duration-300 hover-grow">
-                    <div class="flex items-center mb-4">
-                        <div class="gold-text text-xl">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic mb-6">"De stylisten bij Luminous luisteren echt naar wat je wilt en overtreffen de verwachtingen. Ik heb me nog nooit zo zelfverzekerd gevoeld met mijn haar!"</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="/api/placeholder/100/100" alt="Klant 1" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Sarah de Jong</h4>
-                            <p class="text-sm text-gray-500">Vaste Klant</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="bg-white p-8 rounded-md shadow-md hover:shadow-lg transition duration-300 hover-grow">
-                    <div class="flex items-center mb-4">
-                        <div class="gold-text text-xl">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic mb-6">"Ik ben bij veel salons geweest, maar Luminous onderscheidt zich door hun uitzonderlijke vaardigheid en oog voor detail. Elke cent waard!"</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="/api/placeholder/100/100" alt="Klant 2" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Michael van Dijk</h4>
-                            <p class="text-sm text-gray-500">Klant sinds 2019</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="bg-white p-8 rounded-md shadow-md hover:shadow-lg transition duration-300 hover-grow">
-                    <div class="flex items-center mb-4">
-                        <div class="gold-text text-xl">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-gray-600 italic mb-6">"De perfecte mix van luxe, vakmanschap en persoonlijke service. Mijn stylist heeft mijn haar getransformeerd en mijn zelfvertrouwen vergroot!"</p>
-                    <div class="flex items-center">
-                        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                            <img src="/api/placeholder/100/100" alt="Klant 3" class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-semibold">Emma de Boer</h4>
-                            <p class="text-sm text-gray-500">Klant sinds 2020</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Google Reviews Section -->
-            <div class="mt-16 py-10 bg-white rounded-lg shadow-md">
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-semibold">Onze Google Recensies</h3>
-                    <div class="flex items-center justify-center mt-4">
-                        <div class="gold-text text-xl mr-2">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <span class="text-2xl font-semibold">4.8</span>
-                        <span class="text-gray-500 ml-2">uit 5 (124 recensies)</span>
-                    </div>
-                </div>
-                
-                <div class="flex flex-wrap justify-center gap-4 px-4">
-                    <a href="#" class="inline-flex items-center px-4 py-2 bg-gold text-white rounded-full hover:bg-gold-dark transition duration-300">
-                        <i class="fas fa-pencil-alt mr-2"></i> Schrijf een recensie
-                    </a>
-                    <a href="#" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-full hover:bg-gray-50 transition duration-300">
-                        <i class="fab fa-google mr-2"></i> Bekijk alle recensies
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 relative">
-        <div class="absolute top-0 left-0 w-1/3 h-full gold-light-bg opacity-30 hidden lg:block"></div>
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl font-semibold mb-2 gold-text">Contact</h2>
-                <div class="w-24 h-1 gold-gradient mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto">Bel ons vandaag nog voor een afspraak en ervaar het Luminous verschil.</p>
-            </div>
-            
-            <div class="bg-white p-8 rounded-md shadow-lg max-w-3xl mx-auto">
-                <div class="flex flex-col md:flex-row md:divide-x">
-                    <div class="md:w-1/2 md:pr-8 mb-8 md:mb-0">
-                        <h3 class="text-2xl font-semibold mb-6 gold-text">Bezoek Onze Salon</h3>
-                        
-                        <div class="mb-8 flex items-start">
-                            <div class="mr-4 mt-1">
-                                <div class="w-10 h-10 rounded-full gold-bg text-white flex items-center justify-center">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold mb-2">Locatie</h4>
-                                <p class="text-gray-600 mb-1">Elegantiestraat 123</p>
-                                <p class="text-gray-600 mb-2">1071 AM Amsterdam</p>
-                                <a href="#" class="inline-flex items-center text-sm gold-text hover:underline">
-                                    Bekijk op Kaart <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-8 flex items-start">
-                            <div class="mr-4 mt-1">
-                                <div class="w-10 h-10 rounded-full gold-bg text-white flex items-center justify-center">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold mb-2">Openingstijden</h4>
-                                <div class="space-y-2">
-                                    <div class="flex justify-between border-b border-gray-100 pb-2">
-                                        <span class="text-gray-600">Maandag - Vrijdag</span>
-                                        <span class="font-medium">9:00 - 20:00</span>
-                                    </div>
-                                    <div class="flex justify-between border-b border-gray-100 pb-2">
-                                        <span class="text-gray-600">Zaterdag</span>
-                                        <span class="font-medium">9:00 - 18:00</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-600">Zondag</span>
-                                        <span class="font-medium">10:00 - 16:00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="md:w-1/2 md:pl-8">
-                        <h3 class="text-2xl font-semibold mb-6 gold-text">Neem Contact Op</h3>
-                        
-                        <div class="mb-8 flex items-start">
-                            <div class="mr-4 mt-1">
-                                <div class="w-10 h-10 rounded-full gold-bg text-white flex items-center justify-center">
-                                    <i class="fas fa-phone-alt"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold mb-2">Telefoon</h4>
-                                <p class="text-gray-600 mb-1">
-                                    <a href="tel:+31627403860" class="hover:gold-text transition duration-300">+31 6 27 40 38 60</a>
-                                </p>
-                                <p class="text-sm text-gray-500">
-                                    Bel ons om een afspraak te maken of voor meer informatie
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-8 flex items-start">
-                            <div class="mr-4 mt-1">
-                                <div class="w-10 h-10 rounded-full gold-bg text-white flex items-center justify-center">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold mb-2">E-mail</h4>
-                                <p class="text-gray-600 mb-1">
-                                    <a href="mailto:info@luminoushaar.nl" class="hover:gold-text transition duration-300">info@luminoushaar.nl</a>
-                                </p>
-                                <p class="text-sm text-gray-500">
-                                    Voor algemene vragen en informatie
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8">
-                            <h4 class="text-lg font-semibold mb-3">Volg Ons</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border gold-border text-gray-600 hover:bg-gold hover:text-white hover:border-gold transition duration-300">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border gold-border text-gray-600 hover:bg-gold hover:text-white hover:border-gold transition duration-300">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border gold-border text-gray-600 hover:bg-gold hover:text-white hover:border-gold transition duration-300">
-                                    <i class="fab fa-pinterest"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border gold-border text-gray-600 hover:bg-gold hover:text-white hover:border-gold transition duration-300">
-                                    <i class="fab fa-tiktok"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mt-10 pt-8 border-t border-gray-100 text-center">
-                    <a href="tel:+31627403860" class="inline-block px-8 py-3 gold-gradient text-white font-medium rounded-md hover:opacity-90 transition duration-300 shadow-md">
-                        <i class="fas fa-phone-alt mr-2"></i> BEL NU VOOR EEN AFSPRAAK: +31 6 27 40 38 60
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="py-16 gold-light-bg relative overflow-hidden">
-        <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-gold-light opacity-20"></div>
-        <div class="absolute -left-16 -bottom-16 w-64 h-64 rounded-full bg-gold-light opacity-20"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-3xl mx-auto text-center">
-                <h3 class="text-3xl font-semibold mb-4">Schrijf Je In Voor Stijltips & Updates</h3>
-                <p class="text-gray-600 mb-8">Word lid van onze mailinglijst om de nieuwste haartrends, stylingtips en exclusieve aanbiedingen te ontvangen.</p>
-                <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                    <input type="email" placeholder="Jouw e-mailadres" class="flex-grow px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent shadow-md">
-                    <button type="submit" class="px-6 py-3 bg-gold text-white font-medium rounded-md hover:bg-gold-dark transition duration-300 whitespace-nowrap shadow-md">INSCHRIJVEN</button>
-                </form>
-                
-                <!-- Newsletter benefits -->
-                <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-                    <div class="flex items-start">
-                        <i class="fas fa-gift text-gold text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h4 class="font-medium mb-1">Exclusieve Aanbiedingen</h4>
-                            <p class="text-sm text-gray-600">Ontvang speciale kortingen alleen voor abonnees.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fas fa-lightbulb text-gold text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h4 class="font-medium mb-1">Haarverzorgingstips</h4>
-                            <p class="text-sm text-gray-600">Professionele adviezen voor dagelijkse haarverzorging.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start">
-                        <i class="fas fa-calendar-alt text-gold text-xl mt-1 mr-3"></i>
-                        <div>
-                            <h4 class="font-medium mb-1">Evenementen & Nieuws</h4>
-                            <p class="text-sm text-gray-600">Blijf op de hoogte van onze evenementen en nieuws.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-                <div>
-                    <a href="#" class="text-3xl font-bold gold-text font-serif mb-6 inline-block">Luminous</a>
-                    <p class="text-gray-400 mb-6">We verheffen de kunst van haarstyling door expertise, premium producten en gepersonaliseerde service.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 text-gray-400 hover:text-gold hover:border-gold transition duration-300">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 text-gray-400 hover:text-gold hover:border-gold transition duration-300">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 text-gray-400 hover:text-gold hover:border-gold transition duration-300">
-                            <i class="fab fa-pinterest"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 text-gray-400 hover:text-gold hover:border-gold transition duration-300">
-                            <i class="fab fa-tiktok"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="text-xl font-semibold mb-6">Snelle Links</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Home</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Over Ons</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Diensten</a></li>
-                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Galerie</a></li>
-                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Recensies</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="text-xl font-semibold mb-6">Contact</h4>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 gold-text"></i>
-                            <span class="text-gray-400">Elegantiestraat 123<br>1071 AM Amsterdam</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone-alt mr-3 gold-text"></i>
-                            <span class="text-gray-400">
-                                <a href="tel:+31627403860" class="hover:text-white transition duration-300">+31 6 27 40 38 60</a>
-                            </span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 gold-text"></i>
-                            <span class="text-gray-400">info@luminoushaar.nl</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-clock mt-1 mr-3 gold-text"></i>
-                            <div class="text-gray-400">
-                                <p>Ma-Vr: 9:00 - 20:00</p>
-                                <p>Za: 9:00 - 18:00</p>
-                                <p>Zo: 10:00 - 16:00</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 mt-8">
-                <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; <span class="current-year">2025</span> Luminous Haar Studio. Alle rechten voorbehouden.</p>
-                    <div class="flex flex-wrap justify-center gap-4 md:gap-6">
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Privacybeleid</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Algemene Voorwaarden</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Toegankelijkheid</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Sitemap</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <a href="#home" class="fixed bottom-8 right-8 w-12 h-12 gold-bg text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gold-dark transition duration-300 z-30">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-    
-    <!-- Cookie Consent Banner -->
-    <div id="cookieBanner" class="cookie-banner">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-4 md:mb-0 md:mr-8">
-                <p class="text-gray-800 mb-2">Deze website gebruikt cookies om je ervaring te verbeteren.</p>
-                <p class="text-gray-600 text-sm">Door op "Accepteren" te klikken, stem je in met het gebruik van cookies volgens ons <a href="#" class="gold-text underline">cookiebeleid</a>.</p>
-            </div>
-            <div class="flex flex-col sm:flex-row gap-3">
-                <button id="acceptCookies" class="px-4 py-2 gold-bg text-white font-medium rounded-md hover:bg-gold-dark transition duration-300">Accepteren</button>
-                <button id="rejectCookies" class="px-4 py-2 border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-50 transition duration-300">Alleen Noodzakelijke</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Chat Widget -->
-    <div id="chat-widget" class="chat-widget">
-        <!-- Chat toggle button -->
-        <button id="chat-widget-toggle" class="chat-widget-toggle gold-gradient scale-on-click">
-            <i class="fas fa-comments"></i>
-        </button>
-        
-        <!-- Chat container -->
-        <div id="chat-widget-container" class="chat-widget-container">
-            <div class="chat-widget-header gold-gradient">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center">
-                        <span class="font-serif font-bold gold-text">L</span>
-                    </div>
-                    <h3 class="font-serif text-white">Luminous Assistent</h3>
-                </div>
-                <button id="chat-widget-close" class="text-white hover:text-gray-200">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div id="chat-widget-messages" class="chat-widget-messages">
-                <!-- Messages will be added here -->
-            </div>
-            <div class="chat-widget-input">
-                <textarea id="chat-widget-input" placeholder="Stel een vraag over onze salon..." rows="1"></textarea>
-                <button id="chat-widget-send" class="gold-gradient text-white" disabled>
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Price List Modal JS -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const priceListBtn = document.getElementById('priceListBtn');
-            const priceListModal = document.getElementById('priceListModal');
-            const closePriceList = document.getElementById('closePriceList');
-            const closePriceListBtn = document.getElementById('closePriceListBtn');
-            
-            // Show Price List Modal
-            priceListBtn.addEventListener('click', function() {
-                priceListModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            // Close Price List Modal
-            function closePriceListModal() {
-                priceListModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }
-            
-            closePriceList.addEventListener('click', closePriceListModal);
-            closePriceListBtn.addEventListener('click', closePriceListModal);
-            
-            // Close modal on outside click
-            priceListModal.addEventListener('click', function(e) {
-                if (e.target === priceListModal) {
-                    closePriceListModal();
-                }
-            });
-        });
-    </script>
-
-    <!-- JavaScript for mobile menu -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const closeMenu = document.getElementById('closeMenu');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a[href^="#"]');
-            const cookieBanner = document.getElementById('cookieBanner');
-            const acceptCookies = document.getElementById('acceptCookies');
-            const rejectCookies = document.getElementById('rejectCookies');
-            
-            // Toggle mobile menu
-            mobileMenuToggle.addEventListener('click', function() {
-                mobileMenu.classList.add('open');
-            });
-            
-            // Close mobile menu
-            closeMenu.addEventListener('click', function() {
-                mobileMenu.classList.remove('open');
-            });
-            
-            // Close menu when clicking a link
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.remove('open');
-                });
-            });
-            
-            // Add smooth scrolling to all links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Cookie Banner
-            function showCookieBanner() {
-                // Check if user has already made a choice
-                if (!localStorage.getItem('cookieChoice')) {
-                    cookieBanner.classList.add('show');
-                }
-            }
-            
-            function hideCookieBanner() {
-                cookieBanner.classList.remove('show');
-            }
-            
-            acceptCookies.addEventListener('click', function() {
-                localStorage.setItem('cookieChoice', 'accepted');
-                hideCookieBanner();
-                // Here you would initialize any optional cookies/tracking
-            });
-            
-            rejectCookies.addEventListener('click', function() {
-                localStorage.setItem('cookieChoice', 'rejected');
-                hideCookieBanner();
-                // Only use essential cookies
-            });
-            
-            // Show cookie banner after a short delay
-            setTimeout(showCookieBanner, 1000);
-            
-            // Add fade-in animation to elements as they scroll into view
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const fadeInOnScroll = function() {
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (elementTop < windowHeight - 100) {
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
-                    }
-                });
-            };
-            
-            // Set initial state for fade elements
-            fadeElements.forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-            });
-            
-            // Run on load and scroll
-            window.addEventListener('load', fadeInOnScroll);
-            window.addEventListener('scroll', fadeInOnScroll);
-            
-            // Initialize current year
-            const currentYear = new Date().getFullYear();
-            const yearElements = document.querySelectorAll('.current-year');
-            yearElements.forEach(element => {
-                element.textContent = currentYear;
-            });
-        });
-    </script>
-
-    <!-- Chat Widget Scripts -->
-    <script>
-       document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Chat Widget Elements
     const chatWidget = {
         elements: {
@@ -1676,6 +142,12 @@
                 }
             } catch (error) {
                 console.error('Error loading chat state:', error);
+                // Reset state if there's an error
+                this.state.threadId = null;
+                this.state.messages = [];
+                this.state.initialized = false;
+                localStorage.removeItem(this.storage.THREAD_ID);
+                localStorage.removeItem(this.storage.MESSAGES);
             }
         },
         
@@ -1706,6 +178,7 @@
         // Create a new thread
         createThread: async function() {
             try {
+                console.log('Creating new thread...');
                 const response = await fetch('/api/openai-api/create-thread', {
                     method: 'POST',
                     headers: {
@@ -1714,10 +187,13 @@
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Failed to create thread');
+                    const errorData = await response.json();
+                    console.error('Thread creation error:', errorData);
+                    throw new Error(`Failed to create thread: ${response.status} ${response.statusText}`);
                 }
                 
                 const data = await response.json();
+                console.log('Thread created:', data.id);
                 return data.id;
             } catch (error) {
                 console.error('Error creating thread:', error);
@@ -1745,7 +221,7 @@
                 // Add message to UI
                 this.addMessageToUI(messageText, true);
                 
-                // Save to state
+                // Save user message to state
                 this.state.messages.push({
                     content: messageText,
                     isUser: true,
@@ -1754,6 +230,7 @@
                 this.saveState();
                 
                 // Add message to thread
+                console.log('Adding message to thread:', this.state.threadId);
                 await this.addMessageToThread(messageText);
                 
                 // Process assistant response
@@ -1761,6 +238,14 @@
             } catch (error) {
                 console.error('Error sending message:', error);
                 this.addMessageToUI("Sorry, er ging iets mis bij het verwerken van je bericht. Probeer het later nog eens.", false);
+                
+                // Add error message to state
+                this.state.messages.push({
+                    content: "Sorry, er ging iets mis bij het verwerken van je bericht. Probeer het later nog eens.",
+                    isUser: false,
+                    timestamp: new Date().toISOString()
+                });
+                this.saveState();
             } finally {
                 // Reset processing state
                 this.state.isProcessing = false;
@@ -1784,10 +269,14 @@
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Failed to add message to thread');
+                    const errorData = await response.json();
+                    console.error('Add message error:', errorData);
+                    throw new Error(`Failed to add message: ${response.status} ${response.statusText}`);
                 }
                 
-                return await response.json();
+                const data = await response.json();
+                console.log('Message added:', data.id);
+                return data;
             } catch (error) {
                 console.error('Error adding message to thread:', error);
                 throw error;
@@ -1801,6 +290,7 @@
                 this.showTypingIndicator();
                 
                 // Create a run
+                console.log('Creating run for thread:', this.state.threadId);
                 const runResponse = await fetch('/api/openai-api/create-run', {
                     method: 'POST',
                     headers: {
@@ -1812,10 +302,13 @@
                 });
                 
                 if (!runResponse.ok) {
-                    throw new Error('Failed to create run');
+                    const errorData = await runResponse.json();
+                    console.error('Create run error:', errorData);
+                    throw new Error(`Failed to create run: ${runResponse.status} ${runResponse.statusText}`);
                 }
                 
                 const runData = await runResponse.json();
+                console.log('Run created:', runData.id);
                 const runId = runData.id;
                 
                 // Poll for run completion
@@ -1823,34 +316,42 @@
                 let attempts = 0;
                 const maxAttempts = 30;
                 
-                while (status !== 'completed' && status !== 'failed' && attempts < maxAttempts) {
+                while (status !== 'completed' && status !== 'failed' && status !== 'expired' && status !== 'cancelled' && attempts < maxAttempts) {
                     attempts++;
                     
                     // Wait for 1 second before checking status
                     await new Promise(resolve => setTimeout(resolve, 1000));
                     
                     // Check run status
+                    console.log(`Checking run status (attempt ${attempts})...`);
                     const statusResponse = await fetch(`/api/openai-api/check-run-status?threadId=${this.state.threadId}&runId=${runId}`);
                     
                     if (!statusResponse.ok) {
-                        throw new Error('Failed to check run status');
+                        const errorData = await statusResponse.json();
+                        console.error('Check run status error:', errorData);
+                        throw new Error(`Failed to check run status: ${statusResponse.status} ${statusResponse.statusText}`);
                     }
                     
                     // Parse the JSON response to get the status
                     const statusData = await statusResponse.json();
                     status = statusData.status;
+                    console.log('Run status:', status);
                     
                     if (status === 'completed') {
                         // Get messages
+                        console.log('Run completed, fetching messages...');
                         const messagesResponse = await fetch(`/api/openai-api/get-messages?threadId=${this.state.threadId}`);
                         
                         if (!messagesResponse.ok) {
-                            throw new Error('Failed to get messages');
+                            const errorData = await messagesResponse.json();
+                            console.error('Get messages error:', errorData);
+                            throw new Error(`Failed to get messages: ${messagesResponse.status} ${messagesResponse.statusText}`);
                         }
                         
                         const messagesData = await messagesResponse.json();
+                        console.log('Messages received:', messagesData);
                         
-                        // Find the assistant's response (first message in the list)
+                        // Find the assistant's response (most recent assistant message)
                         const assistantMessage = messagesData.data.find(msg => msg.role === 'assistant');
                         
                         if (assistantMessage && assistantMessage.content && assistantMessage.content.length > 0) {
@@ -1859,15 +360,19 @@
                             
                             // Add assistant's response to UI
                             const responseContent = assistantMessage.content[0].text.value;
+                            console.log('Assistant response:', responseContent);
                             this.addMessageToUI(responseContent, false);
                             
-                            // Save to state
+                            // Save assistant message to state
                             this.state.messages.push({
                                 content: responseContent,
                                 isUser: false,
                                 timestamp: new Date().toISOString()
                             });
                             this.saveState();
+                        } else {
+                            console.error('No valid assistant message found');
+                            throw new Error('No valid assistant message found');
                         }
                     } else if (status === 'failed' || status === 'expired' || status === 'cancelled') {
                         throw new Error(`Run ${status}`);
@@ -1881,6 +386,14 @@
                 console.error('Error processing response:', error);
                 this.removeTypingIndicator();
                 this.addMessageToUI("Sorry, ik kan op dit moment niet reageren. Probeer het later nog eens.", false);
+                
+                // Add error message to state
+                this.state.messages.push({
+                    content: "Sorry, ik kan op dit moment niet reageren. Probeer het later nog eens.",
+                    isUser: false,
+                    timestamp: new Date().toISOString()
+                });
+                this.saveState();
             }
         },
         
@@ -1940,6 +453,3 @@
     // Initialize the chat widget
     chatWidget.init();
 });
-    </script>
-</body>
-</html>
