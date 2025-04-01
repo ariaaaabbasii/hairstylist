@@ -10,12 +10,6 @@
   to = "/.netlify/functions/openai-api"
   status = 200
 
-# Handle direct access to netlify functions
-[[redirects]]
-  from = "/.netlify/functions/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
-
 # Default redirect to index.html for SPA routing
 [[redirects]]
   from = "/*"
