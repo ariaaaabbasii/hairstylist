@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Luminous - Uw premium haarsalon in Amsterdam. Ontdek onze toonaangevende haarstyling, kleurbehandelingen en VIP-ervaring.">
-    <title>Luminous | Luxe Haarstyling & Beauty Experience</title>
+    <meta name="description" content="Luminous - Premium haarsalon in Amsterdam. Ervaar onze luxueuze haarstyling, kleurbehandelingen en VIP-ervaring.">
+    <title>Luminous | Luxury Hair Experience</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -19,27 +19,28 @@
                 extend: {
                     colors: {
                         gold: {
-                            lightest: '#FFF8E1',
-                            lighter: '#F5EAC1',
-                            light: '#E6D090',
-                            DEFAULT: '#D4AF37',
-                            dark: '#B8860B',
-                            darker: '#96700D',
+                            50: '#FFFCF2',
+                            100: '#FFF8E1',
+                            200: '#FEEFC8',
+                            300: '#FEE7B0',
+                            400: '#F5D988',
+                            500: '#D4AF37',
+                            600: '#B8860B',
+                            700: '#96700D',
+                            800: '#735711',
+                            900: '#5F4917'
                         },
-                        charcoal: {
-                            light: '#505050',
-                            DEFAULT: '#333333',
-                            dark: '#222222',
+                        dark: {
+                            DEFAULT: '#1C1C1C',
+                            light: '#3A3A3A'
                         }
                     },
                     fontFamily: {
-                        'serif': ['Cormorant', 'serif'],
+                        'serif': ['"Playfair Display"', 'serif'],
                         'sans': ['Montserrat', 'sans-serif'],
                     },
                     backgroundImage: {
-                        'hero-pattern': "url('/api/placeholder/1920/1080')",
-                        'about-pattern': "url('/api/placeholder/1200/800')",
-                        'gallery-pattern': "url('/api/placeholder/1400/900')",
+                        'texture': "url('data:image/svg+xml,%3Csvg width=\"40\" height=\"40\" viewBox=\"0 0 40 40\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"%23d4af37\" fill-opacity=\"0.05\" fill-rule=\"evenodd\"%3E%3Cpath d=\"M0 40L40 0H20L0 20M40 40V20L20 40\"%3E%3C/path%3E%3C/g%3E%3C/svg%3E')",
                     }
                 }
             }
@@ -52,99 +53,47 @@
         }
         
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cormorant', serif;
+            font-family: 'Playfair Display', serif;
         }
         
-        .gold-text {
-            color: #D4AF37;
-        }
-        
-        .gold-border {
-            border-color: #D4AF37;
-        }
-        
-        .gold-bg {
-            background-color: #D4AF37;
-        }
-        
-        .gold-light-bg {
-            background-color: #F5EAC1;
+        /* Custom styling */
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .gold-gradient {
             background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
         }
         
-        .charcoal-bg {
-            background-color: #333333;
+        .gold-border-gradient::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+            border-radius: inherit;
+            z-index: -1;
         }
         
-        .hero-pattern {
-            background-color: white;
-            background-image: radial-gradient(#D4AF37 0.5px, transparent 0.5px), radial-gradient(#D4AF37 0.5px, white 0.5px);
-            background-size: 20px 20px;
-            background-position: 0 0, 10px 10px;
-            opacity: 0.08;
-        }
-        
-        .text-shadow {
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .img-shadow {
-            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3);
-        }
-        
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: #D4AF37;
-            border-radius: 5px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: #B8860B;
-        }
-        
-        /* Animations */
-        .reveal {
+        .menu-item {
             position: relative;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 1s ease;
         }
         
-        .reveal.active {
-            transform: translateY(0);
-            opacity: 1;
+        .menu-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 0;
+            height: 2px;
+            background: #D4AF37;
+            transition: width 0.3s ease;
         }
         
-        .fade-in {
-            animation: fadeIn 0.8s ease-in-out;
+        .menu-item:hover::after {
+            width: 100%;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .hover-grow {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .hover-grow:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
-        }
-        
-        /* Mobile menu */
+        /* Mobile menu styling */
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
@@ -154,792 +103,225 @@
             transform: translateX(0);
         }
         
-        /* Placeholder images styling */
-        .placeholder-image {
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .placeholder-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(212,175,55,0.2) 0%, rgba(255,255,255,0) 50%, rgba(212,175,55,0.2) 100%);
-            z-index: 1;
-        }
-        
-        /* Wave divider */
-        .wave-divider {
-            position: relative;
-            height: 70px;
-            overflow: hidden;
-        }
-        
-        .wave-divider::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 10px;
-            background-size: 20px 40px;
-            background-image: radial-gradient(circle at 10px -15px, transparent 20px, white 20px);
-        }
-        
-        /* Photo overlay */
-        .photo-overlay {
-            position: relative;
-        }
-        
-        .photo-overlay::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 100%);
-            pointer-events: none;
-        }
-        
-        /* Service hover effect */
+        /* Service card hover effect */
         .service-card {
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-            background-position: center;
-            background-size: cover;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 22px 40px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
         
         .service-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7));
             opacity: 0.8;
-            transition: opacity 0.5s ease;
-            z-index: 1;
+            transition: opacity 0.3s ease;
+            z-index: 0;
         }
         
         .service-card:hover::before {
-            opacity: 0.7;
+            opacity: 0.6;
         }
         
-        .service-content {
-            position: relative;
-            z-index: 2;
+        .service-card .service-content {
+            transform: translateY(calc(100% - 90px));
+            transition: transform 0.3s ease;
         }
         
-        /* Fancy border */
-        .fancy-border {
-            position: relative;
-            overflow: hidden;
+        .service-card:hover .service-content {
+            transform: translateY(0);
         }
         
-        .fancy-border::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: linear-gradient(45deg, #D4AF37, transparent, #D4AF37, transparent);
-            z-index: -1;
-            border-radius: 8px;
-            animation: animatedBorder 4s linear infinite;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
         }
         
-        @keyframes animatedBorder {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        ::-webkit-scrollbar-track {
+            background: #f5f5f5;
         }
         
-        /* Curved section dividers */
-        .curve-top {
-            position: relative;
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 5px;
         }
         
-        .curve-top::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='1' d='M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,165.3C672,181,768,235,864,250.7C960,267,1056,245,1152,224C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: bottom;
-            z-index: 1;
-        }
-        
-        .curve-bottom {
-            position: relative;
-        }
-        
-        .curve-bottom::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            left: 0;
-            right: 0;
-            height: 50px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f5eac1' fill-opacity='1' d='M0,32L48,53.3C96,75,192,117,288,122.7C384,128,480,96,576,90.7C672,85,768,107,864,128C960,149,1056,171,1152,186.7C1248,203,1344,213,1392,218.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: top;
-            z-index: 1;
-        }
-        
-        /* New 3D button style */
-        .btn-3d {
-            position: relative;
-            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
-            color: white;
-            box-shadow: 0 6px 0 #96700D;
-            transition: all 0.1s ease;
-        }
-        
-        .btn-3d:hover {
-            transform: translateY(2px);
-            box-shadow: 0 4px 0 #96700D;
-        }
-        
-        .btn-3d:active {
-            transform: translateY(6px);
-            box-shadow: 0 0 0 #96700D;
-        }
-        
-        /* Parallax effect */
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        
-        /* Better image gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            grid-auto-rows: 300px;
-            grid-auto-flow: dense;
-            gap: 10px;
-        }
-        
+        /* Gallery image hover */
         .gallery-item {
-            position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
         }
         
         .gallery-item:hover img {
             transform: scale(1.05);
         }
         
-        .gallery-item.wide {
-            grid-column: span 2;
-        }
-        
-        .gallery-item.tall {
-            grid-row: span 2;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: all 0.5s ease;
-        }
-        
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-            color: white;
-            padding: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-        }
-        
-        .gallery-item:hover .gallery-caption {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Floating elements */
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        /* Style for cookie consent */
-        .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(5px);
-            padding: 1rem;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            transform: translateY(100%);
-            transition: transform 0.3s ease-in-out;
-            border-top: 2px solid #D4AF37;
-        }
-        
-        .cookie-banner.show {
-            transform: translateY(0);
-        }
-        
-        /* Enhanced Chat Widget Styles */
-        .chat-widget {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
+        /* Chat widget styling */
         .chat-widget-toggle {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 26px;
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
             transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .chat-widget-toggle::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(145deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
-            border-radius: 50%;
-            z-index: 1;
         }
         
         .chat-widget-toggle:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            transform: scale(1.1);
         }
         
         .chat-widget-container {
-            position: absolute;
-            bottom: 85px;
-            right: 0;
-            width: 380px;
-            max-height: 600px;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             opacity: 0;
-            transform: translateY(30px) scale(0.95);
+            transform: translateY(20px) scale(0.95);
             pointer-events: none;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
         
         .chat-widget-container.open {
             opacity: 1;
             transform: translateY(0) scale(1);
-            pointer-events: all;
+            pointer-events: auto;
         }
         
-        .chat-widget-header {
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: white;
-            background-size: 200% 200%;
-            animation: gradientAnimation 10s ease infinite;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
         
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        .chat-widget-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            max-height: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            background-color: #f9f9f9;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4af37' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
         }
         
-        .chat-message {
-            max-width: 85%;
-            padding: 16px 20px;
-            border-radius: 18px;
-            margin-bottom: 5px;
-            word-break: break-word;
-            position: relative;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-            animation: message-pop 0.4s cubic-bezier(0.38, 0.1, 0.36, 1.47) forwards;
-            line-height: 1.5;
+        /* Cookie banner */
+        .cookie-banner {
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
         }
         
-        .chat-message.assistant {
-            align-self: flex-start;
-            background: white;
-            color: #333;
-            border-bottom-left-radius: 6px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-        }
-        
-        .chat-message.assistant::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -8px;
-            width: 16px;
-            height: 16px;
-            background: white;
-            border-left: 1px solid rgba(0, 0, 0, 0.08);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            transform: rotate(45deg);
-            border-bottom-left-radius: 6px;
-        }
-        
-        .chat-message.user {
-            align-self: flex-end;
-            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
-            color: white;
-            border-bottom-right-radius: 6px;
-        }
-        
-        .chat-message.user::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: -8px;
-            width: 16px;
-            height: 16px;
-            background: #B8860B;
-            transform: rotate(45deg);
-            border-bottom-right-radius: 6px;
-        }
-        
-        .chat-widget-input {
-            padding: 15px;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            gap: 10px;
-            background: white;
-            position: relative;
-        }
-        
-        .chat-widget-input::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 0;
-            right: 0;
-            height: 10px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.03), transparent);
-        }
-        
-        .chat-widget-input textarea {
-            flex: 1;
-            border: 1px solid #E5E7EB;
-            border-radius: 25px;
-            padding: 12px 20px;
-            resize: none;
-            font-family: 'Montserrat', sans-serif;
-            max-height: 120px;
-            outline: none;
-            transition: all 0.3s ease;
-            font-size: 14px;
-        }
-        
-        .chat-widget-input textarea:focus {
-            border-color: #D4AF37;
-            box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
-        }
-        
-        .chat-widget-input button {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
-            color: white;
-            box-shadow: 0 3px 10px rgba(184, 134, 11, 0.3);
-        }
-        
-        .chat-widget-input button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(184, 134, 11, 0.4);
-        }
-        
-        .chat-widget-input button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: scale(1);
-            box-shadow: none;
-        }
-        
-        .scale-on-click:active {
-            transform: scale(0.95);
-        }
-        
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 15px 20px;
-            background: white;
-            border-radius: 18px;
-            border-bottom-left-radius: 6px;
-            width: fit-content;
-            margin-bottom: 5px;
-            align-self: flex-start;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-        }
-        
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            background: #D4AF37;
-            border-radius: 50%;
-            animation: typing-dot 1.4s infinite both;
-        }
-        
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        
-        @keyframes typing-dot {
-            0%, 100% {
-                opacity: 0.4;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1.2);
-            }
-        }
-        
-        @keyframes message-pop {
-            0% {
-                opacity: 0;
-                transform: translateY(10px) scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-        
-        /* New testimonial card style */
-        .testimonial-card {
-            position: relative;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: -20px;
-            left: 20px;
-            font-size: 120px;
-            font-family: 'Cormorant', serif;
-            color: rgba(212,175,55,0.1);
-            z-index: 0;
-        }
-        
-        .testimonial-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Pricing table improvements */
-        .pricing-table {
-            border-collapse: separate;
-            border-spacing: 0;
-            width: 100%;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        
-        .pricing-table th {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            text-align: left;
-        }
-        
-        .pricing-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        
-        .pricing-table tr:hover {
-            background-color: rgba(212,175,55,0.1);
-        }
-        
-        .pricing-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        /* New booking form style */
-        .booking-form {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-input:focus {
-            border-color: #D4AF37;
-            box-shadow: 0 0 0 3px rgba(212,175,55,0.2);
-            outline: none;
-        }
-        
-        .input-label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            color: #4b5563;
-        }
-        
-        /* Responsive styles */
-        @media (max-width: 480px) {
-            .chat-widget-container {
-                width: calc(100vw - 40px);
-                max-height: 70vh;
-                bottom: 80px;
-            }
-            
-            .chat-widget-toggle {
-                width: 55px;
-                height: 55px;
-                font-size: 22px;
-            }
-        }
-        
-        /* Video background */
-        .video-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
-        }
-        
-        .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
-            z-index: 0;
-        }
-        
-        /* New booking buttons */
-        .booking-btn {
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .booking-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: rgba(255,255,255,0.2);
-            transition: all 0.3s ease;
-            z-index: -1;
-        }
-        
-        .booking-btn:hover::after {
-            height: 100%;
+        .cookie-banner.show {
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-white text-gray-800 overflow-x-hidden">
+<body class="bg-white text-dark overflow-x-hidden">
     <!-- Navigation -->
-    <nav id="main-nav" class="fixed w-full bg-white bg-opacity-95 shadow-md z-50 transition-all duration-500">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-3xl font-bold gold-text font-serif tracking-wider flex items-center gap-2">
-                <span class="text-4xl">L</span>
-                <span class="pt-1">Luminous</span>
-            </a>
-            <div class="hidden lg:flex space-x-8">
-                <a href="#home" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold py-2">HOME</a>
-                <a href="#about" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold py-2">OVER ONS</a>
-                <a href="#services" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold py-2">DIENSTEN</a>
-                <a href="#gallery" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold py-2">GALERIE</a>
-                <a href="#testimonials" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold py-2">RECENSIES</a>
-                <a href="#contact" class="text-sm font-medium hover:gold-text transition duration-300 border-b-2 border-transparent hover:border-gold py-2">CONTACT</a>
-                <a href="tel:+31627403860" class="ml-4 bg-gold text-white px-6 py-2 rounded-full shadow-md hover:bg-gold-dark transition duration-300 transform hover:-translate-y-1">AFSPRAAK</a>
+    <nav id="main-nav" class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition-all duration-500">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-3xl font-serif font-bold text-gold-500">
+                    Luminous
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="menu-item text-sm font-medium hover:text-gold-500 transition duration-300">HOME</a>
+                    <a href="#about" class="menu-item text-sm font-medium hover:text-gold-500 transition duration-300">OVER ONS</a>
+                    <a href="#services" class="menu-item text-sm font-medium hover:text-gold-500 transition duration-300">DIENSTEN</a>
+                    <a href="#gallery" class="menu-item text-sm font-medium hover:text-gold-500 transition duration-300">GALERIE</a>
+                    <a href="#testimonials" class="menu-item text-sm font-medium hover:text-gold-500 transition duration-300">RECENSIES</a>
+                    <a href="#contact" class="menu-item text-sm font-medium hover:text-gold-500 transition duration-300">CONTACT</a>
+                    <a href="tel:+31627403860" class="ml-4 gold-gradient text-white px-6 py-2 rounded-full text-sm font-medium hover:shadow-lg transition duration-300 transform hover:-translate-y-1">AFSPRAAK MAKEN</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuToggle" class="lg:hidden text-gold-500 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
             </div>
-            <button id="mobileMenuToggle" class="lg:hidden gold-text focus:outline-none">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
         </div>
     </nav>
     
     <!-- Mobile Menu -->
-    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 overflow-y-auto lg:hidden">
-        <div class="p-6">
+    <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 overflow-y-auto lg:hidden">
+        <div class="px-6 py-8">
             <div class="flex justify-between items-center mb-8">
-                <a href="#" class="text-2xl font-bold gold-text font-serif">Luminous</a>
+                <a href="#" class="text-2xl font-serif font-bold text-gold-500">Luminous</a>
                 <button id="closeMenu" class="focus:outline-none">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">HOME</a>
-                <a href="#about" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">OVER ONS</a>
-                <a href="#services" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">DIENSTEN</a>
-                <a href="#gallery" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">GALERIE</a>
-                <a href="#testimonials" class="py-2 text-sm font-medium hover:gold-text transition duration-300 border-b border-gray-100">RECENSIES</a>
-                <a href="#contact" class="py-2 text-sm font-medium hover:gold-text transition duration-300">CONTACT</a>
+            <div class="flex flex-col space-y-5">
+                <a href="#home" class="py-2 text-sm font-medium hover:text-gold-500 transition duration-300 border-b border-gray-100">HOME</a>
+                <a href="#about" class="py-2 text-sm font-medium hover:text-gold-500 transition duration-300 border-b border-gray-100">OVER ONS</a>
+                <a href="#services" class="py-2 text-sm font-medium hover:text-gold-500 transition duration-300 border-b border-gray-100">DIENSTEN</a>
+                <a href="#gallery" class="py-2 text-sm font-medium hover:text-gold-500 transition duration-300 border-b border-gray-100">GALERIE</a>
+                <a href="#testimonials" class="py-2 text-sm font-medium hover:text-gold-500 transition duration-300 border-b border-gray-100">RECENSIES</a>
+                <a href="#contact" class="py-2 text-sm font-medium hover:text-gold-500 transition duration-300">CONTACT</a>
             </div>
             <div class="mt-8 pt-6 border-t border-gray-100">
-                <a href="tel:+31627403860" class="block w-full py-3 gold-bg text-white text-center font-medium rounded-full hover:bg-gold-dark transition duration-300 shadow-md">BEL VOOR EEN AFSPRAAK</a>
+                <a href="tel:+31627403860" class="block w-full py-3 gold-gradient text-white text-center font-medium rounded-full shadow-md">
+                    <i class="fas fa-phone-alt mr-2"></i> DIRECT BELLEN
+                </a>
             </div>
             <div class="mt-6 flex justify-center space-x-4">
-                <a href="#" class="text-gray-400 hover:gold-text transition duration-300"><i class="fab fa-instagram text-lg"></i></a>
-                <a href="#" class="text-gray-400 hover:gold-text transition duration-300"><i class="fab fa-facebook-f text-lg"></i></a>
-                <a href="#" class="text-gray-400 hover:gold-text transition duration-300"><i class="fab fa-pinterest text-lg"></i></a>
-                <a href="#" class="text-gray-400 hover:gold-text transition duration-300"><i class="fab fa-tiktok text-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gold-500 transition duration-300"><i class="fab fa-instagram text-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gold-500 transition duration-300"><i class="fab fa-facebook-f text-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gold-500 transition duration-300"><i class="fab fa-pinterest text-lg"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gold-500 transition duration-300"><i class="fab fa-tiktok text-lg"></i></a>
             </div>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center">
+    <section id="home" class="relative min-h-screen flex items-center pt-16">
         <div class="absolute inset-0 overflow-hidden">
-            <img src="/api/placeholder/1920/1080" alt="Luxe haarsalon interieur" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+            <img src="/api/placeholder/1920/1080" alt="Luxury hair salon interior" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-30"></div>
         </div>
         
-        <div class="container mx-auto px-4 py-20 flex flex-col items-center justify-center relative z-10 text-center text-white">
+        <div class="container mx-auto px-4 py-20 relative z-10 text-center text-white">
             <div class="max-w-3xl mx-auto">
-                <h1 class="text-5xl sm:text-6xl md:text-7xl font-serif font-bold mb-6 leading-tight text-shadow">
-                    Ontdek je <span class="gold-text italic">Stralende Stijl</span>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold mb-6 leading-tight fade-in">
+                    <span class="italic text-gold-300">Schoonheid</span> begint<br>met perfect haar
                 </h1>
-                <p class="text-xl mb-10 text-gray-100 max-w-2xl mx-auto">
-                    Waar luxe ontmoet vakmanschap. Premium haarstyling die jouw unieke schoonheid viert en je zelfvertrouwen laat stralen.
+                <p class="text-lg md:text-xl mb-10 text-white/90 max-w-xl mx-auto fade-in">
+                    Waar vakmanschap en luxe samenkomen voor een transformerende haarervaring die al je verwachtingen overtreft.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                    <a href="#booking" class="px-8 py-4 bg-gold text-white font-medium rounded-full hover:bg-gold-dark hover:shadow-lg transition duration-300 text-center booking-btn">
-                        <i class="fas fa-calendar-alt mr-2"></i> MAAK NU EEN AFSPRAAK
+                <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 fade-in">
+                    <a href="tel:+31627403860" class="px-8 py-4 gold-gradient text-white font-medium rounded-full hover:shadow-lg transition duration-300 text-center transform hover:-translate-y-1">
+                        <i class="fas fa-phone-alt mr-2"></i> BEL VOOR AFSPRAAK
                     </a>
-                    <a href="#services" class="px-8 py-4 bg-transparent text-white border-2 border-white font-medium rounded-full hover:bg-white hover:text-gold transition duration-300 text-center">
+                    <a href="#services" class="px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white font-medium rounded-full hover:bg-white/20 transition duration-300 text-center">
                         ONTDEK ONZE DIENSTEN
                     </a>
                 </div>
-                
-                <!-- Scroll indicator -->
-                <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
-                    <a href="#about" class="text-white">
-                        <i class="fas fa-chevron-down text-2xl"></i>
-                    </a>
-                </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-0 right-0 flex justify-center animate-bounce fade-in">
+                <a href="#about" class="text-white">
+                    <i class="fas fa-chevron-down text-xl"></i>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24 relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-gold-lightest rounded-full -mr-48 -mt-48 opacity-50"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-gold-lightest rounded-full -ml-48 -mb-48 opacity-50"></div>
-        
-        <div class="container mx-auto px-4 relative">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-5xl font-semibold mb-3 font-serif gold-text">Over Ons</h2>
+    <section id="about" class="py-20 md:py-28 relative overflow-hidden bg-texture">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl sm:text-5xl font-serif font-semibold mb-3 text-gold-500">Over Ons</h2>
                 <div class="w-24 h-1 gold-gradient mx-auto"></div>
-                <p class="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
-                    Bij Luminous vieren we individuele schoonheid en bieden we luxe, gepersonaliseerde ervaringen.
+                <p class="mt-8 text-dark/80 max-w-2xl mx-auto text-lg">
+                    Sinds 2015 heeft Luminous zich gevestigd als dé premium bestemming voor haarstyling in Amsterdam.
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="reveal">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
                     <div class="relative">
-                        <img src="/api/placeholder/600/800" alt="Luxe salon interieur" class="rounded-lg shadow-2xl w-full h-auto object-cover">
-                        <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-white p-4 shadow-lg hidden md:flex items-center justify-center">
-                            <div class="w-full h-full border gold-border flex flex-col items-center justify-center">
+                        <img src="/api/placeholder/600/800" alt="Luxe salon interieur" class="rounded-xl shadow-xl w-full h-auto object-cover">
+                        <div class="absolute -bottom-6 -right-6 w-40 h-40 bg-white p-4 shadow-xl hidden md:flex items-center justify-center rounded-lg">
+                            <div class="w-full h-full border-2 border-gold-400 flex flex-col items-center justify-center rounded-lg">
                                 <div class="text-center">
-                                    <p class="font-serif gold-text">SINDS</p>
+                                    <p class="font-serif text-gold-500">SINDS</p>
                                     <p class="font-bold text-3xl">2015</p>
                                 </div>
                             </div>
@@ -947,567 +329,532 @@
                     </div>
                 </div>
                 
-                <div class="reveal" style="--reveal-delay: 0.2s;">
-                    <h3 class="text-3xl font-semibold mb-6 font-serif">Onze Passie voor Perfectie</h3>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Sinds onze oprichting in 2015 heeft Luminous zich gevestigd als een toonaangevende bestemming voor luxe haarverzorging en styling. Ons team van gepassioneerde stylisten combineert artistieke visie met technische precisie om looks te creëren die jouw natuurlijke schoonheid versterken.
+                <div class="fade-in">
+                    <h3 class="text-3xl font-serif mb-6">De Luminous<span class="text-gold-500"> Ervaring</span></h3>
+                    <p class="text-dark/80 mb-6 leading-relaxed">
+                        Ons team van gepassioneerde experts combineert artistieke visie met technische precisie om looks te creëren die jouw natuurlijke schoonheid versterken. Wij geloven dat mooi haar de expressie is van je persoonlijkheid en een boost voor je zelfvertrouwen.
                     </p>
-                    <p class="text-gray-600 mb-6 leading-relaxed">
-                        Wij geloven dat mooi haar meer is dan alleen esthetiek—het is een expressie van je persoonlijkheid, een boost voor je zelfvertrouwen en een manier om je unieke stijl te laten zien. In onze salon draait alles om persoonlijke aandacht en op maat gemaakte oplossingen.
+                    <p class="text-dark/80 mb-10 leading-relaxed">
+                        In onze salon draait alles om persoonlijke aandacht en op maat gemaakte oplossingen voor jouw specifieke haartype, levensstijl en wensen. We gebruiken uitsluitend premium producten die zowel goed zijn voor je haar als voor het milieu.
                     </p>
                     
-                    <div class="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <div class="bg-white p-6 rounded-lg shadow-md hover-grow text-center">
-                            <div class="gold-text text-4xl font-semibold mb-2">10+</div>
-                            <div class="text-gray-500 uppercase text-sm font-medium">JAREN ERVARING</div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-xl shadow-md text-center transform hover:-translate-y-1 transition duration-300">
+                            <div class="text-gold-500 text-4xl font-semibold mb-2">10+</div>
+                            <div class="text-dark/70 uppercase text-sm font-medium">JAREN ERVARING</div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md hover-grow text-center">
-                            <div class="gold-text text-4xl font-semibold mb-2">15k+</div>
-                            <div class="text-gray-500 uppercase text-sm font-medium">TEVREDEN KLANTEN</div>
+                        <div class="bg-white p-6 rounded-xl shadow-md text-center transform hover:-translate-y-1 transition duration-300">
+                            <div class="text-gold-500 text-4xl font-semibold mb-2">15k+</div>
+                            <div class="text-dark/70 uppercase text-sm font-medium">TEVREDEN KLANTEN</div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md hover-grow text-center">
-                            <div class="gold-text text-4xl font-semibold mb-2">12</div>
-                            <div class="text-gray-500 uppercase text-sm font-medium">EXPERT STYLISTEN</div>
+                        <div class="bg-white p-6 rounded-xl shadow-md text-center transform hover:-translate-y-1 transition duration-300">
+                            <div class="text-gold-500 text-4xl font-semibold mb-2">12</div>
+                            <div class="text-dark/70 uppercase text-sm font-medium">EXPERT STYLISTEN</div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Mission statement -->
-            <div class="mt-20 bg-charcoal text-white p-12 rounded-2xl shadow-xl reveal">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div>
-                        <div class="gold-text text-4xl mb-4">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-4 font-serif">Onze Missie</h4>
-                        <p class="text-gray-300">
-                            Wij streven ernaar om elke klant een transformerende ervaring te bieden die verder gaat dan alleen haar, door persoonlijke aandacht te combineren met technische expertise.
-                        </p>
+            <!-- Values -->
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg fade-in">
+                    <div class="text-gold-500 text-3xl mb-4">
+                        <i class="fas fa-gem"></i>
                     </div>
-                    <div>
-                        <div class="gold-text text-4xl mb-4">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-4 font-serif">Onze Waarden</h4>
-                        <p class="text-gray-300">
-                            Kwaliteit, authenticiteit, creativiteit en respect staan centraal in alles wat we doen, van productkeuze tot klantenservice.
-                        </p>
+                    <h4 class="text-xl font-serif font-semibold mb-4">Onze Missie</h4>
+                    <p class="text-dark/70">
+                        Wij streven ernaar om elke klant een transformerende ervaring te bieden die verder gaat dan alleen haar, door persoonlijke aandacht te combineren met technische expertise.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg fade-in">
+                    <div class="text-gold-500 text-3xl mb-4">
+                        <i class="fas fa-star"></i>
                     </div>
-                    <div>
-                        <div class="gold-text text-4xl mb-4">
-                            <i class="fas fa-leaf"></i>
-                        </div>
-                        <h4 class="text-xl font-semibold mb-4 font-serif">Onze Belofte</h4>
-                        <p class="text-gray-300">
-                            We beloven alleen de hoogste kwaliteit producten te gebruiken die zowel goed zijn voor je haar als voor het milieu, met een focus op duurzaamheid.
-                        </p>
+                    <h4 class="text-xl font-serif font-semibold mb-4">Onze Waarden</h4>
+                    <p class="text-dark/70">
+                        Kwaliteit, authenticiteit, creativiteit en respect staan centraal in alles wat we doen, van productkeuze tot klantenservice.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg fade-in">
+                    <div class="text-gold-500 text-3xl mb-4">
+                        <i class="fas fa-leaf"></i>
                     </div>
+                    <h4 class="text-xl font-serif font-semibold mb-4">Onze Belofte</h4>
+                    <p class="text-dark/70">
+                        We beloven alleen de hoogste kwaliteit producten te gebruiken die zowel goed zijn voor je haar als voor het milieu, met een focus op duurzaamheid.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-24 bg-gold-lightest relative overflow-hidden">
-        <div class="absolute top-0 left-0 right-0 h-20 bg-white"></div>
-        <div class="curve-top bg-gold-lightest"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-5xl font-semibold mb-3 font-serif gold-text">Onze Diensten</h2>
+    <section id="services" class="py-20 md:py-28 bg-gold-50 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl sm:text-5xl font-serif font-semibold mb-3 text-gold-500">Onze Diensten</h2>
                 <div class="w-24 h-1 gold-gradient mx-auto"></div>
-                <p class="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
-                    Ontdek ons assortiment premium diensten, ontworpen om je natuurlijke schoonheid te versterken en je vol zelfvertrouwen te laten stralen.
+                <p class="mt-8 text-dark/80 max-w-2xl mx-auto text-lg">
+                    Ontdek ons assortiment premium diensten, ontworpen om je natuurlijke schoonheid te versterken.
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Service 1 -->
-                <div class="service-card rounded-xl overflow-hidden relative h-96 reveal" style="background-image: url('/api/placeholder/600/800');">
-                    <div class="service-content p-8 h-full flex flex-col justify-end text-white">
-                        <div class="transform transition-transform duration-300 group-hover:translate-y-0">
-                            <div class="text-5xl mb-4 gold-text">
-                                <i class="fas fa-cut"></i>
-                            </div>
-                            <h3 class="text-2xl font-semibold mb-3 font-serif">Precisie Knipbeurten</h3>
-                            <p class="text-gray-200 mb-4 opacity-90">
-                                Op maat gemaakte kapsels die je kenmerken versterken en bij je levensstijl passen, uitgevoerd met deskundige precisie.
-                            </p>
-                            <p class="font-semibold text-gold-lighter text-xl">Vanaf €65</p>
-                            <a href="tel:+31627403860" class="inline-block mt-4 text-white hover:text-gold-lighter transition">
-                                <span>Maak een afspraak</span> <i class="fas fa-arrow-right ml-2"></i>
+                <div class="service-card rounded-xl relative h-80 overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/800" alt="Knipbeurt" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="service-content absolute inset-0 p-6 flex flex-col justify-end text-white z-10">
+                        <div class="text-3xl text-gold-200 mb-3">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif mb-3">Precisie Knipbeurten</h3>
+                        <p class="text-white/90 mb-6">
+                            Op maat gemaakte kapsels die je kenmerken versterken en bij je levensstijl passen, uitgevoerd met deskundige precisie.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-medium text-gold-200">Vanaf €65</span>
+                            <a href="tel:+31627403860" class="text-white/90 hover:text-gold-200 transition">
+                                <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="service-card rounded-xl overflow-hidden relative h-96 reveal" style="--reveal-delay: 0.2s; background-image: url('/api/placeholder/600/800');">
-                    <div class="service-content p-8 h-full flex flex-col justify-end text-white">
-                        <div class="transform transition-transform duration-300 group-hover:translate-y-0">
-                            <div class="text-5xl mb-4 gold-text">
-                                <i class="fas fa-paint-brush"></i>
-                            </div>
-                            <h3 class="text-2xl font-semibold mb-3 font-serif">Luxe Kleurbehandelingen</h3>
-                            <p class="text-gray-200 mb-4 opacity-90">
-                                Van subtiele highlights tot gedurfde transformaties, onze kleurspecialisten creëren dimensie en levendigheid.
-                            </p>
-                            <p class="font-semibold text-gold-lighter text-xl">Vanaf €85</p>
-                            <a href="tel:+31627403860" class="inline-block mt-4 text-white hover:text-gold-lighter transition">
-                                <span>Maak een afspraak</span> <i class="fas fa-arrow-right ml-2"></i>
+                <div class="service-card rounded-xl relative h-80 overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/800" alt="Kleurbehandeling" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="service-content absolute inset-0 p-6 flex flex-col justify-end text-white z-10">
+                        <div class="text-3xl text-gold-200 mb-3">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif mb-3">Luxe Kleurbehandelingen</h3>
+                        <p class="text-white/90 mb-6">
+                            Van subtiele highlights tot gedurfde transformaties, onze kleurspecialisten creëren dimensie en levendigheid.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-medium text-gold-200">Vanaf €85</span>
+                            <a href="tel:+31627403860" class="text-white/90 hover:text-gold-200 transition">
+                                <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="service-card rounded-xl overflow-hidden relative h-96 reveal" style="--reveal-delay: 0.4s; background-image: url('/api/placeholder/600/800');">
-                    <div class="service-content p-8 h-full flex flex-col justify-end text-white">
-                        <div class="transform transition-transform duration-300 group-hover:translate-y-0">
-                            <div class="text-5xl mb-4 gold-text">
-                                <i class="fas fa-fire"></i>
-                            </div>
-                            <h3 class="text-2xl font-semibold mb-3 font-serif">Styling & Blowouts</h3>
-                            <p class="text-gray-200 mb-4 opacity-90">
-                                Perfect voor speciale gelegenheden of wanneer je er buitengewoon goed uit wilt zien en voelen.
-                            </p>
-                            <p class="font-semibold text-gold-lighter text-xl">Vanaf €55</p>
-                            <a href="tel:+31627403860" class="inline-block mt-4 text-white hover:text-gold-lighter transition">
-                                <span>Maak een afspraak</span> <i class="fas fa-arrow-right ml-2"></i>
+                <div class="service-card rounded-xl relative h-80 overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/800" alt="Styling" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="service-content absolute inset-0 p-6 flex flex-col justify-end text-white z-10">
+                        <div class="text-3xl text-gold-200 mb-3">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif mb-3">Styling & Blowouts</h3>
+                        <p class="text-white/90 mb-6">
+                            Perfect voor speciale gelegenheden of wanneer je er buitengewoon goed uit wilt zien en voelen.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-medium text-gold-200">Vanaf €55</span>
+                            <a href="tel:+31627403860" class="text-white/90 hover:text-gold-200 transition">
+                                <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Service 4 -->
-                <div class="service-card rounded-xl overflow-hidden relative h-96 reveal" style="background-image: url('/api/placeholder/600/800');">
-                    <div class="service-content p-8 h-full flex flex-col justify-end text-white">
-                        <div class="transform transition-transform duration-300 group-hover:translate-y-0">
-                            <div class="text-5xl mb-4 gold-text">
-                                <i class="fas fa-magic"></i>
-                            </div>
-                            <h3 class="text-2xl font-semibold mb-3 font-serif">Haarbehandelingen</h3>
-                            <p class="text-gray-200 mb-4 opacity-90">
-                                Revitaliseer en herstel de gezondheid van je haar met onze voedende, professionele behandelingen.
-                            </p>
-                            <p class="font-semibold text-gold-lighter text-xl">Vanaf €75</p>
-                            <a href="tel:+31627403860" class="inline-block mt-4 text-white hover:text-gold-lighter transition">
-                                <span>Maak een afspraak</span> <i class="fas fa-arrow-right ml-2"></i>
+                <div class="service-card rounded-xl relative h-80 overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/800" alt="Behandelingen" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="service-content absolute inset-0 p-6 flex flex-col justify-end text-white z-10">
+                        <div class="text-3xl text-gold-200 mb-3">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif mb-3">Haarbehandelingen</h3>
+                        <p class="text-white/90 mb-6">
+                            Revitaliseer en herstel de gezondheid van je haar met onze voedende, professionele behandelingen.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-medium text-gold-200">Vanaf €75</span>
+                            <a href="tel:+31627403860" class="text-white/90 hover:text-gold-200 transition">
+                                <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Service 5 -->
-                <div class="service-card rounded-xl overflow-hidden relative h-96 reveal" style="--reveal-delay: 0.2s; background-image: url('/api/placeholder/600/800');">
-                    <div class="service-content p-8 h-full flex flex-col justify-end text-white">
-                        <div class="transform transition-transform duration-300 group-hover:translate-y-0">
-                            <div class="text-5xl mb-4 gold-text">
-                                <i class="fas fa-gem"></i>
-                            </div>
-                            <h3 class="text-2xl font-semibold mb-3 font-serif">Extensions & Textuur</h3>
-                            <p class="text-gray-200 mb-4 opacity-90">
-                                Voeg lengte, volume en dimensie toe met onze premium extension- en texturiseringsdiensten.
-                            </p>
-                            <p class="font-semibold text-gold-lighter text-xl">Vanaf €150</p>
-                            <a href="tel:+31627403860" class="inline-block mt-4 text-white hover:text-gold-lighter transition">
-                                <span>Maak een afspraak</span> <i class="fas fa-arrow-right ml-2"></i>
+                <div class="service-card rounded-xl relative h-80 overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/800" alt="Extensions" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="service-content absolute inset-0 p-6 flex flex-col justify-end text-white z-10">
+                        <div class="text-3xl text-gold-200 mb-3">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif mb-3">Extensions & Textuur</h3>
+                        <p class="text-white/90 mb-6">
+                            Voeg lengte, volume en dimensie toe met onze premium extension- en texturiseringsdiensten.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-medium text-gold-200">Vanaf €150</span>
+                            <a href="tel:+31627403860" class="text-white/90 hover:text-gold-200 transition">
+                                <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Service 6 -->
-                <div class="service-card rounded-xl overflow-hidden relative h-96 reveal" style="--reveal-delay: 0.4s; background-image: url('/api/placeholder/600/800');">
-                    <div class="service-content p-8 h-full flex flex-col justify-end text-white">
-                        <div class="transform transition-transform duration-300 group-hover:translate-y-0">
-                            <div class="text-5xl mb-4 gold-text">
-                                <i class="fas fa-crown"></i>
-                            </div>
-                            <h3 class="text-2xl font-semibold mb-3 font-serif">Bruiloft & Speciale Evenementen</h3>
-                            <p class="text-gray-200 mb-4 opacity-90">
-                                Uitgebreide stylingpakketten om ervoor te zorgen dat je er onvergetelijk uitziet op je speciale dag.
-                            </p>
-                            <p class="font-semibold text-gold-lighter text-xl">Vanaf €120</p>
-                            <a href="tel:+31627403860" class="inline-block mt-4 text-white hover:text-gold-lighter transition">
-                                <span>Maak een afspraak</span> <i class="fas fa-arrow-right ml-2"></i>
+                <div class="service-card rounded-xl relative h-80 overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/800" alt="Bruiloft" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="service-content absolute inset-0 p-6 flex flex-col justify-end text-white z-10">
+                        <div class="text-3xl text-gold-200 mb-3">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <h3 class="text-2xl font-serif mb-3">Bruiloft & Evenementen</h3>
+                        <p class="text-white/90 mb-6">
+                            Uitgebreide stylingpakketten om ervoor te zorgen dat je er onvergetelijk uitziet op je speciale dag.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-medium text-gold-200">Vanaf €120</span>
+                            <a href="tel:+31627403860" class="text-white/90 hover:text-gold-200 transition">
+                                <i class="fas fa-arrow-right"></i>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="text-center mt-16">
-                <a href="tel:+31627403860" class="inline-block px-10 py-4 bg-charcoal text-white font-medium rounded-full hover:bg-black transition duration-300 shadow-xl text-lg">
-                    <i class="fas fa-phone-alt mr-2"></i> BEL VOOR EEN AFSPRAAK: +31 6 27 40 38 60
-                </a>
-            </div>
-            
             <!-- Price List Button -->
-            <div class="text-center mt-8">
-                <button id="priceListBtn" class="inline-flex items-center px-8 py-3 border gold-border text-gray-800 font-medium rounded-full hover:bg-gold-lightest transition duration-300">
+            <div class="text-center mt-12 fade-in">
+                <button id="priceListBtn" class="inline-flex items-center px-8 py-4 border-2 border-gold-500 text-gold-600 font-medium rounded-full hover:bg-gold-50 transition duration-300">
                     <i class="fas fa-list-ul mr-2"></i> Bekijk onze volledige prijslijst
                 </button>
+                
+                <a href="tel:+31627403860" class="block sm:inline-block px-8 py-4 gold-gradient text-white font-medium rounded-full shadow-lg hover:shadow-xl transition duration-300 mt-4 sm:mt-0 sm:ml-4">
+                    <i class="fas fa-phone-alt mr-2"></i> BEL VOOR AFSPRAAK
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Price List Modal -->
     <div id="priceListModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center hidden backdrop-blur-sm">
-        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-screen overflow-y-auto m-4 shadow-2xl">
-            <div class="p-8 border-b border-gray-200">
+        <div class="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto m-4 shadow-2xl">
+            <div class="sticky top-0 bg-white p-6 border-b border-gray-200 z-10">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-3xl font-semibold gold-text font-serif">Volledige Prijslijst</h3>
-                    <button id="closePriceList" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <h3 class="text-2xl sm:text-3xl font-serif text-gold-500">Prijslijst</h3>
+                    <button id="closePriceList" class="text-gray-400 hover:text-gray-600 focus:outline-none">
                         <i class="fas fa-times text-xl"></i>
                     </button>
                 </div>
             </div>
-            <div class="p-8">
+            <div class="p-6">
                 <!-- Haircuts -->
                 <div class="mb-10">
-                    <h4 class="text-xl font-semibold mb-6 pb-2 border-b flex items-center">
-                        <i class="fas fa-cut mr-3 gold-text"></i> Knipbeurten
+                    <h4 class="text-xl font-serif mb-6 pb-2 border-b flex items-center">
+                        <i class="fas fa-cut mr-3 text-gold-500"></i> Knipbeurten
                     </h4>
                     <div class="space-y-4">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Dames Knipbeurt</span>
-                            <span class="font-medium gold-text">€65 - €85</span>
+                            <span class="font-medium text-gold-600">€65 - €85</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Heren Knipbeurt</span>
-                            <span class="font-medium gold-text">€45 - €65</span>
+                            <span class="font-medium text-gold-600">€45 - €65</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Kinderen Knipbeurt (tot 12 jaar)</span>
-                            <span class="font-medium gold-text">€35 - €45</span>
+                            <span class="font-medium text-gold-600">€35 - €45</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Pony Knippen</span>
-                            <span class="font-medium gold-text">€20</span>
+                            <span class="font-medium text-gold-600">€20</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Styling Consultatie</span>
-                            <span class="font-medium gold-text">€35</span>
+                            <span class="font-medium text-gold-600">€35</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Color -->
                 <div class="mb-10">
-                    <h4 class="text-xl font-semibold mb-6 pb-2 border-b flex items-center">
-                        <i class="fas fa-paint-brush mr-3 gold-text"></i> Kleurbehandelingen
+                    <h4 class="text-xl font-serif mb-6 pb-2 border-b flex items-center">
+                        <i class="fas fa-paint-brush mr-3 text-gold-500"></i> Kleurbehandelingen
                     </h4>
                     <div class="space-y-4">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Uitgroei Bijwerken</span>
-                            <span class="font-medium gold-text">€85 - €95</span>
+                            <span class="font-medium text-gold-600">€85 - €95</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Volledige Kleuring</span>
-                            <span class="font-medium gold-text">€110 - €140</span>
+                            <span class="font-medium text-gold-600">€110 - €140</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Highlights (Half Hoofd)</span>
-                            <span class="font-medium gold-text">€120 - €140</span>
+                            <span class="font-medium text-gold-600">€120 - €140</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Highlights (Vol Hoofd)</span>
-                            <span class="font-medium gold-text">€150 - €180</span>
+                            <span class="font-medium text-gold-600">€150 - €180</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Balayage / Ombre</span>
-                            <span class="font-medium gold-text">€170 - €220</span>
+                            <span class="font-medium text-gold-600">€170 - €220</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Toner</span>
-                            <span class="font-medium gold-text">€40 - €60</span>
+                            <span class="font-medium text-gold-600">€40 - €60</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Styling -->
                 <div class="mb-10">
-                    <h4 class="text-xl font-semibold mb-6 pb-2 border-b flex items-center">
-                        <i class="fas fa-fire mr-3 gold-text"></i> Styling & Blowouts
+                    <h4 class="text-xl font-serif mb-6 pb-2 border-b flex items-center">
+                        <i class="fas fa-fire mr-3 text-gold-500"></i> Styling & Blowouts
                     </h4>
                     <div class="space-y-4">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Blowout - Kort Haar</span>
-                            <span class="font-medium gold-text">€55</span>
+                            <span class="font-medium text-gold-600">€55</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Blowout - Middellang Haar</span>
-                            <span class="font-medium gold-text">€65</span>
+                            <span class="font-medium text-gold-600">€65</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Blowout - Lang Haar</span>
-                            <span class="font-medium gold-text">€75</span>
+                            <span class="font-medium text-gold-600">€75</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Stijlen met Krultang/Stijltang</span>
-                            <span class="font-medium gold-text">€35 - €55</span>
+                            <span class="font-medium text-gold-600">€35 - €55</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Feestkapsel / Opsteekkapsel</span>
-                            <span class="font-medium gold-text">€85 - €120</span>
+                            <span class="font-medium text-gold-600">€85 - €120</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Treatments -->
                 <div class="mb-10">
-                    <h4 class="text-xl font-semibold mb-6 pb-2 border-b flex items-center">
-                        <i class="fas fa-magic mr-3 gold-text"></i> Haarbehandelingen
+                    <h4 class="text-xl font-serif mb-6 pb-2 border-b flex items-center">
+                        <i class="fas fa-magic mr-3 text-gold-500"></i> Haarbehandelingen
                     </h4>
                     <div class="space-y-4">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Diepe Voedende Behandeling</span>
-                            <span class="font-medium gold-text">€75</span>
+                            <span class="font-medium text-gold-600">€75</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Keratine Behandeling</span>
-                            <span class="font-medium gold-text">€180 - €250</span>
+                            <span class="font-medium text-gold-600">€180 - €250</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Olaplex Behandeling</span>
-                            <span class="font-medium gold-text">€90</span>
+                            <span class="font-medium text-gold-600">€90</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Hoofdhuidbehandeling</span>
-                            <span class="font-medium gold-text">€65</span>
+                            <span class="font-medium text-gold-600">€65</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Extensions -->
                 <div class="mb-10">
-                    <h4 class="text-xl font-semibold mb-6 pb-2 border-b flex items-center">
-                        <i class="fas fa-gem mr-3 gold-text"></i> Extensions & Textuur
+                    <h4 class="text-xl font-serif mb-6 pb-2 border-b flex items-center">
+                        <i class="fas fa-gem mr-3 text-gold-500"></i> Extensions & Textuur
                     </h4>
                     <div class="space-y-4">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Consultatie Extensions</span>
-                            <span class="font-medium gold-text">€50</span>
+                            <span class="font-medium text-gold-600">€50</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Extensions Plaatsen (Half Hoofd)</span>
-                            <span class="font-medium gold-text">€350 - €550</span>
+                            <span class="font-medium text-gold-600">€350 - €550</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Extensions Plaatsen (Vol Hoofd)</span>
-                            <span class="font-medium gold-text">€650 - €950</span>
+                            <span class="font-medium text-gold-600">€650 - €950</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Extensions Onderhoud (per uur)</span>
-                            <span class="font-medium gold-text">€95</span>
+                            <span class="font-medium text-gold-600">€95</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Extensions Verwijderen</span>
-                            <span class="font-medium gold-text">€150 - €250</span>
+                            <span class="font-medium text-gold-600">€150 - €250</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Permanente Wave</span>
-                            <span class="font-medium gold-text">€140 - €220</span>
+                            <span class="font-medium text-gold-600">€140 - €220</span>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Bridal -->
                 <div>
-                    <h4 class="text-xl font-semibold mb-6 pb-2 border-b flex items-center">
-                        <i class="fas fa-crown mr-3 gold-text"></i> Bruiloft & Speciale Evenementen
+                    <h4 class="text-xl font-serif mb-6 pb-2 border-b flex items-center">
+                        <i class="fas fa-crown mr-3 text-gold-500"></i> Bruiloft & Speciale Evenementen
                     </h4>
                     <div class="space-y-4">
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Bruid Proefkapsel</span>
-                            <span class="font-medium gold-text">€120</span>
+                            <span class="font-medium text-gold-600">€120</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Bruid Kapsel op de Dag</span>
-                            <span class="font-medium gold-text">€180</span>
+                            <span class="font-medium text-gold-600">€180</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Bruidsmeisje/Gast Kapsel</span>
-                            <span class="font-medium gold-text">€95 - €120</span>
+                            <span class="font-medium text-gold-600">€95 - €120</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Bruidegom Styling</span>
-                            <span class="font-medium gold-text">€65</span>
+                            <span class="font-medium text-gold-600">€65</span>
                         </div>
-                        <div class="flex justify-between">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
                             <span class="font-medium">Op Locatie Toeslag</span>
-                            <span class="font-medium gold-text">Vanaf €150</span>
+                            <span class="font-medium text-gold-600">Vanaf €150</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="p-8 border-t border-gray-200 text-center">
+            <div class="p-6 border-t border-gray-200 text-center">
                 <p class="text-sm text-gray-500 mb-6">Alle prijzen zijn inclusief BTW. Prijzen kunnen variëren afhankelijk van haarlengte, dikte en gebruikte producten.</p>
-                <button id="closePriceListBtn" class="px-8 py-3 bg-gold text-white font-medium rounded-full hover:bg-gold-dark transition duration-300 shadow-md">Sluiten</button>
+                <button id="closePriceListBtn" class="px-8 py-3 gold-gradient text-white font-medium rounded-full shadow-md hover:shadow-lg">Sluiten</button>
             </div>
         </div>
     </div>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-24 bg-white relative">
+    <section id="gallery" class="py-20 md:py-28 bg-white relative">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-5xl font-semibold mb-3 font-serif gold-text">Ons Werk</h2>
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl sm:text-5xl font-serif font-semibold mb-3 text-gold-500">Onze Galerie</h2>
                 <div class="w-24 h-1 gold-gradient mx-auto"></div>
-                <p class="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
-                    Bekijk onze galerij van transformaties en laat je inspireren voor je volgende bezoek.
+                <p class="mt-8 text-dark/80 max-w-2xl mx-auto text-lg">
+                    Bekijk enkele van onze mooiste transformaties en laat je inspireren voor je volgende look.
                 </p>
             </div>
             
-            <div class="gallery-grid reveal">
-                <div class="gallery-item">
-                    <img src="/api/placeholder/600/600" alt="Elegante styling" class="shadow-lg rounded-md">
-                    <div class="gallery-caption">
-                        <h3 class="font-semibold text-lg">Luxueuze Golven</h3>
-                        <p class="text-sm text-white/80">Kleur & Styling</p>
-                    </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/600" alt="Elegante styling" class="w-full h-full object-cover aspect-square">
                 </div>
-                
-                <div class="gallery-item">
-                    <img src="/api/placeholder/600/600" alt="Moderne bob" class="shadow-lg rounded-md">
-                    <div class="gallery-caption">
-                        <h3 class="font-semibold text-lg">Moderne Bob</h3>
-                        <p class="text-sm text-white/80">Precisie Knipbeurt</p>
-                    </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/600" alt="Moderne bob" class="w-full h-full object-cover aspect-square">
                 </div>
-                
-                <div class="gallery-item tall">
-                    <img src="/api/placeholder/600/900" alt="Balayage highlights" class="shadow-lg rounded-md">
-                    <div class="gallery-caption">
-                        <h3 class="font-semibold text-lg">Balayage Highlights</h3>
-                        <p class="text-sm text-white/80">Kleur Transformatie</p>
-                    </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/600" alt="Balayage highlights" class="w-full h-full object-cover aspect-square">
                 </div>
-                
-                <div class="gallery-item wide">
-                    <img src="/api/placeholder/900/600" alt="Bruidsstyling" class="shadow-lg rounded-md">
-                    <div class="gallery-caption">
-                        <h3 class="font-semibold text-lg">Klassiek Opgestoken Haar</h3>
-                        <p class="text-sm text-white/80">Bruids Styling</p>
-                    </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/600" alt="Bruidsstyling" class="w-full h-full object-cover aspect-square">
                 </div>
-                
-                <div class="gallery-item">
-                    <img src="/api/placeholder/600/600" alt="Pixie cut" class="shadow-lg rounded-md">
-                    <div class="gallery-caption">
-                        <h3 class="font-semibold text-lg">Moderne Pixie Cut</h3>
-                        <p class="text-sm text-white/80">Korte Stijl</p>
-                    </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/600" alt="Pixie cut" class="w-full h-full object-cover aspect-square">
                 </div>
-                
-                <div class="gallery-item">
-                    <img src="/api/placeholder/600/600" alt="Kleurcorrectie" class="shadow-lg rounded-md">
-                    <div class="gallery-caption">
-                        <h3 class="font-semibold text-lg">Platina Transformatie</h3>
-                        <p class="text-sm text-white/80">Kleurcorrectie</p>
-                    </div>
+                <div class="gallery-item rounded-xl overflow-hidden shadow-lg stagger-item">
+                    <img src="/api/placeholder/600/600" alt="Kleurcorrectie" class="w-full h-full object-cover aspect-square">
                 </div>
             </div>
             
             <!-- Before & After Section -->
-            <div class="mt-20 reveal">
-                <h3 class="text-3xl font-semibold mb-8 text-center font-serif">Voor & Na Transformaties</h3>
+            <div class="mt-20 fade-in">
+                <h3 class="text-3xl font-serif mb-8 text-center">Voor & Na Transformaties</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                    <div class="bg-white p-6 rounded-lg shadow-xl hover-grow">
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <div class="flex-1">
-                                <div class="relative w-full h-48 overflow-hidden rounded-md">
-                                    <img src="/api/placeholder/400/400" alt="Voor" class="w-full h-full object-cover">
-                                    <div class="absolute top-3 left-3 px-3 py-1 bg-black text-white text-xs rounded-full">VOOR</div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex flex-col gap-4">
+                            <div class="relative">
+                                <div class="absolute top-0 left-0 w-full h-full flex">
+                                    <div class="w-1/2 h-full overflow-hidden">
+                                        <img src="/api/placeholder/400/400" alt="Voor" class="w-full h-full object-cover">
+                                        <div class="absolute top-3 left-3 px-3 py-1 bg-black text-white text-xs rounded-full">VOOR</div>
+                                    </div>
+                                    <div class="w-1/2 h-full overflow-hidden">
+                                        <img src="/api/placeholder/400/400" alt="Na" class="w-full h-full object-cover">
+                                        <div class="absolute top-3 right-3 px-3 py-1 bg-gold-500 text-white text-xs rounded-full">NA</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="relative w-full h-48 overflow-hidden rounded-md">
-                                    <img src="/api/placeholder/400/400" alt="Na" class="w-full h-full object-cover">
-                                    <div class="absolute top-3 left-3 px-3 py-1 gold-bg text-white text-xs rounded-full">NA</div>
-                                </div>
+                                <img src="/api/placeholder/400/400" alt="Voor & Na" class="w-full h-auto invisible">
                             </div>
                         </div>
                         <div class="text-center mt-6">
                             <h4 class="font-semibold text-lg">Donker naar Blond</h4>
-                            <p class="text-sm text-gray-600 mt-1">Kleurcorrectie & Highlights</p>
+                            <p class="text-sm text-dark/60 mt-1">Kleurcorrectie & Highlights</p>
                         </div>
                     </div>
                     
-                    <div class="bg-white p-6 rounded-lg shadow-xl hover-grow">
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <div class="flex-1">
-                                <div class="relative w-full h-48 overflow-hidden rounded-md">
-                                    <img src="/api/placeholder/400/400" alt="Voor" class="w-full h-full object-cover">
-                                    <div class="absolute top-3 left-3 px-3 py-1 bg-black text-white text-xs rounded-full">VOOR</div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex flex-col gap-4">
+                            <div class="relative">
+                                <div class="absolute top-0 left-0 w-full h-full flex">
+                                    <div class="w-1/2 h-full overflow-hidden">
+                                        <img src="/api/placeholder/400/400" alt="Voor" class="w-full h-full object-cover">
+                                        <div class="absolute top-3 left-3 px-3 py-1 bg-black text-white text-xs rounded-full">VOOR</div>
+                                    </div>
+                                    <div class="w-1/2 h-full overflow-hidden">
+                                        <img src="/api/placeholder/400/400" alt="Na" class="w-full h-full object-cover">
+                                        <div class="absolute top-3 right-3 px-3 py-1 bg-gold-500 text-white text-xs rounded-full">NA</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="relative w-full h-48 overflow-hidden rounded-md">
-                                    <img src="/api/placeholder/400/400" alt="Na" class="w-full h-full object-cover">
-                                    <div class="absolute top-3 left-3 px-3 py-1 gold-bg text-white text-xs rounded-full">NA</div>
-                                </div>
+                                <img src="/api/placeholder/400/400" alt="Voor & Na" class="w-full h-auto invisible">
                             </div>
                         </div>
                         <div class="text-center mt-6">
                             <h4 class="font-semibold text-lg">Lang naar Bob</h4>
-                            <p class="text-sm text-gray-600 mt-1">Transformerende Knipbeurt</p>
+                            <p class="text-sm text-dark/60 mt-1">Transformerende Knipbeurt</p>
                         </div>
                     </div>
                     
-                    <div class="bg-white p-6 rounded-lg shadow-xl hover-grow">
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <div class="flex-1">
-                                <div class="relative w-full h-48 overflow-hidden rounded-md">
-                                    <img src="/api/placeholder/400/400" alt="Voor" class="w-full h-full object-cover">
-                                    <div class="absolute top-3 left-3 px-3 py-1 bg-black text-white text-xs rounded-full">VOOR</div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg">
+                        <div class="flex flex-col gap-4">
+                            <div class="relative">
+                                <div class="absolute top-0 left-0 w-full h-full flex">
+                                    <div class="w-1/2 h-full overflow-hidden">
+                                        <img src="/api/placeholder/400/400" alt="Voor" class="w-full h-full object-cover">
+                                        <div class="absolute top-3 left-3 px-3 py-1 bg-black text-white text-xs rounded-full">VOOR</div>
+                                    </div>
+                                    <div class="w-1/2 h-full overflow-hidden">
+                                        <img src="/api/placeholder/400/400" alt="Na" class="w-full h-full object-cover">
+                                        <div class="absolute top-3 right-3 px-3 py-1 bg-gold-500 text-white text-xs rounded-full">NA</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="relative w-full h-48 overflow-hidden rounded-md">
-                                    <img src="/api/placeholder/400/400" alt="Na" class="w-full h-full object-cover">
-                                    <div class="absolute top-3 left-3 px-3 py-1 gold-bg text-white text-xs rounded-full">NA</div>
-                                </div>
+                                <img src="/api/placeholder/400/400" alt="Voor & Na" class="w-full h-auto invisible">
                             </div>
                         </div>
                         <div class="text-center mt-6">
                             <h4 class="font-semibold text-lg">Volume & Balayage</h4>
-                            <p class="text-sm text-gray-600 mt-1">Highlights & Styling</p>
+                            <p class="text-sm text-dark/60 mt-1">Highlights & Styling</p>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="text-center mt-16">
-                <a href="#" class="inline-block px-10 py-4 bg-charcoal text-white font-medium rounded-full hover:bg-black transition duration-300 shadow-xl">
-                    BEKIJK AL ONS WERK <i class="fas fa-arrow-right ml-2"></i>
-                </a>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-24 bg-gold-lightest relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-white rounded-full -mr-32 -mt-32 opacity-50"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full -ml-32 -mb-32 opacity-50"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-5xl font-semibold mb-3 font-serif gold-text">Klantrecensies</h2>
+    <section id="testimonials" class="py-20 md:py-28 bg-gold-50 relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl sm:text-5xl font-serif font-semibold mb-3 text-gold-500">Wat Klanten Zeggen</h2>
                 <div class="w-24 h-1 gold-gradient mx-auto"></div>
-                <p class="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
-                    Hier is wat onze klanten te zeggen hebben over hun ervaring bij Luminous.
+                <p class="mt-8 text-dark/80 max-w-2xl mx-auto text-lg">
+                    Lees wat onze tevreden klanten ervaren bij Luminous Hair Salon.
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Testimonial 1 -->
-                <div class="testimonial-card p-8 reveal">
-                    <div class="testimonial-content">
-                        <div class="flex items-center mb-4">
-                            <div class="gold-text text-xl">
+                <div class="bg-white p-8 rounded-xl shadow-lg relative stagger-item">
+                    <div class="text-gold-400 text-6xl absolute top-4 left-4 opacity-10 font-serif">"</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center mb-6">
+                            <div class="text-gold-500 flex">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -1515,26 +862,27 @@
                                 <i class="fas fa-star"></i>
                             </div>
                         </div>
-                        <p class="text-gray-600 italic mb-8 leading-relaxed text-lg">
+                        <p class="text-dark/80 italic mb-8 leading-relaxed">
                             "De stylisten bij Luminous luisteren echt naar wat je wilt en overtreffen de verwachtingen. Ik heb me nog nooit zo zelfverzekerd gevoeld met mijn haar!"
                         </p>
                         <div class="flex items-center">
                             <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                <img src="/api/placeholder/100/100" alt="Klant 1" class="w-full h-full object-cover">
+                                <img src="/api/placeholder/100/100" alt="Klant portret" class="w-full h-full object-cover">
                             </div>
                             <div>
                                 <h4 class="font-semibold">Sarah de Jong</h4>
-                                <p class="text-sm text-gray-500">Vaste Klant</p>
+                                <p class="text-sm text-dark/60">Vaste Klant</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Testimonial 2 -->
-                <div class="testimonial-card p-8 reveal" style="--reveal-delay: 0.2s;">
-                    <div class="testimonial-content">
-                        <div class="flex items-center mb-4">
-                            <div class="gold-text text-xl">
+                <div class="bg-white p-8 rounded-xl shadow-lg relative stagger-item">
+                    <div class="text-gold-400 text-6xl absolute top-4 left-4 opacity-10 font-serif">"</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center mb-6">
+                            <div class="text-gold-500 flex">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -1542,26 +890,27 @@
                                 <i class="fas fa-star"></i>
                             </div>
                         </div>
-                        <p class="text-gray-600 italic mb-8 leading-relaxed text-lg">
+                        <p class="text-dark/80 italic mb-8 leading-relaxed">
                             "Ik ben bij veel salons geweest, maar Luminous onderscheidt zich door hun uitzonderlijke vaardigheid en oog voor detail. Elke cent waard!"
                         </p>
                         <div class="flex items-center">
                             <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                <img src="/api/placeholder/100/100" alt="Klant 2" class="w-full h-full object-cover">
+                                <img src="/api/placeholder/100/100" alt="Klant portret" class="w-full h-full object-cover">
                             </div>
                             <div>
                                 <h4 class="font-semibold">Michael van Dijk</h4>
-                                <p class="text-sm text-gray-500">Klant sinds 2019</p>
+                                <p class="text-sm text-dark/60">Klant sinds 2019</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Testimonial 3 -->
-                <div class="testimonial-card p-8 reveal" style="--reveal-delay: 0.4s;">
-                    <div class="testimonial-content">
-                        <div class="flex items-center mb-4">
-                            <div class="gold-text text-xl">
+                <div class="bg-white p-8 rounded-xl shadow-lg relative stagger-item">
+                    <div class="text-gold-400 text-6xl absolute top-4 left-4 opacity-10 font-serif">"</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center mb-6">
+                            <div class="text-gold-500 flex">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -1569,28 +918,28 @@
                                 <i class="fas fa-star"></i>
                             </div>
                         </div>
-                        <p class="text-gray-600 italic mb-8 leading-relaxed text-lg">
+                        <p class="text-dark/80 italic mb-8 leading-relaxed">
                             "De perfecte mix van luxe, vakmanschap en persoonlijke service. Mijn stylist heeft mijn haar getransformeerd en mijn zelfvertrouwen vergroot!"
                         </p>
                         <div class="flex items-center">
                             <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
-                                <img src="/api/placeholder/100/100" alt="Klant 3" class="w-full h-full object-cover">
+                                <img src="/api/placeholder/100/100" alt="Klant portret" class="w-full h-full object-cover">
                             </div>
                             <div>
                                 <h4 class="font-semibold">Emma de Boer</h4>
-                                <p class="text-sm text-gray-500">Klant sinds 2020</p>
+                                <p class="text-sm text-dark/60">Klant sinds 2020</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Google Reviews Section -->
-            <div class="mt-16 py-10 bg-white rounded-2xl shadow-xl reveal">
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-semibold font-serif">Onze Google Recensies</h3>
+            <!-- Google Reviews -->
+            <div class="mt-16 bg-white rounded-xl shadow-xl p-8 fade-in">
+                <div class="text-center">
+                    <h3 class="text-2xl font-serif mb-4">Onze Google Recensies</h3>
                     <div class="flex items-center justify-center mt-4">
-                        <div class="gold-text text-xl mr-2">
+                        <div class="text-gold-500 flex text-xl mr-2">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -1598,15 +947,15 @@
                             <i class="fas fa-star-half-alt"></i>
                         </div>
                         <span class="text-2xl font-semibold">4.8</span>
-                        <span class="text-gray-500 ml-2">uit 5 (124 recensies)</span>
+                        <span class="text-dark/60 ml-2">uit 5 (124 recensies)</span>
                     </div>
                 </div>
                 
-                <div class="flex flex-wrap justify-center gap-6 px-4">
-                    <a href="#" class="inline-flex items-center px-6 py-3 bg-gold text-white rounded-full hover:bg-gold-dark transition duration-300 shadow-md">
+                <div class="flex flex-wrap justify-center gap-4 mt-8">
+                    <a href="#" class="px-6 py-3 gold-gradient text-white rounded-full shadow-md hover:shadow-lg transition duration-300">
                         <i class="fas fa-pencil-alt mr-2"></i> Schrijf een recensie
                     </a>
-                    <a href="#" class="inline-flex items-center px-6 py-3 border border-gray-300 rounded-full hover:bg-gray-50 transition duration-300">
+                    <a href="#" class="px-6 py-3 border border-gray-300 rounded-full hover:bg-gray-50 transition duration-300">
                         <i class="fab fa-google mr-2"></i> Bekijk alle recensies
                     </a>
                 </div>
@@ -1615,291 +964,235 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-24 relative">
-        <div class="absolute top-0 left-0 w-1/3 h-full gold-light-bg opacity-30 hidden lg:block"></div>
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-5xl font-semibold mb-3 font-serif gold-text">Contact</h2>
+    <section id="contact" class="py-20 md:py-28 bg-white relative">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl sm:text-5xl font-serif font-semibold mb-3 text-gold-500">Contact</h2>
                 <div class="w-24 h-1 gold-gradient mx-auto"></div>
-                <p class="mt-6 text-gray-600 max-w-2xl mx-auto text-lg">
-                    Bel ons vandaag nog voor een afspraak en ervaar het Luminous verschil.
+                <p class="mt-8 text-dark/80 max-w-2xl mx-auto text-lg">
+                    Neem contact met ons op voor vragen of om een afspraak te maken.
                 </p>
             </div>
             
-            <div class="bg-white p-0 rounded-2xl shadow-2xl max-w-4xl mx-auto overflow-hidden">
-                <div class="grid grid-cols-1 md:grid-cols-2">
-                    <div class="p-10 bg-charcoal text-white">
-                        <h3 class="text-2xl font-semibold mb-6 font-serif gold-text">Bezoek Onze Salon</h3>
-                        
-                        <div class="mb-10 flex items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
+                <div class="lg:col-span-2 bg-dark p-8 rounded-xl text-white">
+                    <h3 class="text-2xl font-serif mb-8 text-gold-400">Informatie</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
                             <div class="mr-4 mt-1">
-                                <div class="w-12 h-12 rounded-full gold-bg text-white flex items-center justify-center text-xl">
+                                <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center text-gold-400">
                                     <i class="fas fa-map-marker-alt"></i>
                                 </div>
                             </div>
                             <div>
-                                <h4 class="text-lg font-semibold mb-3">Locatie</h4>
-                                <p class="text-gray-300 mb-1">Elegantiestraat 123</p>
-                                <p class="text-gray-300 mb-3">1071 AM Amsterdam</p>
-                                <a href="#" class="inline-flex items-center text-sm gold-text hover:underline">
-                                    Bekijk op Kaart <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
+                                <h4 class="font-medium mb-2">Adres</h4>
+                                <p class="text-white/80 text-sm">Elegantiestraat 123</p>
+                                <p class="text-white/80 text-sm">1071 AM Amsterdam</p>
                             </div>
                         </div>
                         
-                        <div class="mb-10 flex items-start">
+                        <div class="flex items-start">
                             <div class="mr-4 mt-1">
-                                <div class="w-12 h-12 rounded-full gold-bg text-white flex items-center justify-center text-xl">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold mb-3">Openingstijden</h4>
-                                <div class="space-y-3">
-                                    <div class="flex justify-between border-b border-gray-700 pb-2">
-                                        <span class="text-gray-300">Maandag - Vrijdag</span>
-                                        <span class="font-medium text-white">9:00 - 20:00</span>
-                                    </div>
-                                    <div class="flex justify-between border-b border-gray-700 pb-2">
-                                        <span class="text-gray-300">Zaterdag</span>
-                                        <span class="font-medium text-white">9:00 - 18:00</span>
-                                    </div>
-                                    <div class="flex justify-between">
-                                        <span class="text-gray-300">Zondag</span>
-                                        <span class="font-medium text-white">10:00 - 16:00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mb-8 flex items-start">
-                            <div class="mr-4 mt-1">
-                                <div class="w-12 h-12 rounded-full gold-bg text-white flex items-center justify-center text-xl">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-semibold mb-3">E-mail</h4>
-                                <p class="text-gray-300 mb-1">
-                                    <a href="mailto:info@luminoushaar.nl" class="hover:text-gold transition duration-300">info@luminoushaar.nl</a>
-                                </p>
-                                <p class="text-sm text-gray-400">
-                                    Voor algemene vragen en informatie
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-10">
-                            <h4 class="text-lg font-semibold mb-4 font-serif">Volg Ons</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-12 h-12 rounded-full flex items-center justify-center border border-gold text-gold hover:bg-gold hover:text-white transition duration-300">
-                                    <i class="fab fa-instagram text-lg"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 rounded-full flex items-center justify-center border border-gold text-gold hover:bg-gold hover:text-white transition duration-300">
-                                    <i class="fab fa-facebook-f text-lg"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 rounded-full flex items-center justify-center border border-gold text-gold hover:bg-gold hover:text-white transition duration-300">
-                                    <i class="fab fa-pinterest text-lg"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 rounded-full flex items-center justify-center border border-gold text-gold hover:bg-gold hover:text-white transition duration-300">
-                                    <i class="fab fa-tiktok text-lg"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="p-10">
-                        <h3 class="text-2xl font-semibold mb-6 font-serif gold-text">Neem Contact Op</h3>
-                        
-                        <div class="mb-8 flex items-start">
-                            <div class="mb-8 flex items-start">
-                            <div class="mr-4 mt-1">
-                                <div class="w-12 h-12 rounded-full gold-bg text-white flex items-center justify-center text-xl">
+                                <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center text-gold-400">
                                     <i class="fas fa-phone-alt"></i>
                                 </div>
                             </div>
                             <div>
-                                <h4 class="text-lg font-semibold mb-3">Telefoon</h4>
-                                <p class="mb-1">
-                                    <a href="tel:+31627403860" class="text-xl font-medium hover:gold-text transition duration-300">+31 6 27 40 38 60</a>
-                                </p>
-                                <p class="text-sm text-gray-500">
-                                    Bel ons om een afspraak te maken of voor vragen
+                                <h4 class="font-medium mb-2">Telefoon</h4>
+                                <p class="text-white/80 text-sm">
+                                    <a href="tel:+31627403860" class="hover:text-gold-300 transition duration-300">+31 6 27 40 38 60</a>
                                 </p>
                             </div>
                         </div>
                         
-                        <!-- Contact Form -->
-                        <form class="mt-8">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                                <div>
-                                    <label for="name" class="input-label">Naam</label>
-                                    <input type="text" id="name" class="form-input" placeholder="Jouw naam">
-                                </div>
-                                <div>
-                                    <label for="email" class="input-label">E-mail</label>
-                                    <input type="email" id="email" class="form-input" placeholder="Jouw e-mail">
+                        <div class="flex items-start">
+                            <div class="mr-4 mt-1">
+                                <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center text-gold-400">
+                                    <i class="fas fa-envelope"></i>
                                 </div>
                             </div>
-                            <div class="mb-4">
-                                <label for="phone" class="input-label">Telefoonnummer</label>
-                                <input type="tel" id="phone" class="form-input" placeholder="Jouw telefoonnummer">
+                            <div>
+                                <h4 class="font-medium mb-2">E-mail</h4>
+                                <p class="text-white/80 text-sm">
+                                    <a href="mailto:info@luminoushaar.nl" class="hover:text-gold-300 transition duration-300">info@luminoushaar.nl</a>
+                                </p>
                             </div>
-                            <div class="mb-4">
-                                <label for="message" class="input-label">Bericht</label>
-                                <textarea id="message" rows="4" class="form-input" placeholder="Jouw bericht"></textarea>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="mr-4 mt-1">
+                                <div class="w-10 h-10 rounded-full bg-gold-500/20 flex items-center justify-center text-gold-400">
+                                    <i class="fas fa-clock"></i>
+                                </div>
                             </div>
-                            <button type="submit" class="w-full py-3 bg-gold text-white font-medium rounded-md hover:bg-gold-dark transition duration-300 mt-2">Verstuur Bericht</button>
-                        </form>
+                            <div>
+                                <h4 class="font-medium mb-2">Openingstijden</h4>
+                                <div class="text-white/80 text-sm space-y-1">
+                                    <div class="flex justify-between">
+                                        <span>Maandag - Vrijdag:</span>
+                                        <span class="pl-3">9:00 - 20:00</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Zaterdag:</span>
+                                        <span class="pl-3">9:00 - 18:00</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span>Zondag:</span>
+                                        <span class="pl-3">10:00 - 16:00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-white/10">
+                        <h4 class="font-medium mb-4">Volg Ons</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gold-400/30 text-gold-400 hover:bg-gold-500 hover:text-white hover:border-gold-500 transition duration-300">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gold-400/30 text-gold-400 hover:bg-gold-500 hover:text-white hover:border-gold-500 transition duration-300">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gold-400/30 text-gold-400 hover:bg-gold-500 hover:text-white hover:border-gold-500 transition duration-300">
+                                <i class="fab fa-pinterest"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gold-400/30 text-gold-400 hover:bg-gold-500 hover:text-white hover:border-gold-500 transition duration-300">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="text-center mt-16 reveal">
-                <a href="tel:+31627403860" class="inline-block px-10 py-4 btn-3d text-lg font-medium rounded-full">
-                    <i class="fas fa-phone-alt mr-2"></i> BEL NU VOOR EEN AFSPRAAK: +31 6 27 40 38 60
-                </a>
+                
+                <div class="lg:col-span-3 bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-serif mb-8 text-gold-500">Stuur een Bericht</h3>
+                    
+                    <form>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Naam</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Telefoonnummer</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Bericht</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-400 focus:border-transparent outline-none transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 gold-gradient text-white font-medium rounded-lg hover:shadow-lg transition duration-300">
+                            Verstuur Bericht
+                        </button>
+                    </form>
+                    
+                    <div class="mt-8 text-center">
+                        <p class="text-dark/60 mb-4">Of bel direct voor een afspraak</p>
+                        <a href="tel:+31627403860" class="inline-flex items-center px-6 py-3 bg-dark text-white rounded-full hover:bg-dark-light transition duration-300">
+                            <i class="fas fa-phone-alt mr-2"></i> +31 6 27 40 38 60
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Newsletter Section -->
-    <section class="py-16 bg-gray-50 relative overflow-hidden">
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-3xl mx-auto text-center reveal">
-                <h3 class="text-3xl font-semibold mb-4 font-serif">Schrijf Je In Voor Stijltips & Updates</h3>
-                <p class="text-gray-600 mb-8">Word lid van onze mailinglijst om de nieuwste haartrends, stylingtips en exclusieve aanbiedingen te ontvangen.</p>
+    <section class="py-16 bg-gold-50 relative">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <h3 class="text-3xl font-serif mb-4">Blijf op de Hoogte</h3>
+                <p class="text-dark/70 mb-8">Word lid van onze mailinglijst om de nieuwste haartrends, stylingtips en exclusieve aanbiedingen te ontvangen.</p>
                 <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
-                    <input type="email" placeholder="Jouw e-mailadres" class="flex-grow px-4 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent shadow-md">
-                    <button type="submit" class="px-8 py-3 bg-gold text-white font-medium rounded-full hover:bg-gold-dark transition duration-300 whitespace-nowrap shadow-md">INSCHRIJVEN</button>
+                    <input type="email" placeholder="Jouw e-mailadres" class="flex-grow px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-400 shadow-md">
+                    <button type="submit" class="px-8 py-3 gold-gradient text-white font-medium rounded-lg shadow-md hover:shadow-lg transition duration-300">INSCHRIJVEN</button>
                 </form>
-                
-                <!-- Newsletter benefits -->
-                <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6 text-left">
-                    <div class="bg-white p-6 rounded-xl shadow-md hover-grow">
-                        <div class="flex items-start">
-                            <div class="gold-text text-2xl mr-4">
-                                <i class="fas fa-gift"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium mb-2">Exclusieve Aanbiedingen</h4>
-                                <p class="text-sm text-gray-600">Ontvang speciale kortingen en promoties alleen voor onze abonnees.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover-grow">
-                        <div class="flex items-start">
-                            <div class="gold-text text-2xl mr-4">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium mb-2">Haarverzorgingstips</h4>
-                                <p class="text-sm text-gray-600">Professionele adviezen en geheimen voor dagelijkse haarverzorging.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-6 rounded-xl shadow-md hover-grow">
-                        <div class="flex items-start">
-                            <div class="gold-text text-2xl mr-4">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-medium mb-2">Evenementen & Nieuws</h4>
-                                <p class="text-sm text-gray-600">Blijf op de hoogte van onze evenementen, workshops en het laatste nieuws.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-charcoal text-white py-16">
+    <footer class="bg-dark text-white py-16">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
                 <div>
-                    <a href="#" class="text-3xl font-bold gold-text font-serif mb-6 inline-block tracking-wider">Luminous</a>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
+                    <a href="#" class="text-3xl font-serif font-bold text-gold-400 mb-6 inline-block">Luminous</a>
+                    <p class="text-white/60 mb-6 leading-relaxed">
                         We verheffen de kunst van haarstyling door expertise, premium producten en gepersonaliseerde service te combineren voor een onvergetelijke ervaring.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 text-gray-400 hover:text-gold hover:border-gold transition duration-300">
+                        <a href="#" class="w-8 h-8 rounded-full flex items-center justify-center border border-gold-400/30 text-gold-400/70 hover:bg-gold-500 hover:text-white hover:border-gold-500 transition duration-300">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 text-gray-400 hover:text-gold hover:border-gold transition duration-300">
+                        <a href="#" class="w-8 h-8 rounded-full flex items-center justify-center border border-gold-400/30 text-gold-400/70 hover:bg-gold-500 hover:text-white hover:border-gold-500 transition duration-300">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 text-gray-400 hover:text-gold hover:border-gold transition duration-300">
+                        <a href="#" class="w-8 h-8 rounded-full flex items-center justify-center border border-gold-400/30 text-gold-400/70 hover:bg-gold-500 hover:text-white hover:border-gold-500 transition duration-300">
                             <i class="fab fa-pinterest"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center border border-gray-700 text-gray-400 hover:text-gold hover:border-gold transition duration-300">
+                        <a href="#" class="w-8 h-8 rounded-full flex items-center justify-center border border-gold-400/30 text-gold-400/70 hover:bg-gold-500 hover:text-white hover:border-gold-500 transition duration-300">
                             <i class="fab fa-tiktok"></i>
                         </a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="text-xl font-semibold mb-6 font-serif">Snelle Links</h4>
+                    <h4 class="text-lg font-medium mb-6">Snelle Links</h4>
                     <ul class="space-y-3">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Home</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Over Ons</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Diensten</a></li>
-                        <li><a href="#gallery" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Galerie</a></li>
-                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Recensies</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Contact</a></li>
+                        <li><a href="#home" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Home</a></li>
+                        <li><a href="#about" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Over Ons</a></li>
+                        <li><a href="#services" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Diensten</a></li>
+                        <li><a href="#gallery" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Galerie</a></li>
+                        <li><a href="#testimonials" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Recensies</a></li>
+                        <li><a href="#contact" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Contact</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-xl font-semibold mb-6 font-serif">Diensten</h4>
+                    <h4 class="text-lg font-medium mb-6">Diensten</h4>
                     <ul class="space-y-3">
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Knippen & Styling</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Kleurbehandelingen</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Hairextensions</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Bruidsstyling</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Keratine Behandelingen</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 gold-text"></i> Hoofdhuid Therapie</a></li>
+                        <li><a href="#services" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Knippen & Styling</a></li>
+                        <li><a href="#services" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Kleurbehandelingen</a></li>
+                        <li><a href="#services" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Hairextensions</a></li>
+                        <li><a href="#services" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Bruidsstyling</a></li>
+                        <li><a href="#services" class="text-white/60 hover:text-gold-400 transition duration-300 flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-gold-500"></i> Keratine Behandelingen</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="text-xl font-semibold mb-6 font-serif">Contact</h4>
+                    <h4 class="text-lg font-medium mb-6">Contact</h4>
                     <ul class="space-y-4">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 gold-text"></i>
-                            <span class="text-gray-400">Elegantiestraat 123<br>1071 AM Amsterdam</span>
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-gold-500"></i>
+                            <span class="text-white/60">Elegantiestraat 123<br>1071 AM Amsterdam</span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-phone-alt mr-3 gold-text"></i>
-                            <span class="text-gray-400">
-                                <a href="tel:+31627403860" class="hover:text-white transition duration-300">+31 6 27 40 38 60</a>
+                            <i class="fas fa-phone-alt mr-3 text-gold-500"></i>
+                            <span class="text-white/60">
+                                <a href="tel:+31627403860" class="hover:text-gold-400 transition duration-300">+31 6 27 40 38 60</a>
                             </span>
                         </li>
                         <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 gold-text"></i>
-                            <span class="text-gray-400">info@luminoushaar.nl</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-clock mt-1 mr-3 gold-text"></i>
-                            <div class="text-gray-400">
-                                <p>Ma-Vr: 9:00 - 20:00</p>
-                                <p>Za: 9:00 - 18:00</p>
-                                <p>Zo: 10:00 - 16:00</p>
-                            </div>
+                            <i class="fas fa-envelope mr-3 text-gold-500"></i>
+                            <span class="text-white/60">info@luminoushaar.nl</span>
                         </li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 pt-8 mt-8">
+            <div class="border-t border-white/10 pt-8 mt-8">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; <span class="current-year">2025</span> Luminous Haar Studio. Alle rechten voorbehouden.</p>
+                    <p class="text-white/50 text-sm mb-4 md:mb-0">&copy; <span class="current-year">2025</span> Luminous Haar Studio. Alle rechten voorbehouden.</p>
                     <div class="flex flex-wrap justify-center gap-4 md:gap-6">
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Privacybeleid</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Algemene Voorwaarden</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Toegankelijkheid</a>
-                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-sm">Sitemap</a>
+                        <a href="#" class="text-white/50 hover:text-gold-400 transition duration-300 text-sm">Privacybeleid</a>
+                        <a href="#" class="text-white/50 hover:text-gold-400 transition duration-300 text-sm">Algemene Voorwaarden</a>
+                        <a href="#" class="text-white/50 hover:text-gold-400 transition duration-300 text-sm">Toegankelijkheid</a>
                     </div>
                 </div>
             </div>
@@ -1907,74 +1200,93 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#home" class="fixed bottom-8 right-8 w-14 h-14 gold-bg text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gold-dark transition duration-300 z-30">
+    <a href="#home" class="fixed bottom-6 right-6 w-12 h-12 gold-gradient text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition duration-300 z-30">
         <i class="fas fa-arrow-up"></i>
     </a>
     
     <!-- Cookie Consent Banner -->
-    <div id="cookieBanner" class="cookie-banner">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+    <div id="cookieBanner" class="cookie-banner fixed inset-x-0 bottom-0 bg-white bg-opacity-95 shadow-lg z-50 backdrop-blur-sm border-t-2 border-gold-500">
+        <div class="container mx-auto p-4 flex flex-col md:flex-row justify-between items-center">
             <div class="mb-4 md:mb-0 md:mr-8">
-                <p class="text-gray-800 mb-2">Deze website gebruikt cookies om je ervaring te verbeteren.</p>
-                <p class="text-gray-600 text-sm">Door op "Accepteren" te klikken, stem je in met het gebruik van cookies volgens ons <a href="#" class="gold-text underline">cookiebeleid</a>.</p>
+                <p class="text-dark mb-2">Deze website gebruikt cookies om je ervaring te verbeteren.</p>
+                <p class="text-dark/60 text-sm">Door op "Accepteren" te klikken, stem je in met het gebruik van cookies volgens ons <a href="#" class="text-gold-500 underline">cookiebeleid</a>.</p>
             </div>
             <div class="flex flex-col sm:flex-row gap-3">
-                <button id="acceptCookies" class="px-6 py-3 gold-bg text-white font-medium rounded-full hover:bg-gold-dark transition duration-300 shadow-md">Accepteren</button>
-                <button id="rejectCookies" class="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-full hover:bg-gray-50 transition duration-300">Alleen Noodzakelijke</button>
+                <button id="acceptCookies" class="px-6 py-3 gold-gradient text-white font-medium rounded-lg hover:shadow-lg transition duration-300">Accepteren</button>
+                <button id="rejectCookies" class="px-6 py-3 border border-gray-300 text-dark font-medium rounded-lg hover:bg-gray-50 transition duration-300">Alleen Noodzakelijke</button>
             </div>
         </div>
     </div>
 
     <!-- Chat Widget -->
-    <div id="chat-widget" class="chat-widget">
-        <!-- Chat toggle button -->
-        <button id="chat-widget-toggle" class="chat-widget-toggle gold-gradient scale-on-click">
+    <div id="chat-widget" class="fixed bottom-6 right-6 z-40">
+        <!-- Toggle button -->
+        <button id="chat-widget-toggle" class="w-16 h-16 gold-gradient rounded-full flex items-center justify-center text-white text-2xl shadow-lg chat-widget-toggle">
             <i class="fas fa-comments"></i>
         </button>
         
         <!-- Chat container -->
-        <div id="chat-widget-container" class="chat-widget-container">
-            <div class="chat-widget-header gold-gradient">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-md">
-                        <span class="font-serif font-bold gold-text text-xl">L</span>
+        <div id="chat-widget-container" class="absolute bottom-20 right-0 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col chat-widget-container">
+            <div class="p-4 gold-gradient flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
+                        <span class="text-gold-500 font-serif font-bold text-xl">L</span>
                     </div>
-                    <div>
-                        <h3 class="font-serif text-white text-lg">Luminous Assistent</h3>
-                        <p class="text-white text-xs opacity-80">Online | Meestal binnen 5 minuten</p>
+                    <div class="ml-3">
+                        <h3 class="text-white font-medium">Luminous Chat</h3>
+                        <p class="text-white/70 text-xs">Online | Antwoord binnen 5 min</p>
                     </div>
                 </div>
-                <button id="chat-widget-close" class="text-white hover:text-gray-200 w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/20">
+                <button id="chat-widget-close" class="text-white hover:text-white/80 w-8 h-8 flex items-center justify-center">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div id="chat-widget-messages" class="chat-widget-messages">
-                <!-- Messages will be added here by JS -->
+            <div id="chat-widget-messages" class="p-4 flex-1 overflow-y-auto max-h-96 bg-gray-50">
+                <!-- Messages will be added here -->
             </div>
-            <div class="chat-widget-input">
-                <textarea id="chat-widget-input" placeholder="Stel een vraag over onze salon..." rows="1"></textarea>
-                <button id="chat-widget-send" class="gold-gradient text-white" disabled>
+            <div class="p-4 border-t border-gray-100 flex gap-2">
+                <textarea id="chat-widget-input" placeholder="Typ een bericht..." class="flex-1 p-3 border border-gray-200 rounded-lg resize-none focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 max-h-32"></textarea>
+                <button id="chat-widget-send" class="w-10 h-10 gold-gradient rounded-full flex items-center justify-center text-white disabled:opacity-50 disabled:cursor-not-allowed" disabled>
                     <i class="fas fa-paper-plane"></i>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Price List Modal JS -->
+    <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const closeMenu = document.getElementById('closeMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a[href^="#"]');
+            
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenu.classList.add('open');
+            });
+            
+            closeMenu.addEventListener('click', function() {
+                mobileMenu.classList.remove('open');
+            });
+            
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('open');
+                });
+            });
+            
+            // Price List Modal
             const priceListBtn = document.getElementById('priceListBtn');
             const priceListModal = document.getElementById('priceListModal');
             const closePriceList = document.getElementById('closePriceList');
             const closePriceListBtn = document.getElementById('closePriceListBtn');
             
-            // Show Price List Modal
             priceListBtn.addEventListener('click', function() {
                 priceListModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             });
             
-            // Close Price List Modal
             function closePriceListModal() {
                 priceListModal.classList.add('hidden');
                 document.body.style.overflow = 'auto';
@@ -1983,46 +1295,15 @@
             closePriceList.addEventListener('click', closePriceListModal);
             closePriceListBtn.addEventListener('click', closePriceListModal);
             
-            // Close modal on outside click
             priceListModal.addEventListener('click', function(e) {
                 if (e.target === priceListModal) {
                     closePriceListModal();
                 }
             });
-        });
-    </script>
-
-    <!-- JavaScript for mobile menu -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const closeMenu = document.getElementById('closeMenu');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a[href^="#"]');
-            const cookieBanner = document.getElementById('cookieBanner');
-            const acceptCookies = document.getElementById('acceptCookies');
-            const rejectCookies = document.getElementById('rejectCookies');
             
-            // Toggle mobile menu
-            mobileMenuToggle.addEventListener('click', function() {
-                mobileMenu.classList.add('open');
-            });
-            
-            // Close mobile menu
-            closeMenu.addEventListener('click', function() {
-                mobileMenu.classList.remove('open');
-            });
-            
-            // Close menu when clicking a link
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    mobileMenu.classList.remove('open');
-                });
-            });
-            
-            // Add smooth scrolling to all links
+            // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
+                anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     
                     const targetId = this.getAttribute('href');
@@ -2037,47 +1318,28 @@
                     }
                 });
             });
-
-            // Shrink and change navbar on scroll
+            
+            // Shrink navbar on scroll
             const navbar = document.getElementById('main-nav');
             
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 50) {
                     navbar.classList.add('py-2');
-                    navbar.classList.add('shadow-lg');
+                    navbar.classList.add('shadow-md');
                     navbar.classList.remove('py-3');
                 } else {
                     navbar.classList.add('py-3');
                     navbar.classList.remove('py-2');
-                    navbar.classList.remove('shadow-lg');
+                    navbar.classList.remove('shadow-md');
                 }
             });
             
-            // Reveal animations on scroll
-            const revealElements = document.querySelectorAll('.reveal');
+            // Cookie banner
+            const cookieBanner = document.getElementById('cookieBanner');
+            const acceptCookies = document.getElementById('acceptCookies');
+            const rejectCookies = document.getElementById('rejectCookies');
             
-            function revealOnScroll() {
-                const windowHeight = window.innerHeight;
-                const revealPoint = 150;
-                
-                revealElements.forEach(element => {
-                    const revealTop = element.getBoundingClientRect().top;
-                    
-                    if (revealTop < windowHeight - revealPoint) {
-                        const delay = element.style.getPropertyValue('--reveal-delay') || 0;
-                        setTimeout(() => {
-                            element.classList.add('active');
-                        }, delay * 1000);
-                    }
-                });
-            }
-            
-            window.addEventListener('scroll', revealOnScroll);
-            window.addEventListener('load', revealOnScroll);
-            
-            // Cookie Banner
             function showCookieBanner() {
-                // Check if user has already made a choice
                 if (!localStorage.getItem('cookieChoice')) {
                     cookieBanner.classList.add('show');
                 }
@@ -2090,31 +1352,16 @@
             acceptCookies.addEventListener('click', function() {
                 localStorage.setItem('cookieChoice', 'accepted');
                 hideCookieBanner();
-                // Here you would initialize any optional cookies/tracking
             });
             
             rejectCookies.addEventListener('click', function() {
                 localStorage.setItem('cookieChoice', 'rejected');
                 hideCookieBanner();
-                // Only use essential cookies
             });
             
-            // Show cookie banner after a short delay
             setTimeout(showCookieBanner, 1000);
             
-            // Initialize current year
-            const currentYear = new Date().getFullYear();
-            const yearElements = document.querySelectorAll('.current-year');
-            yearElements.forEach(element => {
-                element.textContent = currentYear;
-            });
-        });
-    </script>
-
-    <!-- Enhanced Chat Widget Scripts -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Chat Widget Elements
+            // Chat Widget
             const chatWidget = {
                 elements: {
                     widget: document.getElementById('chat-widget'),
@@ -2134,48 +1381,27 @@
                     initialized: false
                 },
                 
-                // Storage keys
                 storage: {
                     THREAD_ID: 'luminous_chat_thread_id',
                     MESSAGES: 'luminous_chat_messages'
                 },
                 
-                // Initialize the chat widget
                 init: function() {
-                    // Load previous state if available
                     this.loadState();
-                    
-                    // Set up event listeners
                     this.setupEventListeners();
                     
-                    // Initialize the chat if not already initialized
                     if (!this.state.initialized) {
                         this.initializeChat();
                     } else {
                         this.loadMessages();
                     }
-
-                    // Add welcome animation to the toggle button
-                    setTimeout(() => {
-                        this.elements.toggleBtn.classList.add('animate-bounce');
-                        setTimeout(() => {
-                            this.elements.toggleBtn.classList.remove('animate-bounce');
-                        }, 1000);
-                    }, 3000);
                 },
                 
-                // Set up event listeners
                 setupEventListeners: function() {
-                    // Toggle chat open/closed
                     this.elements.toggleBtn.addEventListener('click', () => this.toggleChat());
-                    
-                    // Close chat
                     this.elements.closeBtn.addEventListener('click', () => this.closeChat());
-                    
-                    // Send message on button click
                     this.elements.sendBtn.addEventListener('click', () => this.sendMessage());
                     
-                    // Send message on Enter key (but allow Shift+Enter for new lines)
                     this.elements.input.addEventListener('keydown', (e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                             e.preventDefault();
@@ -2183,18 +1409,13 @@
                         }
                     });
                     
-                    // Handle input changes (enable/disable send button)
                     this.elements.input.addEventListener('input', () => {
-                        // Auto-resize textarea
                         this.elements.input.style.height = 'auto';
                         this.elements.input.style.height = (this.elements.input.scrollHeight > 120 ? '120px' : this.elements.input.scrollHeight + 'px');
-                        
-                        // Enable/disable send button based on content
                         this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
                     });
                 },
                 
-                // Toggle chat open/closed
                 toggleChat: function() {
                     if (this.state.isOpen) {
                         this.closeChat();
@@ -2203,37 +1424,31 @@
                     }
                 },
                 
-                // Open chat
                 openChat: function() {
                     this.elements.container.classList.add('open');
                     this.state.isOpen = true;
                     this.scrollToBottom();
                     
-                    // Focus input field
                     setTimeout(() => {
                         this.elements.input.focus();
                     }, 400);
                 },
                 
-                // Close chat
                 closeChat: function() {
                     this.elements.container.classList.remove('open');
                     this.state.isOpen = false;
                 },
                 
-                // Initialize chat
                 initializeChat: async function() {
                     try {
-                        // Create a thread if we don't have one
                         if (!this.state.threadId) {
                             const threadId = await this.createThread();
                             this.state.threadId = threadId;
                             this.saveState();
                         }
                         
-                        // Add welcome message with special formatting
                         const welcomeMessage = 
-                            "Welkom bij Luminous! 👋\n\nIk ben je virtuele assistent en sta klaar om je te helpen. Je kunt me vragen stellen over:\n• Onze diensten en prijzen\n• Openingstijden\n• Afspraken maken\n• Haar- en verzorgingstips\n\nWaarmee kan ik je vandaag helpen?";
+                            "👋 Welkom bij Luminous Hair Salon! Hoe kan ik je vandaag helpen? Je kunt vragen stellen over onze diensten, prijzen, of een afspraak maken.";
                         
                         this.addMessageToUI(welcomeMessage, false);
                         this.state.messages.push({
@@ -2247,11 +1462,10 @@
                         this.saveState();
                     } catch (error) {
                         console.error('Error initializing chat:', error);
-                        this.addMessageToUI("Sorry, er is een probleem opgetreden bij het initialiseren van de chat. Vernieuw de pagina en probeer het opnieuw.", false);
+                        this.addMessageToUI("Er is een probleem opgetreden met de chat. Probeer het later nog eens of bel ons op +31 6 27 40 38 60.", false);
                     }
                 },
                 
-                // Load saved state from localStorage
                 loadState: function() {
                     try {
                         const threadId = localStorage.getItem(this.storage.THREAD_ID);
@@ -2267,7 +1481,6 @@
                         }
                     } catch (error) {
                         console.error('Error loading chat state:', error);
-                        // Reset state if there's an error
                         this.state.threadId = null;
                         this.state.messages = [];
                         this.state.initialized = false;
@@ -2276,7 +1489,6 @@
                     }
                 },
                 
-                // Save state to localStorage
                 saveState: function() {
                     try {
                         localStorage.setItem(this.storage.THREAD_ID, this.state.threadId);
@@ -2286,21 +1498,16 @@
                     }
                 },
                 
-                // Load messages into UI
                 loadMessages: function() {
-                    // Clear messages container
                     this.elements.messagesContainer.innerHTML = '';
                     
-                    // Add each message to UI
                     this.state.messages.forEach(message => {
                         this.addMessageToUI(message.content, message.isUser, false);
                     });
                     
-                    // Scroll to bottom
                     this.scrollToBottom();
                 },
                 
-                // Create a new thread
                 createThread: async function() {
                     try {
                         console.log('Creating new thread...');
@@ -2326,7 +1533,6 @@
                     }
                 },
                 
-                // Send a message
                 sendMessage: async function() {
                     const messageText = this.elements.input.value.trim();
                     
@@ -2335,18 +1541,13 @@
                     }
                     
                     try {
-                        // Set processing state
                         this.state.isProcessing = true;
                         this.elements.sendBtn.disabled = true;
-                        
-                        // Clear input
                         this.elements.input.value = '';
                         this.elements.input.style.height = 'auto';
                         
-                        // Add message to UI
                         this.addMessageToUI(messageText, true);
                         
-                        // Save user message to state
                         this.state.messages.push({
                             content: messageText,
                             isUser: true,
@@ -2354,32 +1555,25 @@
                         });
                         this.saveState();
                         
-                        // Add message to thread
-                        console.log('Adding message to thread:', this.state.threadId);
                         await this.addMessageToThread(messageText);
-                        
-                        // Process assistant response
                         await this.processResponse();
                     } catch (error) {
                         console.error('Error sending message:', error);
-                        this.addMessageToUI("Sorry, er ging iets mis bij het verwerken van je bericht. Probeer het later nog eens.", false);
+                        this.addMessageToUI("Sorry, er ging iets mis. Probeer het later nog eens of neem telefonisch contact met ons op.", false);
                         
-                        // Add error message to state
                         this.state.messages.push({
-                            content: "Sorry, er ging iets mis bij het verwerken van je bericht. Probeer het later nog eens.",
+                            content: "Sorry, er ging iets mis. Probeer het later nog eens of neem telefonisch contact met ons op.",
                             isUser: false,
                             timestamp: new Date().toISOString()
                         });
                         this.saveState();
                     } finally {
-                        // Reset processing state
                         this.state.isProcessing = false;
                         this.elements.sendBtn.disabled = false;
                         this.elements.input.focus();
                     }
                 },
                 
-                // Add message to thread via API
                 addMessageToThread: async function(content) {
                     try {
                         const response = await fetch('/api/openai-api/add-message', {
@@ -2408,13 +1602,10 @@
                     }
                 },
                 
-                // Process the assistant's response
                 processResponse: async function() {
                     try {
-                        // Show typing indicator
                         this.showTypingIndicator();
                         
-                        // Create a run
                         console.log('Creating run for thread:', this.state.threadId);
                         const runResponse = await fetch('/api/openai-api/create-run', {
                             method: 'POST',
@@ -2436,7 +1627,6 @@
                         console.log('Run created:', runData.id);
                         const runId = runData.id;
                         
-                        // Poll for run completion
                         let status = 'queued';
                         let attempts = 0;
                         const maxAttempts = 30;
@@ -2444,10 +1634,8 @@
                         while (status !== 'completed' && status !== 'failed' && status !== 'expired' && status !== 'cancelled' && attempts < maxAttempts) {
                             attempts++;
                             
-                            // Wait for 1 second before checking status
                             await new Promise(resolve => setTimeout(resolve, 1000));
                             
-                            // Check run status
                             console.log(`Checking run status (attempt ${attempts})...`);
                             const statusResponse = await fetch(`/api/openai-api/check-run-status?threadId=${this.state.threadId}&runId=${runId}`);
                             
@@ -2457,13 +1645,11 @@
                                 throw new Error(`Failed to check run status: ${statusResponse.status} ${statusResponse.statusText}`);
                             }
                             
-                            // Parse the JSON response to get the status
                             const statusData = await statusResponse.json();
                             status = statusData.status;
                             console.log('Run status:', status);
                             
                             if (status === 'completed') {
-                                // Get messages
                                 console.log('Run completed, fetching messages...');
                                 const messagesResponse = await fetch(`/api/openai-api/get-messages?threadId=${this.state.threadId}`);
                                 
@@ -2476,22 +1662,17 @@
                                 const messagesData = await messagesResponse.json();
                                 console.log('Messages received:', messagesData);
                                 
-                                // Find the assistant's response (most recent assistant message)
                                 const assistantMessage = messagesData.data.find(msg => msg.role === 'assistant');
                                 
                                 if (assistantMessage && assistantMessage.content && assistantMessage.content.length > 0) {
-                                    // Remove typing indicator
                                     this.removeTypingIndicator();
                                     
-                                    // Add assistant's response to UI with a slight delay for a more natural feeling
                                     const responseContent = assistantMessage.content[0].text.value;
                                     console.log('Assistant response:', responseContent);
                                     
-                                    // Simulate typing delay for more natural feel
                                     await new Promise(resolve => setTimeout(resolve, 500));
                                     this.addMessageToUI(responseContent, false);
                                     
-                                    // Save assistant message to state
                                     this.state.messages.push({
                                         content: responseContent,
                                         isUser: false,
@@ -2513,11 +1694,10 @@
                     } catch (error) {
                         console.error('Error processing response:', error);
                         this.removeTypingIndicator();
-                        this.addMessageToUI("Sorry, ik kan op dit moment niet reageren. Probeer het later nog eens of bel ons direct op +31 6 27 40 38 60.", false);
+                        this.addMessageToUI("Sorry, ik kan momenteel niet reageren. Probeer het later opnieuw of bel ons direct op +31 6 27 40 38 60.", false);
                         
-                        // Add error message to state
                         this.state.messages.push({
-                            content: "Sorry, ik kan op dit moment niet reageren. Probeer het later nog eens of bel ons direct op +31 6 27 40 38 60.",
+                            content: "Sorry, ik kan momenteel niet reageren. Probeer het later opnieuw of bel ons direct op +31 6 27 40 38 60.",
                             isUser: false,
                             timestamp: new Date().toISOString()
                         });
@@ -2525,54 +1705,64 @@
                     }
                 },
                 
-                // Add message to UI
                 addMessageToUI: function(content, isUser, animate = true) {
                     const messageDiv = document.createElement('div');
-                    messageDiv.className = `chat-message ${isUser ? 'user' : 'assistant'}`;
-                    if (!animate) {
-                        messageDiv.style.animation = 'none';
+                    messageDiv.className = `mb-4 ${isUser ? 'ml-auto max-w-[75%]' : 'mr-auto max-w-[75%]'}`;
+                    
+                    const messageContent = document.createElement('div');
+                    messageContent.className = `p-3 rounded-lg ${isUser ? 'bg-gold-500 text-white rounded-tr-none' : 'bg-white shadow-md rounded-tl-none'}`;
+                    if (animate) {
+                        messageContent.style.opacity = '0';
+                        messageContent.style.transform = 'translateY(10px)';
                     }
                     
-                    // Format message content (handle links, line breaks)
                     const formattedContent = this.formatMessageContent(content);
+                    messageContent.innerHTML = formattedContent;
                     
-                    messageDiv.innerHTML = formattedContent;
+                    messageDiv.appendChild(messageContent);
                     
                     this.elements.messagesContainer.appendChild(messageDiv);
+                    
+                    if (animate) {
+                        setTimeout(() => {
+                            messageContent.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            messageContent.style.opacity = '1';
+                            messageContent.style.transform = 'translateY(0)';
+                        }, 50);
+                    }
+                    
                     this.scrollToBottom();
                 },
                 
-                // Format message content
                 formatMessageContent: function(content) {
-                    // Convert URLs to links
                     const urlRegex = /(https?:\/\/[^\s]+)/g;
-                    const withLinks = content.replace(urlRegex, '<a href="$1" target="_blank" class="underline gold-text">$1</a>');
+                    const withLinks = content.replace(urlRegex, '<a href="$1" target="_blank" class="underline text-gold-400">$1</a>');
                     
-                    // Format bullet lists
-                    let formattedText = withLinks.replace(/\n•\s(.*)/g, '<br>• $1');
-                    
-                    // Convert line breaks to <br>
+                    let formattedText = withLinks;
                     formattedText = formattedText.replace(/\n/g, '<br>');
                     
                     return formattedText;
                 },
                 
-                // Show typing indicator
                 showTypingIndicator: function() {
                     const typingDiv = document.createElement('div');
                     typingDiv.id = 'typing-indicator';
-                    typingDiv.className = 'typing-indicator';
-                    typingDiv.innerHTML = `
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
+                    typingDiv.className = 'mb-4 mr-auto max-w-[75%]';
+                    
+                    const typingContent = document.createElement('div');
+                    typingContent.className = 'p-3 bg-white shadow-md rounded-lg rounded-tl-none flex items-center';
+                    
+                    typingContent.innerHTML = `
+                        <span class="w-2 h-2 bg-gray-400 rounded-full mr-1 animate-bounce" style="animation-delay: 0ms;"></span>
+                        <span class="w-2 h-2 bg-gray-400 rounded-full mr-1 animate-bounce" style="animation-delay: 150ms;"></span>
+                        <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 300ms;"></span>
                     `;
                     
+                    typingDiv.appendChild(typingContent);
                     this.elements.messagesContainer.appendChild(typingDiv);
                     this.scrollToBottom();
                 },
                 
-                // Remove typing indicator
                 removeTypingIndicator: function() {
                     const typingIndicator = document.getElementById('typing-indicator');
                     if (typingIndicator) {
@@ -2580,96 +1770,133 @@
                     }
                 },
                 
-                // Scroll to the bottom of the messages container
                 scrollToBottom: function() {
                     this.elements.messagesContainer.scrollTop = this.elements.messagesContainer.scrollHeight;
                 }
             };
             
-            // Initialize the chat widget
             chatWidget.init();
-
-            // Simulate a chat notification after 30 seconds if the user hasn't interacted with the chat
-            setTimeout(() => {
-                if (!chatWidget.state.isOpen && chatWidget.state.messages.length <= 1) {
-                    chatWidget.elements.toggleBtn.classList.add('animate-pulse');
+            
+            // Animate elements on scroll
+            function animateOnScroll() {
+                const fadeInElements = document.querySelectorAll('.fade-in');
+                const staggerItems = document.querySelectorAll('.stagger-item');
+                
+                const windowHeight = window.innerHeight;
+                const triggerPosition = windowHeight * 0.85;
+                
+                fadeInElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
                     
-                    // Stop the animation after 3 seconds
-                    setTimeout(() => {
-                        chatWidget.elements.toggleBtn.classList.remove('animate-pulse');
-                    }, 3000);
-                }
-            }, 30000);
-        });
-    </script>
-    
-    <!-- GSAP Animation Scripts -->
-    <script>
-        // Initialize GSAP animations
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof gsap !== 'undefined') {
-                // Register ScrollTrigger plugin
+                    if (elementTop < triggerPosition) {
+                        element.classList.add('active');
+                    }
+                });
+                
+                staggerItems.forEach((element, index) => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    
+                    if (elementTop < triggerPosition) {
+                        // Apply staggered animation delay
+                        setTimeout(() => {
+                            element.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                            element.style.opacity = '1';
+                            element.style.transform = 'translateY(0)';
+                        }, index * 100); // Stagger each item by 100ms
+                    }
+                });
+            }
+            
+            // Initialize animations on load
+            window.addEventListener('load', () => {
+                animateOnScroll();
+                
+                // Activate initial animations with slight delay
+                setTimeout(() => {
+                    document.querySelectorAll('.fade-in').forEach(element => {
+                        element.classList.add('active');
+                    });
+                }, 200);
+            });
+            
+            // Check animations on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Set current year in footer
+            const currentYearElements = document.querySelectorAll('.current-year');
+            const currentYear = new Date().getFullYear();
+            
+            currentYearElements.forEach(element => {
+                element.textContent = currentYear;
+            });
+            
+            // GSAP Animations (if GSAP is available)
+            if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                // Register ScrollTrigger
                 gsap.registerPlugin(ScrollTrigger);
                 
-                // Hero text animation
+                // Hero section animations
                 gsap.from("#home h1", {
                     opacity: 0,
-                    y: 50,
+                    y: 30,
                     duration: 1,
-                    delay: 0.5
+                    delay: 0.3
                 });
                 
                 gsap.from("#home p", {
                     opacity: 0,
                     y: 30,
                     duration: 1,
-                    delay: 0.8
+                    delay: 0.6
                 });
                 
                 gsap.from("#home .flex", {
                     opacity: 0,
                     y: 30,
                     duration: 1,
-                    delay: 1.1
+                    delay: 0.9
                 });
                 
-                // Service cards staggered animation
+                // Service cards animation
                 gsap.from(".service-card", {
                     scrollTrigger: {
                         trigger: "#services",
-                        start: "top 70%"
+                        start: "top 75%"
                     },
                     opacity: 0,
                     y: 50,
-                    stagger: 0.2,
-                    duration: 0.8
-                });
-                
-                // Testimonial cards staggered animation
-                gsap.from(".testimonial-card", {
-                    scrollTrigger: {
-                        trigger: "#testimonials",
-                        start: "top 70%"
-                    },
-                    opacity: 0,
-                    y: 50,
-                    stagger: 0.2,
-                    duration: 0.8
+                    stagger: 0.15,
+                    duration: 0.8,
+                    ease: "power2.out"
                 });
                 
                 // Gallery items animation
                 gsap.from(".gallery-item", {
                     scrollTrigger: {
                         trigger: "#gallery",
-                        start: "top 70%"
+                        start: "top 75%"
                     },
                     opacity: 0,
-                    scale: 0.9,
-                    stagger: 0.15,
-                    duration: 0.8
+                    y: 30,
+                    stagger: 0.1,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+                
+                // Testimonial cards animation
+                gsap.from("#testimonials .bg-white", {
+                    scrollTrigger: {
+                        trigger: "#testimonials",
+                        start: "top 75%"
+                    },
+                    opacity: 0,
+                    y: 30,
+                    stagger: 0.2,
+                    duration: 0.8,
+                    ease: "power2.out"
                 });
             }
         });
     </script>
 </body>
-</html>
+</html
