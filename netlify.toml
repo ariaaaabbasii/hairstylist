@@ -1,17 +1,11 @@
-# netlify.toml - Configuration file for Netlify deployment
-
 [build]
-  publish = "." # Deploy the current directory
-  functions = "netlify/functions" # Path to your Netlify functions
+  publish = "public"
+  functions = "functions"
+  command = ""  # No build command needed for this setup
 
-# Redirect API requests to the serverless functions
+# Redirect API calls to the Netlify Functions
 [[redirects]]
-  from = "/api/openai-api/*"
-  to = "/.netlify/functions/openai-api"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
-
-# Default redirect to index.html for SPA routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  force = true
