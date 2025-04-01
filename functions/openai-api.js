@@ -1,45 +1,29 @@
-// netlify/functions/openai-api.js
 const axios = require('axios');
 
-exports.handler = async function(event, context) {
-  // API routes for OpenAI interaction
-  const API_ROUTES = {
-    CREATE_THREAD: '/api/openai-api/create-thread',
-    ADD_MESSAGE: '/api/openai-api/add-message',
-    CREATE_RUN: '/api/openai-api/create-run',
-    CHECK_RUN_STATUS: '/api/openai-api/check-run-status',
-    GET_MESSAGES: '/api/openai-api/get-messages'
-  };
-  
-  const API_KEY = process.env.OPENAI_API_KEY;
-  const ASSISTANT_ID = process.env.OPENAI_ASSISTANT_ID;
-  
-  if (!API_KEY) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "OpenAI API key is not configured" })
-    };
-  }
-  
-  if (!ASSISTANT_ID) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: "OpenAI Assistant ID is not configured" })
-    };
-  }
-  
-  const path = event.path;
-  const httpMethod = event.httpMethod;
-  
-  // CORS headers for all responses
-  const headers = {
+// Helper for setting consistent CORS headers
+const getCorsHeaders = () => {
+  return {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
   };
+};
+
+// Helper for error responses
+const errorResponse = (statusCode, message, headers) => {
+  return {
+    statusCode: statusCode,
+    headers: headers || getCorsHeaders(),
+    body: JSON.stringify({ error: message })
+  };
+};
+
+exports.handler = async function(event, context) {
+  // Set CORS headers for all responses
+  const headers = getCorsHeaders();
   
   // Handle preflight OPTIONS request
-  if (httpMethod === 'OPTIONS') {
+  if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
       headers,
@@ -47,16 +31,38 @@ exports.handler = async function(event, context) {
     };
   }
   
+  // Get OpenAI API key from environment variable
+  const openaiApiKey = process.env.OPENAI_API_KEY;
+  const assistantId = process.env.OPENAI_ASSISTANT_ID || 'asst_kUIXx1BgVyEahtLafgob8u6W';
+  
+  if (!openaiApiKey) {
+    console.error('OPENAI_API_KEY environment variable is not set');
+    return errorResponse(500, 'Server configuration error', headers);
+  }
+  
+  // Set up common OpenAI API request headers
+  const openaiHeaders = {
+    'Authorization': `Bearer ${openaiApiKey}`,
+    'Content-Type': 'application/json',
+    'OpenAI-Beta': 'assistants=v2'
+  };
+  
   try {
-    // Create new thread endpoint
-    if (path.includes(API_ROUTES.CREATE_THREAD) && httpMethod === 'POST') {
-      const response = await axios.post('https://api.openai.com/v1/threads', {}, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${API_KEY}`,
-          'OpenAI-Beta': 'assistants=v1'
-        }
-      });
+    // Parse the path to determine which operation to perform
+    const path = event.path.split('/');
+    const operation = path[path.length - 1]; // Last part of the path
+    
+    // CREATE THREAD
+    if (operation === 'create-thread') {
+      if (event.httpMethod !== 'POST') {
+        return errorResponse(405, 'Method Not Allowed', headers);
+      }
+      
+      const response = await axios.post(
+        'https://api.openai.com/v1/threads',
+        {}, // No body required for thread creation
+        { headers: openaiHeaders }
+      );
       
       return {
         statusCode: 200,
@@ -65,29 +71,24 @@ exports.handler = async function(event, context) {
       };
     }
     
-    // Add message to thread endpoint
-    if (path.includes(API_ROUTES.ADD_MESSAGE) && httpMethod === 'POST') {
+    // ADD MESSAGE TO THREAD
+    else if (operation === 'add-message') {
+      if (event.httpMethod !== 'POST') {
+        return errorResponse(405, 'Method Not Allowed', headers);
+      }
+      
       const requestBody = JSON.parse(event.body);
       const { threadId, content } = requestBody;
       
       if (!threadId || !content) {
-        return {
-          statusCode: 400,
-          headers,
-          body: JSON.stringify({ error: "Thread ID and content are required" })
-        };
+        return errorResponse(400, 'threadId and content are required', headers);
       }
       
-      const response = await axios.post(`https://api.openai.com/v1/threads/${threadId}/messages`, {
-        role: 'user',
-        content: content
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${API_KEY}`,
-          'OpenAI-Beta': 'assistants=v1'
-        }
-      });
+      const response = await axios.post(
+        `https://api.openai.com/v1/threads/${threadId}/messages`,
+        { role: 'user', content },
+        { headers: openaiHeaders }
+      );
       
       return {
         statusCode: 200,
@@ -96,28 +97,24 @@ exports.handler = async function(event, context) {
       };
     }
     
-    // Create run endpoint
-    if (path.includes(API_ROUTES.CREATE_RUN) && httpMethod === 'POST') {
+    // CREATE RUN
+    else if (operation === 'create-run') {
+      if (event.httpMethod !== 'POST') {
+        return errorResponse(405, 'Method Not Allowed', headers);
+      }
+      
       const requestBody = JSON.parse(event.body);
       const { threadId } = requestBody;
       
       if (!threadId) {
-        return {
-          statusCode: 400,
-          headers,
-          body: JSON.stringify({ error: "Thread ID is required" })
-        };
+        return errorResponse(400, 'threadId is required', headers);
       }
       
-      const response = await axios.post(`https://api.openai.com/v1/threads/${threadId}/runs`, {
-        assistant_id: ASSISTANT_ID
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${API_KEY}`,
-          'OpenAI-Beta': 'assistants=v1'
-        }
-      });
+      const response = await axios.post(
+        `https://api.openai.com/v1/threads/${threadId}/runs`,
+        { assistant_id: assistantId },
+        { headers: openaiHeaders }
+      );
       
       return {
         statusCode: 200,
@@ -126,25 +123,23 @@ exports.handler = async function(event, context) {
       };
     }
     
-    // Check run status endpoint
-    if (path.includes(API_ROUTES.CHECK_RUN_STATUS) && httpMethod === 'GET') {
-      const queryParams = event.queryStringParameters;
-      const { threadId, runId } = queryParams;
+    // CHECK RUN STATUS
+    else if (operation === 'check-run-status') {
+      if (event.httpMethod !== 'GET') {
+        return errorResponse(405, 'Method Not Allowed', headers);
+      }
+      
+      const threadId = event.queryStringParameters?.threadId;
+      const runId = event.queryStringParameters?.runId;
       
       if (!threadId || !runId) {
-        return {
-          statusCode: 400,
-          headers,
-          body: JSON.stringify({ error: "Thread ID and Run ID are required" })
-        };
+        return errorResponse(400, 'threadId and runId are required', headers);
       }
       
-      const response = await axios.get(`https://api.openai.com/v1/threads/${threadId}/runs/${runId}`, {
-        headers: {
-          'Authorization': `Bearer ${API_KEY}`,
-          'OpenAI-Beta': 'assistants=v1'
-        }
-      });
+      const response = await axios.get(
+        `https://api.openai.com/v1/threads/${threadId}/runs/${runId}`,
+        { headers: openaiHeaders }
+      );
       
       return {
         statusCode: 200,
@@ -153,25 +148,22 @@ exports.handler = async function(event, context) {
       };
     }
     
-    // Get messages endpoint
-    if (path.includes(API_ROUTES.GET_MESSAGES) && httpMethod === 'GET') {
-      const queryParams = event.queryStringParameters;
-      const { threadId } = queryParams;
+    // GET MESSAGES
+    else if (operation === 'get-messages') {
+      if (event.httpMethod !== 'GET') {
+        return errorResponse(405, 'Method Not Allowed', headers);
+      }
+      
+      const threadId = event.queryStringParameters?.threadId;
       
       if (!threadId) {
-        return {
-          statusCode: 400,
-          headers,
-          body: JSON.stringify({ error: "Thread ID is required" })
-        };
+        return errorResponse(400, 'threadId is required', headers);
       }
       
-      const response = await axios.get(`https://api.openai.com/v1/threads/${threadId}/messages?limit=10`, {
-        headers: {
-          'Authorization': `Bearer ${API_KEY}`,
-          'OpenAI-Beta': 'assistants=v1'
-        }
-      });
+      const response = await axios.get(
+        `https://api.openai.com/v1/threads/${threadId}/messages`,
+        { headers: openaiHeaders }
+      );
       
       return {
         statusCode: 200,
@@ -180,21 +172,21 @@ exports.handler = async function(event, context) {
       };
     }
     
-    // If no route matches
-    return {
-      statusCode: 404,
-      headers,
-      body: JSON.stringify({ error: "Not found" })
-    };
+    // UNKNOWN OPERATION
+    else {
+      return errorResponse(404, 'Unknown operation', headers);
+    }
   } catch (error) {
-    console.error('Error:', error.response ? error.response.data : error.message);
+    console.error(`Error in OpenAI API operation:`, error);
+    
+    // Extract error details
+    const statusCode = error.response?.status || 500;
+    const errorDetails = error.response?.data?.error || { message: 'Internal Server Error' };
     
     return {
-      statusCode: error.response ? error.response.status : 500,
+      statusCode: statusCode,
       headers,
-      body: JSON.stringify({
-        error: error.response ? error.response.data : error.message
-      })
+      body: JSON.stringify({ error: errorDetails })
     };
   }
 };
