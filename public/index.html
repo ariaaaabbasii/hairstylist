@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
-    <!-- Axios for API calls -->
+    <!-- Axios for API calls (if needed by future JS, kept for now) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
 
     <!-- Custom Styles -->
@@ -60,14 +60,12 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
              scroll-behavior: smooth;
-             /* Add padding top to prevent content jump when header becomes fixed if referral bar is initially visible */
-             /* padding-top: 0; /* Adjust dynamically if needed */
         }
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
         }
 
-        /* Custom scrollbar */
+        /* Custom scrollbar for chat messages and price modal */
         #chat-messages::-webkit-scrollbar,
         #price-modal-body::-webkit-scrollbar {
             width: 6px;
@@ -90,58 +88,37 @@
         /* Header shrink effect styling */
         #main-header {
             transition: background-color 0.3s ease, box-shadow 0.3s ease, padding-top 0.3s ease, padding-bottom 0.3s ease;
-            /* Start transparent */
-            background-color: transparent;
-            box-shadow: none;
         }
         #main-header.header-scrolled {
-             background-color: rgba(255, 255, 255, 0.95); /* White bg when scrolled */
+             background-color: rgba(255, 255, 255, 0.95); /* Adjusted transparency slightly */
              box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-             padding-top: 0.75rem; /* Adjust padding */
-             padding-bottom: 0.75rem;
+             padding-top: 0.75rem; /* 12px */
+             padding-bottom: 0.75rem; /* 12px */
              backdrop-filter: blur(8px);
         }
-        /* Text color changes when scrolled */
+        /* Style adjustments for scrolled header text/links */
         #main-header.header-scrolled nav a:not(.button-cta) {
-             color: theme('colors.neutral.800'); /* Darker text */
+             color: theme('colors.neutral.800');
         }
         #main-header.header-scrolled nav a:hover:not(.button-cta) {
-              color: theme('colors.brand.primary'); /* Gold hover */
+              color: theme('colors.brand.primary');
         }
         #main-header.header-scrolled .logo-text {
-              color: theme('colors.brand.primary'); /* Gold logo */
+              color: theme('colors.brand.primary');
         }
         #main-header.header-scrolled .phone-link {
-             color: theme('colors.brand.primary'); /* Gold phone link */
+             color: theme('colors.brand.primary');
         }
         #main-header.header-scrolled .phone-link:hover {
-             color: theme('colors.brand.dark'); /* Darker gold hover */
+             color: theme('colors.brand.dark');
         }
         #main-header.header-scrolled #mobile-menu-button {
-             color: theme('colors.neutral.800'); /* Darker burger icon */
+             color: theme('colors.neutral.800');
         }
         #main-header.header-scrolled #mobile-menu-button:hover {
               color: theme('colors.brand.primary');
               background-color: theme('colors.gold.light');
         }
-        /* Initial state text color (when header is transparent over hero) */
-        #main-header:not(.header-scrolled) nav a:not(.button-cta),
-        #main-header:not(.header-scrolled) .phone-link,
-        #main-header:not(.header-scrolled) #mobile-menu-button {
-            color: theme('colors.white'); /* White text initially */
-        }
-        #main-header:not(.header-scrolled) .logo-text {
-             color: theme('colors.white'); /* White logo initially */
-        }
-        #main-header:not(.header-scrolled) nav a:hover:not(.button-cta),
-        #main-header:not(.header-scrolled) .phone-link:hover,
-        #main-header:not(.header-scrolled) #mobile-menu-button:hover {
-            color: theme('colors.brand.secondary'); /* Light gold hover initially */
-        }
-         #main-header:not(.header-scrolled) #mobile-menu-button:hover {
-             background-color: rgba(255, 255, 255, 0.1); /* Slight white background on hover */
-         }
-
 
         /* Animation Keyframes */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -149,10 +126,16 @@
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        /* Typing indicator animation */
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        .animate-bounce { animation: bounce 1s infinite ease-in-out; }
+
 
         /* Animation classes */
         .animate-on-scroll { opacity: 0; }
         .is-visible { opacity: 1; }
+        /* Apply animation name via CSS variable */
+        .animate-on-scroll { --animation-name: fadeIn; } /* Default */
         .animate-fade-in { --animation-name: fadeIn; }
         .animate-slide-up { --animation-name: slideUp; }
         .animate-slide-in-left { --animation-name: slideInLeft; }
@@ -165,15 +148,17 @@
             transform-origin: bottom right;
         }
 
-        /* Chat Quick Reply */
+        /* Chat Quick Reply (Using Tailwind @apply for brevity) */
         .chat-quick-reply {
-             @apply px-3 py-1.5 bg-gold-light/50 text-brand-primary border border-gold-light rounded-full text-xs font-medium transition duration-200 cursor-pointer hover:bg-gold-light/80 hover:text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:ring-offset-1;
+             @apply px-3 py-1.5 bg-gold-light/50 text-brand-primary border border-gold-light rounded-full text-xs font-medium transition duration-200 cursor-pointer hover:bg-gold-light/80 hover:text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:ring-offset-1 active:scale-95; /* Added active:scale-95 */
         }
 
-        /* Additional styling */
+        /* Subtle noise background */
         .noise-bg {
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
         }
+
+        /* Image hover effect (subtle brightness/saturation/scale) */
         .hover-filter {
              transition: filter 0.3s ease, transform 0.3s ease;
         }
@@ -181,36 +166,36 @@
             filter: brightness(0.9) saturate(1.1);
             transform: scale(1.03);
         }
+
+        /* Gallery Item Hover Effects */
         .gallery-item {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            position: relative; /* Needed for absolute overlay */
+            overflow: hidden; /* Keep image zoom contained */
         }
         .gallery-item:hover {
             transform: scale(1.03);
             box-shadow: 0 8px 16px rgba(0,0,0,0.15);
         }
+        /* Make image zoom slightly on gallery item hover */
         .gallery-item img {
-             transition: transform 0.3s ease;
+             transition: transform 0.4s ease; /* Slightly slower image zoom */
         }
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1); /* Zoom image more */
+        }
+        /* Overlay for gallery item */
+        .gallery-overlay {
+             @apply absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10 cursor-pointer;
         }
 
-        /* Chat message bubble styles */
-        .chat-bubble-salon {
-            background-color: theme('colors.brand.light');
-            border-radius: 12px 12px 12px 0;
-        }
-        .chat-bubble-user {
-            background-color: theme('colors.neutral.200');
-            border-radius: 12px 12px 0 12px;
-        }
-
-        /* Referral Banner Style (Main one in #referral-program section) */
-        .referral-banner {
-            background: linear-gradient(135deg, #f7eed9 0%, #d4af37 100%);
-            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.2);
+        /* Referral Banner Style (Inside Hero) */
+        .hero-referral-banner {
+            /* Let Tailwind classes handle background/text, or add specific styles if needed */
+            /* Example: background: rgba(247, 238, 217, 0.8); /* Slightly transparent gold-light */
+            /* backdrop-filter: blur(3px); */
+            border-radius: 0.5rem; /* Optional rounding */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
         }
 
         /* Mobile Menu Transition */
@@ -230,94 +215,41 @@
         #price-modal {
             transition: opacity 0.3s ease-in-out;
         }
-        #price-modal > div { /* Target the inner content div */
-             transition: transform 0.3s ease-in-out;
+        #price-modal > div { /* Target the inner modal content */
+             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
 
-        /* Referral Bar (Top of Hero) Transition */
-        #referral-bar {
-            /* No longer position: absolute; Removed */
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            /* Initial state managed by JS based on scroll */
-        }
-
-        /* Floating referral box */
-        #floating-referral {
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            transform: translateX(100%); /* Start off-screen */
-            opacity: 0;
-        }
-        #floating-referral.show {
-            transform: translateX(0); /* Slide in */
-            opacity: 1;
-        }
-
-        /* Better focus styles for accessibility */
-        a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-            outline: 3px solid theme('colors.brand.secondary'); /* Make outline more prominent */
-            outline-offset: 2px;
-            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3); /* Optional glow */
-        }
-
-        /* Skip to content link for accessibility */
-        .skip-to-content {
-            position: absolute;
-            top: -9999px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: theme('colors.brand.primary');
-            color: white;
-            padding: 0.5rem 1rem;
-            z-index: 1000; /* Ensure it's above everything when focused */
-            border-radius: 0 0 0.5rem 0.5rem;
-            transition: top 0.3s ease;
-        }
-        .skip-to-content:focus {
-            top: 0;
-        }
-
-        /* Styling for the Typing Indicator */
-        @keyframes bounce {
-            0%, 80%, 100% { transform: scale(0); }
-            40% { transform: scale(1.0); }
-        }
-        .animate-bounce {
-             animation: bounce 1.4s infinite ease-in-out both;
-        }
     </style>
 </head>
 <body class="bg-neutral-50 text-neutral-700 antialiased font-poppins">
-    <!-- Skip to content link -->
-    <a href="#main-content" class="skip-to-content">Direct naar inhoud</a>
 
     <!-- Header -->
-    <header id="main-header" class="fixed w-full top-0 z-50 py-6"> {/* Increased initial padding */}
+    <header id="main-header" class="fixed w-full top-0 z-50 py-4"> <!-- Initial padding -->
         <div class="container mx-auto px-4 flex justify-between items-center">
             <!-- Logo -->
-            <a href="#home" class="text-3xl font-bold font-playfair text-white hover:text-brand-secondary transition duration-300 logo-text" aria-label="Luminous Haarsalon Home">
+            <a href="#home" class="text-3xl font-bold font-playfair text-brand-primary hover:text-brand-dark transition duration-300 logo-text" aria-label="Luminous Haarsalon Home">
                 Luminous
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden lg:block" aria-label="Hoofdnavigatie">
+            <nav class="hidden lg:block">
                 <ul class="flex space-x-8">
-                    {/* Initial text color is white (set in CSS), changes on scroll */}
-                    <li><a href="#home" class="font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Home</a></li>
-                    <li><a href="#diensten" class="font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Diensten</a></li>
-                    <li><a href="#referral-program" class="font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Vrienden Bonus</a></li>
-                    <li><a href="#over-ons" class="font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Over Ons</a></li>
-                    <li><a href="#galerij" class="font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Galerij</a></li>
-                    <li><a href="#contact" class="font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Contact</a></li>
+                    <li><a href="#home" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Home</a></li>
+                    <li><a href="#diensten" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Diensten</a></li>
+                    <li><a href="#referral-program" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Vrienden Bonus</a></li>
+                    <li><a href="#over-ons" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Over Ons</a></li>
+                    <li><a href="#galerij" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Galerij</a></li>
+                    <li><a href="#contact" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Contact</a></li>
                 </ul>
             </nav>
 
             <!-- Call & Mobile Menu Button -->
             <div class="flex items-center space-x-3">
-                <a href="tel:+31627403860" class="phone-link hidden sm:inline-flex items-center font-medium transition duration-300">
+                <a href="tel:+31627403860" class="phone-link hidden sm:inline-flex items-center text-brand-primary hover:text-brand-dark font-medium transition duration-300">
                     <i class="fas fa-phone-alt mr-2 text-sm" aria-hidden="true"></i> 06-27403860
                 </a>
-                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-primary" aria-label="Open hoofdmenu" aria-controls="mobile-menu" aria-expanded="false">
-                    <i class="fas fa-bars text-xl"></i>
+                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-neutral-600 hover:text-brand-primary hover:bg-gold-light focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-primary" aria-label="Open hoofdmenu" aria-controls="mobile-menu" aria-expanded="false">
+                    <i class="fas fa-bars text-xl" aria-hidden="true"></i> <!-- Icon will be changed by JS -->
                 </button>
                 <a href="#contact" class="button-cta hidden lg:inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-brand-primary text-white hover:bg-brand-dark focus:ring-brand-primary shadow-md hover:shadow-lg">Afspraak Maken</a>
             </div>
@@ -327,12 +259,12 @@
         <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-neutral-100" role="navigation" aria-label="Mobiel menu">
             <div class="container mx-auto px-4 py-4">
                 <ul class="space-y-3">
-                    <li><a href="#home" class="block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300 mobile-menu-link">Home</a></li>
-                    <li><a href="#diensten" class="block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300 mobile-menu-link">Diensten</a></li>
-                    <li><a href="#referral-program" class="block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300 mobile-menu-link">Vrienden Bonus</a></li>
-                    <li><a href="#over-ons" class="block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300 mobile-menu-link">Over Ons</a></li>
-                    <li><a href="#galerij" class="block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300 mobile-menu-link">Galerij</a></li>
-                    <li><a href="#contact" class="block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300 mobile-menu-link">Contact</a></li>
+                    <li><a href="#home" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Home</a></li>
+                    <li><a href="#diensten" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Diensten</a></li>
+                    <li><a href="#referral-program" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Vrienden Bonus</a></li>
+                    <li><a href="#over-ons" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Over Ons</a></li>
+                    <li><a href="#galerij" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Galerij</a></li>
+                    <li><a href="#contact" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Contact</a></li>
                     <li class="pt-4 border-t border-neutral-200">
                         <a href="tel:+31627403860" class="flex items-center py-2 px-3 text-lg text-brand-primary font-semibold hover:text-brand-dark transition duration-300">
                             <i class="fas fa-phone-alt mr-3" aria-hidden="true"></i> Bel 06-27403860
@@ -347,30 +279,29 @@
     </header>
 
     <!-- Main Content -->
-    <main id="main-content">
-
+    <main>
         <!-- Hero Section -->
-        <section id="home" class="relative pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-700" style="background-image: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80'); min-height: calc(90vh)"> {/* Adjusted min-height slightly */}
+        <section id="home" class="relative pt-[72px] lg:pt-[88px] pb-16 md:pb-24 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-700" style="background-image: url('STOCK_PHOTO_URL_HERO_BACKGROUND'); min-height: 80vh;">
             <!-- Overlay -->
             <div class="absolute inset-0 bg-black/50 z-0"></div>
 
-            <!-- Referral Banner (MOVED HERE from Header) -->
-            <div id="referral-bar" class="absolute top-0 left-0 right-0 bg-brand-primary/90 text-white py-2 px-4 text-center z-10 backdrop-blur-sm"> {/* Absolute position relative to Hero */}
-                <div class="container mx-auto px-4 relative">
-                    <div class="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0">
+             <!-- Referral Bonus Announcement (Moved here, Option A) -->
+            <div class="hero-referral-banner hidden sm:block bg-brand-primary text-white py-2 px-4 text-center absolute top-[calc(72px+1rem)] lg:top-[calc(88px+1rem)] left-1/2 transform -translate-x-1/2 w-full max-w-3xl z-20 mx-auto"> <!-- Added z-20 -->
+                <div class="container mx-auto px-2 sm:px-4 relative"> <!-- Reduced horizontal padding slightly -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2"> <!-- Reduced spacing -->
                         <div class="flex items-center">
-                            <i class="fas fa-gift text-lg sm:text-xl mr-2 sm:mr-3 animate-pulse" aria-hidden="true"></i>
-                            <span class="font-medium text-sm sm:text-base">Doorverwijzingsbonus:</span>
+                            <i class="fas fa-gift text-lg mr-2 animate-pulse" aria-hidden="true"></i> <!-- Slightly smaller icon -->
+                            <span class="font-medium text-sm sm:text-base">Vrienden Bonus:</span>
                         </div>
-                        <p class="sm:ml-2 text-xs sm:text-sm">Breng een vriend mee en ontvang beiden 10% korting!</p>
-                        <a href="#referral-program" class="ml-2 sm:ml-4 underline hover:text-brand-light font-medium whitespace-nowrap text-xs sm:text-sm">Meer info</a>
+                        <p class="sm:ml-1 text-xs sm:text-sm">Breng een vriend(in) mee & ontvang beiden 10% korting!</p> <!-- Slightly smaller text -->
+                        <a href="#referral-program" class="ml-1 sm:ml-2 underline hover:text-brand-light font-medium whitespace-nowrap text-xs sm:text-sm">Meer info</a>
                     </div>
                 </div>
             </div>
 
-            <div class="container mx-auto px-4 z-10 text-white relative">
-                {/* Content pushed down slightly to avoid initial overlap with header+banner */}
-                <div class="max-w-3xl animate-on-scroll animate-fade-in pt-10 sm:pt-12">
+            <!-- Hero Content Container -->
+            <div class="container mx-auto px-4 z-10 text-white relative mt-16 sm:mt-20"> <!-- Added margin-top to push content below banner -->
+                <div class="max-w-3xl animate-on-scroll animate-fade-in">
                     <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">Ontdek Jouw <span class="text-brand-secondary">Stralende</span> Stijl bij Luminous</h1>
                     <p class="text-lg md:text-xl lg:text-2xl mb-8 font-light">Waar vakmanschap en persoonlijke aandacht samenkomen voor een haarervaring die je verdient.</p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
@@ -386,7 +317,7 @@
                         </button>
                     </div>
                     <div class="mt-8 flex items-center text-xs sm:text-sm">
-                        <div class="flex text-yellow-400" aria-label="5 van 5 sterren">
+                        <div class="flex text-yellow-400">
                             <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                         </div>
                         <span class="ml-2">Gebaseerd op 100+ tevreden klanten</span>
@@ -403,14 +334,6 @@
             </div>
         </section>
 
-        <!-- Floating referral button (HTML added, JS controls visibility) -->
-        <div id="floating-referral" class="fixed bottom-24 right-5 z-40 rounded-full shadow-lg bg-brand-primary text-white overflow-hidden">
-            <a href="#referral-program" class="flex items-center py-2 px-4 hover:bg-brand-secondary transition-colors duration-300">
-                <i class="fas fa-gift mr-2 animate-pulse" aria-hidden="true"></i>
-                <span class="font-medium text-sm">10% Vrienden Bonus</span>
-            </a>
-        </div>
-
         <!-- Why Choose Us Section -->
         <section class="py-16 md:py-24 bg-white noise-bg relative">
             <div class="container mx-auto px-4">
@@ -420,7 +343,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
                     <!-- USP 1 -->
                     <div class="text-center p-6 rounded-xl hover:bg-brand-light/30 transition-all duration-500 animate-on-scroll animate-slide-up">
-                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12">
+                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md"> <!-- Added hover shadow -->
                             <i class="fas fa-cut text-2xl md:text-3xl text-brand-primary" aria-hidden="true"></i>
                         </div>
                         <h3 class="text-xl md:text-2xl font-semibold mb-3">Gepassioneerde Stylisten</h3>
@@ -429,7 +352,7 @@
 
                     <!-- USP 2 -->
                     <div class="text-center p-6 rounded-xl hover:bg-brand-light/30 transition-all duration-500 animate-on-scroll animate-slide-up" data-delay="0.1s">
-                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12">
+                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md"> <!-- Added hover shadow -->
                             <i class="fas fa-leaf text-2xl md:text-3xl text-brand-primary" aria-hidden="true"></i>
                         </div>
                         <h3 class="text-xl md:text-2xl font-semibold mb-3">Luxe Producten</h3>
@@ -438,7 +361,7 @@
 
                     <!-- USP 3 -->
                     <div class="text-center p-6 rounded-xl hover:bg-brand-light/30 transition-all duration-500 animate-on-scroll animate-slide-up" data-delay="0.2s">
-                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12">
+                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md"> <!-- Added hover shadow -->
                             <i class="fas fa-heart text-2xl md:text-3xl text-brand-primary" aria-hidden="true"></i>
                         </div>
                         <h3 class="text-xl md:text-2xl font-semibold mb-3">Persoonlijke Ervaring</h3>
@@ -466,10 +389,10 @@
                 <p class="text-center text-neutral-700 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in" data-delay="0.1s">Van een frisse knipbeurt tot complete transformaties - ontdek onze exclusieve behandelingen.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Service 1: Knippen Dames -->
+                    <!-- Service 1 -->
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Vrouw krijgt een nieuwe coupe bij de kapper" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                            <img src="STOCK_PHOTO_URL_SERVICE_DAMES" alt="Professioneel geknipte dame met stijlvol kapsel" class="w-full h-56 object-cover hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -486,10 +409,10 @@
                         </div>
                     </div>
 
-                    <!-- Service 2: Knippen Heren -->
+                    <!-- Service 2 -->
                      <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.1s">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1621605815971-fbc49d6f007a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Man krijgt een strakke knipbeurt bij de barbier" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                            <img src="STOCK_PHOTO_URL_SERVICE_HEREN" alt="Man met strak geknipt en gestyled modern herenkapsel" class="w-full h-56 object-cover hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -506,10 +429,10 @@
                         </div>
                     </div>
 
-                     <!-- Service 3: Kleuren -->
+                     <!-- Service 3 -->
                     <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.2s">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1632345031435-8727f66c9b59?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Kapster brengt haarverf aan bij een klant" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                            <img src="STOCK_PHOTO_URL_SERVICE_KLEUREN" alt="Haar met prachtige highlights en levendige kleur" class="w-full h-56 object-cover hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -526,10 +449,10 @@
                         </div>
                     </div>
 
-                    <!-- Service 4: Balayage -->
+                    <!-- Service 4 -->
                      <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.3s">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1534350338822-b76910d354e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Prachtig haar met een subtiele balayage kleuring" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                            <img src="STOCK_PHOTO_URL_SERVICE_BALAYAGE" alt="Zachte en natuurlijke balayage kleuring in lang haar" class="w-full h-56 object-cover hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -546,10 +469,10 @@
                         </div>
                     </div>
 
-                    <!-- Service 5: Bruidskapsels -->
+                    <!-- Service 5 -->
                      <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.4s">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1587440988761-7d1d32da950f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Elegante bruid met een opgestoken kapsel" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                            <img src="STOCK_PHOTO_URL_SERVICE_BRUID" alt="Elegante bruid met een prachtig opgestoken bruidskapsel" class="w-full h-56 object-cover hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -566,10 +489,10 @@
                         </div>
                     </div>
 
-                    <!-- Service 6: Verzorging -->
+                    <!-- Service 6 -->
                      <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.5s">
                         <div class="relative overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1560271225-0b643e5d919a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Vrouw met een verzorgend haarmasker in het haar" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                            <img src="STOCK_PHOTO_URL_SERVICE_VERZORGING" alt="Close-up van gezond, glanzend haar na een verzorgende behandeling" class="w-full h-56 object-cover hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -602,16 +525,7 @@
         <section id="referral-program" class="py-16 md:py-24 bg-white noise-bg">
             <div class="container mx-auto px-4">
                 <div class="max-w-5xl mx-auto">
-                    <div class="mb-8 text-center animate-on-scroll animate-fade-in">
-                        <div class="inline-block px-5 py-2 bg-brand-light rounded-full">
-                            <span class="text-brand-primary font-medium">
-                                <i class="fas fa-gift mr-2 animate-pulse" aria-hidden="true"></i>
-                                Vrienden Bonus Programma
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="referral-banner rounded-2xl p-6 md:p-10 lg:p-12 relative overflow-hidden">
+                    <div class="referral-banner rounded-2xl p-6 md:p-10 lg:p-12 relative overflow-hidden"> <!-- Uses custom CSS class -->
                         <div class="relative z-10">
                             <div class="flex flex-col md:flex-row items-center justify-between gap-8">
                                 <div class="md:w-3/5 animate-on-scroll animate-slide-in-left">
@@ -651,8 +565,9 @@
 
                                 <div class="md:w-2/5 text-center animate-on-scroll animate-slide-in-right">
                                     <div class="relative inline-block">
+                                        <!-- Optional ping animation -->
                                         <div class="absolute inset-0 rounded-full bg-brand-primary/20 animate-ping opacity-50"></div>
-                                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Vrienden die blij zijn met hun nieuwe kapsels" class="relative z-10 rounded-xl shadow-lg transform hover:rotate-2 transition-transform duration-500 w-full max-w-[250px] sm:max-w-xs mx-auto" loading="lazy">
+                                        <img src="STOCK_PHOTO_URL_REFERRAL_FRIENDS" alt="Twee lachende vrienden met mooi haar die korting vieren" class="relative z-10 rounded-xl shadow-lg transform hover:rotate-2 transition-transform duration-500 w-full max-w-[250px] sm:max-w-xs mx-auto" loading="lazy">
                                         <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-white rounded-lg shadow-md px-3 py-1.5 md:px-4 md:py-2 transform rotate-3 z-20">
                                             <span class="text-brand-primary font-bold text-lg md:text-xl">10%</span>
                                             <span class="block text-xs text-neutral-600">KORTING</span>
@@ -676,12 +591,14 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div class="relative animate-on-scroll animate-slide-in-left">
                          <div class="relative aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-5">
-                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80" alt="Stijlvol en modern interieur van Luminous Haarsalon" class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg hover-filter" loading="lazy">
+                            <img src="STOCK_PHOTO_URL_ABOUT_INTERIOR" alt="Stijlvol en modern interieur van Luminous Haarsalon" class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg hover-filter" loading="lazy">
                         </div>
 
+                        <!-- Decorative elements -->
                         <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-brand-light rounded-xl -z-10 transform -rotate-6 hidden sm:block"></div>
                         <div class="absolute -top-4 -right-4 w-24 h-24 bg-brand-primary/20 rounded-xl -z-10 transform rotate-6 hidden sm:block"></div>
 
+                        <!-- Stats card -->
                         <div class="absolute -right-3 bottom-1/4 sm:bottom-1/3 bg-white rounded-lg shadow-lg p-3 text-center w-28 transform transition-transform hover:scale-105">
                             <div class="text-2xl font-bold text-brand-primary">8+</div>
                             <div class="text-xs text-neutral-600">Jaar ervaring</div>
@@ -757,9 +674,9 @@
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
                     <!-- Gallery Item 1 -->
-                    <a href="https://images.unsplash.com/photo-1580884890280-aeb613a279c9?w=800&q=80" data-fancybox="gallery" data-caption="Zachte Balayage op lang bruin haar" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md">
-                        <img src="https://images.unsplash.com/photo-1580884890280-aeb613a279c9?w=400&q=80" alt="Kapselfoto Balayage" loading="lazy" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                    <a href="STOCK_PHOTO_URL_GALLERY_1_LARGE" data-fancybox="gallery" data-caption="Zachte Balayage Highlights" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md">
+                        <img src="STOCK_PHOTO_URL_GALLERY_1_THUMB" alt="Voorbeeld kapsel: Zachte balayage highlights" loading="lazy" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
                              <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Zachte Balayage</p>
@@ -767,9 +684,9 @@
                         </div>
                     </a>
                     <!-- Gallery Item 2 -->
-                    <a href="https://images.unsplash.com/photo-1599335623133-797f04301859?w=800&q=80" data-fancybox="gallery" data-caption="Moderne herencoupe met strakke fade" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.05s">
-                        <img src="https://images.unsplash.com/photo-1599335623133-797f04301859?w=400&q=80" alt="Kapselfoto modern herenkapsel" loading="lazy" class="w-full h-full object-cover">
-                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                    <a href="STOCK_PHOTO_URL_GALLERY_2_LARGE" data-fancybox="gallery" data-caption="Moderne Strakke Herencoupe" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.05s">
+                        <img src="STOCK_PHOTO_URL_GALLERY_2_THUMB" alt="Voorbeeld kapsel: Moderne strakke herencoupe" loading="lazy" class="w-full h-full object-cover">
+                         <div class="gallery-overlay">
                              <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Moderne Herencoupe</p>
@@ -777,9 +694,9 @@
                         </div>
                     </a>
                      <!-- Gallery Item 3 -->
-                     <a href="https://images.unsplash.com/photo-1551028467-a8567861147c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" data-fancybox="gallery" data-caption="Levendige rode haarkleuring" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.1s">
-                        <img src="https://images.unsplash.com/photo-1551028467-a8567861147c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Kapselfoto vrouw met fel rood haar" loading="lazy" class="w-full h-full object-cover">
-                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                     <a href="STOCK_PHOTO_URL_GALLERY_3_LARGE" data-fancybox="gallery" data-caption="Levendige Rode Kleuring" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.1s">
+                        <img src="STOCK_PHOTO_URL_GALLERY_3_THUMB" alt="Voorbeeld kapsel: Levendige rode haarkleuring" loading="lazy" class="w-full h-full object-cover">
+                         <div class="gallery-overlay">
                             <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Levendige Kleuring</p>
@@ -787,9 +704,9 @@
                         </div>
                     </a>
                      <!-- Gallery Item 4 -->
-                    <a href="https://images.unsplash.com/photo-1605705744397-507b51357b14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" data-fancybox="gallery" data-caption="Elegante opgestoken bruidskapsel" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.15s">
-                        <img src="https://images.unsplash.com/photo-1605705744397-507b51357b14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Kapselfoto elegante updo" loading="lazy" class="w-full h-full object-cover">
-                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                    <a href="STOCK_PHOTO_URL_GALLERY_4_LARGE" data-fancybox="gallery" data-caption="Elegante Opgestoken Updo" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.15s">
+                        <img src="STOCK_PHOTO_URL_GALLERY_4_THUMB" alt="Voorbeeld kapsel: Elegant opgestoken feestkapsel" loading="lazy" class="w-full h-full object-cover">
+                         <div class="gallery-overlay">
                             <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Elegante Updo</p>
@@ -797,9 +714,9 @@
                         </div>
                     </a>
                      <!-- Gallery Item 5 -->
-                    <a href="https://images.unsplash.com/photo-1603400499961-c794d4781a00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" data-fancybox="gallery" data-caption="Natuurlijke krullen gedefinieerd en gestyled" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.2s">
-                        <img src="https://images.unsplash.com/photo-1603400499961-c794d4781a00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Kapselfoto vrouw met mooie natuurlijke krullen" loading="lazy" class="w-full h-full object-cover">
-                         <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                    <a href="STOCK_PHOTO_URL_GALLERY_5_LARGE" data-fancybox="gallery" data-caption="Natuurlijke Krullen Definitie" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.2s">
+                        <img src="STOCK_PHOTO_URL_GALLERY_5_THUMB" alt="Voorbeeld kapsel: Goed gedefinieerde natuurlijke krullen" loading="lazy" class="w-full h-full object-cover">
+                         <div class="gallery-overlay">
                              <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Natuurlijke Krullen</p>
@@ -807,9 +724,9 @@
                         </div>
                     </a>
                      <!-- Gallery Item 6 -->
-                    <a href="https://images.unsplash.com/photo-1616079427986-8941c6a7f077?w=800&q=80" data-fancybox="gallery" data-caption="Gedurfde boblijn met scherpe snit" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.25s">
-                        <img src="https://images.unsplash.com/photo-1616079427986-8941c6a7f077?w=400&q=80" alt="Kapselfoto strakke boblijn" loading="lazy" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                    <a href="STOCK_PHOTO_URL_GALLERY_6_LARGE" data-fancybox="gallery" data-caption="Gedurfde Korte Boblijn" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.25s">
+                        <img src="STOCK_PHOTO_URL_GALLERY_6_THUMB" alt="Voorbeeld kapsel: Gedurfde korte boblijn" loading="lazy" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
                             <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Gedurfde Boblijn</p>
@@ -817,9 +734,9 @@
                         </div>
                     </a>
                      <!-- Gallery Item 7 -->
-                    <a href="https://images.unsplash.com/photo-1616078960469-610c6b1fba60?w=800&q=80" data-fancybox="gallery" data-caption="Koel platinum blond gekleurd haar" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.3s">
-                        <img src="https://images.unsplash.com/photo-1616078960469-610c6b1fba60?w=400&q=80" alt="Kapselfoto platinum blond haar" loading="lazy" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                    <a href="STOCK_PHOTO_URL_GALLERY_7_LARGE" data-fancybox="gallery" data-caption="Koel Platinum Blond" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.3s">
+                        <img src="STOCK_PHOTO_URL_GALLERY_7_THUMB" alt="Voorbeeld kapsel: Koel platinum blond haar" loading="lazy" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
                             <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Platinum Blond</p>
@@ -827,19 +744,19 @@
                         </div>
                     </a>
                      <!-- Gallery Item 8 -->
-                     <a href="https://images.unsplash.com/photo-1597087175917-7ab7f5e4649f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" data-fancybox="gallery" data-caption="Lang, stijlvol haar met middenscheiding" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.35s">
-                        <img src="https://images.unsplash.com/photo-1597087175917-7ab7f5e4649f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Kapselfoto lang stijl haar" loading="lazy" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10">
+                    <a href="STOCK_PHOTO_URL_GALLERY_8_LARGE" data-fancybox="gallery" data-caption="Herenkapsel met Strakke Scheiding" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.35s">
+                        <img src="STOCK_PHOTO_URL_GALLERY_8_THUMB" alt="Voorbeeld kapsel: Herenkapsel met strakke zijscheiding" loading="lazy" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
                            <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
-                                <p class="text-xs font-medium">Stijlvol Lang Haar</p>
+                                <p class="text-xs font-medium">Strakke Scheiding</p>
                             </div>
                         </div>
                     </a>
                 </div>
 
                 <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                     <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Volg ons op Instagram" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
+                     <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
                         <i class="fab fa-instagram mr-2 text-lg" aria-hidden="true"></i> Volg ons op Instagram
                     </a>
                 </div>
@@ -854,12 +771,12 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Testimonial 1 -->
-                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100"> <!-- Added subtle border on hover -->
                         <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
-                            <div class="flex mb-4 text-yellow-400" aria-label="5 van 5 sterren">
+                            <div class="flex mb-4 text-yellow-400">
                                 <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
@@ -877,12 +794,12 @@
                         </div>
                     </div>
                     <!-- Testimonial 2 -->
-                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300" data-delay="0.1s">
+                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100" data-delay="0.1s"> <!-- Added subtle border on hover -->
                          <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
-                            <div class="flex mb-4 text-yellow-400" aria-label="5 van 5 sterren">
+                            <div class="flex mb-4 text-yellow-400">
                                 <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
@@ -900,12 +817,12 @@
                         </div>
                     </div>
                     <!-- Testimonial 3 -->
-                     <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300" data-delay="0.2s">
+                     <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100" data-delay="0.2s"> <!-- Added subtle border on hover -->
                         <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
-                            <div class="flex mb-4 text-yellow-400" aria-label="5 van 5 sterren">
+                            <div class="flex mb-4 text-yellow-400">
                                 <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
@@ -926,7 +843,7 @@
 
                 <!-- Google Reviews Button -->
                 <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                    <a href="https://www.google.com/maps/search/?api=1&query=Luminous+Haarsalon+Amsterdam" target="_blank" rel="noopener noreferrer" aria-label="Bekijk onze recensies op Google" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Luminous+Haarsalon+Amsterdam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
                        <i class="fab fa-google mr-2 text-lg" aria-hidden="true"></i> Bekijk ons op Google
                    </a>
                </div>
@@ -953,7 +870,7 @@
                 </a>
                 <!-- Decorative circle -->
                 <div class="absolute bottom-0 right-0 opacity-20 transform translate-x-1/4 translate-y-1/4 hidden lg:block">
-                     <svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                     <svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="50" cy="50" r="45" stroke="white" stroke-width="1"/><circle cx="50" cy="50" r="35" stroke="white" stroke-width="1" stroke-dasharray="4 4"/><circle cx="50" cy="50" r="25" stroke="white" stroke-width="1"/>
                     </svg>
                 </div>
@@ -966,9 +883,9 @@
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Plan Je Bezoek</h2>
                 <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in" data-delay="0.1s">Neem contact op of kom langs in onze salon in Amsterdam.</p>
 
-                 <div class="grid grid-cols-1 lg:grid-cols-1 gap-10 lg:gap-12"> {/* Was lg:grid-cols-2 before, seems like only info was intended */}
-                    <!-- Contact Information -->
-                    <div class="animate-on-scroll animate-slide-up lg:max-w-xl lg:mx-auto"> {/* Changed animation */}
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-10 lg:gap-12"> <!-- Changed to 1 column layout for contact info -->
+                    <!-- Contact Information Centered -->
+                    <div class="animate-on-scroll animate-slide-in-left lg:max-w-xl lg:mx-auto"> <!-- Centered using max-w and mx-auto -->
                         <div class="bg-neutral-50 p-6 md:p-8 rounded-xl shadow-lg relative overflow-hidden h-full border border-neutral-100">
                              <h3 class="text-2xl font-semibold mb-6 text-neutral-800">Contactgegevens</h3>
                              <p class="mb-8 text-neutral-600 leading-relaxed text-sm md:text-base">Bezoek ons, bel direct, of volg ons op social media.</p>
@@ -1028,10 +945,11 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Contact Form could go here if needed, maintaining the grid layout -->
                 </div>
 
                  <!-- Map -->
-                <div class="mt-16 rounded-xl overflow-hidden shadow-lg animate-on-scroll animate-fade-in" style="height: 350px;"> {/* Slightly taller map */}
+                <div class="mt-16 rounded-xl overflow-hidden shadow-lg animate-on-scroll animate-fade-in" style="height: 300px;"> <!-- Reduced height slightly -->
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.1234567890123!2d4.885177615800000!3d52.370215979788888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c609c1b8f4c37b%3A0x1b0f1b2b0b7b1b0f!2sPrinsengracht%20123%2C%201015%20KK%20Amsterdam!5e0!3m2!1snl!2snl!4v1678886660000!5m2!1snl!2snl"
                         width="100%"
@@ -1042,6 +960,7 @@
                         referrerpolicy="no-referrer-when-downgrade"
                         title="Locatie Luminous Haarsalon - Prinsengracht 123, Amsterdam">
                     </iframe>
+                    <!-- Fallback message if iframe fails -->
                     <div class="w-full h-full flex items-center justify-center bg-neutral-200 text-neutral-500 text-center p-4 absolute inset-0 -z-10">
                          <p><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i>Kaart kon niet worden geladen. Locatie: Prinsengracht 123, 1015 KK Amsterdam.</p>
                      </div>
@@ -1053,7 +972,7 @@
     <!-- Footer -->
     <footer class="bg-brand-dark text-white pt-16 pb-8 relative overflow-hidden">
          <div class="absolute inset-0 opacity-[0.02]">
-            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><pattern id="footerPattern" patternUnits="userSpaceOnUse" width="30" height="30"><path d="M0 15 L30 15 M15 0 L15 30" stroke="white" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#footerPattern)"/></svg>
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="footerPattern" patternUnits="userSpaceOnUse" width="30" height="30"><path d="M0 15 L30 15 M15 0 L15 30" stroke="white" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#footerPattern)"/></svg>
         </div>
 
         <div class="container mx-auto px-4 relative z-10">
@@ -1066,7 +985,7 @@
                     <p class="text-neutral-300 text-sm mb-6 leading-relaxed">
                         Jouw premium salon voor professionele haarbehandelingen en persoonlijk advies in hartje Amsterdam.
                     </p>
-                    <div class="flex space-x-3">
+                     <div class="flex space-x-3">
                         <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
                             <i class="fab fa-facebook-f text-sm" aria-hidden="true"></i>
                         </a>
@@ -1141,6 +1060,14 @@
         </div>
     </footer>
 
+    <!-- Floating Referral Button -->
+    <div id="floating-referral" class="fixed bottom-5 left-5 z-[60] hidden transition-opacity duration-300 opacity-0">
+        <a href="#referral-program" class="bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-full w-14 h-14 sm:w-16 sm:h-16 flex flex-col items-center justify-center shadow-lg transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" aria-label="Bekijk Vrienden Bonus">
+            <i class="fas fa-gift text-lg sm:text-xl" aria-hidden="true"></i>
+            <span class="text-[9px] sm:text-[10px] font-medium mt-0.5 block leading-none">Bonus</span>
+        </a>
+    </div>
+
     <!-- Chat Widget -->
     <div id="chatbot" class="fixed bottom-5 right-5 z-[60]">
         <!-- Chat Button -->
@@ -1150,7 +1077,7 @@
              <span class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
         </button>
 
-        <!-- Chat Window (Initially hidden) -->
+        <!-- Chat Window -->
         <div id="chat-window" class="hidden absolute bottom-[calc(100%+0.75rem)] sm:bottom-[calc(100%+1rem)] right-0 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl overflow-hidden border border-neutral-200 scale-95 opacity-0 flex flex-col" role="dialog" aria-modal="true" aria-labelledby="chat-header-title">
             <!-- Chat Header -->
             <div class="bg-gradient-to-r from-brand-dark to-brand-primary p-3 sm:p-4 text-white flex justify-between items-center flex-shrink-0">
@@ -1170,7 +1097,7 @@
 
             <!-- Chat Messages Area -->
             <div id="chat-messages" class="p-3 sm:p-4 h-64 sm:h-80 overflow-y-auto bg-neutral-50 space-y-4 flex-grow">
-                <!-- Messages dynamically added here -->
+                <!-- Messages will be added by JS -->
             </div>
 
             <!-- Chat Input Area -->
@@ -1199,7 +1126,7 @@
             <!-- Modal Body -->
             <div id="price-modal-body" class="p-4 sm:p-6 overflow-y-auto flex-grow space-y-6">
                 <!-- Price Category 1: Dames -->
-                <div>
+                <div class="price-category"> <!-- Added wrapper div -->
                     <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-brand-light">Dames</h3>
                     <ul class="space-y-2 text-sm text-neutral-600">
                         <li class="flex justify-between"><span>Knippen, Wassen, Drogen</span> <span>€ 59,50</span></li>
@@ -1213,7 +1140,7 @@
                     </ul>
                 </div>
                  <!-- Price Category 2: Heren -->
-                <div>
+                <div class="price-category border-t border-neutral-200 pt-6 mt-6"> <!-- Added border, padding, margin -->
                     <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-brand-light">Heren</h3>
                     <ul class="space-y-2 text-sm text-neutral-600">
                         <li class="flex justify-between"><span>Knippen, Wassen, Stylen</span> <span>€ 42,50</span></li>
@@ -1223,7 +1150,7 @@
                     </ul>
                 </div>
                  <!-- Price Category 3: Extra's -->
-                <div>
+                <div class="price-category border-t border-neutral-200 pt-6 mt-6"> <!-- Added border, padding, margin -->
                     <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-brand-light">Extra's & Verzorging</h3>
                     <ul class="space-y-2 text-sm text-neutral-600">
                         <li class="flex justify-between"><span>Intensief Haarmasker</span> <span>€ 15,00</span></li>
@@ -1244,58 +1171,85 @@
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Header Scroll Effect & Referral Bar/Button Logic ---
+            // --- Element References ---
             const header = document.getElementById('main-header');
-            const referralBar = document.getElementById('referral-bar'); // Top bar in Hero
-            const floatingReferral = document.getElementById('floating-referral'); // Floating button
-            const scrollThreshold = 80; // Slightly larger threshold
-
-            const handleScrollEffects = () => {
-                 if (!header) return;
-                 const isScrolled = window.scrollY > scrollThreshold;
-
-                 // Toggle header class
-                 header.classList.toggle('header-scrolled', isScrolled);
-
-                 // Toggle visibility/position of referral elements
-                 if (referralBar) {
-                    referralBar.style.opacity = isScrolled ? '0' : '1';
-                    referralBar.style.transform = isScrolled ? 'translateY(-100%)' : 'translateY(0)';
-                    referralBar.style.pointerEvents = isScrolled ? 'none' : 'auto'; // Prevent interaction when hidden
-                 }
-                 if (floatingReferral) {
-                    floatingReferral.classList.toggle('show', isScrolled);
-                 }
-            };
-
-            window.addEventListener('scroll', handleScrollEffects);
-            handleScrollEffects(); // Initial check on load
-
-            // --- Mobile Menu Toggle ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             const mobileMenuLinks = mobileMenu?.querySelectorAll('.mobile-menu-link');
             const menuIcon = mobileMenuButton?.querySelector('i');
+            const priceModal = document.getElementById('price-modal');
+            const openPriceModalButton = document.getElementById('open-price-modal-button');
+            const closePriceModalButton = document.getElementById('close-price-modal-button');
+            const closePriceModalButtonFooter = document.getElementById('close-price-modal-button-footer');
+            const priceModalContent = priceModal?.querySelector('.bg-white'); // Inner content div for transition
+            const floatingReferral = document.getElementById('floating-referral'); // Floating referral button
 
+            // --- Constants ---
+            const SCROLL_THRESHOLD = 50; // Pixels to scroll before header changes
+            const FLOATING_REFERRAL_THRESHOLD = 300; // Pixels to scroll before floating referral appears
+
+            // --- Header Scroll Effect & Floating Referral ---
+            const handleHeaderScroll = () => {
+                 if (!header) return;
+                 const scrollY = window.scrollY;
+
+                 // Header styling
+                 if (scrollY > SCROLL_THRESHOLD) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+
+                 // Floating Referral Button Visibility
+                 if (floatingReferral) {
+                     if (scrollY > FLOATING_REFERRAL_THRESHOLD) {
+                        if (floatingReferral.classList.contains('hidden')) {
+                            floatingReferral.classList.remove('hidden');
+                            // Force reflow to apply transition correctly after removing hidden
+                            void floatingReferral.offsetWidth;
+                            floatingReferral.classList.remove('opacity-0');
+                            floatingReferral.classList.add('opacity-100');
+                        }
+                     } else {
+                         if (!floatingReferral.classList.contains('hidden') && !floatingReferral.classList.contains('opacity-0')) {
+                            floatingReferral.classList.remove('opacity-100');
+                            floatingReferral.classList.add('opacity-0');
+                            // Use setTimeout to add 'hidden' after the transition ends
+                            setTimeout(() => {
+                                // Check again in case user scrolled back down quickly
+                                if (window.scrollY <= FLOATING_REFERRAL_THRESHOLD) {
+                                     floatingReferral.classList.add('hidden');
+                                }
+                            }, 300); // Match the transition duration (300ms)
+                         }
+                     }
+                 }
+            };
+
+            window.addEventListener('scroll', handleHeaderScroll, { passive: true }); // Use passive listener for scroll performance
+            handleHeaderScroll(); // Initial check on load
+
+            // --- Mobile Menu Toggle ---
             const toggleMobileMenu = () => {
                 if (!mobileMenu || !menuIcon || !mobileMenuButton) return;
                 const isHidden = mobileMenu.classList.toggle('hidden');
-                mobileMenuButton.setAttribute('aria-expanded', String(!isHidden));
+                 mobileMenuButton.setAttribute('aria-expanded', String(!isHidden));
 
-                if (isHidden) {
-                    menuIcon.classList.remove('fa-times');
-                    menuIcon.classList.add('fa-bars');
-                    document.body.style.overflow = ''; // Allow scrolling
-                } else {
+                 if (isHidden) {
+                     menuIcon.classList.remove('fa-times');
+                     menuIcon.classList.add('fa-bars');
+                     document.body.style.overflow = ''; // Allow body scroll
+                 } else {
                     menuIcon.classList.remove('fa-bars');
                     menuIcon.classList.add('fa-times');
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling
-                }
+                     document.body.style.overflow = 'hidden'; // Prevent body scroll when menu open
+                 }
             };
 
             if (mobileMenuButton && mobileMenu) {
                 mobileMenuButton.addEventListener('click', toggleMobileMenu);
 
+                 // Close menu when a link is clicked
                 mobileMenuLinks?.forEach(link => {
                     link.addEventListener('click', () => {
                          if (!mobileMenu.classList.contains('hidden')) {
@@ -1304,45 +1258,51 @@
                     });
                 });
 
+                 // Close menu on Escape key
                  document.addEventListener('keydown', (e) => {
                      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
                          toggleMobileMenu();
                      }
                  });
+
+                 // Close menu if clicked outside the menu/button (optional but good UX)
+                 document.addEventListener('click', (e) => {
+                      if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                         toggleMobileMenu();
+                      }
+                 });
             }
 
             // --- Price List Modal ---
-            const priceModal = document.getElementById('price-modal');
-            const openPriceModalButton = document.getElementById('open-price-modal-button');
-            const closePriceModalButton = document.getElementById('close-price-modal-button');
-            const closePriceModalButtonFooter = document.getElementById('close-price-modal-button-footer');
-            const priceModalContent = priceModal?.querySelector('.bg-white');
-
             const openPriceModal = () => {
                 if (!priceModal || !priceModalContent) return;
                 priceModal.classList.remove('hidden');
-                priceModal.classList.add('flex');
+                priceModal.classList.add('flex'); // Use flex for centering
                 document.body.style.overflow = 'hidden'; // Prevent body scroll
-                requestAnimationFrame(() => { // Allow display change before transition
+                // Use requestAnimationFrame to ensure display change happens before transition starts
+                requestAnimationFrame(() => {
                     priceModal.classList.remove('opacity-0');
                     priceModalContent.classList.remove('scale-95');
                     priceModal.classList.add('opacity-100');
                     priceModalContent.classList.add('scale-100');
-                    closePriceModalButton?.focus(); // Focus the close button
                 });
+                 closePriceModalButton?.focus(); // Focus the close button for accessibility
             };
 
             const closePriceModal = () => {
                 if (!priceModal || !priceModalContent || priceModal.classList.contains('hidden')) return;
-                document.body.style.overflow = ''; // Restore body scroll
+
                 priceModal.classList.remove('opacity-100');
                 priceModalContent.classList.remove('scale-100');
                 priceModal.classList.add('opacity-0');
                 priceModalContent.classList.add('scale-95');
+
+                // Wait for transition to finish before hiding and allowing scroll
                 setTimeout(() => {
                     priceModal.classList.add('hidden');
                     priceModal.classList.remove('flex');
-                }, 300); // Wait for transition to finish
+                    document.body.style.overflow = ''; // Allow body scroll again
+                }, 300); // Match transition duration
                  openPriceModalButton?.focus(); // Return focus to the button that opened it
             };
 
@@ -1351,67 +1311,79 @@
                 closePriceModalButton.addEventListener('click', closePriceModal);
                 closePriceModalButtonFooter.addEventListener('click', closePriceModal);
 
+                // Close on clicking backdrop
                 priceModal.addEventListener('click', (event) => {
-                    if (event.target === priceModal) { // Click on backdrop
+                    // Check if the click is directly on the backdrop (priceModal itself)
+                    if (event.target === priceModal) {
                         closePriceModal();
                     }
                 });
 
+                 // Close on Escape key
                  document.addEventListener('keydown', (e) => {
                      if (e.key === 'Escape' && !priceModal.classList.contains('hidden')) {
                          closePriceModal();
                      }
                  });
+
+                 // Handle potential quick reply buttons added by chat JS
+                 document.body.addEventListener('click', (e) => {
+                      if (e.target.matches('.quick-reply-price-modal')) {
+                           openPriceModal();
+                      }
+                 });
             }
 
             // --- Animation on Scroll ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
-            if ("IntersectionObserver" in window) {
-                 const observer = new IntersectionObserver((entries, obs) => {
-                     entries.forEach(entry => {
-                         if (entry.isIntersecting) {
-                             const element = entry.target;
-                             const style = getComputedStyle(element);
-                             const animationName = style.getPropertyValue('--animation-name').trim() || 'fadeIn';
-                             const delay = element.getAttribute('data-delay') || '0s';
-                             const duration = '0.6s'; // Consistent duration
+            const observerOptions = {
+                root: null, // Use the viewport as the root
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
 
-                             element.style.animation = `${animationName} ${duration} ease-out ${delay} forwards`;
-                             element.classList.add('is-visible');
-                             obs.unobserve(element); // Stop observing once animated
-                         }
-                     });
-                 }, { threshold: 0.1 }); // Trigger when 10% is visible
+            const animationObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        // Read animation name from CSS variable
+                        const animationName = getComputedStyle(element).getPropertyValue('--animation-name').trim() || 'fadeIn';
+                        const delay = element.getAttribute('data-delay') || '0s';
+                        const duration = '0.6s'; // Default duration
+                        const fillMode = 'forwards'; // Keep final state
+                        const easing = 'ease-out';
 
-                 animatedElements.forEach(el => observer.observe(el));
-            } else {
-                // Fallback for older browsers: just make them visible
-                animatedElements.forEach(el => {
-                    el.style.opacity = 1;
-                    el.classList.add('is-visible');
+                        element.style.animation = `${animationName} ${duration} ${easing} ${delay} ${fillMode}`;
+                        element.classList.add('is-visible'); // Mark as visible to prevent re-animation
+
+                        // Stop observing the element once animated
+                        observer.unobserve(element);
+                    }
                 });
-            }
+            }, observerOptions);
 
+            animatedElements.forEach(el => animationObserver.observe(el));
 
             // --- Initialize Fancybox ---
-            try {
+            // Ensure Fancybox script has loaded before binding
+            if (typeof Fancybox !== 'undefined') {
                  Fancybox.bind("[data-fancybox]", {
-                     Thumbs: { showOnStart: false },
-                     Images: { zoom: false },
+                     Thumbs: { showOnStart: false }, // Don't show thumbs initially
+                     Images: { zoom: false }, // Disable image zoom on click
                      Toolbar: {
                         display: {
-                            left: ["infobar"],
+                            left: ["infobar"], // Show image count
                             middle: [],
-                            right: ["close"],
+                            right: ["close"], // Show only close button
                         },
                      },
                      caption: function (fancybox, slide) {
-                         // Use data-caption attribute from the <a> tag
+                         // Get caption from data-caption attribute of the trigger element
                          return slide.triggerEl?.dataset.caption || "";
                      }
                  });
-            } catch (e) {
-                 console.warn("Fancybox not available or failed to initialize.", e);
+            } else {
+                 console.warn("Fancybox library not found or not loaded yet.");
             }
 
             // --- Update Footer Year ---
@@ -1420,37 +1392,8 @@
                 currentYearSpan.textContent = new Date().getFullYear();
             }
 
-            // --- Smooth Scrolling for Anchor Links ---
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const targetId = this.getAttribute('href');
-                    if (!targetId || targetId === '#' || targetId.startsWith('#!')) return; // Ignore empty, #, or placeholder links
-
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        e.preventDefault(); // Prevent default jump only if target exists
-
-                        const headerHeight = document.getElementById('main-header')?.offsetHeight || 0;
-                        // Calculate correct offset, considering header might shrink/grow
-                        const elementPosition = targetElement.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-
-                        // Optional: Close mobile menu if open after clicking a link
-                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                            toggleMobileMenu();
-                        }
-                    }
-                });
-            });
-
-
             // ------------------------------------------------------------------------
-            // Chat Widget Functionality (No changes made to this logic)
+            // Chat Widget Functionality (Adapted for NEW element IDs, ORIG logic)
             // ------------------------------------------------------------------------
             const chatWidget = {
                 elements: {
@@ -1462,294 +1405,778 @@
                     input: document.getElementById('chat-input'),
                     sendBtn: document.getElementById('send-message')
                 },
-                state: { isOpen: false, isProcessing: false, threadId: null, messages: [], initialized: false },
-                storage: { THREAD_ID: 'luminous_chat_thread_id', MESSAGES: 'luminous_chat_messages' },
+                state: {
+                    isOpen: false,
+                    isProcessing: false,
+                    threadId: null,
+                    messages: [],
+                    initialized: false,
+                    typingTimeout: null // To manage typing indicator removal
+                },
+                storage: {
+                    THREAD_ID: 'luminous_chat_thread_id_v2', // Use specific key
+                    MESSAGES: 'luminous_chat_messages_v2'
+                },
 
                 init: function() {
-                    // ... (rest of the chatWidget.init function - unchanged) ...
-                    if (!this.elements.widget || !this.elements.toggleBtn || !this.elements.container || !this.elements.closeBtn || !this.elements.messagesContainer || !this.elements.input || !this.elements.sendBtn) {
-                        console.warn("Chat widget elements not fully found. Chat functionality disabled.");
+                    // Basic check if essential elements exist
+                    if (!this.elements.widget || !this.elements.toggleBtn || !this.elements.container) {
+                        console.warn("Chat widget base elements not found. Chat disabled.");
                         return;
                     }
+                    // More granular check for full functionality
+                     if (!this.elements.closeBtn || !this.elements.messagesContainer || !this.elements.input || !this.elements.sendBtn) {
+                        console.warn("Chat widget interactive elements not fully found. Chat functionality might be limited.");
+                        // Maybe disable buttons or provide feedback
+                    }
+
                     this.loadState();
                     this.setupEventListeners();
 
-                    if (!this.state.initialized && this.state.threadId) {
-                        this.loadMessages();
-                        this.state.initialized = true;
-                        this.saveState();
-                    } else if (!this.state.initialized) {
-                        this.initializeChat();
+                    // Determine initialization path
+                    if (this.state.threadId && this.state.messages.length > 0) {
+                        console.log("Chat: Resuming session with Thread ID:", this.state.threadId);
+                        this.loadMessages(); // Load stored messages visually
+                        this.state.initialized = true; // Mark as initialized
+                    } else if (this.state.threadId && this.state.messages.length === 0) {
+                        console.log("Chat: Found Thread ID but no messages, fetching initial state...");
+                        // Might need to fetch recent messages or just start fresh
+                        this.initializeChat(false); // Don't add welcome message if just fetching
                     } else {
-                         this.loadMessages();
+                        console.log("Chat: No previous session found, initializing new chat.");
+                        this.initializeChat(true); // Start fresh with welcome message
                     }
-                    this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
-                },
-                setupEventListeners: function() {
-                    // ... (rest of the chatWidget.setupEventListeners function - unchanged) ...
-                    this.elements.toggleBtn.addEventListener('click', () => this.toggleChat());
-                    this.elements.closeBtn.addEventListener('click', () => this.closeChat());
-                    this.elements.sendBtn.addEventListener('click', () => this.sendMessage());
-                    this.elements.input.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); this.sendMessage(); }
-                    });
-                    this.elements.input.addEventListener('input', () => {
-                        this.elements.input.style.height = 'auto';
-                        const newHeight = Math.min(this.elements.input.scrollHeight, 96); // max-h-24
-                        this.elements.input.style.height = `${newHeight}px`;
+
+                    // Initial state for send button
+                    if (this.elements.input && this.elements.sendBtn) {
                         this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
+                    }
+                },
+
+                setupEventListeners: function() {
+                    // Use optional chaining for safety if elements are missing
+                    this.elements.toggleBtn?.addEventListener('click', () => this.toggleChat());
+                    this.elements.closeBtn?.addEventListener('click', () => this.closeChat());
+                    this.elements.sendBtn?.addEventListener('click', () => this.sendMessage());
+
+                    this.elements.input?.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                             if (!this.elements.sendBtn?.disabled) { // Only send if button is enabled
+                                this.sendMessage();
+                             }
+                        }
                     });
-                     this.elements.container.addEventListener('keydown', (e) => {
-                        if (e.key === 'Escape' && this.state.isOpen) { this.closeChat(); }
+
+                    this.elements.input?.addEventListener('input', () => {
+                        if (!this.elements.input || !this.elements.sendBtn) return;
+                        // Auto-resize textarea
+                        this.elements.input.style.height = 'auto';
+                        const maxHeight = 96; // Corresponds to max-h-24
+                        const newHeight = Math.min(this.elements.input.scrollHeight, maxHeight);
+                        this.elements.input.style.height = `${newHeight}px`;
+                        // Enable/disable send button
+                        this.elements.sendBtn.disabled = this.elements.input.value.trim() === '' || this.state.isProcessing;
+                    });
+
+                    // Close chat on ESC key *only* when the chat window is open and focused
+                     this.elements.container?.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape' && this.state.isOpen) {
+                            this.closeChat();
+                        }
+                    });
+
+                    // Close chat if clicking outside (optional)
+                    document.addEventListener('click', (e) => {
+                        if (this.state.isOpen && this.elements.container && this.elements.toggleBtn) {
+                            if (!this.elements.container.contains(e.target) && !this.elements.toggleBtn.contains(e.target)) {
+                                this.closeChat();
+                            }
+                        }
                     });
                 },
-                toggleChat: function() { this.state.isOpen ? this.closeChat() : this.openChat(); },
+
+                toggleChat: function() {
+                    this.state.isOpen ? this.closeChat() : this.openChat();
+                },
+
                 openChat: function() {
-                    // ... (rest of the chatWidget.openChat function - unchanged) ...
-                    if (!this.elements.container || !this.elements.toggleBtn) return;
+                    if (!this.elements.container || !this.elements.toggleBtn || this.state.isOpen) return;
+
                     this.elements.container.classList.remove('hidden');
-                    requestAnimationFrame(() => {
+                    requestAnimationFrame(() => { // Ensure display:flex is applied first
                         this.elements.container.classList.remove('scale-95', 'opacity-0');
                         this.elements.container.classList.add('scale-100', 'opacity-100');
                     });
-                    this.elements.toggleBtn.classList.add('scale-90', 'opacity-0');
-                     setTimeout(() => this.elements.toggleBtn.classList.add('hidden'), 200);
+
+                    // Hide toggle button
+                    this.elements.toggleBtn.classList.add('scale-90', 'opacity-0', 'pointer-events-none');
+                    setTimeout(() => this.elements.toggleBtn.classList.add('hidden'), 200);
+
                     this.state.isOpen = true;
                     this.elements.toggleBtn.setAttribute('aria-expanded', 'true');
                     this.scrollToBottom();
-                    setTimeout(() => { this.elements.input.focus(); }, 350);
+
+                    setTimeout(() => {
+                        this.elements.input?.focus();
+                    }, 350); // Delay focus until animation likely complete
                 },
+
                 closeChat: function() {
-                    // ... (rest of the chatWidget.closeChat function - unchanged) ...
                     if (!this.elements.container || !this.elements.toggleBtn || !this.state.isOpen) return;
+
                     this.elements.container.classList.remove('scale-100', 'opacity-100');
                     this.elements.container.classList.add('scale-95', 'opacity-0');
+
+                    // Show toggle button
                     this.elements.toggleBtn.classList.remove('hidden');
-                    requestAnimationFrame(() => { this.elements.toggleBtn.classList.remove('scale-90', 'opacity-0'); });
+                     requestAnimationFrame(() => {
+                         this.elements.toggleBtn.classList.remove('scale-90', 'opacity-0', 'pointer-events-none');
+                     });
+
                     setTimeout(() => {
                         this.elements.container.classList.add('hidden');
                         this.state.isOpen = false;
                         this.elements.toggleBtn.setAttribute('aria-expanded', 'false');
-                        this.elements.toggleBtn.focus();
-                    }, 300);
+                        // Consider returning focus to toggle button for keyboard users
+                        // this.elements.toggleBtn.focus();
+                    }, 300); // Match transition duration
                 },
-                initializeChat: async function() {
-                    // ... (rest of the chatWidget.initializeChat function - unchanged) ...
-                    if (this.state.messages.length === 0) {
-                        const welcomeMessage = "👋 Welkom bij Luminous Hair Salon! Hoe kan ik je vandaag helpen? Vraag naar diensten, prijzen, of maak een afspraak.";
-                        this.addMessageToUI(welcomeMessage, false, false);
+
+                initializeChat: async function(addWelcome = true) {
+                    // Add welcome message only if requested and no messages exist
+                    if (addWelcome && this.state.messages.length === 0) {
+                        const welcomeMessage = "👋 Welkom bij Luminous! Hoe kan ik helpen? Vraag naar diensten, prijzen of beschikbaarheid.";
+                        this.addMessageToUI(welcomeMessage, false, false); // Add without animation
                         this.state.messages.push({ content: welcomeMessage, isUser: false, timestamp: new Date().toISOString() });
-                         this.state.initialized = true; // Mark initialized *before* potentially creating thread
+                        this.state.initialized = true; // Mark initialized *after* adding welcome msg
                         this.saveState();
                     }
 
+                    // Ensure thread exists or create one
                     if (!this.state.threadId) {
                         try {
-                             console.log("No thread ID found, creating one...");
                             const threadId = await this.createThread();
                             this.state.threadId = threadId;
-                             console.log("Thread created and saved:", this.state.threadId);
-                            this.saveState();
+                            this.saveState(); // Save the new thread ID immediately
                         } catch (error) {
-                            console.error('Error creating initial thread:', error);
-                            this.addMessageToUI("Kon geen chat sessie starten. Probeer het later opnieuw.", false);
-                            this.state.initialized = false; // Reset initialized if thread failed
+                            console.error('Chat Error: Failed to create thread during initialization.', error);
+                            this.addMessageToUI("Kon geen chat starten. Probeer later opnieuw.", false);
+                            this.state.initialized = false; // Stay uninitialized
                             return;
                         }
                     } else {
-                         console.log("Using existing thread ID:", this.state.threadId);
+                         // If thread exists but no messages were loaded, maybe fetch recent ones?
+                         // For simplicity now, we assume if threadId exists, state is loaded or welcome added.
+                         this.state.initialized = true;
                     }
-                     this.state.initialized = true; // Ensure marked as initialized if thread exists or was created
+                     if (this.elements.input) this.elements.input.disabled = false; // Ensure input is enabled
+                     if (this.elements.sendBtn) this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
                 },
+
+
                 loadState: function() {
-                    // ... (rest of the chatWidget.loadState function - unchanged) ...
-                     try {
+                    try {
                         const threadId = localStorage.getItem(this.storage.THREAD_ID);
                         const messagesJson = localStorage.getItem(this.storage.MESSAGES);
-                        if (threadId) { this.state.threadId = threadId; }
-                        if (messagesJson) { this.state.messages = JSON.parse(messagesJson); }
-                        else { this.state.messages = []; }
+
+                        if (threadId) {
+                            this.state.threadId = threadId;
+                        }
+                        if (messagesJson) {
+                            this.state.messages = JSON.parse(messagesJson);
+                            // Basic validation: ensure it's an array
+                            if (!Array.isArray(this.state.messages)) {
+                                console.warn("Chat Warning: Invalid message format in storage, resetting.");
+                                this.state.messages = [];
+                            }
+                        } else {
+                            this.state.messages = [];
+                        }
+                        console.log("Chat State Loaded:", { threadId: this.state.threadId, messageCount: this.state.messages.length });
                     } catch (error) {
-                        console.error('Error loading chat state:', error);
-                        this.state.threadId = null; this.state.messages = []; this.state.initialized = false;
-                        localStorage.removeItem(this.storage.THREAD_ID); localStorage.removeItem(this.storage.MESSAGES);
+                        console.error('Chat Error: Failed to load state from localStorage.', error);
+                        this.resetState(); // Reset on error
                     }
                 },
+
                 saveState: function() {
-                    // ... (rest of the chatWidget.saveState function - unchanged) ...
                     try {
-                        if (this.state.threadId) { localStorage.setItem(this.storage.THREAD_ID, this.state.threadId); }
-                        else { localStorage.removeItem(this.storage.THREAD_ID); }
-                        localStorage.setItem(this.storage.MESSAGES, JSON.stringify(this.state.messages));
-                    } catch (error) { console.error('Error saving chat state:', error); }
+                        if (this.state.threadId) {
+                             localStorage.setItem(this.storage.THREAD_ID, this.state.threadId);
+                        } else {
+                             localStorage.removeItem(this.storage.THREAD_ID);
+                        }
+                        // Limit stored messages to prevent excessive storage use (e.g., last 50)
+                        const messagesToStore = this.state.messages.slice(-50);
+                        localStorage.setItem(this.storage.MESSAGES, JSON.stringify(messagesToStore));
+                    } catch (error) {
+                        console.error('Chat Error: Failed to save state to localStorage.', error);
+                        // Maybe notify user storage is failing?
+                    }
                 },
+
+                resetState: function() {
+                     console.log("Chat: Resetting chat state.");
+                     this.state.threadId = null;
+                     this.state.messages = [];
+                     this.state.initialized = false;
+                     this.state.isProcessing = false;
+                     localStorage.removeItem(this.storage.THREAD_ID);
+                     localStorage.removeItem(this.storage.MESSAGES);
+                     if(this.elements.messagesContainer) this.elements.messagesContainer.innerHTML = ''; // Clear UI
+                },
+
+
                 loadMessages: function() {
-                    // ... (rest of the chatWidget.loadMessages function - unchanged) ...
-                    this.elements.messagesContainer.innerHTML = '';
-                    this.state.messages.forEach(message => { this.addMessageToUI(message.content, message.isUser, false); });
-                    this.scrollToBottom();
+                    if (!this.elements.messagesContainer) return;
+                    this.elements.messagesContainer.innerHTML = ''; // Clear visual messages
+                    this.state.messages.forEach(message => {
+                        // Add messages without animation on load for speed
+                        this.addMessageToUI(message.content, message.isUser, false);
+                    });
+                    this.scrollToBottom(); // Scroll after adding all messages
                 },
+
+
                 createThread: async function() {
-                    // ... (rest of the chatWidget.createThread function - unchanged) ...
-                    try {
-                        console.log('Creating new thread...');
-                        const response = await fetch('/api/openai-api/create-thread', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
-                        if (!response.ok) { const errorData = await response.json().catch(() => ({ error: "Unknown error creating thread" })); console.error('Thread creation error response:', response.status, errorData); throw new Error(`Failed to create thread: ${response.status} ${response.statusText}. ${errorData.error || ''}`); }
+                    console.log('Chat API: Creating new thread...');
+                     try {
+                        const response = await fetch('/api/openai-api/create-thread', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' }
+                        });
+                        if (!response.ok) {
+                            const errorData = await response.json().catch(() => ({ detail: "Unknown error creating thread" }));
+                            throw new Error(`API Error (${response.status}): ${errorData.detail}`);
+                        }
                         const data = await response.json();
-                         if (!data.id) { console.error('Thread creation response missing ID:', data); throw new Error('Thread ID not received from API.'); }
-                        console.log('Thread created:', data.id); return data.id;
-                    } catch (error) { console.error('Error in createThread function:', error); throw error; }
+                        if (!data.id) throw new Error('Thread ID not received from API.');
+                        console.log('Chat API: Thread created:', data.id);
+                        return data.id;
+                    } catch (error) {
+                        console.error('Chat Error in createThread:', error);
+                        throw error; // Re-throw for the caller
+                    }
                 },
+
                 sendMessage: async function() {
-                    // ... (rest of the chatWidget.sendMessage function - unchanged) ...
+                    if (!this.elements.input || !this.elements.sendBtn) return; // Guard clause
                     const messageText = this.elements.input.value.trim();
-                    if (!messageText || this.state.isProcessing || !this.state.threadId) { if(!this.state.threadId) console.warn("Cannot send message, no thread ID."); return; }
+
+                    if (!messageText || this.state.isProcessing || !this.state.threadId) {
+                        if (!this.state.threadId) console.warn("Chat Warning: Cannot send message, thread not initialized.");
+                        return;
+                    }
+
+                    // --- Start Processing ---
+                    this.state.isProcessing = true;
+                    this.elements.sendBtn.disabled = true;
+                    this.elements.input.disabled = true;
+                    this.elements.input.value = ''; // Clear input visually
+                    this.elements.input.style.height = 'auto'; // Reset height
+
                     try {
-                        this.state.isProcessing = true; this.elements.sendBtn.disabled = true; this.elements.input.disabled = true;
-                        this.elements.input.value = ''; this.elements.input.style.height = 'auto';
-                        this.addMessageToUI(messageText, true);
+                        // Add user message to UI and state immediately
+                        this.addMessageToUI(messageText, true); // Animate user message
                         this.state.messages.push({ content: messageText, isUser: true, timestamp: new Date().toISOString() });
                         this.saveState();
+
+                        // Show typing indicator while waiting for API
+                        this.showTypingIndicator();
+
+                        // Add message to the OpenAI thread
                         await this.addMessageToThread(messageText);
+
+                        // Start the run and wait for response
                         await this.processResponse();
+
                     } catch (error) {
-                        console.error('Error sending message:', error);
-                        const errorMsg = "Sorry, er ging iets mis bij het versturen. Probeer het later opnieuw.";
-                        this.addMessageToUI(errorMsg, false);
+                        console.error('Chat Error: Failed during sendMessage process.', error);
+                        this.removeTypingIndicator(); // Ensure indicator is removed on error
+                        const errorMsg = "Sorry, er ging iets mis. Probeer het opnieuw of neem contact op.";
+                        this.addMessageToUI(errorMsg, false); // Show error without animation
                         this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
                         this.saveState();
                     } finally {
+                        // --- End Processing ---
                         this.state.isProcessing = false;
-                        this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
-                        this.elements.input.disabled = false;
-                        this.elements.input.focus();
+                        // Re-enable input only if chat is initialized
+                        if (this.state.initialized) {
+                             this.elements.input.disabled = false;
+                             // Send button stays disabled until user types again
+                             this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
+                             this.elements.input.focus(); // Return focus
+                        } else {
+                             // Keep disabled if initialization failed
+                             this.elements.input.disabled = true;
+                             this.elements.sendBtn.disabled = true;
+                        }
+                         this.removeTypingIndicator(); // Ensure removed in all scenarios
                     }
                 },
+
+
                 addMessageToThread: async function(content) {
-                    // ... (rest of the chatWidget.addMessageToThread function - unchanged) ...
                     if (!this.state.threadId) throw new Error("Missing threadId in addMessageToThread");
+                    console.log(`Chat API: Adding message to thread ${this.state.threadId}...`);
                      try {
-                        const response = await fetch('/api/openai-api/add-message', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ threadId: this.state.threadId, content: content }) });
-                        if (!response.ok) { const errorData = await response.json().catch(() => ({ error: "Unknown error adding message" })); console.error('Add message error response:', response.status, errorData); throw new Error(`Failed to add message: ${response.status} ${response.statusText}. ${errorData.error || ''}`); }
-                        const data = await response.json(); console.log('Message added to thread:', data.id); return data;
-                    } catch (error) { console.error('Error in addMessageToThread function:', error); throw error; }
+                        const response = await fetch('/api/openai-api/add-message', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ threadId: this.state.threadId, content: content })
+                        });
+                        if (!response.ok) {
+                             const errorData = await response.json().catch(() => ({ detail: "Unknown error adding message" }));
+                             throw new Error(`API Error (${response.status}): ${errorData.detail}`);
+                        }
+                        const data = await response.json();
+                        console.log('Chat API: Message added:', data.id);
+                        return data;
+                    } catch (error) {
+                        console.error('Chat Error in addMessageToThread:', error);
+                        throw error;
+                    }
                 },
-                processResponse: async function() {
-                    // ... (rest of the chatWidget.processResponse function - unchanged) ...
+
+                 processResponse: async function() {
                      if (!this.state.threadId) throw new Error("Missing threadId in processResponse");
                      let runId = null;
+                     let attempts = 0;
+                     const maxAttempts = 30; // Polling attempts
+                     const pollInterval = 1500; // Milliseconds between polls
+
                      try {
-                        this.showTypingIndicator();
-                        console.log('Creating run for thread:', this.state.threadId);
-                        const runResponse = await fetch('/api/openai-api/create-run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ threadId: this.state.threadId }) });
-                        if (!runResponse.ok) { const errorData = await runResponse.json().catch(() => ({ error: "Unknown error creating run" })); console.error('Create run error response:', runResponse.status, errorData); throw new Error(`Failed to create run: ${runResponse.status} ${runResponse.statusText}. ${errorData.error || ''}`); }
-                        const runData = await runResponse.json();
-                         if (!runData.id) { console.error('Create run response missing ID:', runData); throw new Error('Run ID not received from API.'); }
-                        runId = runData.id; console.log('Run created:', runId);
-                        let status = runData.status; let attempts = 0; const maxAttempts = 45; const initialDelay = 1500; const subsequentDelay = 1000;
-                        await new Promise(resolve => setTimeout(resolve, initialDelay));
-                        while (['queued', 'in_progress'].includes(status) && attempts < maxAttempts) {
-                            attempts++; console.log(`Checking run status (attempt ${attempts})...`);
-                            const statusResponse = await fetch(`/api/openai-api/check-run-status?threadId=${this.state.threadId}&runId=${runId}`);
-                            if (!statusResponse.ok) { console.error(`Failed status check attempt ${attempts}: ${statusResponse.status} ${statusResponse.statusText}`); if (attempts >= maxAttempts) { throw new Error(`Failed to get run status after ${attempts} attempts.`); } await new Promise(resolve => setTimeout(resolve, subsequentDelay * 2)); continue; }
-                            const statusData = await statusResponse.json(); status = statusData.status; console.log('Run status:', status);
-                            if (status === 'completed') {
-                                console.log('Run completed, fetching messages...');
-                                const messagesResponse = await fetch(`/api/openai-api/get-messages?threadId=${this.state.threadId}&limit=5`);
-                                if (!messagesResponse.ok) { const errorData = await messagesResponse.json().catch(() => ({ error: "Unknown error getting messages" })); console.error('Get messages error response:', messagesResponse.status, errorData); throw new Error(`Failed to get messages: ${messagesResponse.status} ${messagesResponse.statusText}. ${errorData.error || ''}`); }
-                                const messagesData = await messagesResponse.json(); console.log('Messages received:', messagesData);
-                                const lastUserMessageIndex = this.state.messages.findLastIndex(m => m.isUser);
-                                const lastUserTimestamp = lastUserMessageIndex > -1 ? new Date(this.state.messages[lastUserMessageIndex].timestamp) : new Date(0);
-                                const newAssistantMessages = messagesData.data.filter(msg => msg.role === 'assistant' && new Date(msg.created_at * 1000) > lastUserTimestamp).sort((a, b) => a.created_at - b.created_at);
-                                if (newAssistantMessages.length > 0) {
-                                     this.removeTypingIndicator();
-                                     for (const assistantMessage of newAssistantMessages) {
-                                         if (assistantMessage.content && assistantMessage.content.length > 0 && assistantMessage.content[0].type === 'text') {
-                                            const responseContent = assistantMessage.content[0].text.value; console.log('Assistant response:', responseContent);
-                                            await new Promise(resolve => setTimeout(resolve, 200));
-                                            this.addMessageToUI(responseContent, false);
-                                            this.state.messages.push({ content: responseContent, isUser: false, timestamp: new Date(assistantMessage.created_at * 1000).toISOString() });
-                                         } else { console.warn("Received non-text or empty assistant message part:", assistantMessage); }
+                         console.log(`Chat API: Creating run for thread ${this.state.threadId}...`);
+                         const runResponse = await fetch('/api/openai-api/create-run', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ threadId: this.state.threadId })
+                         });
+
+                         if (!runResponse.ok) {
+                             const errorData = await runResponse.json().catch(() => ({ detail: "Unknown error creating run" }));
+                             throw new Error(`API Error (${runResponse.status}) creating run: ${errorData.detail}`);
+                         }
+
+                         const runData = await runResponse.json();
+                         if (!runData.id) throw new Error('Run ID not received from API.');
+                         runId = runData.id;
+                         console.log('Chat API: Run created:', runId);
+
+                         // --- Polling for Run Completion ---
+                         let status = runData.status;
+                         while (['queued', 'in_progress'].includes(status) && attempts < maxAttempts) {
+                             attempts++;
+                             await new Promise(resolve => setTimeout(resolve, pollInterval)); // Wait
+                             console.log(`Chat API: Checking run status (Attempt ${attempts})...`);
+
+                             try {
+                                const statusResponse = await fetch(`/api/openai-api/check-run-status?threadId=${this.state.threadId}&runId=${runId}`);
+                                if (!statusResponse.ok) {
+                                     // Log error but continue polling for a few attempts
+                                     console.warn(`Chat Warning: Status check failed (Attempt ${attempts}): ${statusResponse.status}`);
+                                     if (attempts >= maxAttempts - 5) { // Start failing near the end
+                                          const errorData = await statusResponse.json().catch(() => ({ detail: `Status check failed` }));
+                                          throw new Error(`API Error (${statusResponse.status}) checking status: ${errorData.detail}`);
                                      }
-                                     this.saveState();
-                                } else { this.removeTypingIndicator(); console.warn('Run completed but no new assistant message found.'); }
-                                break;
-                            } else if (['failed', 'expired', 'cancelled', 'requires_action'].includes(status)) { console.error(`Run ended with status: ${status}`, statusData); throw new Error(`Run ${status}. Check server logs for details.`); }
-                            await new Promise(resolve => setTimeout(resolve, subsequentDelay));
-                        }
-                        if (attempts >= maxAttempts && status !== 'completed') { throw new Error('Timed out waiting for assistant response.'); }
-                    } catch (error) {
-                        console.error('Error processing response:', error); this.removeTypingIndicator();
-                        const errorMsg = "Sorry, ik ondervind momenteel problemen. Probeer het later opnieuw of bel ons.";
-                        this.addMessageToUI(errorMsg, false); this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() }); this.saveState();
-                    } finally { this.removeTypingIndicator(); }
-                },
+                                     continue; // Try again
+                                }
+                                const statusData = await statusResponse.json();
+                                status = statusData.status;
+                                console.log('Chat API: Run status:', status);
+                             } catch (pollError) {
+                                 console.error("Chat Error during polling:", pollError);
+                                 // If polling itself fails badly, break the loop
+                                 if (attempts >= maxAttempts - 5) throw pollError;
+                                 continue;
+                             }
+
+
+                            if (status === 'completed') {
+                                console.log('Chat API: Run completed. Fetching messages...');
+                                this.removeTypingIndicator(); // Remove before adding new message
+
+                                const messagesResponse = await fetch(`/api/openai-api/get-messages?threadId=${this.state.threadId}&limit=5&order=desc`); // Get latest, descending order
+
+                                if (!messagesResponse.ok) {
+                                    const errorData = await messagesResponse.json().catch(() => ({ detail: "Unknown error getting messages" }));
+                                    throw new Error(`API Error (${messagesResponse.status}) getting messages: ${errorData.detail}`);
+                                }
+
+                                const messagesData = await messagesResponse.json();
+                                console.log('Chat API: Messages received:', messagesData.data?.length);
+
+                                // Find the latest assistant message (should be the first in desc order)
+                                const latestAssistantMessage = messagesData.data?.find(msg => msg.role === 'assistant' && msg.run_id === runId); // Ensure it's from this run
+
+
+                                if (latestAssistantMessage?.content?.[0]?.type === 'text') {
+                                    const responseContent = latestAssistantMessage.content[0].text.value;
+                                    console.log('Chat API: Assistant response found:', responseContent.substring(0, 50) + '...');
+
+                                    // Add assistant message to UI and state
+                                    this.addMessageToUI(responseContent, false); // Animate assistant message
+                                    this.state.messages.push({
+                                        content: responseContent,
+                                        isUser: false,
+                                        timestamp: new Date(latestAssistantMessage.created_at * 1000).toISOString()
+                                    });
+                                    this.saveState();
+                                } else {
+                                    console.warn('Chat Warning: Run completed, but no suitable assistant message found.', latestAssistantMessage);
+                                     this.addMessageToUI("Er was een antwoord, maar ik kon het niet lezen. Probeer het opnieuw.", false);
+                                }
+                                return; // Exit function successfully
+                            } else if (['failed', 'expired', 'cancelled', 'requires_action'].includes(status)) {
+                                console.error(`Chat Error: Run ended with status: ${status}`, runData); // Log full run data on failure
+                                throw new Error(`Chat sessie mislukt (status: ${status}).`);
+                            }
+                         } // End while loop
+
+                         // If loop finishes without completion
+                         if (attempts >= maxAttempts) {
+                             throw new Error('Timeout waiting for assistant response.');
+                         }
+
+                     } catch (error) {
+                         console.error('Chat Error in processResponse:', error);
+                         this.removeTypingIndicator(); // Ensure removal
+                         // Add specific error message if available, otherwise generic
+                         const errorMsg = error.message.startsWith("Chat sessie mislukt") || error.message.startsWith("Timeout")
+                             ? error.message
+                             : "Er is een onverwachte fout opgetreden. Probeer het later opnieuw.";
+                         this.addMessageToUI(errorMsg, false);
+                         this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
+                         this.saveState();
+                         // Don't re-throw here, error is handled by adding message
+                     }
+                 },
+
+
                 addMessageToUI: function(content, isUser, animate = true) {
-                    // ... (rest of the chatWidget.addMessageToUI function - unchanged) ...
-                     const messageDiv = document.createElement('div');
-                    messageDiv.className = `flex items-start gap-2.5 mb-4 ${isUser ? 'justify-end' : 'justify-start'}`;
-                    let messageContent = '';
-                    if (isUser) {
-                         messageContent = `<div class="flex flex-col gap-1 max-w-[80%]"><div class="leading-snug p-2.5 sm:p-3 bg-neutral-200 rounded-lg rounded-br-none shadow-sm text-xs sm:text-sm font-normal text-neutral-800">${this.formatMessageContent(content)}</div></div>`;
-                    } else {
-                        messageContent = `<div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1"><i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i></div><div class="flex flex-col gap-1 max-w-[calc(100%-3rem)]"><div class="flex items-center space-x-2 rtl:space-x-reverse"><span class="text-xs sm:text-sm font-semibold text-neutral-900">Luminous Bot</span></div><div class="leading-snug p-2.5 sm:p-3 bg-white rounded-lg rounded-tl-none shadow-sm border border-neutral-100 text-xs sm:text-sm font-normal text-neutral-800">${this.formatMessageContent(content)}</div></div>`;
+                    if (!this.elements.messagesContainer) return;
+
+                    const messageWrapper = document.createElement('div');
+                    messageWrapper.className = `flex items-start gap-2.5 mb-3 ${isUser ? 'justify-end' : 'justify-start'}`; // Reduced mb
+
+                    const bubbleClasses = isUser
+                        ? 'bg-neutral-200 rounded-lg rounded-br-none text-neutral-800'
+                        : 'bg-white rounded-lg rounded-tl-none text-neutral-800 border border-neutral-100';
+
+                    const formattedContent = this.formatMessageContent(content); // Format links/newlines
+
+                    let innerHTML = '';
+                    if (!isUser) {
+                        // Bot Avatar
+                        innerHTML += `
+                            <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
+                                <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
+                            </div>`;
                     }
-                    messageDiv.innerHTML = messageContent;
+
+                    // Message Bubble
+                    innerHTML += `
+                        <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
+                            ${!isUser ? '<span class="text-xs font-semibold text-neutral-600 ml-1">Luminous Bot</span>' : ''}
+                            <div class="leading-snug p-2.5 sm:p-3 shadow-sm text-xs sm:text-sm font-normal ${bubbleClasses}">
+                                ${formattedContent}
+                            </div>
+                            <!-- Timestamp (optional) -->
+                            <!-- <span class="text-[10px] text-neutral-400 ${isUser ? 'text-right' : 'text-left'}">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span> -->
+                        </div>`;
+
+                    if (isUser) {
+                        // User Avatar (Optional Placeholder)
+                        // innerHTML += `<div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-neutral-300 self-end"></div>`;
+                    }
+
+                    messageWrapper.innerHTML = innerHTML;
+
+                    // Animation
                     if (animate) {
-                        messageDiv.style.opacity = '0'; messageDiv.style.transform = 'translateY(10px)';
-                        this.elements.messagesContainer.appendChild(messageDiv);
-                        requestAnimationFrame(() => { messageDiv.style.transition = 'opacity 0.3s ease, transform 0.3s ease'; messageDiv.style.opacity = '1'; messageDiv.style.transform = 'translateY(0)'; });
-                    } else { this.elements.messagesContainer.appendChild(messageDiv); }
+                        messageWrapper.style.opacity = '0';
+                        messageWrapper.style.transform = `translateY(10px) ${isUser ? 'translateX(10px)' : 'translateX(-10px)'}`; // Slide in effect
+                        this.elements.messagesContainer.appendChild(messageWrapper);
+                        requestAnimationFrame(() => {
+                            messageWrapper.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                            messageWrapper.style.opacity = '1';
+                            messageWrapper.style.transform = 'translateY(0) translateX(0)';
+                        });
+                    } else {
+                        this.elements.messagesContainer.appendChild(messageWrapper);
+                    }
+
                     this.scrollToBottom();
                 },
+
                 formatMessageContent: function(content) {
-                    // ... (rest of the chatWidget.formatMessageContent function - unchanged) ...
+                    // Basic sanitization (replace with a more robust library if needed)
                     let formattedText = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                    const urlRegex = /(https?:\/\/[^\s]+)/g;
+                    // Convert URLs to clickable links
+                    const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
                     formattedText = formattedText.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-brand-primary underline hover:text-brand-dark">$1</a>');
+                    // Convert newlines to <br> tags
                     formattedText = formattedText.replace(/\n/g, '<br>');
                     return formattedText;
                 },
+
                 showTypingIndicator: function() {
-                    // ... (rest of the chatWidget.showTypingIndicator function - unchanged) ...
-                     this.removeTypingIndicator(); const typingDiv = document.createElement('div'); typingDiv.id = 'typing-indicator';
-                    typingDiv.className = 'flex items-start gap-2.5 mb-4 justify-start';
-                    typingDiv.innerHTML = `<div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1"><i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i></div><div class="flex flex-col gap-1 max-w-[calc(100%-3rem)]"><div class="leading-snug p-2.5 sm:p-3 bg-white rounded-lg rounded-tl-none shadow-sm border border-neutral-100"><div class="flex space-x-1 items-center h-4"><div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.32s;"></div><div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.16s;"></div><div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce"></div></div></div></div>`;
-                    this.elements.messagesContainer.appendChild(typingDiv); this.scrollToBottom();
-                },
-                removeTypingIndicator: function() {
-                    // ... (rest of the chatWidget.removeTypingIndicator function - unchanged) ...
-                     const typingIndicator = document.getElementById('typing-indicator'); if (typingIndicator) { typingIndicator.remove(); }
-                },
-                scrollToBottom: function() {
-                    // ... (rest of the chatWidget.scrollToBottom function - unchanged) ...
-                    // Consider adding a small delay or checking if user scrolled up manually
+                    if (!this.elements.messagesContainer) return;
+                    // Clear any previous timeout to prevent premature removal
+                    if (this.state.typingTimeout) clearTimeout(this.state.typingTimeout);
+                    // Remove existing indicator before adding a new one
+                    this.removeTypingIndicator();
+
+                    const typingDiv = document.createElement('div');
+                    typingDiv.id = 'typing-indicator';
+                    typingDiv.className = 'flex items-start gap-2.5 mb-3 justify-start'; // Match message style
+
+                    typingDiv.innerHTML = `
+                         <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
+                             <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
+                         </div>
+                         <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
+                              <span class="text-xs font-semibold text-neutral-600 ml-1">Luminous Bot</span>
+                            <div class="leading-snug p-2.5 sm:p-3 bg-white rounded-lg rounded-tl-none shadow-sm border border-neutral-100">
+                                <div class="flex space-x-1 items-center h-4">
+                                    <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.32s;"></div>
+                                    <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.16s;"></div>
+                                    <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    // Animate the appearance (optional)
+                    typingDiv.style.opacity = '0';
+                    this.elements.messagesContainer.appendChild(typingDiv);
                     requestAnimationFrame(() => {
-                        this.elements.messagesContainer.scrollTop = this.elements.messagesContainer.scrollHeight;
+                         typingDiv.style.transition = 'opacity 0.3s ease';
+                         typingDiv.style.opacity = '1';
+                    });
+
+                    this.scrollToBottom();
+
+                    // Set a timeout to remove the indicator if no response arrives (e.g., 30 seconds)
+                    this.state.typingTimeout = setTimeout(() => {
+                         console.warn("Chat Warning: Typing indicator timed out.");
+                         this.removeTypingIndicator();
+                    }, 30000); // 30 seconds
+                },
+
+                removeTypingIndicator: function() {
+                     if (this.state.typingTimeout) {
+                        clearTimeout(this.state.typingTimeout);
+                        this.state.typingTimeout = null;
+                     }
+                    const typingIndicator = document.getElementById('typing-indicator');
+                    if (typingIndicator) {
+                         // Optional: Animate disappearance
+                         typingIndicator.style.transition = 'opacity 0.3s ease';
+                         typingIndicator.style.opacity = '0';
+                         setTimeout(() => typingIndicator.remove(), 300);
+                    }
+                },
+
+                scrollToBottom: function() {
+                    if (!this.elements.messagesContainer) return;
+                    // Use smooth scroll behavior
+                    this.elements.messagesContainer.scrollTo({
+                        top: this.elements.messagesContainer.scrollHeight,
+                        behavior: 'smooth'
                     });
                 }
             };
 
-            // Initialize chat widget
+            // Initialize the chat widget after the DOM is fully loaded
             chatWidget.init();
-            // ---------------- End Chat Widget Functionality --------------------
-
         });
     </script>
 
-    <!-- Netlify Function Script Placeholder (Keep this structure if deploying on Netlify) -->
+    <!-- Netlify Function Handler Script -->
+    <!-- IMPORTANT: This <script> block should NOT be in the HTML sent to the browser. -->
+    <!-- It represents the code for your Netlify serverless function (e.g., in /netlify/functions/openai-api.js) -->
+    <!-- I'm leaving it here commented out for reference, but remove it from the final HTML file. -->
     <!--
     <script>
-        // This would typically be in a separate file like 'functions/openai-api.js' for Netlify
-        // The JavaScript code for the Netlify function (exports.handler = ...) goes here.
-        // It's kept separate from the client-side JS.
-        // --- Netlify function code (exports.handler = ...) as provided previously ---
-        // Make sure to set OPENAI_API_KEY and OPENAI_ASSISTANT_ID in Netlify environment variables.
+        // NETLIFY FUNCTION CODE (e.g., /netlify/functions/openai-api.js)
+        // This code runs on the server, not in the browser.
+
+        // Use dynamic import for node-fetch v3+ if in an ESM environment
+        // const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
         exports.handler = async function(event, context) {
-            // ... (Full Netlify function code from previous examples) ...
+            const API_ROUTES = {
+                CREATE_THREAD: '/api/openai-api/create-thread',
+                ADD_MESSAGE: '/api/openai-api/add-message',
+                CREATE_RUN: '/api/openai-api/create-run',
+                CHECK_RUN_STATUS: '/api/openai-api/check-run-status',
+                GET_MESSAGES: '/api/openai-api/get-messages'
+            };
+
+            const API_KEY = process.env.OPENAI_API_KEY;
+            const ASSISTANT_ID = process.env.OPENAI_ASSISTANT_ID;
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*', // Adjust for production (specific domain)
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
+            };
+
+            if (event.httpMethod === 'OPTIONS') {
+                return { statusCode: 204, headers, body: '' }; // Use 204 No Content for OPTIONS
+            }
+
+             // Centralized Error Response Function
+             const sendError = (statusCode, message, logError = null) => {
+                 console.error(`Netlify Function Error (${statusCode}): ${message}`, logError || '');
+                 return {
+                     statusCode,
+                     headers,
+                     body: JSON.stringify({ error: { message: message } }) // Consistent error object
+                 };
+             };
+
+            if (!API_KEY) return sendError(500, "OpenAI API key is not configured on the server.");
+            if (!ASSISTANT_ID) return sendError(500, "OpenAI Assistant ID is not configured on the server.");
+
+            const path = event.path;
+            const httpMethod = event.httpMethod;
+            const openAIBaseUrl = 'https://api.openai.com/v1';
+
+             // Helper for making OpenAI API calls
+            const callOpenAI = async (endpoint, method = 'POST', body = null) => {
+                const url = `${openAIBaseUrl}${endpoint}`;
+                 const options = {
+                     method: method,
+                     headers: {
+                         'Authorization': `Bearer ${API_KEY}`,
+                         'OpenAI-Beta': 'assistants=v2', // Use v2
+                         ...(body && { 'Content-Type': 'application/json' }) // Add Content-Type only if body exists
+                     },
+                     ...(body && { body: JSON.stringify(body) })
+                 };
+
+                 try {
+                     // Dynamically import node-fetch if not available globally (common in Netlify functions)
+                     const fetch = await import('node-fetch').then(mod => mod.default);
+                     const response = await fetch(url, options);
+                     const responseBody = await response.json(); // Attempt to parse JSON regardless of status
+
+                     if (!response.ok) {
+                          // Try to extract a meaningful error message from OpenAI's response
+                          const errorMessage = responseBody?.error?.message || responseBody?.detail || `OpenAI API Error (${response.status})`;
+                          console.error(`OpenAI API Error: ${method} ${endpoint} failed (${response.status})`, responseBody);
+                          throw new Error(errorMessage); // Throw standardized error
+                     }
+                     return responseBody; // Return parsed JSON body on success
+                 } catch (error) {
+                     console.error(`Error calling OpenAI ${method} ${endpoint}:`, error);
+                     // Re-throw or handle network errors etc. appropriately
+                      if (error instanceof SyntaxError) { // Handle case where OpenAI returns non-JSON error
+                          throw new Error("Received non-JSON response from OpenAI.");
+                      }
+                     throw error; // Re-throw other errors
+                 }
+             };
+
+
+            // --- API Route Handlers ---
+
+            // Create Thread
+             if (path.includes(API_ROUTES.CREATE_THREAD) && httpMethod === 'POST') {
+                try {
+                    console.log("Netlify Function: Creating thread...");
+                    const data = await callOpenAI('/threads', 'POST');
+                    console.log("Netlify Function: Thread created:", data.id);
+                    return { statusCode: 200, headers, body: JSON.stringify(data) };
+                } catch (error) {
+                     return sendError(500, `Failed to create thread: ${error.message}`, error);
+                }
+            }
+
+            // Add Message
+            if (path.includes(API_ROUTES.ADD_MESSAGE) && httpMethod === 'POST') {
+                try {
+                    console.log("Netlify Function: Adding message...");
+                    let requestBody;
+                    try { requestBody = JSON.parse(event.body); }
+                    catch (parseError) { return sendError(400, "Invalid JSON body", parseError); }
+
+                    const { threadId, content } = requestBody;
+                    if (!threadId || !content) return sendError(400, "Thread ID and content are required");
+
+                    console.log(`Netlify Function: Adding to thread ${threadId}`);
+                    const data = await callOpenAI(`/threads/${threadId}/messages`, 'POST', { role: 'user', content });
+                    console.log("Netlify Function: Message added:", data.id);
+                    return { statusCode: 200, headers, body: JSON.stringify(data) };
+                } catch (error) {
+                    return sendError(500, `Failed to add message: ${error.message}`, error);
+                }
+            }
+
+            // Create Run
+            if (path.includes(API_ROUTES.CREATE_RUN) && httpMethod === 'POST') {
+                 try {
+                    console.log("Netlify Function: Creating run...");
+                    let requestBody;
+                    try { requestBody = JSON.parse(event.body); }
+                    catch (parseError) { return sendError(400, "Invalid JSON body", parseError); }
+
+                    const { threadId } = requestBody;
+                    if (!threadId) return sendError(400, "Thread ID is required");
+
+                    console.log(`Netlify Function: Creating run for thread ${threadId}`);
+                    const data = await callOpenAI(`/threads/${threadId}/runs`, 'POST', { assistant_id: ASSISTANT_ID });
+                    console.log("Netlify Function: Run created:", data.id);
+                    return { statusCode: 200, headers, body: JSON.stringify(data) };
+                } catch (error) {
+                    return sendError(500, `Failed to create run: ${error.message}`, error);
+                }
+            }
+
+            // Check Run Status
+            if (path.includes(API_ROUTES.CHECK_RUN_STATUS) && httpMethod === 'GET') {
+                 try {
+                    console.log("Netlify Function: Checking run status...");
+                    const { threadId, runId } = event.queryStringParameters || {};
+                    if (!threadId || !runId) return sendError(400, "Thread ID and Run ID are required");
+
+                    console.log(`Netlify Function: Checking status for run ${runId} in thread ${threadId}`);
+                    const data = await callOpenAI(`/threads/${threadId}/runs/${runId}`, 'GET');
+                    console.log("Netlify Function: Run status:", data.status);
+                    return { statusCode: 200, headers, body: JSON.stringify(data) };
+                } catch (error) {
+                    return sendError(500, `Failed to check run status: ${error.message}`, error);
+                }
+            }
+
+            // Get Messages
+            if (path.includes(API_ROUTES.GET_MESSAGES) && httpMethod === 'GET') {
+                try {
+                    console.log("Netlify Function: Getting messages...");
+                    const { threadId, limit = '10', order = 'desc', after, before } = event.queryStringParameters || {};
+                    if (!threadId) return sendError(400, "Thread ID is required");
+
+                    console.log(`Netlify Function: Getting messages for thread ${threadId}`);
+                    const params = new URLSearchParams({ limit, order });
+                    if (after) params.set('after', after);
+                    if (before) params.set('before', before);
+
+                    const data = await callOpenAI(`/threads/${threadId}/messages?${params.toString()}`, 'GET');
+                    console.log("Netlify Function: Messages retrieved.");
+                    return { statusCode: 200, headers, body: JSON.stringify(data) };
+                } catch (error) {
+                    return sendError(500, `Failed to get messages: ${error.message}`, error);
+                }
+            }
+
+            // Route not found
+            console.log(`Netlify Function: Route not found - ${httpMethod} ${path}`);
+            return sendError(404, "Not Found");
         };
     </script>
-    -->
 
 </body>
 </html>
