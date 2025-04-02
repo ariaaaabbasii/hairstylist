@@ -211,15 +211,49 @@
              transition: transform 0.3s ease-in-out;
         }
 
-        /* REMOVED Original Chat Widget Specific Styles */
-        /* e.g., styles for #chat-widget-toggle, #chat-widget-container, .gold-gradient (if only for chat), etc. */
-
-        /* ADDED Chatbot Styles from paste-2.txt (targeting new IDs/classes) */
-        /* No extra CSS needed here if using Tailwind classes in the HTML structure below */
-
+        /* Improved Referral Bar */
+        #referral-bar {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        
+        /* IMPROVED: Added smooth slide in/out for sticky referral box */
+        #floating-referral {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        #floating-referral.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        /* IMPROVED: Better focus styles for accessibility */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid theme('colors.brand.primary');
+            outline-offset: 2px;
+        }
+        
+        /* IMPROVED: Skip to content link for accessibility */
+        .skip-to-content {
+            position: absolute;
+            top: -9999px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: theme('colors.brand.primary');
+            color: white;
+            padding: 0.5rem 1rem;
+            z-index: 100;
+            border-radius: 0 0 0.5rem 0.5rem;
+            transition: top 0.3s ease;
+        }
+        .skip-to-content:focus {
+            top: 0;
+        }
     </style>
 </head>
 <body class="bg-neutral-50 text-neutral-700 antialiased font-poppins">
+    <!-- IMPROVED: Added skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Direct naar inhoud</a>
 
     <!-- Header -->
     <header id="main-header" class="fixed w-full top-0 z-50 py-4">
@@ -230,7 +264,7 @@
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden lg:block">
+            <nav class="hidden lg:block" aria-label="Hoofdnavigatie">
                 <ul class="flex space-x-8">
                     <li><a href="#home" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Home</a></li>
                     <li><a href="#diensten" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Diensten</a></li>
@@ -277,27 +311,27 @@
     </header>
 
     <!-- Main Content -->
-    <main>
-        <!-- Referral Bonus Announcement (Responsive - Hidden on mobile, visible sm+) -->
-        <div class="hidden sm:block bg-brand-primary text-white py-2 px-4 text-center relative overflow-hidden">
-             <div class="container mx-auto px-4 relative z-10">
-                <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0">
-                    <div class="flex items-center">
-                        <i class="fas fa-gift text-xl mr-3 animate-pulse" aria-hidden="true"></i>
-                        <span class="font-medium">Doorverwijzingsbonus:</span>
-                    </div>
-                    <p class="sm:ml-2 text-sm sm:text-base">Breng een vriend mee en ontvang beiden 10% korting!</p>
-                    <a href="#referral-program" class="ml-2 sm:ml-4 underline hover:text-brand-light font-medium whitespace-nowrap text-sm sm:text-base">Meer info</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sections: Hero, Why Choose Us, Services, Referral, About, Gallery, Testimonials, CTA, Contact, Map -->
-        <!-- ... (All sections from the original code remain here unchanged) ... -->
+    <main id="main-content">
+        <!-- IMPROVED: Moved referral banner to hero section instead of being in the way -->
+        
         <!-- Hero Section -->
-        <section id="home" class="relative pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-700 mt-[72px] lg:mt-[88px]" style="background-image: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80'); min-height: calc(80vh - 72px)">
+        <section id="home" class="relative pt-24 pb-16 md:pt-32 md:pb-24 lg:pt-40 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-700" style="background-image: url('https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&q=80'); min-height: calc(80vh)">
             <!-- Overlay -->
             <div class="absolute inset-0 bg-black/50 z-0"></div>
+
+            <!-- IMPROVED: Added referral banner inside hero as a highlight box -->
+            <div id="referral-bar" class="absolute top-0 left-0 right-0 bg-brand-primary/90 text-white py-2 px-4 text-center z-10 backdrop-blur-sm">
+                <div class="container mx-auto px-4 relative">
+                    <div class="flex flex-col sm:flex-row items-center justify-center space-y-2 sm:space-y-0">
+                        <div class="flex items-center">
+                            <i class="fas fa-gift text-xl mr-3 animate-pulse" aria-hidden="true"></i>
+                            <span class="font-medium">Doorverwijzingsbonus:</span>
+                        </div>
+                        <p class="sm:ml-2 text-sm sm:text-base">Breng een vriend mee en ontvang beiden 10% korting!</p>
+                        <a href="#referral-program" class="ml-2 sm:ml-4 underline hover:text-brand-light font-medium whitespace-nowrap text-sm sm:text-base">Meer info</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="container mx-auto px-4 z-10 text-white relative">
                 <div class="max-w-3xl animate-on-scroll animate-fade-in">
@@ -316,7 +350,7 @@
                         </button>
                     </div>
                     <div class="mt-8 flex items-center text-xs sm:text-sm">
-                        <div class="flex text-yellow-400">
+                        <div class="flex text-yellow-400" aria-label="5 van 5 sterren">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <span class="ml-2">Gebaseerd op 100+ tevreden klanten</span>
@@ -332,6 +366,14 @@
                 </div>
             </div>
         </section>
+
+        <!-- IMPROVED: Floating referral button that shows when scrolling -->
+        <div id="floating-referral" class="fixed bottom-24 right-5 z-40 rounded-full shadow-lg bg-brand-primary text-white overflow-hidden">
+            <a href="#referral-program" class="flex items-center py-2 px-4 hover:bg-brand-secondary transition-colors duration-300">
+                <i class="fas fa-gift mr-2 animate-pulse"></i>
+                <span class="font-medium text-sm">10% Vrienden Bonus</span>
+            </a>
+        </div>
 
         <!-- Why Choose Us Section -->
         <section class="py-16 md:py-24 bg-white noise-bg relative">
@@ -524,6 +566,16 @@
         <section id="referral-program" class="py-16 md:py-24 bg-white noise-bg">
             <div class="container mx-auto px-4">
                 <div class="max-w-5xl mx-auto">
+                    <!-- IMPROVED: Added highlight banner for better visual display -->
+                    <div class="mb-8 text-center animate-on-scroll animate-fade-in">
+                        <div class="inline-block px-5 py-2 bg-brand-light rounded-full">
+                            <span class="text-brand-primary font-medium">
+                                <i class="fas fa-gift mr-2 animate-pulse" aria-hidden="true"></i> 
+                                Vrienden Bonus Programma
+                            </span>
+                        </div>
+                    </div>
+                    
                     <div class="referral-banner rounded-2xl p-6 md:p-10 lg:p-12 relative overflow-hidden">
                         <div class="relative z-10">
                             <div class="flex flex-col md:flex-row items-center justify-between gap-8">
@@ -755,7 +807,7 @@
                 </div>
 
                 <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                     <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
+                     <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Volg ons op Instagram" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
                         <i class="fab fa-instagram mr-2 text-lg" aria-hidden="true"></i> Volg ons op Instagram
                     </a>
                 </div>
@@ -775,7 +827,7 @@
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
-                            <div class="flex mb-4 text-yellow-400">
+                            <div class="flex mb-4 text-yellow-400" aria-label="5 van 5 sterren">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
@@ -798,7 +850,7 @@
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
-                            <div class="flex mb-4 text-yellow-400">
+                            <div class="flex mb-4 text-yellow-400" aria-label="5 van 5 sterren">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
@@ -821,7 +873,7 @@
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
-                            <div class="flex mb-4 text-yellow-400">
+                            <div class="flex mb-4 text-yellow-400" aria-label="5 van 5 sterren">
                                 <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
@@ -842,7 +894,7 @@
 
                 <!-- Google Reviews Button -->
                 <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                    <a href="https://www.google.com/maps/search/?api=1&query=Luminous+Haarsalon+Amsterdam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Luminous+Haarsalon+Amsterdam" target="_blank" rel="noopener noreferrer" aria-label="Bekijk onze recensies op Google" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
                        <i class="fab fa-google mr-2 text-lg" aria-hidden="true"></i> Bekijk ons op Google
                    </a>
                </div>
@@ -965,7 +1017,6 @@
                 </div>
             </div>
         </section>
-        <!-- END: Sections from original code -->
     </main>
 
     <!-- Footer -->
@@ -984,7 +1035,7 @@
                     <p class="text-neutral-300 text-sm mb-6 leading-relaxed">
                         Jouw premium salon voor professionele haarbehandelingen en persoonlijk advies in hartje Amsterdam.
                     </p>
-                     <div class="flex space-x-3">
+                    <div class="flex space-x-3">
                         <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
                             <i class="fab fa-facebook-f text-sm"></i>
                         </a>
@@ -1166,14 +1217,34 @@
         document.addEventListener('DOMContentLoaded', function() {
             // --- Header Scroll Effect ---
             const header = document.getElementById('main-header');
+            const referralBar = document.getElementById('referral-bar');
+            const floatingReferral = document.getElementById('floating-referral');
             const scrollThreshold = 50;
 
             const handleHeaderScroll = () => {
                  if (!header) return;
                  if (window.scrollY > scrollThreshold) {
                     header.classList.add('header-scrolled');
+                    // IMPROVED: Hide referral bar when scrolling down
+                    if (referralBar) {
+                        referralBar.style.opacity = '0';
+                        referralBar.style.transform = 'translateY(-100%)';
+                    }
+                    // IMPROVED: Show floating referral button
+                    if (floatingReferral) {
+                        floatingReferral.classList.add('show');
+                    }
                 } else {
                     header.classList.remove('header-scrolled');
+                    // IMPROVED: Show referral bar when at top
+                    if (referralBar) {
+                        referralBar.style.opacity = '1';
+                        referralBar.style.transform = 'translateY(0)';
+                    }
+                    // IMPROVED: Hide floating referral button
+                    if (floatingReferral) {
+                        floatingReferral.classList.remove('show');
+                    }
                 }
             };
 
@@ -1330,6 +1401,27 @@
             if(currentYearSpan) {
                 currentYearSpan.textContent = new Date().getFullYear();
             }
+
+            // IMPROVED: Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Get the header height for offset
+                        const headerHeight = document.getElementById('main-header')?.offsetHeight || 0;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
 
             // ------------------------------------------------------------------------
             // Chat Widget Functionality (ORIGINAL logic, adapted for NEW element IDs)
@@ -2230,7 +2322,6 @@
             };
         };
     </script>
-
 
 </body>
 </html>
