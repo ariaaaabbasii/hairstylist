@@ -9,7 +9,7 @@
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
 
-    <!-- Configure Tailfwind colors -->
+    <!-- Configure Tailwind colors -->
     <script>
         tailwind.config = {
             theme: {
@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
 
-    <!-- Axios for API calls (if needed by future JS, kept for now) -->
+    <!-- Axios for API calls -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
 
     <!-- Custom Styles -->
@@ -59,8 +59,9 @@
             font-family: 'Poppins', sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-             scroll-behavior: smooth;
+            scroll-behavior: smooth;
         }
+        
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Playfair Display', serif;
         }
@@ -70,16 +71,19 @@
         #price-modal-body::-webkit-scrollbar {
             width: 6px;
         }
+        
         #chat-messages::-webkit-scrollbar-track,
         #price-modal-body::-webkit-scrollbar-track {
             background: theme('colors.neutral.100');
             border-radius: 10px;
         }
+        
         #chat-messages::-webkit-scrollbar-thumb,
         #price-modal-body::-webkit-scrollbar-thumb {
             background: theme('colors.brand.secondary');
             border-radius: 10px;
         }
+        
         #chat-messages::-webkit-scrollbar-thumb:hover,
         #price-modal-body::-webkit-scrollbar-thumb:hover {
             background: theme('colors.brand.primary');
@@ -87,53 +91,78 @@
 
         /* Header shrink effect styling */
         #main-header {
-            transition: background-color 0.3s ease, box-shadow 0.3s ease, padding-top 0.3s ease, padding-bottom 0.3s ease;
+            transition: all 0.4s ease;
         }
+        
         #main-header.header-scrolled {
-             background-color: rgba(255, 255, 255, 0.95); /* Adjusted transparency slightly */
-             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-             padding-top: 0.75rem; /* 12px */
-             padding-bottom: 0.75rem; /* 12px */
-             backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.1);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            backdrop-filter: blur(10px);
         }
+        
         /* Style adjustments for scrolled header text/links */
         #main-header.header-scrolled nav a:not(.button-cta) {
-             color: theme('colors.neutral.800');
+            color: theme('colors.neutral.800');
         }
+        
         #main-header.header-scrolled nav a:hover:not(.button-cta) {
-              color: theme('colors.brand.primary');
+            color: theme('colors.brand.primary');
         }
+        
         #main-header.header-scrolled .logo-text {
-              color: theme('colors.brand.primary');
+            color: theme('colors.brand.primary');
         }
+        
         #main-header.header-scrolled .phone-link {
-             color: theme('colors.brand.primary');
+            color: theme('colors.brand.primary');
         }
+        
         #main-header.header-scrolled .phone-link:hover {
-             color: theme('colors.brand.dark');
+            color: theme('colors.brand.dark');
         }
+        
         #main-header.header-scrolled #mobile-menu-button {
-             color: theme('colors.neutral.800');
+            color: theme('colors.neutral.800');
         }
+        
         #main-header.header-scrolled #mobile-menu-button:hover {
-              color: theme('colors.brand.primary');
-              background-color: theme('colors.gold.light');
+            color: theme('colors.brand.primary');
+            background-color: theme('colors.gold.light');
         }
 
+        /* Improved Mobile Menu Animation */
+        .mobile-menu-container {
+            transform-origin: top center;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+            transform: scaleY(0);
+            opacity: 0;
+            visibility: hidden;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .mobile-menu-container.menu-open {
+            transform: scaleY(1);
+            opacity: 1;
+            visibility: visible;
+            height: auto;
+        }
+        
         /* Animation Keyframes */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
         @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        /* Typing indicator animation */
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
         .animate-bounce { animation: bounce 1s infinite ease-in-out; }
-
 
         /* Animation classes */
         .animate-on-scroll { opacity: 0; }
         .is-visible { opacity: 1; }
+        
         /* Apply animation name via CSS variable */
         .animate-on-scroll { --animation-name: fadeIn; } /* Default */
         .animate-fade-in { --animation-name: fadeIn; }
@@ -148,9 +177,9 @@
             transform-origin: bottom right;
         }
 
-        /* Chat Quick Reply (Using Tailwind @apply for brevity) */
+        /* Chat Quick Reply */
         .chat-quick-reply {
-             @apply px-3 py-1.5 bg-gold-light/50 text-brand-primary border border-gold-light rounded-full text-xs font-medium transition duration-200 cursor-pointer hover:bg-gold-light/80 hover:text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:ring-offset-1 active:scale-95; /* Added active:scale-95 */
+            @apply px-3 py-1.5 bg-gold-light/50 text-brand-primary border border-gold-light rounded-full text-xs font-medium transition duration-200 cursor-pointer hover:bg-gold-light/80 hover:text-brand-dark focus:outline-none focus:ring-2 focus:ring-brand-secondary focus:ring-offset-1 active:scale-95;
         }
 
         /* Subtle noise background */
@@ -158,10 +187,11 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
         }
 
-        /* Image hover effect (subtle brightness/saturation/scale) */
+        /* Image hover effect */
         .hover-filter {
-             transition: filter 0.3s ease, transform 0.3s ease;
+            transition: filter 0.4s ease, transform 0.4s ease;
         }
+        
         .hover-filter:hover {
             filter: brightness(0.9) saturate(1.1);
             transform: scale(1.03);
@@ -169,164 +199,258 @@
 
         /* Gallery Item Hover Effects */
         .gallery-item {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative; /* Needed for absolute overlay */
-            overflow: hidden; /* Keep image zoom contained */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
+        
         .gallery-item:hover {
             transform: scale(1.03);
             box-shadow: 0 8px 16px rgba(0,0,0,0.15);
         }
+        
         /* Make image zoom slightly on gallery item hover */
         .gallery-item img {
-             transition: transform 0.4s ease; /* Slightly slower image zoom */
+            transition: transform 0.5s ease;
         }
+        
         .gallery-item:hover img {
-            transform: scale(1.1); /* Zoom image more */
+            transform: scale(1.1);
         }
+        
         /* Overlay for gallery item */
         .gallery-overlay {
-             @apply absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10 cursor-pointer;
-        }
-
-        /* Referral Banner Style (Inside Hero) */
-        .hero-referral-banner {
-            /* Let Tailwind classes handle background/text, or add specific styles if needed */
-            /* Example: background: rgba(247, 238, 217, 0.8); /* Slightly transparent gold-light */
-            /* backdrop-filter: blur(3px); */
-            border-radius: 0.5rem; /* Optional rounding */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
-        }
-
-        /* Mobile Menu Transition */
-        #mobile-menu {
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        #mobile-menu.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-        #mobile-menu:not(.hidden) {
-            opacity: 1;
-            visibility: visible;
+            @apply absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10 cursor-pointer;
         }
 
         /* Price Modal Transition Styles */
         #price-modal {
             transition: opacity 0.3s ease-in-out;
         }
-        #price-modal > div { /* Target the inner modal content */
-             transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        
+        #price-modal > div {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
         }
-
+        
+        /* Service cards improved hover effect */
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Improve accessibility - focus styles */
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid theme('colors.brand.primary');
+            outline-offset: 2px;
+        }
+        
+        /* Floating action buttons */
+        .floating-btn {
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .floating-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+        }
+        
+        /* Testimonial card hover effect */
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Improved button hover effects */
+        .btn-primary {
+            @apply px-6 py-3 bg-brand-primary text-white rounded-full font-medium shadow-md transition-all duration-300;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .btn-primary:hover {
+            @apply bg-brand-dark;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Aspect ratio utility for modern browsers */
+        .aspect-ratio-box {
+            position: relative;
+        }
+        
+        .aspect-ratio-box::before {
+            content: "";
+            display: block;
+            padding-bottom: var(--aspect-ratio);
+        }
+        
+        .aspect-ratio-box > * {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .aspect-ratio-1x1 {
+            --aspect-ratio: 100%;
+        }
+        
+        .aspect-ratio-4x3 {
+            --aspect-ratio: 75%;
+        }
+        
+        .aspect-ratio-16x9 {
+            --aspect-ratio: 56.25%;
+        }
     </style>
 </head>
+
 <body class="bg-neutral-50 text-neutral-700 antialiased font-poppins">
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white z-50 px-4 py-2 text-brand-primary font-medium rounded-md shadow">Skip to main content</a>
 
     <!-- Header -->
-    <header id="main-header" class="fixed w-full top-0 z-50 py-4"> <!-- Initial padding -->
+    <header id="main-header" class="fixed w-full top-0 z-50 py-3 md:py-4 bg-transparent transition-all duration-300">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <!-- Logo -->
-            <a href="#home" class="text-3xl font-bold font-playfair text-brand-primary hover:text-brand-dark transition duration-300 logo-text" aria-label="Luminous Haarsalon Home">
+            <a href="#home" class="text-2xl md:text-3xl font-bold font-playfair text-white hover:text-brand-light transition duration-300 logo-text" aria-label="Luminous Haarsalon Home">
                 Luminous
             </a>
 
             <!-- Desktop Navigation -->
-            <nav class="hidden lg:block">
+            <nav class="hidden lg:block" aria-label="Main Navigation">
                 <ul class="flex space-x-8">
-                    <li><a href="#home" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Home</a></li>
-                    <li><a href="#diensten" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Diensten</a></li>
-                    <li><a href="#referral-program" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Vrienden Bonus</a></li>
-                    <li><a href="#over-ons" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Over Ons</a></li>
-                    <li><a href="#galerij" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Galerij</a></li>
-                    <li><a href="#contact" class="text-neutral-700 hover:text-brand-primary font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-secondary">Contact</a></li>
+                    <li><a href="#home" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Home</a></li>
+                    <li><a href="#diensten" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Diensten</a></li>
+                    <li><a href="#referral-program" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Vrienden Bonus</a></li>
+                    <li><a href="#over-ons" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Over Ons</a></li>
+                    <li><a href="#galerij" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Galerij</a></li>
+                    <li><a href="#contact" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Contact</a></li>
                 </ul>
             </nav>
 
             <!-- Call & Mobile Menu Button -->
             <div class="flex items-center space-x-3">
-                <a href="tel:+31627403860" class="phone-link hidden sm:inline-flex items-center text-brand-primary hover:text-brand-dark font-medium transition duration-300">
+                <a href="tel:+31627403860" class="phone-link hidden sm:inline-flex items-center text-white hover:text-brand-light font-medium transition duration-300">
                     <i class="fas fa-phone-alt mr-2 text-sm" aria-hidden="true"></i> 06-27403860
                 </a>
-                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-neutral-600 hover:text-brand-primary hover:bg-gold-light focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-primary" aria-label="Open hoofdmenu" aria-controls="mobile-menu" aria-expanded="false">
-                    <i class="fas fa-bars text-xl" aria-hidden="true"></i> <!-- Icon will be changed by JS -->
+                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-white hover:text-brand-light hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-label="Open hoofdmenu" aria-controls="mobile-menu" aria-expanded="false">
+                    <i class="fas fa-bars text-xl" aria-hidden="true"></i>
                 </button>
                 <a href="#contact" class="button-cta hidden lg:inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-brand-primary text-white hover:bg-brand-dark focus:ring-brand-primary shadow-md hover:shadow-lg">Afspraak Maken</a>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-neutral-100" role="navigation" aria-label="Mobiel menu">
-            <div class="container mx-auto px-4 py-4">
-                <ul class="space-y-3">
-                    <li><a href="#home" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Home</a></li>
-                    <li><a href="#diensten" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Diensten</a></li>
-                    <li><a href="#referral-program" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Vrienden Bonus</a></li>
-                    <li><a href="#over-ons" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Over Ons</a></li>
-                    <li><a href="#galerij" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Galerij</a></li>
-                    <li><a href="#contact" class="mobile-menu-link block py-2 px-3 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-md transition duration-300">Contact</a></li>
-                    <li class="pt-4 border-t border-neutral-200">
-                        <a href="tel:+31627403860" class="flex items-center py-2 px-3 text-lg text-brand-primary font-semibold hover:text-brand-dark transition duration-300">
-                            <i class="fas fa-phone-alt mr-3" aria-hidden="true"></i> Bel 06-27403860
-                        </a>
-                    </li>
-                    <li class="pt-2">
-                        <a href="#contact" class="mobile-menu-link button-cta inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-brand-primary text-white hover:bg-brand-dark focus:ring-brand-primary shadow-md hover:shadow-lg w-full">Afspraak Maken</a>
-                    </li>
+        <!-- Improved Mobile Menu with better animation and accessibility -->
+        <div id="mobile-menu" class="mobile-menu-container lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-neutral-100 z-50" role="navigation" aria-label="Mobiel menu">
+            <div class="container mx-auto px-4 py-5">
+                <ul class="space-y-1">
+                    <li><a href="#home" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Home</a></li>
+                    <li><a href="#diensten" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Diensten</a></li>
+                    <li><a href="#referral-program" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Vrienden Bonus</a></li>
+                    <li><a href="#over-ons" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Over Ons</a></li>
+                    <li><a href="#galerij" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Galerij</a></li>
+                    <li><a href="#contact" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Contact</a></li>
                 </ul>
+                
+                <div class="mt-6 space-y-4">
+                    <a href="tel:+31627403860" class="flex items-center py-3 px-4 text-lg text-brand-primary font-semibold hover:text-brand-dark transition duration-300 bg-gold-light/50 rounded-lg">
+                        <i class="fas fa-phone-alt mr-3" aria-hidden="true"></i> Bel 06-27403860
+                    </a>
+                    <a href="#contact" class="mobile-menu-link button-cta inline-flex items-center justify-center px-6 py-4 rounded-lg font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-brand-primary text-white hover:bg-brand-dark focus:ring-brand-primary shadow-md hover:shadow-lg w-full">
+                        <i class="far fa-calendar-alt mr-2" aria-hidden="true"></i> Afspraak Maken
+                    </a>
+                </div>
+                
+                <!-- Social links in mobile menu -->
+                <div class="mt-6 pt-4 border-t border-neutral-100">
+                    <p class="text-sm text-neutral-500 mb-3">Volg ons</p>
+                    <div class="flex space-x-4">
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-100 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Facebook">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-100 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Instagram">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-100 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Pinterest">
+                            <i class="fab fa-pinterest" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
-        <section id="home" class="relative pt-[72px] lg:pt-[88px] pb-16 md:pb-24 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-700" style="background-image: url('/Images/SalonMain.jpg'); min-height: 80vh;">
+        <section id="home" class="relative min-h-screen pt-16 pb-16 md:pb-24 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-800" style="background-image: url('/Images/SalonMain.jpg');">
             <!-- Overlay -->
-            <div class="absolute inset-0 bg-black/50 z-0"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70 z-0"></div>
 
-             <!-- Referral Bonus Announcement (Moved here, Option A) -->
-            <div class="hero-referral-banner hidden sm:block bg-brand-primary text-white py-2 px-4 text-center absolute top-[calc(72px+1rem)] lg:top-[calc(88px+1rem)] left-1/2 transform -translate-x-1/2 w-full max-w-3xl z-20 mx-auto"> <!-- Added z-20 -->
-                <div class="container mx-auto px-2 sm:px-4 relative"> <!-- Reduced horizontal padding slightly -->
-                    <div class="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2"> <!-- Reduced spacing -->
-                        <div class="flex items-center">
-                            <i class="fas fa-gift text-lg mr-2 animate-pulse" aria-hidden="true"></i> <!-- Slightly smaller icon -->
-                            <span class="font-medium text-sm sm:text-base">Vrienden Bonus:</span>
+            <!-- Hero Referral Banner -->
+            <div class="absolute top-20 sm:top-24 md:top-28 left-0 right-0 z-10">
+                <div class="container mx-auto px-4">
+                    <div class="bg-brand-primary text-white py-2 px-4 rounded-lg sm:rounded-xl max-w-3xl mx-auto shadow-lg">
+                        <div class="flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 text-center sm:text-left">
+                            <div class="flex items-center">
+                                <i class="fas fa-gift text-lg mr-2 animate-pulse" aria-hidden="true"></i>
+                                <span class="font-medium text-sm sm:text-base">Vrienden Bonus:</span>
+                            </div>
+                            <p class="text-xs sm:text-sm">Breng een vriend(in) mee & ontvang beiden 10% korting!</p>
+                            <a href="#referral-program" class="ml-1 sm:ml-2 underline hover:text-brand-light font-medium whitespace-nowrap text-xs sm:text-sm">Meer info</a>
                         </div>
-                        <p class="sm:ml-1 text-xs sm:text-sm">Breng een vriend(in) mee & ontvang beiden 10% korting!</p> <!-- Slightly smaller text -->
-                        <a href="#referral-program" class="ml-1 sm:ml-2 underline hover:text-brand-light font-medium whitespace-nowrap text-xs sm:text-sm">Meer info</a>
                     </div>
                 </div>
             </div>
 
             <!-- Hero Content Container -->
-            <div class="container mx-auto px-4 z-10 text-white relative mt-16 sm:mt-20"> <!-- Added margin-top to push content below banner -->
+            <div class="container mx-auto px-4 z-10 text-white relative mt-24 sm:mt-20">
                 <div class="max-w-3xl animate-on-scroll animate-fade-in">
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight">Ontdek Jouw <span class="text-brand-secondary">Stralende</span> Stijl bij Luminous</h1>
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">Ontdek Jouw <span class="text-brand-secondary">Stralende</span> Stijl bij Luminous</h1>
                     <p class="text-lg md:text-xl lg:text-2xl mb-8 font-light">Waar vakmanschap en persoonlijke aandacht samenkomen voor een haarervaring die je verdient.</p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="#contact" class="px-6 py-3 sm:px-8 sm:py-4 bg-brand-primary hover:bg-brand-secondary text-white rounded-full transition-all duration-300 text-center font-medium shadow-md hover:shadow-lg transform hover:-translate-y-1 flex items-center justify-center text-sm sm:text-base">
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="btn-primary flex items-center justify-center">
                             <i class="far fa-calendar-alt mr-2" aria-hidden="true"></i> Plan Jouw Afspraak
                         </a>
-                        <a href="#diensten" class="px-6 py-3 sm:px-8 sm:py-4 border-2 border-white hover:bg-white hover:text-neutral-900 rounded-full transition-all duration-300 text-center font-medium transform hover:-translate-y-1 flex items-center justify-center text-sm sm:text-base">
+                        <a href="#diensten" class="px-6 py-3 border-2 border-white hover:bg-white hover:text-neutral-900 rounded-full transition-all duration-300 text-center font-medium transform hover:-translate-y-1 flex items-center justify-center">
                             <i class="fas fa-th-list mr-2" aria-hidden="true"></i> Bekijk Onze Diensten
                         </a>
                         <!-- Price List Button -->
-                        <button id="open-price-modal-button" class="px-6 py-3 sm:px-8 sm:py-4 border-2 border-white hover:bg-white hover:text-neutral-900 rounded-full transition-all duration-300 text-center font-medium transform hover:-translate-y-1 flex items-center justify-center text-sm sm:text-base">
+                        <button id="open-price-modal-button" class="px-6 py-3 border-2 border-white hover:bg-white hover:text-neutral-900 rounded-full transition-all duration-300 text-center font-medium transform hover:-translate-y-1 flex items-center justify-center">
                             <i class="fas fa-tags mr-2" aria-hidden="true"></i> Prijslijst
                         </button>
                     </div>
-                    <div class="mt-8 flex items-center text-xs sm:text-sm">
+                    
+                    <div class="mt-8 flex items-center text-sm">
                         <div class="flex text-yellow-400">
-                            <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
+                            <i class="fas fa-star" aria-hidden="true"></i>
                         </div>
                         <span class="ml-2">Gebaseerd op 100+ tevreden klanten</span>
                     </div>
                 </div>
 
                 <!-- Scroll Down Indicator -->
-                <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-center hidden sm:block">
-                    <a href="#diensten" class="inline-block text-white animate-bounce">
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center hidden sm:block">
+                    <a href="#diensten" class="inline-block text-white animate-bounce" aria-label="Scroll naar diensten sectie">
                         <span class="block mb-1 text-xs font-light">Ontdek meer</span>
                         <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
                     </a>
@@ -338,12 +462,12 @@
         <section class="py-16 md:py-24 bg-white noise-bg relative">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Waarom Luminous?</h2>
-                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in" data-delay="0.1s">Meer dan een knipbeurt - wij creëren een unieke ervaring die je haar én humeur laat stralen.</p>
+                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Meer dan een knipbeurt - wij creëren een unieke ervaring die je haar én humeur laat stralen.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
                     <!-- USP 1 -->
                     <div class="text-center p-6 rounded-xl hover:bg-brand-light/30 transition-all duration-500 animate-on-scroll animate-slide-up">
-                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md"> <!-- Added hover shadow -->
+                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md">
                             <i class="fas fa-cut text-2xl md:text-3xl text-brand-primary" aria-hidden="true"></i>
                         </div>
                         <h3 class="text-xl md:text-2xl font-semibold mb-3">Gepassioneerde Stylisten</h3>
@@ -351,8 +475,8 @@
                     </div>
 
                     <!-- USP 2 -->
-                    <div class="text-center p-6 rounded-xl hover:bg-brand-light/30 transition-all duration-500 animate-on-scroll animate-slide-up" data-delay="0.1s">
-                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md"> <!-- Added hover shadow -->
+                    <div class="text-center p-6 rounded-xl hover:bg-brand-light/30 transition-all duration-500 animate-on-scroll animate-slide-up" data-delay="0.15s">
+                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md">
                             <i class="fas fa-leaf text-2xl md:text-3xl text-brand-primary" aria-hidden="true"></i>
                         </div>
                         <h3 class="text-xl md:text-2xl font-semibold mb-3">Luxe Producten</h3>
@@ -360,8 +484,8 @@
                     </div>
 
                     <!-- USP 3 -->
-                    <div class="text-center p-6 rounded-xl hover:bg-brand-light/30 transition-all duration-500 animate-on-scroll animate-slide-up" data-delay="0.2s">
-                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md"> <!-- Added hover shadow -->
+                    <div class="text-center p-6 rounded-xl hover:bg-brand-light/30 transition-all duration-500 animate-on-scroll animate-slide-up" data-delay="0.3s">
+                        <div class="bg-brand-light inline-flex p-4 rounded-full mb-5 transform transition-transform duration-500 hover:rotate-12 hover:shadow-md">
                             <i class="fas fa-heart text-2xl md:text-3xl text-brand-primary" aria-hidden="true"></i>
                         </div>
                         <h3 class="text-xl md:text-2xl font-semibold mb-3">Persoonlijke Ervaring</h3>
@@ -373,8 +497,8 @@
 
         <!-- Services Section -->
         <section id="diensten" class="py-16 md:py-24 bg-brand-light relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent z-0"></div>
-            <div class="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent z-0"></div>
+            <div class="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-white to-transparent z-0"></div>
+            <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white to-transparent z-0"></div>
 
             <!-- Decorative Elements -->
             <div class="absolute top-20 right-10 text-brand-primary/10 text-7xl md:text-9xl transform -rotate-12 opacity-50 z-0 hidden lg:block">
@@ -386,13 +510,13 @@
 
             <div class="container mx-auto px-4 relative z-10">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Onze Behandelingen</h2>
-                <p class="text-center text-neutral-700 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in" data-delay="0.1s">Van een frisse knipbeurt tot complete transformaties - ontdek onze exclusieve behandelingen.</p>
+                <p class="text-center text-neutral-700 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Van een frisse knipbeurt tot complete transformaties - ontdek onze exclusieve behandelingen.</p>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                     <!-- Service 1 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                        <div class="relative overflow-hidden">
-                            <img src="/Images/Haar.jpg" alt="Professioneel geknipte dame met stijlvol kapsel" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in">
+                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
+                            <img src="/Images/Haar.jpg" alt="Professioneel geknipte dame met stijlvol kapsel" class="hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -410,9 +534,9 @@
                     </div>
 
                     <!-- Service 2 -->
-                     <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.1s">
-                        <div class="relative overflow-hidden">
-                            <img src="/Images/Salon.jpg" alt="Man met strak geknipt en gestyled modern herenkapsel" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.15s">
+                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
+                            <img src="/Images/Salon.jpg" alt="Man met strak geknipt en gestyled modern herenkapsel" class="hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -422,17 +546,17 @@
                             <p class="text-neutral-600 mb-5 text-sm leading-relaxed">Scherpe contouren en perfecte fades. Inclusief advies voor dagelijkse styling.</p>
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
                                 <p class="text-brand-primary font-semibold text-lg">Vanaf €42,50</p>
-                               <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
+                                <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
                                     Reserveer nu <i class="fas fa-arrow-right ml-1.5 transform group-hover:translate-x-1 transition-transform text-xs" aria-hidden="true"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                     <!-- Service 3 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.2s">
-                        <div class="relative overflow-hidden">
-                            <img src="/Images/Haar.jpg" alt="Haar met prachtige highlights en levendige kleur" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                    <!-- Service 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.3s">
+                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
+                            <img src="/Images/Haar.jpg" alt="Haar met prachtige highlights en levendige kleur" class="hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -450,9 +574,9 @@
                     </div>
 
                     <!-- Service 4 -->
-                     <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.3s">
-                        <div class="relative overflow-hidden">
-                            <img src="/Images/Haar.jpg" alt="Zachte en natuurlijke balayage kleuring in lang haar" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.45s">
+                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
+                            <img src="/Images/Haar.jpg" alt="Zachte en natuurlijke balayage kleuring in lang haar" class="hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -470,9 +594,9 @@
                     </div>
 
                     <!-- Service 5 -->
-                     <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.4s">
-                        <div class="relative overflow-hidden">
-                            <img src="/Images/Salon1.jpg" alt="Elegante bruid met een prachtig opgestoken bruidskapsel" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.6s">
+                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
+                            <img src="/Images/Salon1.jpg" alt="Elegante bruid met een prachtig opgestoken bruidskapsel" class="hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -490,9 +614,9 @@
                     </div>
 
                     <!-- Service 6 -->
-                     <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-delay="0.5s">
-                        <div class="relative overflow-hidden">
-                            <img src="/Images/Salon.jpg" alt="Close-up van gezond, glanzend haar na een verzorgende behandeling" class="w-full h-56 object-cover hover-filter" loading="lazy">
+                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.75s">
+                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
+                            <img src="/Images/Salon.jpg" alt="Close-up van gezond, glanzend haar na een verzorgende behandeling" class="hover-filter" loading="lazy">
                         </div>
                         <div class="p-6">
                             <div class="flex justify-between items-start mb-3">
@@ -502,7 +626,7 @@
                             <p class="text-neutral-600 mb-5 text-sm leading-relaxed">Keratine, Olaplex of maskers voor herstel, glans en ontspanning.</p>
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
                                 <p class="text-brand-primary font-semibold text-lg">Vanaf €39,95</p>
-                               <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
+                                <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
                                     Reserveer nu <i class="fas fa-arrow-right ml-1.5 transform group-hover:translate-x-1 transition-transform text-xs" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -511,11 +635,9 @@
                 </div>
 
                 <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                    <a href="#contact" class="inline-block px-8 py-3 sm:px-10 sm:py-4 bg-brand-primary hover:bg-brand-secondary text-white rounded-full transition-all duration-300 font-medium shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm sm:text-base">
-                        <span class="flex items-center">
-                            <i class="fas fa-calendar-check mr-2" aria-hidden="true"></i>
-                            Plan Jouw Behandeling
-                        </span>
+                    <a href="#contact" class="btn-primary inline-flex items-center">
+                        <i class="fas fa-calendar-check mr-2" aria-hidden="true"></i>
+                        Plan Jouw Behandeling
                     </a>
                 </div>
             </div>
@@ -525,7 +647,7 @@
         <section id="referral-program" class="py-16 md:py-24 bg-white noise-bg">
             <div class="container mx-auto px-4">
                 <div class="max-w-5xl mx-auto">
-                    <div class="referral-banner rounded-2xl p-6 md:p-10 lg:p-12 relative overflow-hidden"> <!-- Uses custom CSS class -->
+                    <div class="bg-gold-light/30 rounded-2xl p-6 md:p-10 lg:p-12 relative overflow-hidden shadow-lg border border-gold-light/30">
                         <div class="relative z-10">
                             <div class="flex flex-col md:flex-row items-center justify-between gap-8">
                                 <div class="md:w-3/5 animate-on-scroll animate-slide-in-left">
@@ -538,34 +660,32 @@
                                     <h3 class="font-semibold text-lg md:text-xl mb-3 text-brand-dark">Hoe werkt het?</h3>
                                     <ol class="space-y-3 text-neutral-700 mb-6 text-sm md:text-base">
                                         <li class="flex items-start">
-                                            <span class="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs md:text-sm">1</span>
+                                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs">1</span>
                                             <span>Vertel je vrienden over Luminous</span>
                                         </li>
                                         <li class="flex items-start">
-                                            <span class="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs md:text-sm">2</span>
+                                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs">2</span>
                                             <span>Vraag hen jouw naam te noemen bij het boeken</span>
                                         </li>
                                         <li class="flex items-start">
-                                            <span class="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs md:text-sm">3</span>
+                                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs">3</span>
                                             <span>Zij ontvangen 10% korting op hun eerste bezoek</span>
                                         </li>
                                         <li class="flex items-start">
-                                            <span class="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs md:text-sm">4</span>
+                                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs">4</span>
                                             <span>Jij krijgt 10% korting op je volgende behandeling</span>
                                         </li>
                                     </ol>
 
-                                    <a href="#contact" class="inline-block px-6 py-3 bg-brand-primary hover:bg-brand-secondary text-white rounded-full transition-all duration-300 font-medium shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm md:text-base">
-                                        <span class="flex items-center">
-                                            <i class="fas fa-users mr-2" aria-hidden="true"></i>
-                                            Start met Verwijzen
-                                        </span>
+                                    <a href="#contact" class="btn-primary inline-flex items-center">
+                                        <i class="fas fa-users mr-2" aria-hidden="true"></i>
+                                        Start met Verwijzen
                                     </a>
                                 </div>
 
                                 <div class="md:w-2/5 text-center animate-on-scroll animate-slide-in-right">
                                     <div class="relative inline-block">
-                                        <!-- Optional ping animation -->
+                                        <!-- Ping animation -->
                                         <div class="absolute inset-0 rounded-full bg-brand-primary/20 animate-ping opacity-50"></div>
                                         <img src="/Images/Friends.PNG" alt="Twee lachende vrienden met mooi haar die korting vieren" class="relative z-10 rounded-xl shadow-lg transform hover:rotate-2 transition-transform duration-500 w-full max-w-[250px] sm:max-w-xs mx-auto" loading="lazy">
                                         <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-white rounded-lg shadow-md px-3 py-1.5 md:px-4 md:py-2 transform rotate-3 z-20">
@@ -576,9 +696,9 @@
                                 </div>
                             </div>
                         </div>
-                         <!-- Decorative element -->
-                         <div class="absolute bottom-0 right-0 text-brand-primary/10 text-7xl md:text-9xl transform translate-x-1/4 translate-y-1/4 opacity-50 hidden lg:block">
-                             <i class="fas fa-gift" aria-hidden="true"></i>
+                        <!-- Decorative element -->
+                        <div class="absolute bottom-0 right-0 text-brand-primary/10 text-7xl md:text-9xl transform translate-x-1/4 translate-y-1/4 opacity-50 hidden lg:block">
+                            <i class="fas fa-gift" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -590,8 +710,8 @@
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div class="relative animate-on-scroll animate-slide-in-left">
-                         <div class="relative aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-5">
-                            <img src="/Images/Kapperstoelen.jpg" alt="Stijlvol en modern interieur van Luminous Haarsalon" class="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg hover-filter" loading="lazy">
+                        <div class="relative rounded-xl overflow-hidden shadow-xl">
+                            <img src="/Images/Kapperstoelen.jpg" alt="Stijlvol en modern interieur van Luminous Haarsalon" class="w-full h-auto aspect-ratio-box aspect-ratio-4x3 object-cover hover-filter" loading="lazy">
                         </div>
 
                         <!-- Decorative elements -->
@@ -634,7 +754,7 @@
                                     <p class="text-neutral-600 text-xs sm:text-sm">Jouw wensen staan centraal in elke behandeling.</p>
                                 </div>
                             </li>
-                             <li class="flex items-start">
+                            <li class="flex items-start">
                                 <div class="bg-brand-light p-2 rounded-full mr-3 mt-1 text-brand-primary flex-shrink-0">
                                     <i class="fas fa-couch w-4 h-4 text-center" aria-hidden="true"></i>
                                 </div>
@@ -643,7 +763,7 @@
                                     <p class="text-neutral-600 text-xs sm:text-sm">Een moment van rust en verwennerij voor jezelf.</p>
                                 </div>
                             </li>
-                             <li class="flex items-start">
+                            <li class="flex items-start">
                                 <div class="bg-brand-light p-2 rounded-full mr-3 mt-1 text-brand-primary flex-shrink-0">
                                     <i class="fas fa-leaf w-4 h-4 text-center" aria-hidden="true"></i>
                                 </div>
@@ -654,11 +774,9 @@
                             </li>
                         </ul>
 
-                        <a href="#contact" class="inline-block px-6 py-3 bg-brand-primary hover:bg-brand-secondary text-white rounded-full transition-all duration-300 font-medium shadow-md hover:shadow-lg transform hover:-translate-y-1 text-sm md:text-base">
-                            <span class="flex items-center">
-                                <i class="fas fa-users mr-2" aria-hidden="true"></i>
-                                Maak Kennis Met Ons Team
-                            </span>
+                        <a href="#contact" class="btn-primary inline-flex items-center">
+                            <i class="fas fa-users mr-2" aria-hidden="true"></i>
+                            Maak Kennis Met Ons Team
                         </a>
                     </div>
                 </div>
@@ -670,62 +788,67 @@
             <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-neutral-50 to-transparent"></div>
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Inspiratie Galerij</h2>
-                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in" data-delay="0.1s">Bekijk onze creaties en laat je inspireren.</p>
+                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Bekijk onze creaties en laat je inspireren.</p>
 
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
                     <!-- Gallery Item 1 -->
-                    <a href="/hairstylist/public/Images/Haar.jpg" data-fancybox="gallery" data-caption="Zachte Balayage Highlights" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md">
+                    <a href="/Images/Haar.jpg" data-fancybox="gallery" data-caption="Zachte Balayage Highlights" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md">
                         <img src="/Images/Haar.jpg" alt="Voorbeeld kapsel: Zachte balayage highlights" loading="lazy" class="w-full h-full object-cover">
                         <div class="gallery-overlay">
-                             <div class="text-white text-center p-2">
+                            <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Zachte Balayage</p>
                             </div>
                         </div>
                     </a>
+                    
                     <!-- Gallery Item 2 -->
-                    <a href="/Images/Salon.jpg" data-fancybox="gallery" data-caption="Moderne Strakke Herencoupe" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.05s">
-                        <img src="/hairstylist/public/Images/Salon.jpg" alt="Voorbeeld kapsel: Moderne strakke herencoupe" loading="lazy" class="w-full h-full object-cover">
-                         <div class="gallery-overlay">
-                             <div class="text-white text-center p-2">
+                    <a href="/Images/Salon.jpg" data-fancybox="gallery" data-caption="Moderne Strakke Herencoupe" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.05s">
+                        <img src="/Images/Salon.jpg" alt="Voorbeeld kapsel: Moderne strakke herencoupe" loading="lazy" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
+                            <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Moderne Herencoupe</p>
                             </div>
                         </div>
                     </a>
-                     <!-- Gallery Item 3 -->
-                     <a href="/hairstylist/public/Images/Salon1.jpg" data-fancybox="gallery" data-caption="Levendige Rode Kleuring" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.1s">
-                        <img src="/hairstylist/public/Images/Salon1.jpg" alt="Voorbeeld kapsel: Levendige rode haarkleuring" loading="lazy" class="w-full h-full object-cover">
-                         <div class="gallery-overlay">
+                    
+                    <!-- Gallery Item 3 -->
+                    <a href="/Images/Salon1.jpg" data-fancybox="gallery" data-caption="Levendige Rode Kleuring" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.1s">
+                        <img src="/Images/Salon1.jpg" alt="Voorbeeld kapsel: Levendige rode haarkleuring" loading="lazy" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
                             <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Levendige Kleuring</p>
                             </div>
                         </div>
                     </a>
-                     <!-- Gallery Item 4 -->
-                    <a href="/hairstylist/public/Images/Kapperstoelen.jpg" data-fancybox="gallery" data-caption="Elegante Opgestoken Updo" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.15s">
-                        <img src="/hairstylist/public/Images/Kapperstoelen.jpg" alt="Voorbeeld kapsel: Elegant opgestoken feestkapsel" loading="lazy" class="w-full h-full object-cover">
-                         <div class="gallery-overlay">
+                    
+                    <!-- Gallery Item 4 -->
+                    <a href="/Images/Kapperstoelen.jpg" data-fancybox="gallery" data-caption="Elegante Opgestoken Updo" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.15s">
+                        <img src="/Images/Kapperstoelen.jpg" alt="Voorbeeld kapsel: Elegant opgestoken feestkapsel" loading="lazy" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
                             <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Elegante Updo</p>
                             </div>
                         </div>
                     </a>
-                     <!-- Gallery Item 5 -->
-                    <a href="/hairstylist/public/Images/SalonMain.jpg" data-fancybox="gallery" data-caption="Natuurlijke Krullen Definitie" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.2s">
-                        <img src="/hairstylist/public/Images/SalonMain.jpg" alt="Voorbeeld kapsel: Goed gedefinieerde natuurlijke krullen" loading="lazy" class="w-full h-full object-cover">
-                         <div class="gallery-overlay">
-                             <div class="text-white text-center p-2">
+                    
+                    <!-- Gallery Item 5 -->
+                    <a href="/Images/SalonMain.jpg" data-fancybox="gallery" data-caption="Natuurlijke Krullen Definitie" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.2s">
+                        <img src="/Images/SalonMain.jpg" alt="Voorbeeld kapsel: Goed gedefinieerde natuurlijke krullen" loading="lazy" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
+                            <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Natuurlijke Krullen</p>
                             </div>
                         </div>
                     </a>
-                     <!-- Gallery Item 6 -->
-                    <a href="/hairstylist/public/Images/Haar.jpg" data-fancybox="gallery" data-caption="Gedurfde Korte Boblijn" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.25s">
-                        <img src="/hairstylist/public/Images/Haar.jpg" alt="Voorbeeld kapsel: Gedurfde korte boblijn" loading="lazy" class="w-full h-full object-cover">
+                    
+                    <!-- Gallery Item 6 -->
+                    <a href="/Images/Haar.jpg" data-fancybox="gallery" data-caption="Gedurfde Korte Boblijn" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.25s">
+                        <img src="/Images/Haar.jpg" alt="Voorbeeld kapsel: Gedurfde korte boblijn" loading="lazy" class="w-full h-full object-cover">
                         <div class="gallery-overlay">
                             <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
@@ -733,9 +856,10 @@
                             </div>
                         </div>
                     </a>
-                     <!-- Gallery Item 7 -->
-                    <a href="/hairstylist/public/Images/Salon.jpg" data-fancybox="gallery" data-caption="Koel Platinum Blond" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.3s">
-                        <img src="/hairstylist/public/Images/Salon.jpg" alt="Voorbeeld kapsel: Koel platinum blond haar" loading="lazy" class="w-full h-full object-cover">
+                    
+                    <!-- Gallery Item 7 -->
+                    <a href="/Images/Salon.jpg" data-fancybox="gallery" data-caption="Koel Platinum Blond" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.3s">
+                        <img src="/Images/Salon.jpg" alt="Voorbeeld kapsel: Koel platinum blond haar" loading="lazy" class="w-full h-full object-cover">
                         <div class="gallery-overlay">
                             <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
@@ -743,11 +867,12 @@
                             </div>
                         </div>
                     </a>
-                     <!-- Gallery Item 8 -->
-                    <a href="/hairstylist/public/Images/Salon1.jpg" data-fancybox="gallery" data-caption="Herenkapsel met Strakke Scheiding" class="gallery-item animate-on-scroll animate-scale-in block aspect-w-1 aspect-h-1 rounded-xl overflow-hidden shadow-md" data-delay="0.35s">
-                        <img src="/hairstylist/public/Images/Salon1.jpg" alt="Voorbeeld kapsel: Herenkapsel met strakke zijscheiding" loading="lazy" class="w-full h-full object-cover">
+                    
+                    <!-- Gallery Item 8 -->
+                    <a href="/Images/Salon1.jpg" data-fancybox="gallery" data-caption="Herenkapsel met Strakke Scheiding" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.35s">
+                        <img src="/Images/Salon1.jpg" alt="Voorbeeld kapsel: Herenkapsel met strakke zijscheiding" loading="lazy" class="w-full h-full object-cover">
                         <div class="gallery-overlay">
-                           <div class="text-white text-center p-2">
+                            <div class="text-white text-center p-2">
                                 <i class="fas fa-search-plus text-2xl mb-1" aria-hidden="true"></i>
                                 <p class="text-xs font-medium">Strakke Scheiding</p>
                             </div>
@@ -756,7 +881,7 @@
                 </div>
 
                 <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                     <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
+                    <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
                         <i class="fab fa-instagram mr-2 text-lg" aria-hidden="true"></i> Volg ons op Instagram
                     </a>
                 </div>
@@ -767,17 +892,21 @@
         <section class="py-16 md:py-24 bg-white noise-bg">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Wat Klanten Zeggen</h2>
-                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in" data-delay="0.1s">Echte ervaringen die voor zich spreken.</p>
+                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Echte ervaringen die voor zich spreken.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Testimonial 1 -->
-                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100"> <!-- Added subtle border on hover -->
+                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100">
                         <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
                             <div class="flex mb-4 text-yellow-400">
-                                <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
                                 "Eindelijk een salon waar echt geluisterd wordt! Precies het kapsel dat ik wilde, plus geweldig advies. Super sfeer!"
@@ -793,14 +922,19 @@
                             </div>
                         </div>
                     </div>
+                    
                     <!-- Testimonial 2 -->
-                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100" data-delay="0.1s"> <!-- Added subtle border on hover -->
-                         <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
+                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100" data-delay="0.15s">
+                        <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
                             <div class="flex mb-4 text-yellow-400">
-                                <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
                                 "Al jaren klant en elke keer weer top. Vakkundig, up-to-date en altijd eerlijk advies. Je voelt je hier echt welkom."
@@ -816,14 +950,19 @@
                             </div>
                         </div>
                     </div>
+                    
                     <!-- Testimonial 3 -->
-                     <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100" data-delay="0.2s"> <!-- Added subtle border on hover -->
+                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100" data-delay="0.3s">
                         <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
                             <i class="fas fa-quote-left" aria-hidden="true"></i>
                         </div>
                         <div class="relative z-10">
                             <div class="flex mb-4 text-yellow-400">
-                                <i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i><i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
                             </div>
                             <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
                                 "Mijn bruidskapsel was perfect! Het team overtrof mijn verwachtingen en het bleef de hele dag zitten. Een absolute aanrader!"
@@ -844,9 +983,9 @@
                 <!-- Google Reviews Button -->
                 <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
                     <a href="https://www.google.com/maps/search/?api=1&query=Luminous+Haarsalon+Amsterdam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
-                       <i class="fab fa-google mr-2 text-lg" aria-hidden="true"></i> Bekijk ons op Google
-                   </a>
-               </div>
+                        <i class="fab fa-google mr-2 text-lg" aria-hidden="true"></i> Bekijk ons op Google
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -859,19 +998,22 @@
 
             <div class="container mx-auto px-4 text-center relative z-10">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 animate-on-scroll animate-fade-in">Klaar voor jouw transformatie?</h2>
-                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto animate-on-scroll animate-fade-in" data-delay="0.1s">
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto animate-on-scroll animate-fade-in">
                     Gun jezelf het kapsel waar je van droomt. Ons team staat klaar om je te verwelkomen.
                 </p>
-                <a href="#contact" class="inline-block px-8 py-3 sm:px-10 sm:py-4 bg-white text-brand-primary hover:bg-brand-light rounded-full transition-all duration-300 font-medium text-base md:text-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 animate-on-scroll animate-fade-in" data-delay="0.2s">
+                <a href="#contact" class="inline-block px-8 py-3 sm:px-10 sm:py-4 bg-white text-brand-primary hover:bg-brand-light rounded-full transition-all duration-300 font-medium text-base md:text-lg shadow-md hover:shadow-xl transform hover:-translate-y-1 animate-on-scroll animate-fade-in">
                     <span class="flex items-center">
                         <i class="fas fa-calendar-check mr-2" aria-hidden="true"></i>
                         Maak Nu Je Afspraak
                     </span>
                 </a>
+                
                 <!-- Decorative circle -->
                 <div class="absolute bottom-0 right-0 opacity-20 transform translate-x-1/4 translate-y-1/4 hidden lg:block">
-                     <svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="50" r="45" stroke="white" stroke-width="1"/><circle cx="50" cy="50" r="35" stroke="white" stroke-width="1" stroke-dasharray="4 4"/><circle cx="50" cy="50" r="25" stroke="white" stroke-width="1"/>
+                    <svg width="200" height="200" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" stroke="white" stroke-width="1"/>
+                        <circle cx="50" cy="50" r="35" stroke="white" stroke-width="1" stroke-dasharray="4 4"/>
+                        <circle cx="50" cy="50" r="25" stroke="white" stroke-width="1"/>
                     </svg>
                 </div>
             </div>
@@ -881,15 +1023,63 @@
         <section id="contact" class="py-16 md:py-24 bg-white">
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Plan Je Bezoek</h2>
-                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in" data-delay="0.1s">Neem contact op of kom langs in onze salon in Amsterdam.</p>
+                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Neem contact op of kom langs in onze salon in Amsterdam.</p>
 
-                <div class="grid grid-cols-1 lg:grid-cols-1 gap-10 lg:gap-12"> <!-- Changed to 1 column layout for contact info -->
-                    <!-- Contact Information Centered -->
-                    <div class="animate-on-scroll animate-slide-in-left lg:max-w-xl lg:mx-auto"> <!-- Centered using max-w and mx-auto -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
+                    <!-- Contact Form -->
+                    <div class="animate-on-scroll animate-slide-in-left">
+                        <div class="bg-neutral-50 p-6 md:p-8 rounded-xl shadow-lg border border-neutral-100 h-full">
+                            <h3 class="text-2xl font-semibold mb-6 text-neutral-800">Stuur ons een bericht</h3>
+                            <form class="space-y-6" action="#" method="POST">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="name" class="block text-sm font-medium text-neutral-700 mb-1">Naam</label>
+                                        <input type="text" id="name" name="name" autocomplete="name" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition duration-200">
+                                    </div>
+                                    <div>
+                                        <label for="email" class="block text-sm font-medium text-neutral-700 mb-1">E-mail</label>
+                                        <input type="email" id="email" name="email" autocomplete="email" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition duration-200">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="phone" class="block text-sm font-medium text-neutral-700 mb-1">Telefoonnummer</label>
+                                    <input type="tel" id="phone" name="phone" autocomplete="tel" class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition duration-200">
+                                </div>
+                                <div>
+                                    <label for="service" class="block text-sm font-medium text-neutral-700 mb-1">Gewenste behandeling</label>
+                                    <select id="service" name="service" required class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition duration-200">
+                                        <option value="" disabled selected>Kies een behandeling</option>
+                                        <option value="women-cut">Knippen & Styling Dames</option>
+                                        <option value="men-cut">Knippen & Styling Heren</option>
+                                        <option value="color">Kleuring & Highlights</option>
+                                        <option value="balayage">Balayage & Ombre</option>
+                                        <option value="bridal">Bruidskapsel</option>
+                                        <option value="treatment">Verzorgende Behandeling</option>
+                                        <option value="other">Anders / Weet ik nog niet</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-neutral-700 mb-1">Bericht (optioneel)</label>
+                                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition duration-200"></textarea>
+                                </div>
+                                <div>
+                                    <button type="submit" class="w-full py-3 px-6 bg-brand-primary text-white font-medium rounded-lg hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary shadow-md hover:shadow-lg transition duration-300 transform hover:-translate-y-1">
+                                        <span class="flex items-center justify-center">
+                                            <i class="fas fa-paper-plane mr-2" aria-hidden="true"></i>
+                                            Verstuur aanvraag
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="animate-on-scroll animate-slide-in-right">
                         <div class="bg-neutral-50 p-6 md:p-8 rounded-xl shadow-lg relative overflow-hidden h-full border border-neutral-100">
-                             <h3 class="text-2xl font-semibold mb-6 text-neutral-800">Contactgegevens</h3>
-                             <p class="mb-8 text-neutral-600 leading-relaxed text-sm md:text-base">Bezoek ons, bel direct, of volg ons op social media.</p>
-                             <div class="space-y-6">
+                            <h3 class="text-2xl font-semibold mb-6 text-neutral-800">Contactgegevens</h3>
+                            <p class="mb-8 text-neutral-600 leading-relaxed text-sm md:text-base">Bezoek ons, bel direct, of volg ons op social media.</p>
+                            <div class="space-y-6">
                                 <div class="flex items-start">
                                     <i class="fas fa-map-marker-alt text-brand-primary text-xl mr-4 mt-1 flex-shrink-0 w-6 text-center" aria-hidden="true"></i>
                                     <div>
@@ -913,7 +1103,7 @@
                                     <div>
                                         <h4 class="font-semibold text-neutral-800">Email</h4>
                                         <a href="mailto:info@luminous.nl" class="text-brand-primary hover:text-brand-dark transition duration-300 font-medium text-sm md:text-base break-all">info@luminous.nl</a>
-                                         <p class="text-xs text-neutral-500 mt-1">Voor niet-urgente vragen.</p>
+                                        <p class="text-xs text-neutral-500 mt-1">Voor niet-urgente vragen.</p>
                                     </div>
                                 </div>
                                 <div class="flex items-start">
@@ -929,27 +1119,26 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="mt-8 pt-6 border-t border-neutral-200">
+                            <div class="mt-8 pt-6 border-t border-neutral-200">
                                 <h4 class="font-semibold text-neutral-800 mb-4">Volg Ons</h4>
                                 <div class="flex space-x-3">
-                                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-neutral-200 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Facebook">
-                                        <i class="fab fa-facebook-f text-sm" aria-hidden="true"></i>
+                                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-200 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Facebook">
+                                        <i class="fab fa-facebook-f" aria-hidden="true"></i>
                                     </a>
-                                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-neutral-200 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Instagram">
-                                        <i class="fab fa-instagram text-sm" aria-hidden="true"></i>
+                                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-200 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Instagram">
+                                        <i class="fab fa-instagram" aria-hidden="true"></i>
                                     </a>
-                                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full bg-neutral-200 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Pinterest">
-                                        <i class="fab fa-pinterest text-sm" aria-hidden="true"></i>
+                                    <a href="#" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-200 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Pinterest">
+                                        <i class="fab fa-pinterest" aria-hidden="true"></i>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Contact Form could go here if needed, maintaining the grid layout -->
                 </div>
 
-                 <!-- Map -->
-                <div class="mt-16 rounded-xl overflow-hidden shadow-lg animate-on-scroll animate-fade-in" style="height: 300px;"> <!-- Reduced height slightly -->
+                <!-- Map -->
+                <div class="mt-16 rounded-xl overflow-hidden shadow-lg animate-on-scroll animate-fade-in" style="height: 300px;">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.1234567890123!2d4.885177615800000!3d52.370215979788888!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c609c1b8f4c37b%3A0x1b0f1b2b0b7b1b0f!2sPrinsengracht%20123%2C%201015%20KK%20Amsterdam!5e0!3m2!1snl!2snl!4v1678886660000!5m2!1snl!2snl"
                         width="100%"
@@ -962,8 +1151,8 @@
                     </iframe>
                     <!-- Fallback message if iframe fails -->
                     <div class="w-full h-full flex items-center justify-center bg-neutral-200 text-neutral-500 text-center p-4 absolute inset-0 -z-10">
-                         <p><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i>Kaart kon niet worden geladen. Locatie: Prinsengracht 123, 1015 KK Amsterdam.</p>
-                     </div>
+                        <p><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i>Kaart kon niet worden geladen. Locatie: Prinsengracht 123, 1015 KK Amsterdam.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -971,7 +1160,7 @@
 
     <!-- Footer -->
     <footer class="bg-brand-dark text-white pt-16 pb-8 relative overflow-hidden">
-         <div class="absolute inset-0 opacity-[0.02]">
+        <div class="absolute inset-0 opacity-[0.02]">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="footerPattern" patternUnits="userSpaceOnUse" width="30" height="30"><path d="M0 15 L30 15 M15 0 L15 30" stroke="white" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#footerPattern)"/></svg>
         </div>
 
@@ -979,20 +1168,20 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
                 <!-- Column 1: Logo & About -->
                 <div class="lg:col-span-1 sm:col-span-2">
-                     <a href="#home" class="inline-flex items-center mb-4 text-2xl font-bold font-playfair">
-                         Luminous
+                    <a href="#home" class="inline-flex items-center mb-4 text-2xl font-bold font-playfair">
+                        Luminous
                     </a>
                     <p class="text-neutral-300 text-sm mb-6 leading-relaxed">
                         Jouw premium salon voor professionele haarbehandelingen en persoonlijk advies in hartje Amsterdam.
                     </p>
-                     <div class="flex space-x-3">
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
+                    <div class="flex space-x-3">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
                             <i class="fab fa-facebook-f text-sm" aria-hidden="true"></i>
                         </a>
-                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
+<a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
                             <i class="fab fa-instagram text-sm" aria-hidden="true"></i>
                         </a>
-                         <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" class="w-9 h-9 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
                             <i class="fab fa-pinterest-p text-sm" aria-hidden="true"></i>
                         </a>
                     </div>
@@ -1004,18 +1193,18 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="#home" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Home</a></li>
                         <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Diensten</a></li>
-                         <li><a href="#referral-program" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Vrienden Bonus</a></li>
+                        <li><a href="#referral-program" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Vrienden Bonus</a></li>
                         <li><a href="#over-ons" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Over Ons</a></li>
                         <li><a href="#galerij" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Galerij</a></li>
                         <li><a href="#contact" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Contact</a></li>
-                         <li><a href="#" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Privacybeleid</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Privacybeleid</a></li>
                     </ul>
                 </div>
 
                 <!-- Column 3: Services -->
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Populaire Diensten</h4>
-                     <ul class="space-y-2 text-sm">
+                    <ul class="space-y-2 text-sm">
                         <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Knippen & Styling</a></li>
                         <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Balayage & Kleuring</a></li>
                         <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Verzorgende Treatments</a></li>
@@ -1027,7 +1216,7 @@
                 <!-- Column 4: Contact -->
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Contact</h4>
-                     <ul class="space-y-3 text-sm">
+                    <ul class="space-y-3 text-sm">
                         <li class="flex items-start">
                             <i class="fas fa-map-marker-alt mr-3 text-brand-secondary mt-1 w-4 text-center flex-shrink-0" aria-hidden="true"></i>
                             <span class="text-neutral-300">
@@ -1037,17 +1226,17 @@
                         <li class="flex items-start">
                             <i class="fas fa-phone-alt mr-3 text-brand-secondary mt-1 w-4 text-center flex-shrink-0" aria-hidden="true"></i>
                             <a href="tel:+31627403860" class="text-neutral-300 hover:text-brand-secondary transition-colors">06-27403860</a>
-                            </li>
+                        </li>
                         <li class="flex items-start">
                             <i class="fas fa-envelope mr-3 text-brand-secondary mt-1 w-4 text-center flex-shrink-0" aria-hidden="true"></i>
                             <a href="mailto:info@luminous.nl" class="text-neutral-300 hover:text-brand-secondary transition-colors break-all">info@luminous.nl</a>
                         </li>
-                         <li class="flex items-start">
+                        <li class="flex items-start">
                             <i class="fas fa-clock mr-3 text-brand-secondary mt-1 w-4 text-center flex-shrink-0" aria-hidden="true"></i>
                             <span class="text-neutral-300">Di-Vr: 9-18 | Za: 9-17</span>
                         </li>
                     </ul>
-                     <div class="mt-4 p-3 bg-white/5 rounded-lg border border-white/10">
+                    <div class="mt-4 p-3 bg-white/5 rounded-lg border border-white/10">
                         <span class="text-sm font-medium text-brand-secondary block mb-1">🌟 Vrienden Bonus</span>
                         <p class="text-xs text-neutral-300 leading-snug">10% korting voor jou & je vriend(in)!</p>
                     </div>
@@ -1060,21 +1249,31 @@
         </div>
     </footer>
 
-    <!-- Floating Referral Button -->
-    <div id="floating-referral" class="fixed bottom-5 left-5 z-[60] hidden transition-opacity duration-300 opacity-0">
-        <a href="#referral-program" class="bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-full w-14 h-14 sm:w-16 sm:h-16 flex flex-col items-center justify-center shadow-lg transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" aria-label="Bekijk Vrienden Bonus">
-            <i class="fas fa-gift text-lg sm:text-xl" aria-hidden="true"></i>
-            <span class="text-[9px] sm:text-[10px] font-medium mt-0.5 block leading-none">Bonus</span>
-        </a>
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-4 left-4 z-50 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:flex-row-reverse">
+        <!-- Floating Referral Button -->
+        <div id="floating-referral" class="transition-opacity duration-300 opacity-0 hidden">
+            <a href="#referral-program" class="floating-btn bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-full w-14 h-14 flex flex-col items-center justify-center shadow-lg" aria-label="Bekijk Vrienden Bonus">
+                <i class="fas fa-gift text-lg" aria-hidden="true"></i>
+                <span class="text-[9px] font-medium mt-0.5 block leading-none">Bonus</span>
+            </a>
+        </div>
+
+        <!-- Scroll To Top Button (hidden initially) -->
+        <div id="scroll-top-btn" class="transition-opacity duration-300 opacity-0 hidden">
+            <button aria-label="Scroll naar boven" class="floating-btn bg-white text-brand-primary rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:bg-brand-light">
+                <i class="fas fa-chevron-up text-lg" aria-hidden="true"></i>
+            </button>
+        </div>
     </div>
 
     <!-- Chat Widget -->
     <div id="chatbot" class="fixed bottom-5 right-5 z-[60]">
         <!-- Chat Button -->
-        <button id="chat-button" class="bg-brand-primary hover:bg-brand-dark text-white rounded-full w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center shadow-lg transition duration-300 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary" aria-label="Open Chat" aria-haspopup="true" aria-expanded="false">
+        <button id="chat-button" class="floating-btn bg-brand-primary hover:bg-brand-dark text-white rounded-full w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center" aria-label="Open Chat" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-comments text-xl sm:text-2xl" aria-hidden="true"></i>
-             <!-- Online indicator -->
-             <span class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
+            <!-- Online indicator -->
+            <span class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white"></span>
         </button>
 
         <!-- Chat Window -->
@@ -1111,7 +1310,6 @@
             </div>
         </div>
     </div>
-    <!-- END: Chat Widget -->
 
     <!-- Price List Modal -->
     <div id="price-modal" class="fixed inset-0 z-[70] bg-black/60 hidden items-center justify-center p-4 transition-opacity duration-300 ease-in-out opacity-0" aria-labelledby="price-modal-title" role="dialog" aria-modal="true">
@@ -1126,52 +1324,52 @@
             <!-- Modal Body -->
             <div id="price-modal-body" class="p-4 sm:p-6 overflow-y-auto flex-grow space-y-6">
                 <!-- Price Category 1: Dames -->
-                <div class="price-category"> <!-- Added wrapper div -->
+                <div class="price-category">
                     <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-brand-light">Dames</h3>
                     <ul class="space-y-2 text-sm text-neutral-600">
-                        <li class="flex justify-between"><span>Knippen, Wassen, Drogen</span> <span>€ 59,50</span></li>
-                        <li class="flex justify-between"><span>Knippen, Wassen, Föhnen/Stylen</span> <span>€ 75,00</span></li>
-                        <li class="flex justify-between"><span>Uitgroei Kleuren (max 2cm)</span> <span>Vanaf € 89,50</span></li>
-                        <li class="flex justify-between"><span>Volledige Kleuring</span> <span>Vanaf € 110,00</span></li>
-                        <li class="flex justify-between"><span>Highlights / Lowlights (Half Hoofd)</span> <span>Vanaf € 115,00</span></li>
-                        <li class="flex justify-between"><span>Highlights / Lowlights (Heel Hoofd)</span> <span>Vanaf € 150,00</span></li>
-                        <li class="flex justify-between"><span>Balayage / Ombre</span> <span>Vanaf € 125,00</span></li>
-                        <li class="flex justify-between"><span>Toner / Glossing</span> <span>Vanaf € 45,00</span></li>
+                        <li class="flex justify-between"><span>Knippen, Wassen, Drogen</span> <span class="font-medium">€ 59,50</span></li>
+                        <li class="flex justify-between"><span>Knippen, Wassen, Föhnen/Stylen</span> <span class="font-medium">€ 75,00</span></li>
+                        <li class="flex justify-between"><span>Uitgroei Kleuren (max 2cm)</span> <span class="font-medium">Vanaf € 89,50</span></li>
+                        <li class="flex justify-between"><span>Volledige Kleuring</span> <span class="font-medium">Vanaf € 110,00</span></li>
+                        <li class="flex justify-between"><span>Highlights / Lowlights (Half Hoofd)</span> <span class="font-medium">Vanaf € 115,00</span></li>
+                        <li class="flex justify-between"><span>Highlights / Lowlights (Heel Hoofd)</span> <span class="font-medium">Vanaf € 150,00</span></li>
+                        <li class="flex justify-between"><span>Balayage / Ombre</span> <span class="font-medium">Vanaf € 125,00</span></li>
+                        <li class="flex justify-between"><span>Toner / Glossing</span> <span class="font-medium">Vanaf € 45,00</span></li>
                     </ul>
                 </div>
-                 <!-- Price Category 2: Heren -->
-                <div class="price-category border-t border-neutral-200 pt-6 mt-6"> <!-- Added border, padding, margin -->
+                <!-- Price Category 2: Heren -->
+                <div class="price-category border-t border-neutral-200 pt-6 mt-6">
                     <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-brand-light">Heren</h3>
                     <ul class="space-y-2 text-sm text-neutral-600">
-                        <li class="flex justify-between"><span>Knippen, Wassen, Stylen</span> <span>€ 42,50</span></li>
-                        <li class="flex justify-between"><span>Buzz Cut (Tondeuse)</span> <span>€ 25,00</span></li>
-                        <li class="flex justify-between"><span>Baard Trimmen / Contouren</span> <span>€ 15,00</span></li>
-                        <li class="flex justify-between"><span>Kleuring</span> <span>Vanaf € 55,00</span></li>
+                        <li class="flex justify-between"><span>Knippen, Wassen, Stylen</span> <span class="font-medium">€ 42,50</span></li>
+                        <li class="flex justify-between"><span>Buzz Cut (Tondeuse)</span> <span class="font-medium">€ 25,00</span></li>
+                        <li class="flex justify-between"><span>Baard Trimmen / Contouren</span> <span class="font-medium">€ 15,00</span></li>
+                        <li class="flex justify-between"><span>Kleuring</span> <span class="font-medium">Vanaf € 55,00</span></li>
                     </ul>
                 </div>
-                 <!-- Price Category 3: Extra's -->
-                <div class="price-category border-t border-neutral-200 pt-6 mt-6"> <!-- Added border, padding, margin -->
+                <!-- Price Category 3: Extra's -->
+                <div class="price-category border-t border-neutral-200 pt-6 mt-6">
                     <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-brand-light">Extra's & Verzorging</h3>
                     <ul class="space-y-2 text-sm text-neutral-600">
-                        <li class="flex justify-between"><span>Intensief Haarmasker</span> <span>€ 15,00</span></li>
-                        <li class="flex justify-between"><span>Olaplex Herstelbehandeling</span> <span>Vanaf € 39,95</span></li>
-                        <li class="flex justify-between"><span>Keratine Behandeling</span> <span>Op aanvraag</span></li>
-                        <li class="flex justify-between"><span>Bruids- / Feestkapsel</span> <span>Op aanvraag</span></li>
+                        <li class="flex justify-between"><span>Intensief Haarmasker</span> <span class="font-medium">€ 15,00</span></li>
+                        <li class="flex justify-between"><span>Olaplex Herstelbehandeling</span> <span class="font-medium">Vanaf € 39,95</span></li>
+                        <li class="flex justify-between"><span>Keratine Behandeling</span> <span class="font-medium">Op aanvraag</span></li>
+                        <li class="flex justify-between"><span>Bruids- / Feestkapsel</span> <span class="font-medium">Op aanvraag</span></li>
                     </ul>
                 </div>
                 <p class="text-xs text-neutral-500 italic text-center mt-4">Prijzen zijn indicatief en kunnen variëren afhankelijk van haarlengte, dikte en specifieke wensen. Vraag uw stylist om een exacte prijsopgave.</p>
             </div>
             <!-- Modal Footer -->
-             <div class="p-4 bg-neutral-50 border-t border-neutral-200 text-right flex-shrink-0">
+            <div class="p-4 bg-neutral-50 border-t border-neutral-200 text-right flex-shrink-0">
                 <button id="close-price-modal-button-footer" class="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-md hover:bg-neutral-300 transition-colors text-sm font-medium">Sluiten</button>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
+    <!-- JavaScript - Improved & Organized -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Element References ---
+            // --- Elements References ---
             const header = document.getElementById('main-header');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
@@ -1181,28 +1379,30 @@
             const openPriceModalButton = document.getElementById('open-price-modal-button');
             const closePriceModalButton = document.getElementById('close-price-modal-button');
             const closePriceModalButtonFooter = document.getElementById('close-price-modal-button-footer');
-            const priceModalContent = priceModal?.querySelector('.bg-white'); // Inner content div for transition
-            const floatingReferral = document.getElementById('floating-referral'); // Floating referral button
+            const priceModalContent = priceModal?.querySelector('.bg-white');
+            const floatingReferral = document.getElementById('floating-referral');
+            const scrollTopBtn = document.getElementById('scroll-top-btn');
 
             // --- Constants ---
-            const SCROLL_THRESHOLD = 50; // Pixels to scroll before header changes
-            const FLOATING_REFERRAL_THRESHOLD = 300; // Pixels to scroll before floating referral appears
+            const SCROLL_THRESHOLD = 50;
+            const FLOATING_REFERRAL_THRESHOLD = 300;
+            const SCROLL_TOP_THRESHOLD = 400;
 
-            // --- Header Scroll Effect & Floating Referral ---
-            const handleHeaderScroll = () => {
-                 if (!header) return;
-                 const scrollY = window.scrollY;
+            // --- Header, Floating Buttons & Scroll Handling ---
+            const handleScrollEvents = () => {
+                if (!header) return;
+                const scrollY = window.scrollY;
 
-                 // Header styling
-                 if (scrollY > SCROLL_THRESHOLD) {
+                // Header styling
+                if (scrollY > SCROLL_THRESHOLD) {
                     header.classList.add('header-scrolled');
                 } else {
                     header.classList.remove('header-scrolled');
                 }
 
-                 // Floating Referral Button Visibility
-                 if (floatingReferral) {
-                     if (scrollY > FLOATING_REFERRAL_THRESHOLD) {
+                // Floating Referral Button Visibility
+                if (floatingReferral) {
+                    if (scrollY > FLOATING_REFERRAL_THRESHOLD) {
                         if (floatingReferral.classList.contains('hidden')) {
                             floatingReferral.classList.remove('hidden');
                             // Force reflow to apply transition correctly after removing hidden
@@ -1210,83 +1410,126 @@
                             floatingReferral.classList.remove('opacity-0');
                             floatingReferral.classList.add('opacity-100');
                         }
-                     } else {
-                         if (!floatingReferral.classList.contains('hidden') && !floatingReferral.classList.contains('opacity-0')) {
+                    } else {
+                        if (!floatingReferral.classList.contains('hidden') && !floatingReferral.classList.contains('opacity-0')) {
                             floatingReferral.classList.remove('opacity-100');
                             floatingReferral.classList.add('opacity-0');
                             // Use setTimeout to add 'hidden' after the transition ends
                             setTimeout(() => {
                                 // Check again in case user scrolled back down quickly
                                 if (window.scrollY <= FLOATING_REFERRAL_THRESHOLD) {
-                                     floatingReferral.classList.add('hidden');
+                                    floatingReferral.classList.add('hidden');
                                 }
-                            }, 300); // Match the transition duration (300ms)
-                         }
-                     }
-                 }
+                            }, 300);
+                        }
+                    }
+                }
+
+                // Scroll To Top Button Visibility
+                if (scrollTopBtn) {
+                    if (scrollY > SCROLL_TOP_THRESHOLD) {
+                        if (scrollTopBtn.classList.contains('hidden')) {
+                            scrollTopBtn.classList.remove('hidden');
+                            void scrollTopBtn.offsetWidth;
+                            scrollTopBtn.classList.remove('opacity-0');
+                            scrollTopBtn.classList.add('opacity-100');
+                        }
+                    } else {
+                        if (!scrollTopBtn.classList.contains('hidden') && !scrollTopBtn.classList.contains('opacity-0')) {
+                            scrollTopBtn.classList.remove('opacity-100');
+                            scrollTopBtn.classList.add('opacity-0');
+                            setTimeout(() => {
+                                if (window.scrollY <= SCROLL_TOP_THRESHOLD) {
+                                    scrollTopBtn.classList.add('hidden');
+                                }
+                            }, 300);
+                        }
+                    }
+                }
             };
 
-            window.addEventListener('scroll', handleHeaderScroll, { passive: true }); // Use passive listener for scroll performance
-            handleHeaderScroll(); // Initial check on load
+            // Scroll to top function
+            const scrollToTop = () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            };
 
-            // --- Mobile Menu Toggle ---
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScrollEvents, { passive: true });
+            
+            // Initial check on load
+            handleScrollEvents();
+
+            // Scroll to top button click handler
+            if (scrollTopBtn) {
+                scrollTopBtn.addEventListener('click', scrollToTop);
+            }
+
+            // --- Improved Mobile Menu ---
             const toggleMobileMenu = () => {
                 if (!mobileMenu || !menuIcon || !mobileMenuButton) return;
-                const isHidden = mobileMenu.classList.toggle('hidden');
-                 mobileMenuButton.setAttribute('aria-expanded', String(!isHidden));
+                
+                // Toggle menu-open class instead of hidden
+                const isOpen = mobileMenu.classList.toggle('menu-open');
+                mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
 
-                 if (isHidden) {
-                     menuIcon.classList.remove('fa-times');
-                     menuIcon.classList.add('fa-bars');
-                     document.body.style.overflow = ''; // Allow body scroll
-                 } else {
+                if (isOpen) {
                     menuIcon.classList.remove('fa-bars');
                     menuIcon.classList.add('fa-times');
-                     document.body.style.overflow = 'hidden'; // Prevent body scroll when menu open
-                 }
+                    document.body.style.overflow = 'hidden'; // Prevent body scroll
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                    document.body.style.overflow = ''; // Allow body scroll
+                }
             };
 
             if (mobileMenuButton && mobileMenu) {
                 mobileMenuButton.addEventListener('click', toggleMobileMenu);
 
-                 // Close menu when a link is clicked
+                // Close menu when a link is clicked
                 mobileMenuLinks?.forEach(link => {
                     link.addEventListener('click', () => {
-                         if (!mobileMenu.classList.contains('hidden')) {
-                             toggleMobileMenu();
-                         }
+                        if (mobileMenu.classList.contains('menu-open')) {
+                            toggleMobileMenu();
+                        }
                     });
                 });
 
-                 // Close menu on Escape key
-                 document.addEventListener('keydown', (e) => {
-                     if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-                         toggleMobileMenu();
-                     }
-                 });
+                // Close menu on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && mobileMenu.classList.contains('menu-open')) {
+                        toggleMobileMenu();
+                    }
+                });
 
-                 // Close menu if clicked outside the menu/button (optional but good UX)
-                 document.addEventListener('click', (e) => {
-                      if (!mobileMenu.classList.contains('hidden') && !mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-                         toggleMobileMenu();
-                      }
-                 });
+                // Close menu if clicked outside
+                document.addEventListener('click', (e) => {
+                    if (mobileMenu.classList.contains('menu-open') && 
+                        !mobileMenu.contains(e.target) && 
+                        !mobileMenuButton.contains(e.target)) {
+                        toggleMobileMenu();
+                    }
+                });
             }
 
-            // --- Price List Modal ---
+            // --- Price Modal Handling ---
             const openPriceModal = () => {
                 if (!priceModal || !priceModalContent) return;
                 priceModal.classList.remove('hidden');
-                priceModal.classList.add('flex'); // Use flex for centering
-                document.body.style.overflow = 'hidden'; // Prevent body scroll
-                // Use requestAnimationFrame to ensure display change happens before transition starts
+                priceModal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+                
                 requestAnimationFrame(() => {
                     priceModal.classList.remove('opacity-0');
                     priceModalContent.classList.remove('scale-95');
                     priceModal.classList.add('opacity-100');
                     priceModalContent.classList.add('scale-100');
                 });
-                 closePriceModalButton?.focus(); // Focus the close button for accessibility
+                
+                closePriceModalButton?.focus();
             };
 
             const closePriceModal = () => {
@@ -1297,13 +1540,13 @@
                 priceModal.classList.add('opacity-0');
                 priceModalContent.classList.add('scale-95');
 
-                // Wait for transition to finish before hiding and allowing scroll
                 setTimeout(() => {
                     priceModal.classList.add('hidden');
                     priceModal.classList.remove('flex');
-                    document.body.style.overflow = ''; // Allow body scroll again
-                }, 300); // Match transition duration
-                 openPriceModalButton?.focus(); // Return focus to the button that opened it
+                    document.body.style.overflow = '';
+                }, 300);
+                
+                openPriceModalButton?.focus();
             };
 
             if (openPriceModalButton && priceModal && closePriceModalButton && closePriceModalButtonFooter) {
@@ -1311,52 +1554,42 @@
                 closePriceModalButton.addEventListener('click', closePriceModal);
                 closePriceModalButtonFooter.addEventListener('click', closePriceModal);
 
-                // Close on clicking backdrop
+                // Close on backdrop click
                 priceModal.addEventListener('click', (event) => {
-                    // Check if the click is directly on the backdrop (priceModal itself)
                     if (event.target === priceModal) {
                         closePriceModal();
                     }
                 });
 
-                 // Close on Escape key
-                 document.addEventListener('keydown', (e) => {
-                     if (e.key === 'Escape' && !priceModal.classList.contains('hidden')) {
-                         closePriceModal();
-                     }
-                 });
-
-                 // Handle potential quick reply buttons added by chat JS
-                 document.body.addEventListener('click', (e) => {
-                      if (e.target.matches('.quick-reply-price-modal')) {
-                           openPriceModal();
-                      }
-                 });
+                // Close on Escape key
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && !priceModal.classList.contains('hidden')) {
+                        closePriceModal();
+                    }
+                });
             }
 
             // --- Animation on Scroll ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
             const observerOptions = {
-                root: null, // Use the viewport as the root
+                root: null,
                 rootMargin: '0px',
-                threshold: 0.1 // Trigger when 10% of the element is visible
+                threshold: 0.15 // Trigger when 15% of the element is visible
             };
 
             const animationObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const element = entry.target;
-                        // Read animation name from CSS variable
                         const animationName = getComputedStyle(element).getPropertyValue('--animation-name').trim() || 'fadeIn';
                         const delay = element.getAttribute('data-delay') || '0s';
-                        const duration = '0.6s'; // Default duration
-                        const fillMode = 'forwards'; // Keep final state
-                        const easing = 'ease-out';
+                        const duration = '0.8s'; // Slightly longer for smoother effect
+                        const fillMode = 'forwards';
+                        const easing = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'; // More dynamic easing
 
                         element.style.animation = `${animationName} ${duration} ${easing} ${delay} ${fillMode}`;
-                        element.classList.add('is-visible'); // Mark as visible to prevent re-animation
+                        element.classList.add('is-visible');
 
-                        // Stop observing the element once animated
                         observer.unobserve(element);
                     }
                 });
@@ -1365,36 +1598,56 @@
             animatedElements.forEach(el => animationObserver.observe(el));
 
             // --- Initialize Fancybox ---
-            // Ensure Fancybox script has loaded before binding
             if (typeof Fancybox !== 'undefined') {
-                 Fancybox.bind("[data-fancybox]", {
-                     Thumbs: { showOnStart: false }, // Don't show thumbs initially
-                     Images: { zoom: false }, // Disable image zoom on click
-                     Toolbar: {
+                Fancybox.bind("[data-fancybox]", {
+                    Thumbs: { showOnStart: false },
+                    Images: { zoom: false },
+                    Toolbar: {
                         display: {
-                            left: ["infobar"], // Show image count
+                            left: ["infobar"],
                             middle: [],
-                            right: ["close"], // Show only close button
+                            right: ["close"],
                         },
-                     },
-                     caption: function (fancybox, slide) {
-                         // Get caption from data-caption attribute of the trigger element
-                         return slide.triggerEl?.dataset.caption || "";
-                     }
-                 });
+                    },
+                    caption: function (fancybox, slide) {
+                        return slide.triggerEl?.dataset.caption || "";
+                    }
+                });
             } else {
-                 console.warn("Fancybox library not found or not loaded yet.");
+                console.warn("Fancybox library not found or not loaded yet.");
             }
 
             // --- Update Footer Year ---
             const currentYearSpan = document.getElementById('current-year');
-            if(currentYearSpan) {
+            if (currentYearSpan) {
                 currentYearSpan.textContent = new Date().getFullYear();
             }
 
-            // ------------------------------------------------------------------------
-            // Chat Widget Functionality (Adapted for NEW element IDs, ORIG logic)
-            // ------------------------------------------------------------------------
+            // --- Smooth Scroll for Internal Links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        
+                        const targetId = href.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        
+                        if (targetElement) {
+                            const headerOffset = 80; // Adjust based on header height
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+
+            // --- Chat Widget Functionality ---
             const chatWidget = {
                 elements: {
                     widget: document.getElementById('chatbot'),
@@ -1411,50 +1664,44 @@
                     threadId: null,
                     messages: [],
                     initialized: false,
-                    typingTimeout: null // To manage typing indicator removal
+                    typingTimeout: null
                 },
                 storage: {
-                    THREAD_ID: 'luminous_chat_thread_id_v2', // Use specific key
+                    THREAD_ID: 'luminous_chat_thread_id_v2',
                     MESSAGES: 'luminous_chat_messages_v2'
                 },
 
                 init: function() {
-                    // Basic check if essential elements exist
                     if (!this.elements.widget || !this.elements.toggleBtn || !this.elements.container) {
                         console.warn("Chat widget base elements not found. Chat disabled.");
                         return;
                     }
-                    // More granular check for full functionality
-                     if (!this.elements.closeBtn || !this.elements.messagesContainer || !this.elements.input || !this.elements.sendBtn) {
+
+                    if (!this.elements.closeBtn || !this.elements.messagesContainer || !this.elements.input || !this.elements.sendBtn) {
                         console.warn("Chat widget interactive elements not fully found. Chat functionality might be limited.");
-                        // Maybe disable buttons or provide feedback
                     }
 
                     this.loadState();
                     this.setupEventListeners();
 
-                    // Determine initialization path
                     if (this.state.threadId && this.state.messages.length > 0) {
                         console.log("Chat: Resuming session with Thread ID:", this.state.threadId);
-                        this.loadMessages(); // Load stored messages visually
-                        this.state.initialized = true; // Mark as initialized
+                        this.loadMessages();
+                        this.state.initialized = true;
                     } else if (this.state.threadId && this.state.messages.length === 0) {
                         console.log("Chat: Found Thread ID but no messages, fetching initial state...");
-                        // Might need to fetch recent messages or just start fresh
-                        this.initializeChat(false); // Don't add welcome message if just fetching
+                        this.initializeChat(false);
                     } else {
                         console.log("Chat: No previous session found, initializing new chat.");
-                        this.initializeChat(true); // Start fresh with welcome message
+                        this.initializeChat(true);
                     }
 
-                    // Initial state for send button
                     if (this.elements.input && this.elements.sendBtn) {
                         this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
                     }
                 },
 
                 setupEventListeners: function() {
-                    // Use optional chaining for safety if elements are missing
                     this.elements.toggleBtn?.addEventListener('click', () => this.toggleChat());
                     this.elements.closeBtn?.addEventListener('click', () => this.closeChat());
                     this.elements.sendBtn?.addEventListener('click', () => this.sendMessage());
@@ -1462,31 +1709,29 @@
                     this.elements.input?.addEventListener('keydown', (e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                             e.preventDefault();
-                             if (!this.elements.sendBtn?.disabled) { // Only send if button is enabled
+                            if (!this.elements.sendBtn?.disabled) {
                                 this.sendMessage();
-                             }
+                            }
                         }
                     });
 
                     this.elements.input?.addEventListener('input', () => {
                         if (!this.elements.input || !this.elements.sendBtn) return;
-                        // Auto-resize textarea
+                        
                         this.elements.input.style.height = 'auto';
-                        const maxHeight = 96; // Corresponds to max-h-24
+                        const maxHeight = 96;
                         const newHeight = Math.min(this.elements.input.scrollHeight, maxHeight);
                         this.elements.input.style.height = `${newHeight}px`;
-                        // Enable/disable send button
+                        
                         this.elements.sendBtn.disabled = this.elements.input.value.trim() === '' || this.state.isProcessing;
                     });
 
-                    // Close chat on ESC key *only* when the chat window is open and focused
-                     this.elements.container?.addEventListener('keydown', (e) => {
+                    this.elements.container?.addEventListener('keydown', (e) => {
                         if (e.key === 'Escape' && this.state.isOpen) {
                             this.closeChat();
                         }
                     });
 
-                    // Close chat if clicking outside (optional)
                     document.addEventListener('click', (e) => {
                         if (this.state.isOpen && this.elements.container && this.elements.toggleBtn) {
                             if (!this.elements.container.contains(e.target) && !this.elements.toggleBtn.contains(e.target)) {
@@ -1504,12 +1749,11 @@
                     if (!this.elements.container || !this.elements.toggleBtn || this.state.isOpen) return;
 
                     this.elements.container.classList.remove('hidden');
-                    requestAnimationFrame(() => { // Ensure display:flex is applied first
+                    requestAnimationFrame(() => {
                         this.elements.container.classList.remove('scale-95', 'opacity-0');
                         this.elements.container.classList.add('scale-100', 'opacity-100');
                     });
 
-                    // Hide toggle button
                     this.elements.toggleBtn.classList.add('scale-90', 'opacity-0', 'pointer-events-none');
                     setTimeout(() => this.elements.toggleBtn.classList.add('hidden'), 200);
 
@@ -1519,7 +1763,7 @@
 
                     setTimeout(() => {
                         this.elements.input?.focus();
-                    }, 350); // Delay focus until animation likely complete
+                    }, 350);
                 },
 
                 closeChat: function() {
@@ -1528,52 +1772,45 @@
                     this.elements.container.classList.remove('scale-100', 'opacity-100');
                     this.elements.container.classList.add('scale-95', 'opacity-0');
 
-                    // Show toggle button
                     this.elements.toggleBtn.classList.remove('hidden');
-                     requestAnimationFrame(() => {
-                         this.elements.toggleBtn.classList.remove('scale-90', 'opacity-0', 'pointer-events-none');
-                     });
+                    requestAnimationFrame(() => {
+                        this.elements.toggleBtn.classList.remove('scale-90', 'opacity-0', 'pointer-events-none');
+                    });
 
                     setTimeout(() => {
                         this.elements.container.classList.add('hidden');
                         this.state.isOpen = false;
                         this.elements.toggleBtn.setAttribute('aria-expanded', 'false');
-                        // Consider returning focus to toggle button for keyboard users
-                        // this.elements.toggleBtn.focus();
-                    }, 300); // Match transition duration
+                    }, 300);
                 },
 
                 initializeChat: async function(addWelcome = true) {
-                    // Add welcome message only if requested and no messages exist
                     if (addWelcome && this.state.messages.length === 0) {
                         const welcomeMessage = "👋 Welkom bij Luminous! Hoe kan ik helpen? Vraag naar diensten, prijzen of beschikbaarheid.";
-                        this.addMessageToUI(welcomeMessage, false, false); // Add without animation
+                        this.addMessageToUI(welcomeMessage, false, false);
                         this.state.messages.push({ content: welcomeMessage, isUser: false, timestamp: new Date().toISOString() });
-                        this.state.initialized = true; // Mark initialized *after* adding welcome msg
+                        this.state.initialized = true;
                         this.saveState();
                     }
 
-                    // Ensure thread exists or create one
                     if (!this.state.threadId) {
                         try {
                             const threadId = await this.createThread();
                             this.state.threadId = threadId;
-                            this.saveState(); // Save the new thread ID immediately
+                            this.saveState();
                         } catch (error) {
                             console.error('Chat Error: Failed to create thread during initialization.', error);
                             this.addMessageToUI("Kon geen chat starten. Probeer later opnieuw.", false);
-                            this.state.initialized = false; // Stay uninitialized
+                            this.state.initialized = false;
                             return;
                         }
                     } else {
-                         // If thread exists but no messages were loaded, maybe fetch recent ones?
-                         // For simplicity now, we assume if threadId exists, state is loaded or welcome added.
-                         this.state.initialized = true;
+                        this.state.initialized = true;
                     }
-                     if (this.elements.input) this.elements.input.disabled = false; // Ensure input is enabled
-                     if (this.elements.sendBtn) this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
+                    
+                    if (this.elements.input) this.elements.input.disabled = false;
+                    if (this.elements.sendBtn) this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
                 },
-
 
                 loadState: function() {
                     try {
@@ -1585,7 +1822,6 @@
                         }
                         if (messagesJson) {
                             this.state.messages = JSON.parse(messagesJson);
-                            // Basic validation: ensure it's an array
                             if (!Array.isArray(this.state.messages)) {
                                 console.warn("Chat Warning: Invalid message format in storage, resetting.");
                                 this.state.messages = [];
@@ -1596,52 +1832,48 @@
                         console.log("Chat State Loaded:", { threadId: this.state.threadId, messageCount: this.state.messages.length });
                     } catch (error) {
                         console.error('Chat Error: Failed to load state from localStorage.', error);
-                        this.resetState(); // Reset on error
+                        this.resetState();
                     }
                 },
 
                 saveState: function() {
                     try {
                         if (this.state.threadId) {
-                             localStorage.setItem(this.storage.THREAD_ID, this.state.threadId);
+                            localStorage.setItem(this.storage.THREAD_ID, this.state.threadId);
                         } else {
-                             localStorage.removeItem(this.storage.THREAD_ID);
+                            localStorage.removeItem(this.storage.THREAD_ID);
                         }
-                        // Limit stored messages to prevent excessive storage use (e.g., last 50)
+                        
                         const messagesToStore = this.state.messages.slice(-50);
                         localStorage.setItem(this.storage.MESSAGES, JSON.stringify(messagesToStore));
                     } catch (error) {
                         console.error('Chat Error: Failed to save state to localStorage.', error);
-                        // Maybe notify user storage is failing?
                     }
                 },
 
                 resetState: function() {
-                     console.log("Chat: Resetting chat state.");
-                     this.state.threadId = null;
-                     this.state.messages = [];
-                     this.state.initialized = false;
-                     this.state.isProcessing = false;
-                     localStorage.removeItem(this.storage.THREAD_ID);
-                     localStorage.removeItem(this.storage.MESSAGES);
-                     if(this.elements.messagesContainer) this.elements.messagesContainer.innerHTML = ''; // Clear UI
+                    console.log("Chat: Resetting chat state.");
+                    this.state.threadId = null;
+                    this.state.messages = [];
+                    this.state.initialized = false;
+                    this.state.isProcessing = false;
+                    localStorage.removeItem(this.storage.THREAD_ID);
+                    localStorage.removeItem(this.storage.MESSAGES);
+                    if (this.elements.messagesContainer) this.elements.messagesContainer.innerHTML = '';
                 },
-
 
                 loadMessages: function() {
                     if (!this.elements.messagesContainer) return;
-                    this.elements.messagesContainer.innerHTML = ''; // Clear visual messages
+                    this.elements.messagesContainer.innerHTML = '';
                     this.state.messages.forEach(message => {
-                        // Add messages without animation on load for speed
                         this.addMessageToUI(message.content, message.isUser, false);
                     });
-                    this.scrollToBottom(); // Scroll after adding all messages
+                    this.scrollToBottom();
                 },
-
 
                 createThread: async function() {
                     console.log('Chat API: Creating new thread...');
-                     try {
+                    try {
                         const response = await fetch('/api/openai-api/create-thread', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' }
@@ -1656,12 +1888,12 @@
                         return data.id;
                     } catch (error) {
                         console.error('Chat Error in createThread:', error);
-                        throw error; // Re-throw for the caller
+                        throw error;
                     }
                 },
 
                 sendMessage: async function() {
-                    if (!this.elements.input || !this.elements.sendBtn) return; // Guard clause
+                    if (!this.elements.input || !this.elements.sendBtn) return;
                     const messageText = this.elements.input.value.trim();
 
                     if (!messageText || this.state.isProcessing || !this.state.threadId) {
@@ -1669,66 +1901,55 @@
                         return;
                     }
 
-                    // --- Start Processing ---
                     this.state.isProcessing = true;
                     this.elements.sendBtn.disabled = true;
                     this.elements.input.disabled = true;
-                    this.elements.input.value = ''; // Clear input visually
-                    this.elements.input.style.height = 'auto'; // Reset height
+                    this.elements.input.value = '';
+                    this.elements.input.style.height = 'auto';
 
                     try {
-                        // Add user message to UI and state immediately
-                        this.addMessageToUI(messageText, true); // Animate user message
+                        this.addMessageToUI(messageText, true);
                         this.state.messages.push({ content: messageText, isUser: true, timestamp: new Date().toISOString() });
                         this.saveState();
 
-                        // Show typing indicator while waiting for API
                         this.showTypingIndicator();
 
-                        // Add message to the OpenAI thread
                         await this.addMessageToThread(messageText);
-
-                        // Start the run and wait for response
                         await this.processResponse();
 
                     } catch (error) {
                         console.error('Chat Error: Failed during sendMessage process.', error);
-                        this.removeTypingIndicator(); // Ensure indicator is removed on error
+                        this.removeTypingIndicator();
                         const errorMsg = "Sorry, er ging iets mis. Probeer het opnieuw of neem contact op.";
-                        this.addMessageToUI(errorMsg, false); // Show error without animation
+                        this.addMessageToUI(errorMsg, false);
                         this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
                         this.saveState();
                     } finally {
-                        // --- End Processing ---
                         this.state.isProcessing = false;
-                        // Re-enable input only if chat is initialized
                         if (this.state.initialized) {
-                             this.elements.input.disabled = false;
-                             // Send button stays disabled until user types again
-                             this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
-                             this.elements.input.focus(); // Return focus
+                            this.elements.input.disabled = false;
+                            this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
+                            this.elements.input.focus();
                         } else {
-                             // Keep disabled if initialization failed
-                             this.elements.input.disabled = true;
-                             this.elements.sendBtn.disabled = true;
+                            this.elements.input.disabled = true;
+                            this.elements.sendBtn.disabled = true;
                         }
-                         this.removeTypingIndicator(); // Ensure removed in all scenarios
+                        this.removeTypingIndicator();
                     }
                 },
-
 
                 addMessageToThread: async function(content) {
                     if (!this.state.threadId) throw new Error("Missing threadId in addMessageToThread");
                     console.log(`Chat API: Adding message to thread ${this.state.threadId}...`);
-                     try {
+                    try {
                         const response = await fetch('/api/openai-api/add-message', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ threadId: this.state.threadId, content: content })
                         });
                         if (!response.ok) {
-                             const errorData = await response.json().catch(() => ({ detail: "Unknown error adding message" }));
-                             throw new Error(`API Error (${response.status}): ${errorData.detail}`);
+                            const errorData = await response.json().catch(() => ({ detail: "Unknown error adding message" }));
+                            throw new Error(`API Error (${response.status}): ${errorData.detail}`);
                         }
                         const data = await response.json();
                         console.log('Chat API: Message added:', data.id);
@@ -1739,65 +1960,61 @@
                     }
                 },
 
-                 processResponse: async function() {
-                     if (!this.state.threadId) throw new Error("Missing threadId in processResponse");
-                     let runId = null;
-                     let attempts = 0;
-                     const maxAttempts = 30; // Polling attempts
-                     const pollInterval = 1500; // Milliseconds between polls
+                processResponse: async function() {
+                    if (!this.state.threadId) throw new Error("Missing threadId in processResponse");
+                    let runId = null;
+                    let attempts = 0;
+                    const maxAttempts = 30;
+                    const pollInterval = 1500;
 
-                     try {
-                         console.log(`Chat API: Creating run for thread ${this.state.threadId}...`);
-                         const runResponse = await fetch('/api/openai-api/create-run', {
+                    try {
+                        console.log(`Chat API: Creating run for thread ${this.state.threadId}...`);
+                        const runResponse = await fetch('/api/openai-api/create-run', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ threadId: this.state.threadId })
-                         });
+                        });
 
-                         if (!runResponse.ok) {
-                             const errorData = await runResponse.json().catch(() => ({ detail: "Unknown error creating run" }));
-                             throw new Error(`API Error (${runResponse.status}) creating run: ${errorData.detail}`);
-                         }
+                        if (!runResponse.ok) {
+                            const errorData = await runResponse.json().catch(() => ({ detail: "Unknown error creating run" }));
+                            throw new Error(`API Error (${runResponse.status}) creating run: ${errorData.detail}`);
+                        }
 
-                         const runData = await runResponse.json();
-                         if (!runData.id) throw new Error('Run ID not received from API.');
-                         runId = runData.id;
-                         console.log('Chat API: Run created:', runId);
+                        const runData = await runResponse.json();
+                        if (!runData.id) throw new Error('Run ID not received from API.');
+                        runId = runData.id;
+                        console.log('Chat API: Run created:', runId);
 
-                         // --- Polling for Run Completion ---
-                         let status = runData.status;
-                         while (['queued', 'in_progress'].includes(status) && attempts < maxAttempts) {
-                             attempts++;
-                             await new Promise(resolve => setTimeout(resolve, pollInterval)); // Wait
-                             console.log(`Chat API: Checking run status (Attempt ${attempts})...`);
+                        let status = runData.status;
+                        while (['queued', 'in_progress'].includes(status) && attempts < maxAttempts) {
+                            attempts++;
+                            await new Promise(resolve => setTimeout(resolve, pollInterval));
+                            console.log(`Chat API: Checking run status (Attempt ${attempts})...`);
 
-                             try {
+                            try {
                                 const statusResponse = await fetch(`/api/openai-api/check-run-status?threadId=${this.state.threadId}&runId=${runId}`);
                                 if (!statusResponse.ok) {
-                                     // Log error but continue polling for a few attempts
-                                     console.warn(`Chat Warning: Status check failed (Attempt ${attempts}): ${statusResponse.status}`);
-                                     if (attempts >= maxAttempts - 5) { // Start failing near the end
-                                          const errorData = await statusResponse.json().catch(() => ({ detail: `Status check failed` }));
-                                          throw new Error(`API Error (${statusResponse.status}) checking status: ${errorData.detail}`);
-                                     }
-                                     continue; // Try again
+                                    console.warn(`Chat Warning: Status check failed (Attempt ${attempts}): ${statusResponse.status}`);
+                                    if (attempts >= maxAttempts - 5) {
+                                        const errorData = await statusResponse.json().catch(() => ({ detail: `Status check failed` }));
+                                        throw new Error(`API Error (${statusResponse.status}) checking status: ${errorData.detail}`);
+                                    }
+                                    continue;
                                 }
                                 const statusData = await statusResponse.json();
                                 status = statusData.status;
                                 console.log('Chat API: Run status:', status);
-                             } catch (pollError) {
-                                 console.error("Chat Error during polling:", pollError);
-                                 // If polling itself fails badly, break the loop
-                                 if (attempts >= maxAttempts - 5) throw pollError;
-                                 continue;
-                             }
-
+                            } catch (pollError) {
+                                console.error("Chat Error during polling:", pollError);
+                                if (attempts >= maxAttempts - 5) throw pollError;
+                                continue;
+                            }
 
                             if (status === 'completed') {
                                 console.log('Chat API: Run completed. Fetching messages...');
-                                this.removeTypingIndicator(); // Remove before adding new message
+                                this.removeTypingIndicator();
 
-                                const messagesResponse = await fetch(`/api/openai-api/get-messages?threadId=${this.state.threadId}&limit=5&order=desc`); // Get latest, descending order
+                                const messagesResponse = await fetch(`/api/openai-api/get-messages?threadId=${this.state.threadId}&limit=5&order=desc`);
 
                                 if (!messagesResponse.ok) {
                                     const errorData = await messagesResponse.json().catch(() => ({ detail: "Unknown error getting messages" }));
@@ -1807,16 +2024,13 @@
                                 const messagesData = await messagesResponse.json();
                                 console.log('Chat API: Messages received:', messagesData.data?.length);
 
-                                // Find the latest assistant message (should be the first in desc order)
-                                const latestAssistantMessage = messagesData.data?.find(msg => msg.role === 'assistant' && msg.run_id === runId); // Ensure it's from this run
-
+                                const latestAssistantMessage = messagesData.data?.find(msg => msg.role === 'assistant' && msg.run_id === runId);
 
                                 if (latestAssistantMessage?.content?.[0]?.type === 'text') {
                                     const responseContent = latestAssistantMessage.content[0].text.value;
                                     console.log('Chat API: Assistant response found:', responseContent.substring(0, 50) + '...');
 
-                                    // Add assistant message to UI and state
-                                    this.addMessageToUI(responseContent, false); // Animate assistant message
+                                    this.addMessageToUI(responseContent, false);
                                     this.state.messages.push({
                                         content: responseContent,
                                         isUser: false,
@@ -1825,78 +2039,64 @@
                                     this.saveState();
                                 } else {
                                     console.warn('Chat Warning: Run completed, but no suitable assistant message found.', latestAssistantMessage);
-                                     this.addMessageToUI("Er was een antwoord, maar ik kon het niet lezen. Probeer het opnieuw.", false);
+                                    this.addMessageToUI("Er was een antwoord, maar ik kon het niet lezen. Probeer het opnieuw.", false);
                                 }
-                                return; // Exit function successfully
+                                return;
                             } else if (['failed', 'expired', 'cancelled', 'requires_action'].includes(status)) {
-                                console.error(`Chat Error: Run ended with status: ${status}`, runData); // Log full run data on failure
+                                console.error(`Chat Error: Run ended with status: ${status}`, runData);
                                 throw new Error(`Chat sessie mislukt (status: ${status}).`);
                             }
-                         } // End while loop
+                        }
 
-                         // If loop finishes without completion
-                         if (attempts >= maxAttempts) {
-                             throw new Error('Timeout waiting for assistant response.');
-                         }
+                        if (attempts >= maxAttempts) {
+                            throw new Error('Timeout waiting for assistant response.');
+                        }
 
-                     } catch (error) {
-                         console.error('Chat Error in processResponse:', error);
-                         this.removeTypingIndicator(); // Ensure removal
-                         // Add specific error message if available, otherwise generic
-                         const errorMsg = error.message.startsWith("Chat sessie mislukt") || error.message.startsWith("Timeout")
-                             ? error.message
-                             : "Er is een onverwachte fout opgetreden. Probeer het later opnieuw.";
-                         this.addMessageToUI(errorMsg, false);
-                         this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
-                         this.saveState();
-                         // Don't re-throw here, error is handled by adding message
-                     }
-                 },
-
+                    } catch (error) {
+                        console.error('Chat Error in processResponse:', error);
+                        this.removeTypingIndicator();
+                        const errorMsg = error.message.startsWith("Chat sessie mislukt") || error.message.startsWith("Timeout")
+                            ? error.message
+                            : "Er is een onverwachte fout opgetreden. Probeer het later opnieuw.";
+                        this.addMessageToUI(errorMsg, false);
+                        this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
+                        this.saveState();
+                    }
+                },
 
                 addMessageToUI: function(content, isUser, animate = true) {
                     if (!this.elements.messagesContainer) return;
 
                     const messageWrapper = document.createElement('div');
-                    messageWrapper.className = `flex items-start gap-2.5 mb-3 ${isUser ? 'justify-end' : 'justify-start'}`; // Reduced mb
+                    messageWrapper.className = `flex items-start gap-2.5 mb-3 ${isUser ? 'justify-end' : 'justify-start'}`;
 
                     const bubbleClasses = isUser
                         ? 'bg-neutral-200 rounded-lg rounded-br-none text-neutral-800'
                         : 'bg-white rounded-lg rounded-tl-none text-neutral-800 border border-neutral-100';
 
-                    const formattedContent = this.formatMessageContent(content); // Format links/newlines
+                    const formattedContent = this.formatMessageContent(content);
 
                     let innerHTML = '';
                     if (!isUser) {
-                        // Bot Avatar
                         innerHTML += `
                             <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
                                 <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
                             </div>`;
                     }
 
-                    // Message Bubble
                     innerHTML += `
                         <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
                             ${!isUser ? '<span class="text-xs font-semibold text-neutral-600 ml-1">Luminous Bot</span>' : ''}
                             <div class="leading-snug p-2.5 sm:p-3 shadow-sm text-xs sm:text-sm font-normal ${bubbleClasses}">
                                 ${formattedContent}
                             </div>
-                            <!-- Timestamp (optional) -->
-                            <!-- <span class="text-[10px] text-neutral-400 ${isUser ? 'text-right' : 'text-left'}">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span> -->
                         </div>`;
-
-                    if (isUser) {
-                        // User Avatar (Optional Placeholder)
-                        // innerHTML += `<div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-neutral-300 self-end"></div>`;
-                    }
 
                     messageWrapper.innerHTML = innerHTML;
 
-                    // Animation
                     if (animate) {
                         messageWrapper.style.opacity = '0';
-                        messageWrapper.style.transform = `translateY(10px) ${isUser ? 'translateX(10px)' : 'translateX(-10px)'}`; // Slide in effect
+                        messageWrapper.style.transform = `translateY(10px) ${isUser ? 'translateX(10px)' : 'translateX(-10px)'}`;
                         this.elements.messagesContainer.appendChild(messageWrapper);
                         requestAnimationFrame(() => {
                             messageWrapper.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
@@ -1911,33 +2111,30 @@
                 },
 
                 formatMessageContent: function(content) {
-                    // Basic sanitization (replace with a more robust library if needed)
                     let formattedText = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                    // Convert URLs to clickable links
+                    
                     const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
                     formattedText = formattedText.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-brand-primary underline hover:text-brand-dark">$1</a>');
-                    // Convert newlines to <br> tags
+                    
                     formattedText = formattedText.replace(/\n/g, '<br>');
                     return formattedText;
                 },
 
                 showTypingIndicator: function() {
                     if (!this.elements.messagesContainer) return;
-                    // Clear any previous timeout to prevent premature removal
                     if (this.state.typingTimeout) clearTimeout(this.state.typingTimeout);
-                    // Remove existing indicator before adding a new one
                     this.removeTypingIndicator();
 
                     const typingDiv = document.createElement('div');
                     typingDiv.id = 'typing-indicator';
-                    typingDiv.className = 'flex items-start gap-2.5 mb-3 justify-start'; // Match message style
+                    typingDiv.className = 'flex items-start gap-2.5 mb-3 justify-start';
 
                     typingDiv.innerHTML = `
-                         <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
-                             <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
-                         </div>
-                         <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
-                              <span class="text-xs font-semibold text-neutral-600 ml-1">Luminous Bot</span>
+                        <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
+                            <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
+                        </div>
+                        <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
+                            <span class="text-xs font-semibold text-neutral-600 ml-1">Luminous Bot</span>
                             <div class="leading-snug p-2.5 sm:p-3 bg-white rounded-lg rounded-tl-none shadow-sm border border-neutral-100">
                                 <div class="flex space-x-1 items-center h-4">
                                     <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.32s;"></div>
@@ -1947,40 +2144,37 @@
                             </div>
                         </div>
                     `;
-                    // Animate the appearance (optional)
+                    
                     typingDiv.style.opacity = '0';
                     this.elements.messagesContainer.appendChild(typingDiv);
                     requestAnimationFrame(() => {
-                         typingDiv.style.transition = 'opacity 0.3s ease';
-                         typingDiv.style.opacity = '1';
+                        typingDiv.style.transition = 'opacity 0.3s ease';
+                        typingDiv.style.opacity = '1';
                     });
 
                     this.scrollToBottom();
 
-                    // Set a timeout to remove the indicator if no response arrives (e.g., 30 seconds)
                     this.state.typingTimeout = setTimeout(() => {
-                         console.warn("Chat Warning: Typing indicator timed out.");
-                         this.removeTypingIndicator();
-                    }, 30000); // 30 seconds
+                        console.warn("Chat Warning: Typing indicator timed out.");
+                        this.removeTypingIndicator();
+                    }, 30000);
                 },
 
                 removeTypingIndicator: function() {
-                     if (this.state.typingTimeout) {
+                    if (this.state.typingTimeout) {
                         clearTimeout(this.state.typingTimeout);
                         this.state.typingTimeout = null;
-                     }
+                    }
                     const typingIndicator = document.getElementById('typing-indicator');
                     if (typingIndicator) {
-                         // Optional: Animate disappearance
-                         typingIndicator.style.transition = 'opacity 0.3s ease';
-                         typingIndicator.style.opacity = '0';
-                         setTimeout(() => typingIndicator.remove(), 300);
+                        typingIndicator.style.transition = 'opacity 0.3s ease';
+                        typingIndicator.style.opacity = '0';
+                        setTimeout(() => typingIndicator.remove(), 300);
                     }
                 },
 
                 scrollToBottom: function() {
                     if (!this.elements.messagesContainer) return;
-                    // Use smooth scroll behavior
                     this.elements.messagesContainer.scrollTo({
                         top: this.elements.messagesContainer.scrollHeight,
                         behavior: 'smooth'
@@ -1988,10 +2182,9 @@
                 }
             };
 
-            // Initialize the chat widget after the DOM is fully loaded
+            // Initialize the chat widget
             chatWidget.init();
         });
     </script>
 </body>
 </html>
-                            
