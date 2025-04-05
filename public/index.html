@@ -315,78 +315,6 @@
         .aspect-ratio-16x9 {
             --aspect-ratio: 56.25%;
         }
-
-        /* Promotion top bar */
-        .promo-top-bar {
-            background-color: theme('colors.brand.primary');
-            color: white;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 60;
-            transition: transform 0.3s ease;
-        }
-
-        .promo-top-bar.hidden-bar {
-            transform: translateY(-100%);
-        }
-
-        /* Adjust header position for promotion bar */
-        #main-header {
-            top: 40px; /* Height of promo bar */
-            transition: all 0.4s ease, top 0.3s ease;
-        }
-
-        #main-header.no-promo-bar {
-            top: 0;
-        }
-
-        /* Optimized testimonial cards */
-        .testimonial-optimized {
-            background-color: #fff;
-            border-radius: 1rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            overflow: hidden;
-        }
-
-        .testimonial-optimized:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.15);
-        }
-
-        .testimonial-header {
-            background: linear-gradient(to right, theme('colors.brand.primary'), theme('colors.brand.secondary'));
-            padding: 1.25rem;
-            color: white;
-            position: relative;
-        }
-
-        .testimonial-body {
-            padding: 1.5rem;
-            position: relative;
-        }
-
-        .testimonial-quote {
-            position: absolute;
-            top: -1.25rem;
-            right: 1.25rem;
-            color: white;
-            font-size: 3rem;
-            opacity: 0.25;
-            line-height: 0;
-        }
-
-        .testimonial-content {
-            position: relative;
-        }
-
-        .testimonial-highlight {
-            color: theme('colors.brand.primary');
-            font-weight: 600;
-        }
     </style>
 </head>
 
@@ -394,25 +322,8 @@
     <!-- Skip to main content link for accessibility -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white z-50 px-4 py-2 text-brand-primary font-medium rounded-md shadow">Skip to main content</a>
 
-    <!-- Top Promotion Bar -->
-    <div id="promo-top-bar" class="promo-top-bar py-2 px-4">
-        <div class="container mx-auto flex flex-col sm:flex-row items-center justify-center text-center sm:text-left">
-            <div class="flex items-center">
-                <i class="fas fa-gift text-lg mr-2 animate-pulse" aria-hidden="true"></i>
-                <span class="font-medium text-sm sm:text-base">Vrienden Bonus:</span>
-            </div>
-            <p class="text-xs sm:text-sm mx-2">Breng een vriend(in) mee & ontvang beiden 10% korting!</p>
-            <a href="#referral-program" class="ml-1 underline hover:text-brand-light font-medium whitespace-nowrap text-xs sm:text-sm">Meer info</a>
-            
-            <button id="close-promo-bar" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-white p-1 sm:p-1.5 rounded-full hover:bg-white/10">
-                <i class="fas fa-times text-xs sm:text-sm" aria-hidden="true"></i>
-                <span class="sr-only">Sluit promotie</span>
-            </button>
-        </div>
-    </div>
-
     <!-- Header -->
-    <header id="main-header" class="fixed w-full z-50 py-3 md:py-4 bg-transparent transition-all duration-300">
+    <header id="main-header" class="fixed w-full top-0 z-50 py-3 md:py-4 bg-transparent transition-all duration-300">
         <div class="container mx-auto px-4 flex justify-between items-center">
             <!-- Logo -->
             <a href="#home" class="text-2xl md:text-3xl font-bold font-playfair text-white hover:text-brand-light transition duration-300 logo-text" aria-label="Diamond Haarsalon Home">
@@ -423,7 +334,6 @@
             <nav class="hidden lg:block" aria-label="Main Navigation">
                 <ul class="flex space-x-8">
                     <li><a href="#home" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Home</a></li>
-                    <li><a href="#diensten" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Diensten</a></li>
                     <li><a href="#referral-program" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Vrienden Bonus</a></li>
                     <li><a href="#over-ons" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Over Ons</a></li>
                     <li><a href="#galerij" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Galerij</a></li>
@@ -448,7 +358,6 @@
             <div class="container mx-auto px-4 py-5">
                 <ul class="space-y-1">
                     <li><a href="#home" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Home</a></li>
-                    <li><a href="#diensten" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Diensten</a></li>
                     <li><a href="#referral-program" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Vrienden Bonus</a></li>
                     <li><a href="#over-ons" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Over Ons</a></li>
                     <li><a href="#galerij" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Galerij</a></li>
@@ -486,12 +395,28 @@
     <!-- Main Content -->
     <main id="main-content">
         <!-- Hero Section -->
-        <section id="home" class="relative min-h-screen pt-24 md:pt-28 pb-16 md:pb-24 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-800" style="background-image: url('/Images/SalonMain.jpg');">
+        <section id="home" class="relative min-h-screen pt-16 pb-16 md:pb-24 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-800" style="background-image: url('/Images/SalonMain.jpg');">
             <!-- Overlay -->
             <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70 z-0"></div>
 
+            <!-- Hero Referral Banner - MODIFIED: Made less tall for better visibility -->
+            <div class="absolute top-20 sm:top-24 md:top-28 left-0 right-0 z-10">
+                <div class="container mx-auto px-4">
+                    <div class="bg-brand-primary text-white py-1.5 px-4 rounded-lg sm:rounded-xl max-w-3xl mx-auto shadow-lg">
+                        <div class="flex flex-col sm:flex-row items-center justify-center sm:space-y-0 sm:space-x-2 text-center sm:text-left">
+                            <div class="flex items-center">
+                                <i class="fas fa-gift text-lg mr-2 animate-pulse" aria-hidden="true"></i>
+                                <span class="font-medium text-sm sm:text-base">Vrienden Bonus:</span>
+                            </div>
+                            <p class="text-xs sm:text-sm">Breng een vriend(in) mee & ontvang beiden 10% korting!</p>
+                            <a href="#referral-program" class="ml-1 sm:ml-2 underline hover:text-brand-light font-medium whitespace-nowrap text-xs sm:text-sm">Meer info</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Hero Content Container -->
-            <div class="container mx-auto px-4 z-10 text-white relative mt-8 sm:mt-4">
+            <div class="container mx-auto px-4 z-10 text-white relative mt-24 sm:mt-16">
                 <div class="max-w-3xl animate-on-scroll animate-fade-in">
                     <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">Ontdek Jouw <span class="text-brand-secondary">Stralende</span> Stijl bij Diamond</h1>
                     <p class="text-lg md:text-xl lg:text-2xl mb-8 font-light">Waar vakmanschap en persoonlijke aandacht samenkomen voor een haarervaring die je verdient.</p>
@@ -500,10 +425,6 @@
                         <a href="#contact" class="btn-primary flex items-center justify-center">
                             <i class="far fa-calendar-alt mr-2" aria-hidden="true"></i> Plan Jouw Afspraak
                         </a>
-                        <a href="#diensten" class="px-6 py-3 border-2 border-white hover:bg-white hover:text-neutral-900 rounded-full transition-all duration-300 text-center font-medium transform hover:-translate-y-1 flex items-center justify-center">
-                            <i class="fas fa-th-list mr-2" aria-hidden="true"></i> Bekijk Onze Diensten
-                        </a>
-                        <!-- Price List Button -->
                         <button id="open-price-modal-button" class="px-6 py-3 border-2 border-white hover:bg-white hover:text-neutral-900 rounded-full transition-all duration-300 text-center font-medium transform hover:-translate-y-1 flex items-center justify-center">
                             <i class="fas fa-tags mr-2" aria-hidden="true"></i> Prijslijst
                         </button>
@@ -527,7 +448,7 @@
 
                 <!-- Scroll Down Indicator -->
                 <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center hidden sm:block">
-                    <a href="#diensten" class="inline-block text-white animate-bounce" aria-label="Scroll naar diensten sectie">
+                    <a href="#referral-program" class="inline-block text-white animate-bounce" aria-label="Scroll naar vrienden bonus sectie">
                         <span class="block mb-1 text-xs font-light">Ontdek meer</span>
                         <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
                     </a>
@@ -568,151 +489,6 @@
                         <h3 class="text-xl md:text-2xl font-semibold mb-3">Persoonlijke Ervaring</h3>
                         <p class="text-neutral-600 text-sm md:text-base">Jouw wensen staan centraal. We luisteren aandachtig en creëren een look die perfect bij je past.</p>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Services Section -->
-        <section id="diensten" class="py-16 md:py-24 bg-brand-light relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-white to-transparent z-0"></div>
-            <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-white to-transparent z-0"></div>
-
-            <!-- Decorative Elements -->
-            <div class="absolute top-20 right-10 text-brand-primary/10 text-7xl md:text-9xl transform -rotate-12 opacity-50 z-0 hidden lg:block">
-                <i class="fas fa-cut" aria-hidden="true"></i>
-            </div>
-            <div class="absolute bottom-20 left-10 text-brand-primary/10 text-7xl md:text-9xl transform rotate-12 opacity-50 z-0 hidden lg:block">
-                <i class="fas fa-pump-soap" aria-hidden="true"></i>
-            </div>
-
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    <!-- Service 1 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in">
-                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
-                            <img src="/Images/Haar.jpg" alt="Professioneel geknipte dame met stijlvol kapsel" class="hover-filter" loading="lazy">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-semibold">Knippen & Styling Dames</h3>
-                                <i class="fas fa-scissors text-brand-primary text-xl" aria-hidden="true"></i>
-                            </div>
-                            <p class="text-neutral-600 mb-5 text-sm leading-relaxed">Ontspannende hoofdmassage, precisiesnit en styling die perfect bij jou past.</p>
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-                                <p class="text-brand-primary font-semibold text-lg">Vanaf €59,50</p>
-                                <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
-                                    Reserveer nu <i class="fas fa-arrow-right ml-1.5 transform group-hover:translate-x-1 transition-transform text-xs" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service 2 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.15s">
-                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
-                            <img src="/Images/Salon.jpg" alt="Man met strak geknipt en gestyled modern herenkapsel" class="hover-filter" loading="lazy">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-semibold">Knippen & Styling Heren</h3>
-                                <i class="fas fa-cut text-brand-primary text-xl" aria-hidden="true"></i>
-                            </div>
-                            <p class="text-neutral-600 mb-5 text-sm leading-relaxed">Scherpe contouren en perfecte fades. Inclusief advies voor dagelijkse styling.</p>
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-                                <p class="text-brand-primary font-semibold text-lg">Vanaf €42,50</p>
-                                <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
-                                    Reserveer nu <i class="fas fa-arrow-right ml-1.5 transform group-hover:translate-x-1 transition-transform text-xs" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service 3 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.3s">
-                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
-                            <img src="/Images/Haar.jpg" alt="Haar met prachtige highlights en levendige kleur" class="hover-filter" loading="lazy">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-semibold">Kleuren & Highlights</h3>
-                                <i class="fas fa-palette text-brand-primary text-xl" aria-hidden="true"></i>
-                            </div>
-                            <p class="text-neutral-600 mb-5 text-sm leading-relaxed">Van subtiele nuances tot complete transformaties, met zorg voor je haar.</p>
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-                                <p class="text-brand-primary font-semibold text-lg">Vanaf €89,50</p>
-                                <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
-                                    Reserveer nu <i class="fas fa-arrow-right ml-1.5 transform group-hover:translate-x-1 transition-transform text-xs" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service 4 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.45s">
-                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
-                            <img src="/Images/Haar.jpg" alt="Zachte en natuurlijke balayage kleuring in lang haar" class="hover-filter" loading="lazy">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-semibold">Balayage & Ombre</h3>
-                                <i class="fas fa-paint-brush text-brand-primary text-xl" aria-hidden="true"></i>
-                            </div>
-                            <p class="text-neutral-600 mb-5 text-sm leading-relaxed">Moeiteloze, zon-gezoende looks met naadloze overgangen.</p>
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-                                <p class="text-brand-primary font-semibold text-lg">Vanaf €125,00</p>
-                                <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
-                                    Reserveer nu <i class="fas fa-arrow-right ml-1.5 transform group-hover:translate-x-1 transition-transform text-xs" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service 5 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.6s">
-                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
-                            <img src="/Images/Salon1.jpg" alt="Elegante bruid met een prachtig opgestoken bruidskapsel" class="hover-filter" loading="lazy">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-semibold">Bruids- & Feestkapsels</h3>
-                                <i class="fas fa-gem text-brand-primary text-xl" aria-hidden="true"></i>
-                            </div>
-                            <p class="text-neutral-600 mb-5 text-sm leading-relaxed">Straal op je speciale dag met een look die perfect bij jou past.</p>
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-                                <p class="text-brand-primary font-semibold text-lg">Op aanvraag</p>
-                                <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
-                                    Informeer nu <i class="fas fa-arrow-right ml-1.5 transform group-hover:translate-x-1 transition-transform text-xs" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Service 6 -->
-                    <div class="bg-white rounded-xl overflow-hidden shadow-lg service-card animate-on-scroll animate-scale-in" data-delay="0.75s">
-                        <div class="relative overflow-hidden aspect-ratio-box aspect-ratio-4x3">
-                            <img src="/Images/Salon.jpg" alt="Close-up van gezond, glanzend haar na een verzorgende behandeling" class="hover-filter" loading="lazy">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-3">
-                                <h3 class="text-xl font-semibold">Verzorgende Behandelingen</h3>
-                                <i class="fas fa-spa text-brand-primary text-xl" aria-hidden="true"></i>
-                            </div>
-                            <p class="text-neutral-600 mb-5 text-sm leading-relaxed">Keratine, Olaplex of maskers voor herstel, glans en ontspanning.</p>
-                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-2 sm:space-y-0">
-                                <p class="text-brand-primary font-semibold text-lg">Vanaf €39,95</p>
-                                <a href="#contact" class="text-sm font-medium text-brand-dark hover:text-brand-primary transition-colors flex items-center group">
-                                    Reserveer nu <i class="fas fa-arrow-right ml-1.5 transform group-hover:translate-x-1 transition-transform text-xs" aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                    <a href="#contact" class="btn-primary inline-flex items-center">
-                        <i class="fas fa-calendar-check mr-2" aria-hidden="true"></i>
-                        Plan Jouw Behandeling
-                    </a>
                 </div>
             </div>
         </section>
@@ -857,146 +633,9 @@
             </div>
         </section>
 
-        <!-- Testimonials Section (Redesigned) -->
-        <section class="py-16 md:py-24 bg-white noise-bg">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Wat Klanten Zeggen</h2>
-                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Echte ervaringen die voor zich spreken.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- New Testimonial 1 - Lana S -->
-                    <div class="testimonial-optimized animate-on-scroll animate-slide-up">
-                        <div class="testimonial-header">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                                        <span class="text-white font-playfair font-semibold text-xl">L</span>
-                                    </div>
-                                    <div class="ml-3">
-                                        <p class="font-medium text-lg">Lana S.</p>
-                                        <p class="text-xs text-white/80">Keratine Behandeling</p>
-                                    </div>
-                                </div>
-                                <div class="flex">
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                </div>
-                            </div>
-                            <div class="testimonial-quote">
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                        </div>
-                        <div class="testimonial-body">
-                            <div class="testimonial-content">
-                                <p class="text-neutral-700 mb-3 leading-relaxed">Ik heb nog nooit zo'n goeie keratine behandeling genomen waarbij mijn haren echt gezond zijn geworden en de service echt perfect! vriendelijke <span class="testimonial-highlight">vrouwen</span>!</p>
-                                <div class="flex text-yellow-400 mb-1">
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                </div>
-                                <p class="text-sm text-neutral-500">Gepost 3 weken geleden</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- New Testimonial 2 - Loes -->
-                    <div class="testimonial-optimized animate-on-scroll animate-slide-up" data-delay="0.15s">
-                        <div class="testimonial-header">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                                        <span class="text-white font-playfair font-semibold text-xl">L</span>
-                                    </div>
-                                    <div class="ml-3">
-                                        <p class="font-medium text-lg">Loes</p>
-                                        <p class="text-xs text-white/80">Knippen & Styling</p>
-                                    </div>
-                                </div>
-                                <div class="flex">
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                </div>
-                            </div>
-                            <div class="testimonial-quote">
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                        </div>
-                        <div class="testimonial-body">
-                            <div class="testimonial-content">
-                                <p class="text-neutral-700 mb-3 leading-relaxed">Deze dame wist met twee woorden precies wat ik wilde. Ik wilde een afspraak maken maar werd gelijk geholpen. Ik kom zeker terug. En zal mijn wenkbrouwen laten <span class="testimonial-highlight">epileren</span>. Echt TOP.</p>
-                                <div class="flex text-yellow-400 mb-1">
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                </div>
-                                <p class="text-sm text-neutral-500">Gepost 1 maand geleden</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- New Testimonial 3 - Ayse (translated) -->
-                    <div class="testimonial-optimized animate-on-scroll animate-slide-up" data-delay="0.3s">
-                        <div class="testimonial-header">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-                                        <span class="text-white font-playfair font-semibold text-xl">A</span>
-                                    </div>
-                                    <div class="ml-3">
-                                        <p class="font-medium text-lg">Ayse</p>
-                                        <p class="text-xs text-white/80">Haarknipbeurt</p>
-                                    </div>
-                                </div>
-                                <div class="flex">
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                    <i class="fas fa-star text-yellow-300"></i>
-                                </div>
-                            </div>
-                            <div class="testimonial-quote">
-                                <i class="fas fa-quote-right"></i>
-                            </div>
-                        </div>
-                        <div class="testimonial-body">
-                            <div class="testimonial-content">
-                                <p class="text-neutral-700 mb-3 leading-relaxed">De beste kapper waar ik ooit ben geweest in Nederland, de knipbeurt is geweldig, je moet het proberen!</p>
-                                <div class="flex text-yellow-400 mb-1">
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                    <i class="fas fa-star" aria-hidden="true"></i>
-                                </div>
-                                <p class="text-sm text-neutral-500">Gepost 2 weken geleden</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Google Reviews Button -->
-                <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                    <a href="https://www.google.com/maps/search/?api=1&query=Diamond+Haarsalon+Leiden" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
-                        <i class="fab fa-google mr-2 text-lg" aria-hidden="true"></i> Bekijk ons op Google
-                    </a>
-                </div>
-            </div>
-        </section>
-
         <!-- Gallery Section -->
         <section id="galerij" class="py-16 md:py-24 bg-neutral-100 relative">
-            <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent"></div>
+            <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-neutral-50 to-transparent"></div>
             <div class="container mx-auto px-4">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Inspiratie Galerij</h2>
                 <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Bekijk onze creaties en laat je inspireren.</p>
@@ -1094,6 +733,107 @@
                 <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
                     <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
                         <i class="fab fa-instagram mr-2 text-lg" aria-hidden="true"></i> Volg ons op Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section - UPDATED -->
+        <section class="py-16 md:py-24 bg-white noise-bg">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in">Wat Klanten Zeggen</h2>
+                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Echte ervaringen die voor zich spreken.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 - UPDATED -->
+                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100">
+                        <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
+                            <i class="fas fa-quote-left" aria-hidden="true"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex mb-4 text-yellow-400">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                            </div>
+                            <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
+                                "Ik heb nog nooit zo'n goeie keratine behandeling genomen waarbij mijn haren echt gezond zijn geworden en de service echt perfect! Vriendelijke <strong>vrouwen</strong>!"
+                            </p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0">
+                                    <span class="text-brand-primary font-playfair font-semibold text-lg">L</span>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-base md:text-lg">Lana S.</p>
+                                    <p class="text-xs text-neutral-500">Keratine Behandeling</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 - UPDATED -->
+                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100" data-delay="0.15s">
+                        <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
+                            <i class="fas fa-quote-left" aria-hidden="true"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex mb-4 text-yellow-400">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                            </div>
+                            <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
+                                "Deze dame wist met twee woorden precies wat ik wilde. Ik wilde een afspraak maken maar werd gelijk geholpen. Ik kom zeker terug. En zal mijn wenkbrouwen laten <strong>epileren</strong>. Echt TOP."
+                            </p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0">
+                                    <span class="text-brand-primary font-playfair font-semibold text-lg">L</span>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-base md:text-lg">Loes</p>
+                                    <p class="text-xs text-neutral-500">Haarbehandeling</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 - UPDATED & TRANSLATED -->
+                    <div class="bg-neutral-50 p-6 md:p-8 rounded-xl testimonial-card animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-neutral-100" data-delay="0.3s">
+                        <div class="absolute -top-3 -left-3 text-brand-primary/10 text-5xl md:text-6xl z-0">
+                            <i class="fas fa-quote-left" aria-hidden="true"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex mb-4 text-yellow-400">
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                                <i class="fas fa-star" aria-hidden="true"></i>
+                            </div>
+                            <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
+                                "De beste kapper waar ik in Nederland ben geweest, de knipbeurt is geweldig, je moet het proberen!"
+                            </p>
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0">
+                                    <span class="text-brand-primary font-playfair font-semibold text-lg">A</span>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium text-base md:text-lg">Ayse</p>
+                                    <p class="text-xs text-neutral-500">Dames Knippen</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Reviews Button -->
+                <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Diamond+Haarsalon+Leiden" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
+                        <i class="fab fa-google mr-2 text-lg" aria-hidden="true"></i> Bekijk ons op Google
                     </a>
                 </div>
             </div>
@@ -1242,7 +982,6 @@
                     <h4 class="text-lg font-semibold mb-4">Snelle Links</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#home" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Home</a></li>
-                        <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Diensten</a></li>
                         <li><a href="#referral-program" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Vrienden Bonus</a></li>
                         <li><a href="#over-ons" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Over Ons</a></li>
                         <li><a href="#galerij" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Galerij</a></li>
@@ -1255,11 +994,11 @@
                 <div>
                     <h4 class="text-lg font-semibold mb-4">Populaire Diensten</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Knippen & Styling</a></li>
-                        <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Balayage & Kleuring</a></li>
-                        <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Verzorgende Treatments</a></li>
-                        <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Bruidskapsels</a></li>
-                        <li><a href="#diensten" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Heren Kapsels</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Knippen & Styling</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Balayage & Kleuring</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Verzorgende Treatments</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Bruidskapsels</a></li>
+                        <li><a href="#" class="text-neutral-300 hover:text-white transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70" aria-hidden="true"></i>Heren Kapsels</a></li>
                     </ul>
                 </div>
 
@@ -1405,7 +1144,6 @@
                         <li class="flex justify-between"><span>Olaplex Herstelbehandeling</span> <span class="font-medium">Vanaf € 39,95</span></li>
                         <li class="flex justify-between"><span>Keratine Behandeling</span> <span class="font-medium">Op aanvraag</span></li>
                         <li class="flex justify-between"><span>Bruids- / Feestkapsel</span> <span class="font-medium">Op aanvraag</span></li>
-                        <li class="flex justify-between"><span>Wenkbrauwen Epileren</span> <span class="font-medium">€ 12,00</span></li>
                     </ul>
                 </div>
                 <p class="text-xs text-neutral-500 italic text-center mt-4">Prijzen zijn indicatief en kunnen variëren afhankelijk van haarlengte, dikte en specifieke wensen. Vraag uw stylist om een exacte prijsopgave.</p>
@@ -1433,827 +1171,808 @@
             const priceModalContent = priceModal?.querySelector('.bg-white');
             const floatingReferral = document.getElementById('floating-referral');
             const scrollTopBtn = document.getElementById('scroll-top-btn');
-            const promoTopBar = document.getElementById('promo-top-bar');
-            const closePromoBarBtn = document.getElementById('close-promo-bar');
 
             // --- Constants ---
-            const SCROLL_THRESHOLD = 50;
-            const FLOATING_REFERRAL_THRESHOLD = 300;
-            const SCROLL_TOP_THRESHOLD = 400;
+const SCROLL_THRESHOLD = 50;
+const FLOATING_REFERRAL_THRESHOLD = 300;
+const SCROLL_TOP_THRESHOLD = 400;
 
-            // --- Promo Bar Handling ---
-            let promoBarClosed = localStorage.getItem('promoBarClosed') === 'true';
-            
-            if (promoBarClosed && promoTopBar) {
-                promoTopBar.classList.add('hidden-bar');
-                if (header) header.classList.add('no-promo-bar');
+// --- Header, Floating Buttons & Scroll Handling ---
+const handleScrollEvents = () => {
+    if (!header) return;
+    const scrollY = window.scrollY;
+
+    // Header styling
+    if (scrollY > SCROLL_THRESHOLD) {
+        header.classList.add('header-scrolled');
+    } else {
+        header.classList.remove('header-scrolled');
+    }
+
+    // Floating Referral Button Visibility
+    if (floatingReferral) {
+        if (scrollY > FLOATING_REFERRAL_THRESHOLD) {
+            if (floatingReferral.classList.contains('hidden')) {
+                floatingReferral.classList.remove('hidden');
+                // Force reflow to apply transition correctly after removing hidden
+                void floatingReferral.offsetWidth;
+                floatingReferral.classList.remove('opacity-0');
+                floatingReferral.classList.add('opacity-100');
             }
-            
-            if (closePromoBarBtn && promoTopBar) {
-                closePromoBarBtn.addEventListener('click', () => {
-                    promoTopBar.classList.add('hidden-bar');
-                    if (header) header.classList.add('no-promo-bar');
-                    localStorage.setItem('promoBarClosed', 'true');
-                });
+        } else {
+            if (!floatingReferral.classList.contains('hidden') && !floatingReferral.classList.contains('opacity-0')) {
+                floatingReferral.classList.remove('opacity-100');
+                floatingReferral.classList.add('opacity-0');
+                // Use setTimeout to add 'hidden' after the transition ends
+                setTimeout(() => {
+                    // Check again in case user scrolled back down quickly
+                    if (window.scrollY <= FLOATING_REFERRAL_THRESHOLD) {
+                        floatingReferral.classList.add('hidden');
+                    }
+                }, 300);
             }
+        }
+    }
 
-            // --- Header, Floating Buttons & Scroll Handling ---
-            const handleScrollEvents = () => {
-                if (!header) return;
-                const scrollY = window.scrollY;
-
-                // Header styling
-                if (scrollY > SCROLL_THRESHOLD) {
-                    header.classList.add('header-scrolled');
-                } else {
-                    header.classList.remove('header-scrolled');
-                }
-
-                // Floating Referral Button Visibility
-                if (floatingReferral) {
-                    if (scrollY > FLOATING_REFERRAL_THRESHOLD) {
-                        if (floatingReferral.classList.contains('hidden')) {
-                            floatingReferral.classList.remove('hidden');
-                            // Force reflow to apply transition correctly after removing hidden
-                            void floatingReferral.offsetWidth;
-                            floatingReferral.classList.remove('opacity-0');
-                            floatingReferral.classList.add('opacity-100');
-                        }
-                    } else {
-                        if (!floatingReferral.classList.contains('hidden') && !floatingReferral.classList.contains('opacity-0')) {
-                            floatingReferral.classList.remove('opacity-100');
-                            floatingReferral.classList.add('opacity-0');
-                            // Use setTimeout to add 'hidden' after the transition ends
-                            setTimeout(() => {
-                                // Check again in case user scrolled back down quickly
-                                if (window.scrollY <= FLOATING_REFERRAL_THRESHOLD) {
-                                    floatingReferral.classList.add('hidden');
-                                }
-                            }, 300);
-                        }
+    // Scroll To Top Button Visibility
+    if (scrollTopBtn) {
+        if (scrollY > SCROLL_TOP_THRESHOLD) {
+            if (scrollTopBtn.classList.contains('hidden')) {
+                scrollTopBtn.classList.remove('hidden');
+                void scrollTopBtn.offsetWidth;
+                scrollTopBtn.classList.remove('opacity-0');
+                scrollTopBtn.classList.add('opacity-100');
+            }
+        } else {
+            if (!scrollTopBtn.classList.contains('hidden') && !scrollTopBtn.classList.contains('opacity-0')) {
+                scrollTopBtn.classList.remove('opacity-100');
+                scrollTopBtn.classList.add('opacity-0');
+                setTimeout(() => {
+                    if (window.scrollY <= SCROLL_TOP_THRESHOLD) {
+                        scrollTopBtn.classList.add('hidden');
                     }
-                }
+                }, 300);
+            }
+        }
+    }
+};
 
-                // Scroll To Top Button Visibility
-                if (scrollTopBtn) {
-                    if (scrollY > SCROLL_TOP_THRESHOLD) {
-                        if (scrollTopBtn.classList.contains('hidden')) {
-                            scrollTopBtn.classList.remove('hidden');
-                            void scrollTopBtn.offsetWidth;
-                            scrollTopBtn.classList.remove('opacity-0');
-                            scrollTopBtn.classList.add('opacity-100');
-                        }
-                    } else {
-                        if (!scrollTopBtn.classList.contains('hidden') && !scrollTopBtn.classList.contains('opacity-0')) {
-                            scrollTopBtn.classList.remove('opacity-100');
-                            scrollTopBtn.classList.add('opacity-0');
-                            setTimeout(() => {
-                                if (window.scrollY <= SCROLL_TOP_THRESHOLD) {
-                                    scrollTopBtn.classList.add('hidden');
-                                }
-                            }, 300);
-                        }
-                    }
-                }
-            };
+// Scroll to top function
+const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+};
 
-            // Scroll to top function
-            const scrollToTop = () => {
+// Add scroll event listener
+window.addEventListener('scroll', handleScrollEvents, { passive: true });
+
+// Initial check on load
+handleScrollEvents();
+
+// Scroll to top button click handler
+if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', scrollToTop);
+}
+
+// --- Improved Mobile Menu ---
+const toggleMobileMenu = () => {
+    if (!mobileMenu || !menuIcon || !mobileMenuButton) return;
+    
+    // Toggle menu-open class instead of hidden
+    const isOpen = mobileMenu.classList.toggle('menu-open');
+    mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+
+    if (isOpen) {
+        menuIcon.classList.remove('fa-bars');
+        menuIcon.classList.add('fa-times');
+        document.body.style.overflow = 'hidden'; // Prevent body scroll
+    } else {
+        menuIcon.classList.remove('fa-times');
+        menuIcon.classList.add('fa-bars');
+        document.body.style.overflow = ''; // Allow body scroll
+    }
+};
+
+if (mobileMenuButton && mobileMenu) {
+    mobileMenuButton.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when a link is clicked
+    mobileMenuLinks?.forEach(link => {
+        link.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('menu-open')) {
+                toggleMobileMenu();
+            }
+        });
+    });
+
+    // Close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('menu-open')) {
+            toggleMobileMenu();
+        }
+    });
+
+    // Close menu if clicked outside
+    document.addEventListener('click', (e) => {
+        if (mobileMenu.classList.contains('menu-open') && 
+            !mobileMenu.contains(e.target) && 
+            !mobileMenuButton.contains(e.target)) {
+            toggleMobileMenu();
+        }
+    });
+}
+
+// --- Price Modal Handling ---
+const openPriceModal = () => {
+    if (!priceModal || !priceModalContent) return;
+    priceModal.classList.remove('hidden');
+    priceModal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+    
+    requestAnimationFrame(() => {
+        priceModal.classList.remove('opacity-0');
+        priceModalContent.classList.remove('scale-95');
+        priceModal.classList.add('opacity-100');
+        priceModalContent.classList.add('scale-100');
+    });
+    
+    closePriceModalButton?.focus();
+};
+
+const closePriceModal = () => {
+    if (!priceModal || !priceModalContent || priceModal.classList.contains('hidden')) return;
+
+    priceModal.classList.remove('opacity-100');
+    priceModalContent.classList.remove('scale-100');
+    priceModal.classList.add('opacity-0');
+    priceModalContent.classList.add('scale-95');
+
+    setTimeout(() => {
+        priceModal.classList.add('hidden');
+        priceModal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }, 300);
+    
+    openPriceModalButton?.focus();
+};
+
+if (openPriceModalButton && priceModal && closePriceModalButton && closePriceModalButtonFooter) {
+    openPriceModalButton.addEventListener('click', openPriceModal);
+    closePriceModalButton.addEventListener('click', closePriceModal);
+    closePriceModalButtonFooter.addEventListener('click', closePriceModal);
+
+    // Close on backdrop click
+    priceModal.addEventListener('click', (event) => {
+        if (event.target === priceModal) {
+            closePriceModal();
+        }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !priceModal.classList.contains('hidden')) {
+            closePriceModal();
+        }
+    });
+}
+
+// --- Animation on Scroll ---
+const animatedElements = document.querySelectorAll('.animate-on-scroll');
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15 // Trigger when 15% of the element is visible
+};
+
+const animationObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const element = entry.target;
+            const animationName = getComputedStyle(element).getPropertyValue('--animation-name').trim() || 'fadeIn';
+            const delay = element.getAttribute('data-delay') || '0s';
+            const duration = '0.8s'; // Slightly longer for smoother effect
+            const fillMode = 'forwards';
+            const easing = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'; // More dynamic easing
+
+            element.style.animation = `${animationName} ${duration} ${easing} ${delay} ${fillMode}`;
+            element.classList.add('is-visible');
+
+            observer.unobserve(element);
+        }
+    });
+}, observerOptions);
+
+animatedElements.forEach(el => animationObserver.observe(el));
+
+// --- Initialize Fancybox ---
+if (typeof Fancybox !== 'undefined') {
+    Fancybox.bind("[data-fancybox]", {
+        Thumbs: { showOnStart: false },
+        Images: { zoom: false },
+        Toolbar: {
+            display: {
+                left: ["infobar"],
+                middle: [],
+                right: ["close"],
+            },
+        },
+        caption: function (fancybox, slide) {
+            return slide.triggerEl?.dataset.caption || "";
+        }
+    });
+} else {
+    console.warn("Fancybox library not found or not loaded yet.");
+}
+
+// --- Update Footer Year ---
+const currentYearSpan = document.getElementById('current-year');
+if (currentYearSpan) {
+    currentYearSpan.textContent = new Date().getFullYear();
+}
+
+// --- Smooth Scroll for Internal Links ---
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+            e.preventDefault();
+            
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerOffset = 80; // Adjust based on header height
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
                 window.scrollTo({
-                    top: 0,
+                    top: offsetPosition,
                     behavior: 'smooth'
                 });
-            };
-
-            // Add scroll event listener
-            window.addEventListener('scroll', handleScrollEvents, { passive: true });
-            
-            // Initial check on load
-            handleScrollEvents();
-
-            // Scroll to top button click handler
-            if (scrollTopBtn) {
-                scrollTopBtn.addEventListener('click', scrollToTop);
             }
+        }
+    });
+});
 
-            // --- Improved Mobile Menu ---
-            const toggleMobileMenu = () => {
-                if (!mobileMenu || !menuIcon || !mobileMenuButton) return;
-                
-                // Toggle menu-open class instead of hidden
-                const isOpen = mobileMenu.classList.toggle('menu-open');
-                mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
+// --- Chat Widget Functionality ---
+const chatWidget = {
+    elements: {
+        widget: document.getElementById('chatbot'),
+        toggleBtn: document.getElementById('chat-button'),
+        container: document.getElementById('chat-window'),
+        closeBtn: document.getElementById('close-chat'),
+        messagesContainer: document.getElementById('chat-messages'),
+        input: document.getElementById('chat-input'),
+        sendBtn: document.getElementById('send-message')
+    },
+    state: {
+        isOpen: false,
+        isProcessing: false,
+        threadId: null,
+        messages: [],
+        initialized: false,
+        typingTimeout: null
+    },
+    storage: {
+        THREAD_ID: 'diamond_chat_thread_id_v2',
+        MESSAGES: 'diamond_chat_messages_v2'
+    },
 
-                if (isOpen) {
-                    menuIcon.classList.remove('fa-bars');
-                    menuIcon.classList.add('fa-times');
-                    document.body.style.overflow = 'hidden'; // Prevent body scroll
-                } else {
-                    menuIcon.classList.remove('fa-times');
-                    menuIcon.classList.add('fa-bars');
-                    document.body.style.overflow = ''; // Allow body scroll
+    init: function() {
+        if (!this.elements.widget || !this.elements.toggleBtn || !this.elements.container) {
+            console.warn("Chat widget base elements not found. Chat disabled.");
+            return;
+        }
+
+        if (!this.elements.closeBtn || !this.elements.messagesContainer || !this.elements.input || !this.elements.sendBtn) {
+            console.warn("Chat widget interactive elements not fully found. Chat functionality might be limited.");
+        }
+
+        this.loadState();
+        this.setupEventListeners();
+
+        if (this.state.threadId && this.state.messages.length > 0) {
+            console.log("Chat: Resuming session with Thread ID:", this.state.threadId);
+            this.loadMessages();
+            this.state.initialized = true;
+        } else if (this.state.threadId && this.state.messages.length === 0) {
+            console.log("Chat: Found Thread ID but no messages, fetching initial state...");
+            this.initializeChat(false);
+        } else {
+            console.log("Chat: No previous session found, initializing new chat.");
+            this.initializeChat(true);
+        }
+
+        if (this.elements.input && this.elements.sendBtn) {
+            this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
+        }
+    },
+
+    setupEventListeners: function() {
+        this.elements.toggleBtn?.addEventListener('click', () => this.toggleChat());
+        this.elements.closeBtn?.addEventListener('click', () => this.closeChat());
+        this.elements.sendBtn?.addEventListener('click', () => this.sendMessage());
+
+        this.elements.input?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (!this.elements.sendBtn?.disabled) {
+                    this.sendMessage();
                 }
-            };
-
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', toggleMobileMenu);
-
-                // Close menu when a link is clicked
-                mobileMenuLinks?.forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (mobileMenu.classList.contains('menu-open')) {
-                            toggleMobileMenu();
-                        }
-                    });
-                });
-
-                // Close menu on Escape key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && mobileMenu.classList.contains('menu-open')) {
-                        toggleMobileMenu();
-                    }
-                });
-
-                // Close menu if clicked outside
-                document.addEventListener('click', (e) => {
-                    if (mobileMenu.classList.contains('menu-open') && 
-                        !mobileMenu.contains(e.target) && 
-                        !mobileMenuButton.contains(e.target)) {
-                        toggleMobileMenu();
-                    }
-                });
             }
+        });
 
-            // --- Price Modal Handling ---
-            const openPriceModal = () => {
-                if (!priceModal || !priceModalContent) return;
-                priceModal.classList.remove('hidden');
-                priceModal.classList.add('flex');
-                document.body.style.overflow = 'hidden';
-                
-                requestAnimationFrame(() => {
-                    priceModal.classList.remove('opacity-0');
-                    priceModalContent.classList.remove('scale-95');
-                    priceModal.classList.add('opacity-100');
-                    priceModalContent.classList.add('scale-100');
-                });
-                
-                closePriceModalButton?.focus();
-            };
+        this.elements.input?.addEventListener('input', () => {
+            if (!this.elements.input || !this.elements.sendBtn) return;
+            
+            this.elements.input.style.height = 'auto';
+            const maxHeight = 96;
+            const newHeight = Math.min(this.elements.input.scrollHeight, maxHeight);
+            this.elements.input.style.height = `${newHeight}px`;
+            
+            this.elements.sendBtn.disabled = this.elements.input.value.trim() === '' || this.state.isProcessing;
+        });
 
-            const closePriceModal = () => {
-                if (!priceModal || !priceModalContent || priceModal.classList.contains('hidden')) return;
-
-                priceModal.classList.remove('opacity-100');
-                priceModalContent.classList.remove('scale-100');
-                priceModal.classList.add('opacity-0');
-                priceModalContent.classList.add('scale-95');
-
-                setTimeout(() => {
-                    priceModal.classList.add('hidden');
-                    priceModal.classList.remove('flex');
-                    document.body.style.overflow = '';
-                }, 300);
-                
-                openPriceModalButton?.focus();
-            };
-
-            if (openPriceModalButton && priceModal && closePriceModalButton && closePriceModalButtonFooter) {
-                openPriceModalButton.addEventListener('click', openPriceModal);
-                closePriceModalButton.addEventListener('click', closePriceModal);
-                closePriceModalButtonFooter.addEventListener('click', closePriceModal);
-
-                // Close on backdrop click
-                priceModal.addEventListener('click', (event) => {
-                    if (event.target === priceModal) {
-                        closePriceModal();
-                    }
-                });
-
-                // Close on Escape key
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && !priceModal.classList.contains('hidden')) {
-                        closePriceModal();
-                    }
-                });
+        this.elements.container?.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.state.isOpen) {
+                this.closeChat();
             }
+        });
 
-            // --- Animation on Scroll ---
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15 // Trigger when 15% of the element is visible
-            };
+        document.addEventListener('click', (e) => {
+            if (this.state.isOpen && this.elements.container && this.elements.toggleBtn) {
+                if (!this.elements.container.contains(e.target) && !this.elements.toggleBtn.contains(e.target)) {
+                    this.closeChat();
+                }
+            }
+        });
+    },
 
-            const animationObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const element = entry.target;
-                        const animationName = getComputedStyle(element).getPropertyValue('--animation-name').trim() || 'fadeIn';
-                        const delay = element.getAttribute('data-delay') || '0s';
-                        const duration = '0.8s'; // Slightly longer for smoother effect
-                        const fillMode = 'forwards';
-                        const easing = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'; // More dynamic easing
+    toggleChat: function() {
+        this.state.isOpen ? this.closeChat() : this.openChat();
+    },
 
-                        element.style.animation = `${animationName} ${duration} ${easing} ${delay} ${fillMode}`;
-                        element.classList.add('is-visible');
+    openChat: function() {
+        if (!this.elements.container || !this.elements.toggleBtn || this.state.isOpen) return;
 
-                        observer.unobserve(element);
-                    }
-                });
-            }, observerOptions);
+        this.elements.container.classList.remove('hidden');
+        requestAnimationFrame(() => {
+            this.elements.container.classList.remove('scale-95', 'opacity-0');
+            this.elements.container.classList.add('scale-100', 'opacity-100');
+        });
 
-            animatedElements.forEach(el => animationObserver.observe(el));
+        this.elements.toggleBtn.classList.add('scale-90', 'opacity-0', 'pointer-events-none');
+        setTimeout(() => this.elements.toggleBtn.classList.add('hidden'), 200);
 
-            // --- Initialize Fancybox ---
-            if (typeof Fancybox !== 'undefined') {
-                Fancybox.bind("[data-fancybox]", {
-                    Thumbs: { showOnStart: false },
-                    Images: { zoom: false },
-                    Toolbar: {
-                        display: {
-                            left: ["infobar"],
-                            middle: [],
-                            right: ["close"],
-                        },
-                    },
-                    caption: function (fancybox, slide) {
-                        return slide.triggerEl?.dataset.caption || "";
-                    }
-                });
+        this.state.isOpen = true;
+        this.elements.toggleBtn.setAttribute('aria-expanded', 'true');
+        this.scrollToBottom();
+
+        setTimeout(() => {
+            this.elements.input?.focus();
+        }, 350);
+    },
+
+    closeChat: function() {
+        if (!this.elements.container || !this.elements.toggleBtn || !this.state.isOpen) return;
+
+        this.elements.container.classList.remove('scale-100', 'opacity-100');
+        this.elements.container.classList.add('scale-95', 'opacity-0');
+
+        this.elements.toggleBtn.classList.remove('hidden');
+        requestAnimationFrame(() => {
+            this.elements.toggleBtn.classList.remove('scale-90', 'opacity-0', 'pointer-events-none');
+        });
+
+        setTimeout(() => {
+            this.elements.container.classList.add('hidden');
+            this.state.isOpen = false;
+            this.elements.toggleBtn.setAttribute('aria-expanded', 'false');
+        }, 300);
+    },
+
+    initializeChat: async function(addWelcome = true) {
+        if (addWelcome && this.state.messages.length === 0) {
+            const welcomeMessage = "👋 Welkom bij Diamond! Hoe kan ik helpen? Vraag naar diensten, prijzen of beschikbaarheid.";
+            this.addMessageToUI(welcomeMessage, false, false);
+            this.state.messages.push({ content: welcomeMessage, isUser: false, timestamp: new Date().toISOString() });
+            this.state.initialized = true;
+            this.saveState();
+        }
+
+        if (!this.state.threadId) {
+            try {
+                const threadId = await this.createThread();
+                this.state.threadId = threadId;
+                this.saveState();
+            } catch (error) {
+                console.error('Chat Error: Failed to create thread during initialization.', error);
+                this.addMessageToUI("Kon geen chat starten. Probeer later opnieuw.", false);
+                this.state.initialized = false;
+                return;
+            }
+        } else {
+            this.state.initialized = true;
+        }
+        
+        if (this.elements.input) this.elements.input.disabled = false;
+        if (this.elements.sendBtn) this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
+    },
+
+    loadState: function() {
+        try {
+            const threadId = localStorage.getItem(this.storage.THREAD_ID);
+            const messagesJson = localStorage.getItem(this.storage.MESSAGES);
+
+            if (threadId) {
+                this.state.threadId = threadId;
+            }
+            if (messagesJson) {
+                this.state.messages = JSON.parse(messagesJson);
+                if (!Array.isArray(this.state.messages)) {
+                    console.warn("Chat Warning: Invalid message format in storage, resetting.");
+                    this.state.messages = [];
+                }
             } else {
-                console.warn("Fancybox library not found or not loaded yet.");
+                this.state.messages = [];
             }
+            console.log("Chat State Loaded:", { threadId: this.state.threadId, messageCount: this.state.messages.length });
+        } catch (error) {
+            console.error('Chat Error: Failed to load state from localStorage.', error);
+            this.resetState();
+        }
+    },
 
-            // --- Update Footer Year ---
-            const currentYearSpan = document.getElementById('current-year');
-            if (currentYearSpan) {
-                currentYearSpan.textContent = new Date().getFullYear();
+    saveState: function() {
+        try {
+            if (this.state.threadId) {
+                localStorage.setItem(this.storage.THREAD_ID, this.state.threadId);
+            } else {
+                localStorage.removeItem(this.storage.THREAD_ID);
             }
+            
+            const messagesToStore = this.state.messages.slice(-50);
+            localStorage.setItem(this.storage.MESSAGES, JSON.stringify(messagesToStore));
+        } catch (error) {
+            console.error('Chat Error: Failed to save state to localStorage.', error);
+        }
+    },
 
-            // --- Smooth Scroll for Internal Links ---
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#') {
-                        e.preventDefault();
-                        
-                        const targetId = href.substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        
-                        if (targetElement) {
-                            const headerOffset = 80; // Adjust based on header height
-                            const elementPosition = targetElement.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    resetState: function() {
+        console.log("Chat: Resetting chat state.");
+        this.state.threadId = null;
+        this.state.messages = [];
+        this.state.initialized = false;
+        this.state.isProcessing = false;
+        localStorage.removeItem(this.storage.THREAD_ID);
+        localStorage.removeItem(this.storage.MESSAGES);
+        if (this.elements.messagesContainer) this.elements.messagesContainer.innerHTML = '';
+    },
 
-                            window.scrollTo({
-                                top: offsetPosition,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
+    loadMessages: function() {
+        if (!this.elements.messagesContainer) return;
+        this.elements.messagesContainer.innerHTML = '';
+        this.state.messages.forEach(message => {
+            this.addMessageToUI(message.content, message.isUser, false);
+        });
+        this.scrollToBottom();
+    },
+
+    createThread: async function() {
+        console.log('Chat API: Creating new thread...');
+        try {
+            const response = await fetch('/api/openai-api/create-thread', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ detail: "Unknown error creating thread" }));
+                throw new Error(`API Error (${response.status}): ${errorData.detail}`);
+            }
+            const data = await response.json();
+            if (!data.id) throw new Error('Thread ID not received from API.');
+            console.log('Chat API: Thread created:', data.id);
+            return data.id;
+        } catch (error) {
+            console.error('Chat Error in createThread:', error);
+            throw error;
+        }
+    },
+
+    sendMessage: async function() {
+        if (!this.elements.input || !this.elements.sendBtn) return;
+        const messageText = this.elements.input.value.trim();
+
+        if (!messageText || this.state.isProcessing || !this.state.threadId) {
+            if (!this.state.threadId) console.warn("Chat Warning: Cannot send message, thread not initialized.");
+            return;
+        }
+
+        this.state.isProcessing = true;
+        this.elements.sendBtn.disabled = true;
+        this.elements.input.disabled = true;
+        this.elements.input.value = '';
+        this.elements.input.style.height = 'auto';
+
+        try {
+            this.addMessageToUI(messageText, true);
+            this.state.messages.push({ content: messageText, isUser: true, timestamp: new Date().toISOString() });
+            this.saveState();
+
+            this.showTypingIndicator();
+
+            await this.addMessageToThread(messageText);
+            await this.processResponse();
+
+        } catch (error) {
+            console.error('Chat Error: Failed during sendMessage process.', error);
+            this.removeTypingIndicator();
+            const errorMsg = "Sorry, er ging iets mis. Probeer het opnieuw of neem contact op.";
+            this.addMessageToUI(errorMsg, false);
+            this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
+            this.saveState();
+        } finally {
+            this.state.isProcessing = false;
+            if (this.state.initialized) {
+                this.elements.input.disabled = false;
+                this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
+                this.elements.input.focus();
+            } else {
+                this.elements.input.disabled = true;
+                this.elements.sendBtn.disabled = true;
+            }
+            this.removeTypingIndicator();
+        }
+    },
+
+    addMessageToThread: async function(content) {
+        if (!this.state.threadId) throw new Error("Missing threadId in addMessageToThread");
+        console.log(`Chat API: Adding message to thread ${this.state.threadId}...`);
+        try {
+            const response = await fetch('/api/openai-api/add-message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ threadId: this.state.threadId, content: content })
+            });
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ detail: "Unknown error adding message" }));
+                throw new Error(`API Error (${response.status}): ${errorData.detail}`);
+            }
+            const data = await response.json();
+            console.log('Chat API: Message added:', data.id);
+            return data;
+        } catch (error) {
+            console.error('Chat Error in addMessageToThread:', error);
+            throw error;
+        }
+    },
+
+    processResponse: async function() {
+        if (!this.state.threadId) throw new Error("Missing threadId in processResponse");
+        let runId = null;
+        let attempts = 0;
+        const maxAttempts = 30;
+        const pollInterval = 1500;
+
+        try {
+            console.log(`Chat API: Creating run for thread ${this.state.threadId}...`);
+            const runResponse = await fetch('/api/openai-api/create-run', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ threadId: this.state.threadId })
             });
 
-            // --- Chat Widget Functionality ---
-            const chatWidget = {
-                elements: {
-                    widget: document.getElementById('chatbot'),
-                    toggleBtn: document.getElementById('chat-button'),
-                    container: document.getElementById('chat-window'),
-                    closeBtn: document.getElementById('close-chat'),
-                    messagesContainer: document.getElementById('chat-messages'),
-                    input: document.getElementById('chat-input'),
-                    sendBtn: document.getElementById('send-message')
-                },
-                state: {
-                    isOpen: false,
-                    isProcessing: false,
-                    threadId: null,
-                    messages: [],
-                    initialized: false,
-                    typingTimeout: null
-                },
-                storage: {
-                    THREAD_ID: 'diamond_chat_thread_id_v2',
-                    MESSAGES: 'diamond_chat_messages_v2'
-                },
+            if (!runResponse.ok) {
+                const errorData = await runResponse.json().catch(() => ({ detail: "Unknown error creating run" }));
+                throw new Error(`API Error (${runResponse.status}) creating run: ${errorData.detail}`);
+            }
 
-                init: function() {
-                    if (!this.elements.widget || !this.elements.toggleBtn || !this.elements.container) {
-                        console.warn("Chat widget base elements not found. Chat disabled.");
-                        return;
-                    }
+            const runData = await runResponse.json();
+            if (!runData.id) throw new Error('Run ID not received from API.');
+            runId = runData.id;
+            console.log('Chat API: Run created:', runId);
 
-                    if (!this.elements.closeBtn || !this.elements.messagesContainer || !this.elements.input || !this.elements.sendBtn) {
-                        console.warn("Chat widget interactive elements not fully found. Chat functionality might be limited.");
-                    }
+            let status = runData.status;
+            while (['queued', 'in_progress'].includes(status) && attempts < maxAttempts) {
+                attempts++;
+                await new Promise(resolve => setTimeout(resolve, pollInterval));
+                console.log(`Chat API: Checking run status (Attempt ${attempts})...`);
 
-                    this.loadState();
-                    this.setupEventListeners();
-
-                    if (this.state.threadId && this.state.messages.length > 0) {
-                        console.log("Chat: Resuming session with Thread ID:", this.state.threadId);
-                        this.loadMessages();
-                        this.state.initialized = true;
-                    } else if (this.state.threadId && this.state.messages.length === 0) {
-                        console.log("Chat: Found Thread ID but no messages, fetching initial state...");
-                        this.initializeChat(false);
-                    } else {
-                        console.log("Chat: No previous session found, initializing new chat.");
-                        this.initializeChat(true);
-                    }
-
-                    if (this.elements.input && this.elements.sendBtn) {
-                        this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
-                    }
-                },
-
-                setupEventListeners: function() {
-                    this.elements.toggleBtn?.addEventListener('click', () => this.toggleChat());
-                    this.elements.closeBtn?.addEventListener('click', () => this.closeChat());
-                    this.elements.sendBtn?.addEventListener('click', () => this.sendMessage());
-
-                    this.elements.input?.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                            e.preventDefault();
-                            if (!this.elements.sendBtn?.disabled) {
-                                this.sendMessage();
-                            }
+                try {
+                    const statusResponse = await fetch(`/api/openai-api/check-run-status?threadId=${this.state.threadId}&runId=${runId}`);
+                    if (!statusResponse.ok) {
+                        console.warn(`Chat Warning: Status check failed (Attempt ${attempts}): ${statusResponse.status}`);
+                        if (attempts >= maxAttempts - 5) {
+                            const errorData = await statusResponse.json().catch(() => ({ detail: `Status check failed` }));
+                            throw new Error(`API Error (${statusResponse.status}) checking status: ${errorData.detail}`);
                         }
-                    });
-
-                    this.elements.input?.addEventListener('input', () => {
-                        if (!this.elements.input || !this.elements.sendBtn) return;
-                        
-                        this.elements.input.style.height = 'auto';
-                        const maxHeight = 96;
-                        const newHeight = Math.min(this.elements.input.scrollHeight, maxHeight);
-                        this.elements.input.style.height = `${newHeight}px`;
-                        
-                        this.elements.sendBtn.disabled = this.elements.input.value.trim() === '' || this.state.isProcessing;
-                    });
-
-                    this.elements.container?.addEventListener('keydown', (e) => {
-                        if (e.key === 'Escape' && this.state.isOpen) {
-                            this.closeChat();
-                        }
-                    });
-
-                    document.addEventListener('click', (e) => {
-                        if (this.state.isOpen && this.elements.container && this.elements.toggleBtn) {
-                            if (!this.elements.container.contains(e.target) && !this.elements.toggleBtn.contains(e.target)) {
-                                this.closeChat();
-                            }
-                        }
-                    });
-                },
-
-                toggleChat: function() {
-                    this.state.isOpen ? this.closeChat() : this.openChat();
-                },
-
-                openChat: function() {
-                    if (!this.elements.container || !this.elements.toggleBtn || this.state.isOpen) return;
-
-                    this.elements.container.classList.remove('hidden');
-                    requestAnimationFrame(() => {
-                        this.elements.container.classList.remove('scale-95', 'opacity-0');
-                        this.elements.container.classList.add('scale-100', 'opacity-100');
-                    });
-
-                    this.elements.toggleBtn.classList.add('scale-90', 'opacity-0', 'pointer-events-none');
-                    setTimeout(() => this.elements.toggleBtn.classList.add('hidden'), 200);
-
-                    this.state.isOpen = true;
-                    this.elements.toggleBtn.setAttribute('aria-expanded', 'true');
-                    this.scrollToBottom();
-
-                    setTimeout(() => {
-                        this.elements.input?.focus();
-                    }, 350);
-                },
-
-                closeChat: function() {
-                    if (!this.elements.container || !this.elements.toggleBtn || !this.state.isOpen) return;
-
-                    this.elements.container.classList.remove('scale-100', 'opacity-100');
-                    this.elements.container.classList.add('scale-95', 'opacity-0');
-
-                    this.elements.toggleBtn.classList.remove('hidden');
-                    requestAnimationFrame(() => {
-                        this.elements.toggleBtn.classList.remove('scale-90', 'opacity-0', 'pointer-events-none');
-                    });
-
-                    setTimeout(() => {
-                        this.elements.container.classList.add('hidden');
-                        this.state.isOpen = false;
-                        this.elements.toggleBtn.setAttribute('aria-expanded', 'false');
-                    }, 300);
-                },
-
-                initializeChat: async function(addWelcome = true) {
-                    if (addWelcome && this.state.messages.length === 0) {
-                        const welcomeMessage = "👋 Welkom bij Diamond! Hoe kan ik helpen? Vraag naar diensten, prijzen of beschikbaarheid.";
-                        this.addMessageToUI(welcomeMessage, false, false);
-                        this.state.messages.push({ content: welcomeMessage, isUser: false, timestamp: new Date().toISOString() });
-                        this.state.initialized = true;
-                        this.saveState();
+                        continue;
                     }
+                    const statusData = await statusResponse.json();
+                    status = statusData.status;
+                    console.log('Chat API: Run status:', status);
+                } catch (pollError) {
+                    console.error("Chat Error during polling:", pollError);
+                    if (attempts >= maxAttempts - 5) throw pollError;
+                    continue;
+                }
 
-                    if (!this.state.threadId) {
-                        try {
-                            const threadId = await this.createThread();
-                            this.state.threadId = threadId;
-                            this.saveState();
-                        } catch (error) {
-                            console.error('Chat Error: Failed to create thread during initialization.', error);
-                            this.addMessageToUI("Kon geen chat starten. Probeer later opnieuw.", false);
-                            this.state.initialized = false;
-                            return;
-                        }
-                    } else {
-                        this.state.initialized = true;
-                    }
-                    
-                    if (this.elements.input) this.elements.input.disabled = false;
-                    if (this.elements.sendBtn) this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
-                },
-
-                loadState: function() {
-                    try {
-                        const threadId = localStorage.getItem(this.storage.THREAD_ID);
-                        const messagesJson = localStorage.getItem(this.storage.MESSAGES);
-
-                        if (threadId) {
-                            this.state.threadId = threadId;
-                        }
-                        if (messagesJson) {
-                            this.state.messages = JSON.parse(messagesJson);
-                            if (!Array.isArray(this.state.messages)) {
-                                console.warn("Chat Warning: Invalid message format in storage, resetting.");
-                                this.state.messages = [];
-                            }
-                        } else {
-                            this.state.messages = [];
-                        }
-                        console.log("Chat State Loaded:", { threadId: this.state.threadId, messageCount: this.state.messages.length });
-                    } catch (error) {
-                        console.error('Chat Error: Failed to load state from localStorage.', error);
-                        this.resetState();
-                    }
-                },
-
-                saveState: function() {
-                    try {
-                        if (this.state.threadId) {
-                            localStorage.setItem(this.storage.THREAD_ID, this.state.threadId);
-                        } else {
-                            localStorage.removeItem(this.storage.THREAD_ID);
-                        }
-                        
-                        const messagesToStore = this.state.messages.slice(-50);
-                        localStorage.setItem(this.storage.MESSAGES, JSON.stringify(messagesToStore));
-                    } catch (error) {
-                        console.error('Chat Error: Failed to save state to localStorage.', error);
-                    }
-                },
-
-                resetState: function() {
-                    console.log("Chat: Resetting chat state.");
-                    this.state.threadId = null;
-                    this.state.messages = [];
-                    this.state.initialized = false;
-                    this.state.isProcessing = false;
-                    localStorage.removeItem(this.storage.THREAD_ID);
-                    localStorage.removeItem(this.storage.MESSAGES);
-                    if (this.elements.messagesContainer) this.elements.messagesContainer.innerHTML = '';
-                },
-
-                loadMessages: function() {
-                    if (!this.elements.messagesContainer) return;
-                    this.elements.messagesContainer.innerHTML = '';
-                    this.state.messages.forEach(message => {
-                        this.addMessageToUI(message.content, message.isUser, false);
-                    });
-                    this.scrollToBottom();
-                },
-
-                createThread: async function() {
-                    console.log('Chat API: Creating new thread...');
-                    try {
-                        const response = await fetch('/api/openai-api/create-thread', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' }
-                        });
-                        if (!response.ok) {
-                            const errorData = await response.json().catch(() => ({ detail: "Unknown error creating thread" }));
-                            throw new Error(`API Error (${response.status}): ${errorData.detail}`);
-                        }
-                        const data = await response.json();
-                        if (!data.id) throw new Error('Thread ID not received from API.');
-                        console.log('Chat API: Thread created:', data.id);
-                        return data.id;
-                    } catch (error) {
-                        console.error('Chat Error in createThread:', error);
-                        throw error;
-                    }
-                },
-
-                sendMessage: async function() {
-                    if (!this.elements.input || !this.elements.sendBtn) return;
-                    const messageText = this.elements.input.value.trim();
-
-                    if (!messageText || this.state.isProcessing || !this.state.threadId) {
-                        if (!this.state.threadId) console.warn("Chat Warning: Cannot send message, thread not initialized.");
-                        return;
-                    }
-
-                    this.state.isProcessing = true;
-                    this.elements.sendBtn.disabled = true;
-                    this.elements.input.disabled = true;
-                    this.elements.input.value = '';
-                    this.elements.input.style.height = 'auto';
-
-                    try {
-                        this.addMessageToUI(messageText, true);
-                        this.state.messages.push({ content: messageText, isUser: true, timestamp: new Date().toISOString() });
-                        this.saveState();
-
-                        this.showTypingIndicator();
-
-                        await this.addMessageToThread(messageText);
-                        await this.processResponse();
-
-                    } catch (error) {
-                        console.error('Chat Error: Failed during sendMessage process.', error);
-                        this.removeTypingIndicator();
-                        const errorMsg = "Sorry, er ging iets mis. Probeer het opnieuw of neem contact op.";
-                        this.addMessageToUI(errorMsg, false);
-                        this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
-                        this.saveState();
-                    } finally {
-                        this.state.isProcessing = false;
-                        if (this.state.initialized) {
-                            this.elements.input.disabled = false;
-                            this.elements.sendBtn.disabled = this.elements.input.value.trim() === '';
-                            this.elements.input.focus();
-                        } else {
-                            this.elements.input.disabled = true;
-                            this.elements.sendBtn.disabled = true;
-                        }
-                        this.removeTypingIndicator();
-                    }
-                },
-
-                addMessageToThread: async function(content) {
-                    if (!this.state.threadId) throw new Error("Missing threadId in addMessageToThread");
-                    console.log(`Chat API: Adding message to thread ${this.state.threadId}...`);
-                    try {
-                        const response = await fetch('/api/openai-api/add-message', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ threadId: this.state.threadId, content: content })
-                        });
-                        if (!response.ok) {
-                            const errorData = await response.json().catch(() => ({ detail: "Unknown error adding message" }));
-                            throw new Error(`API Error (${response.status}): ${errorData.detail}`);
-                        }
-                        const data = await response.json();
-                        console.log('Chat API: Message added:', data.id);
-                        return data;
-                    } catch (error) {
-                        console.error('Chat Error in addMessageToThread:', error);
-                        throw error;
-                    }
-                },
-
-                processResponse: async function() {
-                    if (!this.state.threadId) throw new Error("Missing threadId in processResponse");
-                    let runId = null;
-                    let attempts = 0;
-                    const maxAttempts = 30;
-                    const pollInterval = 1500;
-
-                    try {
-                        console.log(`Chat API: Creating run for thread ${this.state.threadId}...`);
-                        const runResponse = await fetch('/api/openai-api/create-run', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ threadId: this.state.threadId })
-                        });
-
-                        if (!runResponse.ok) {
-                            const errorData = await runResponse.json().catch(() => ({ detail: "Unknown error creating run" }));
-                            throw new Error(`API Error (${runResponse.status}) creating run: ${errorData.detail}`);
-                        }
-
-                        const runData = await runResponse.json();
-                        if (!runData.id) throw new Error('Run ID not received from API.');
-                        runId = runData.id;
-                        console.log('Chat API: Run created:', runId);
-
-                        let status = runData.status;
-                        while (['queued', 'in_progress'].includes(status) && attempts < maxAttempts) {
-                            attempts++;
-                            await new Promise(resolve => setTimeout(resolve, pollInterval));
-                            console.log(`Chat API: Checking run status (Attempt ${attempts})...`);
-
-                            try {
-                                const statusResponse = await fetch(`/api/openai-api/check-run-status?threadId=${this.state.threadId}&runId=${runId}`);
-                                if (!statusResponse.ok) {
-                                    console.warn(`Chat Warning: Status check failed (Attempt ${attempts}): ${statusResponse.status}`);
-                                    if (attempts >= maxAttempts - 5) {
-                                        const errorData = await statusResponse.json().catch(() => ({ detail: `Status check failed` }));
-                                        throw new Error(`API Error (${statusResponse.status}) checking status: ${errorData.detail}`);
-                                    }
-                                    continue;
-                                }
-                                const statusData = await statusResponse.json();
-                                status = statusData.status;
-                                console.log('Chat API: Run status:', status);
-                            } catch (pollError) {
-                                console.error("Chat Error during polling:", pollError);
-                                if (attempts >= maxAttempts - 5) throw pollError;
-                                continue;
-                            }
-
-                            if (status === 'completed') {
-                                console.log('Chat API: Run completed. Fetching messages...');
-                                this.removeTypingIndicator();
-
-                                const messagesResponse = await fetch(`/api/openai-api/get-messages?threadId=${this.state.threadId}&limit=5&order=desc`);
-
-                                if (!messagesResponse.ok) {
-                                    const errorData = await messagesResponse.json().catch(() => ({ detail: "Unknown error getting messages" }));
-                                    throw new Error(`API Error (${messagesResponse.status}) getting messages: ${errorData.detail}`);
-                                }
-
-                                const messagesData = await messagesResponse.json();
-                                console.log('Chat API: Messages received:', messagesData.data?.length);
-
-                                const latestAssistantMessage = messagesData.data?.find(msg => msg.role === 'assistant' && msg.run_id === runId);
-
-                                if (latestAssistantMessage?.content?.[0]?.type === 'text') {
-                                    const responseContent = latestAssistantMessage.content[0].text.value;
-                                    console.log('Chat API: Assistant response found:', responseContent.substring(0, 50) + '...');
-
-                                    this.addMessageToUI(responseContent, false);
-                                    this.state.messages.push({
-                                        content: responseContent,
-                                        isUser: false,
-                                        timestamp: new Date(latestAssistantMessage.created_at * 1000).toISOString()
-                                    });
-                                    this.saveState();
-                                } else {
-                                    console.warn('Chat Warning: Run completed, but no suitable assistant message found.', latestAssistantMessage);
-                                    this.addMessageToUI("Er was een antwoord, maar ik kon het niet lezen. Probeer het opnieuw.", false);
-                                }
-                                return;
-                            } else if (['failed', 'expired', 'cancelled', 'requires_action'].includes(status)) {
-                                console.error(`Chat Error: Run ended with status: ${status}`, runData);
-                                throw new Error(`Chat sessie mislukt (status: ${status}).`);
-                            }
-                        }
-
-                        if (attempts >= maxAttempts) {
-                            throw new Error('Timeout waiting for assistant response.');
-                        }
-
-                    } catch (error) {
-                        console.error('Chat Error in processResponse:', error);
-                        this.removeTypingIndicator();
-                        const errorMsg = error.message.startsWith("Chat sessie mislukt") || error.message.startsWith("Timeout")
-                            ? error.message
-                            : "Er is een onverwachte fout opgetreden. Probeer het later opnieuw.";
-                        this.addMessageToUI(errorMsg, false);
-                        this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
-                        this.saveState();
-                    }
-                },
-
-                addMessageToUI: function(content, isUser, animate = true) {
-                    if (!this.elements.messagesContainer) return;
-
-                    const messageWrapper = document.createElement('div');
-                    messageWrapper.className = `flex items-start gap-2.5 mb-3 ${isUser ? 'justify-end' : 'justify-start'}`;
-
-                    const bubbleClasses = isUser
-                        ? 'bg-neutral-200 rounded-lg rounded-br-none text-neutral-800'
-                        : 'bg-white rounded-lg rounded-tl-none text-neutral-800 border border-neutral-100';
-
-                    const formattedContent = this.formatMessageContent(content);
-
-                    let innerHTML = '';
-                    if (!isUser) {
-                        innerHTML += `
-                            <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
-                                <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
-                            </div>`;
-                    }
-
-                    innerHTML += `
-                        <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
-                            ${!isUser ? '<span class="text-xs font-semibold text-neutral-600 ml-1">Diamond Bot</span>' : ''}
-                            <div class="leading-snug p-2.5 sm:p-3 shadow-sm text-xs sm:text-sm font-normal ${bubbleClasses}">
-                                ${formattedContent}
-                            </div>
-                        </div>`;
-
-                    messageWrapper.innerHTML = innerHTML;
-
-                    if (animate) {
-                        messageWrapper.style.opacity = '0';
-                        messageWrapper.style.transform = `translateY(10px) ${isUser ? 'translateX(10px)' : 'translateX(-10px)'}`;
-                        this.elements.messagesContainer.appendChild(messageWrapper);
-                        requestAnimationFrame(() => {
-                            messageWrapper.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                            messageWrapper.style.opacity = '1';
-                            messageWrapper.style.transform = 'translateY(0) translateX(0)';
-                        });
-                    } else {
-                        this.elements.messagesContainer.appendChild(messageWrapper);
-                    }
-
-                    this.scrollToBottom();
-                },
-
-                formatMessageContent: function(content) {
-                    let formattedText = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-                    
-                    const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-                    formattedText = formattedText.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-brand-primary underline hover:text-brand-dark">$1</a>');
-                    
-                    formattedText = formattedText.replace(/\n/g, '<br>');
-                    return formattedText;
-                },
-
-                showTypingIndicator: function() {
-                    if (!this.elements.messagesContainer) return;
-                    if (this.state.typingTimeout) clearTimeout(this.state.typingTimeout);
+                if (status === 'completed') {
+                    console.log('Chat API: Run completed. Fetching messages...');
                     this.removeTypingIndicator();
 
-                    const typingDiv = document.createElement('div');
-                    typingDiv.id = 'typing-indicator';
-                    typingDiv.className = 'flex items-start gap-2.5 mb-3 justify-start';
+                    const messagesResponse = await fetch(`/api/openai-api/get-messages?threadId=${this.state.threadId}&limit=5&order=desc`);
 
-                    typingDiv.innerHTML = `
-                        <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
-                            <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
-                        </div>
-                        <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
-                            <span class="text-xs font-semibold text-neutral-600 ml-1">Diamond Bot</span>
-                            <div class="leading-snug p-2.5 sm:p-3 bg-white rounded-lg rounded-tl-none shadow-sm border border-neutral-100">
-                                <div class="flex space-x-1 items-center h-4">
-                                    <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.32s;"></div>
-                                    <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.16s;"></div>
-                                    <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce"></div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    
-                    typingDiv.style.opacity = '0';
-                    this.elements.messagesContainer.appendChild(typingDiv);
-                    requestAnimationFrame(() => {
-                        typingDiv.style.transition = 'opacity 0.3s ease';
-                        typingDiv.style.opacity = '1';
-                    });
-
-                    this.scrollToBottom();
-
-                    this.state.typingTimeout = setTimeout(() => {
-                        console.warn("Chat Warning: Typing indicator timed out.");
-                        this.removeTypingIndicator();
-                    }, 30000);
-                },
-
-                removeTypingIndicator: function() {
-                    if (this.state.typingTimeout) {
-                        clearTimeout(this.state.typingTimeout);
-                        this.state.typingTimeout = null;
+                    if (!messagesResponse.ok) {
+                        const errorData = await messagesResponse.json().catch(() => ({ detail: "Unknown error getting messages" }));
+                        throw new Error(`API Error (${messagesResponse.status}) getting messages: ${errorData.detail}`);
                     }
-                    const typingIndicator = document.getElementById('typing-indicator');
-                    if (typingIndicator) {
-                        typingIndicator.style.transition = 'opacity 0.3s ease';
-                        typingIndicator.style.opacity = '0';
-                        setTimeout(() => typingIndicator.remove(), 300);
-                    }
-                },
 
-                scrollToBottom: function() {
-                    if (!this.elements.messagesContainer) return;
-                    this.elements.messagesContainer.scrollTo({
-                        top: this.elements.messagesContainer.scrollHeight,
-                        behavior: 'smooth'
-                    });
+                    const messagesData = await messagesResponse.json();
+                    console.log('Chat API: Messages received:', messagesData.data?.length);
+
+                    const latestAssistantMessage = messagesData.data?.find(msg => msg.role === 'assistant' && msg.run_id === runId);
+
+                    if (latestAssistantMessage?.content?.[0]?.type === 'text') {
+                        const responseContent = latestAssistantMessage.content[0].text.value;
+                        console.log('Chat API: Assistant response found:', responseContent.substring(0, 50) + '...');
+
+                        this.addMessageToUI(responseContent, false);
+                        this.state.messages.push({
+                            content: responseContent,
+                            isUser: false,
+                            timestamp: new Date(latestAssistantMessage.created_at * 1000).toISOString()
+                        });
+                        this.saveState();
+                    } else {
+                        console.warn('Chat Warning: Run completed, but no suitable assistant message found.', latestAssistantMessage);
+                        this.addMessageToUI("Er was een antwoord, maar ik kon het niet lezen. Probeer het opnieuw.", false);
+                    }
+                    return;
+                } else if (['failed', 'expired', 'cancelled', 'requires_action'].includes(status)) {
+                    console.error(`Chat Error: Run ended with status: ${status}`, runData);
+                    throw new Error(`Chat sessie mislukt (status: ${status}).`);
                 }
-            };
+            }
 
-            // Initialize the chat widget
-            chatWidget.init();
+            if (attempts >= maxAttempts) {
+                throw new Error('Timeout waiting for assistant response.');
+            }
+
+        } catch (error) {
+            console.error('Chat Error in processResponse:', error);
+            this.removeTypingIndicator();
+            const errorMsg = error.message.startsWith("Chat sessie mislukt") || error.message.startsWith("Timeout")
+                ? error.message
+                : "Er is een onverwachte fout opgetreden. Probeer het later opnieuw.";
+            this.addMessageToUI(errorMsg, false);
+            this.state.messages.push({ content: errorMsg, isUser: false, timestamp: new Date().toISOString() });
+            this.saveState();
+        }
+    },
+
+    addMessageToUI: function(content, isUser, animate = true) {
+        if (!this.elements.messagesContainer) return;
+
+        const messageWrapper = document.createElement('div');
+        messageWrapper.className = `flex items-start gap-2.5 mb-3 ${isUser ? 'justify-end' : 'justify-start'}`;
+
+        const bubbleClasses = isUser
+            ? 'bg-neutral-200 rounded-lg rounded-br-none text-neutral-800'
+            : 'bg-white rounded-lg rounded-tl-none text-neutral-800 border border-neutral-100';
+
+        const formattedContent = this.formatMessageContent(content);
+
+        let innerHTML = '';
+        if (!isUser) {
+            innerHTML += `
+                <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
+                    <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
+                </div>`;
+        }
+
+        innerHTML += `
+            <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
+                ${!isUser ? '<span class="text-xs font-semibold text-neutral-600 ml-1">Diamond Bot</span>' : ''}
+                <div class="leading-snug p-2.5 sm:p-3 shadow-sm text-xs sm:text-sm font-normal ${bubbleClasses}">
+                    ${formattedContent}
+                </div>
+            </div>`;
+
+        messageWrapper.innerHTML = innerHTML;
+
+        if (animate) {
+            messageWrapper.style.opacity = '0';
+            messageWrapper.style.transform = `translateY(10px) ${isUser ? 'translateX(10px)' : 'translateX(-10px)'}`;
+            this.elements.messagesContainer.appendChild(messageWrapper);
+            requestAnimationFrame(() => {
+                messageWrapper.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                messageWrapper.style.opacity = '1';
+                messageWrapper.style.transform = 'translateY(0) translateX(0)';
+            });
+        } else {
+            this.elements.messagesContainer.appendChild(messageWrapper);
+        }
+
+        this.scrollToBottom();
+    },
+
+    formatMessageContent: function(content) {
+        let formattedText = content.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        
+        const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        formattedText = formattedText.replace(urlRegex, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-brand-primary underline hover:text-brand-dark">$1</a>');
+        
+        formattedText = formattedText.replace(/\n/g, '<br>');
+        return formattedText;
+    },
+
+    showTypingIndicator: function() {
+        if (!this.elements.messagesContainer) return;
+        if (this.state.typingTimeout) clearTimeout(this.state.typingTimeout);
+        this.removeTypingIndicator();
+
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'typing-indicator';
+        typingDiv.className = 'flex items-start gap-2.5 mb-3 justify-start';
+
+        typingDiv.innerHTML = `
+            <div class="flex-shrink-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-primary mt-1 self-end">
+                <i class="fas fa-robot text-xs sm:text-sm" aria-hidden="true"></i>
+            </div>
+            <div class="flex flex-col gap-1 max-w-[80%] sm:max-w-[75%]">
+                <span class="text-xs font-semibold text-neutral-600 ml-1">Diamond Bot</span>
+                <div class="leading-snug p-2.5 sm:p-3 bg-white rounded-lg rounded-tl-none shadow-sm border border-neutral-100">
+                    <div class="flex space-x-1 items-center h-4">
+                        <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.32s;"></div>
+                        <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce" style="animation-delay: -0.16s;"></div>
+                        <div class="w-1.5 h-1.5 bg-neutral-400 rounded-full animate-bounce"></div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        typingDiv.style.opacity = '0';
+        this.elements.messagesContainer.appendChild(typingDiv);
+        requestAnimationFrame(() => {
+            typingDiv.style.transition = 'opacity 0.3s ease';
+            typingDiv.style.opacity = '1';
         });
-    </script>
+
+        this.scrollToBottom();
+
+        this.state.typingTimeout = setTimeout(() => {
+            console.warn("Chat Warning: Typing indicator timed out.");
+            this.removeTypingIndicator();
+        }, 30000);
+    },
+
+    removeTypingIndicator: function() {
+        if (this.state.typingTimeout) {
+            clearTimeout(this.state.typingTimeout);
+            this.state.typingTimeout = null;
+        }
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) {
+            typingIndicator.style.transition = 'opacity 0.3s ease';
+            typingIndicator.style.opacity = '0';
+            setTimeout(() => typingIndicator.remove(), 300);
+        }
+    },
+
+    scrollToBottom: function() {
+        if (!this.elements.messagesContainer) return;
+        this.elements.messagesContainer.scrollTo({
+            top: this.elements.messagesContainer.scrollHeight,
+            behavior: 'smooth'
+        });
+    }
+};
+
+// Initialize the chat widget
+chatWidget.init();
+                                  </script>
 </body>
 </html>
