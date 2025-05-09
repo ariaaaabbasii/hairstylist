@@ -8,31 +8,27 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         :root {
+            /* Core Colors */
             --color-white: #FFFFFF;
-            --color-champagne-light: #F9F6F0;
-            --color-champagne-bg: #F5EFE0;
-            --color-diamond-blue: #A5CADF; /* Diamond blue primary */
-            --color-diamond-blue-dark: #7FB5D4; /* Darker shade */
-            --color-diamond-accent: #D4AF37; /* Gold accent */
-            --color-diamond-accent-soft: #E6C283; /* Softer gold */
-            --color-text-dark: #324B5C; /* Dark blue-gray for titles */
-            --color-text-body: #4E5D6C; /* Mid blue-gray for body */
-            --color-text-light: #FAF6F0; /* For on dark backgrounds */
-            --font-primary: 'Playfair Display', serif;
-            --font-secondary: 'Poppins', sans-serif;
-            --border-radius-sm: 4px;
-            --border-radius-md: 8px;
-            --border-radius-lg: 16px;
-            --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 8px rgba(0,0,0,0.08);
-            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
-            --transition-fast: all 0.2s ease;
-            --transition-normal: all 0.3s ease;
+            --color-off-white: #F9F9F9;
+            --color-light-gray: #F2F2F2;
+            --color-gold: #D4AF37;
+            --color-gold-light: #E6C283;
+            --color-black: #111111;
+            --color-dark-gray: #2D2D2D;
+            --color-medium-gray: #6B6B6B;
+            --color-light-text: #EFEFEF;
+            
+            /* Typography */
+            --font-primary: 'Cormorant Garamond', serif;
+            --font-secondary: 'Montserrat', sans-serif;
+            
+            /* Spacing */
             --spacing-xs: 0.25rem;
             --spacing-sm: 0.5rem;
             --spacing-md: 1rem;
@@ -40,9 +36,19 @@
             --spacing-xl: 2rem;
             --spacing-2xl: 3rem;
             --spacing-3xl: 4rem;
+            
+            /* UI Elements */
+            --border-radius-sm: 4px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+            --transition-fast: all 0.2s ease;
+            --transition-normal: all 0.3s ease;
         }
 
-        /* Base Styles - Mobile First */
+        /* Reset & Base Styles - Mobile First */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -56,7 +62,7 @@
 
         body {
             font-family: var(--font-secondary);
-            color: var(--color-text-body);
+            color: var(--color-dark-gray);
             line-height: 1.6;
             background-color: var(--color-white);
             -webkit-font-smoothing: antialiased;
@@ -66,13 +72,14 @@
 
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-primary);
-            color: var(--color-text-dark);
+            color: var(--color-black);
             margin-bottom: var(--spacing-md);
             line-height: 1.3;
+            font-weight: 600;
         }
         
-        h1 { font-size: 2rem; }
-        h2 { font-size: 1.75rem; }
+        h1 { font-size: 2.25rem; }
+        h2 { font-size: 1.875rem; }
         h3 { font-size: 1.5rem; }
         h4 { font-size: 1.25rem; }
         
@@ -81,13 +88,13 @@
         }
 
         a {
-            color: var(--color-diamond-blue-dark);
+            color: var(--color-black);
             text-decoration: none;
             transition: var(--transition-normal);
         }
 
         a:hover {
-            color: var(--color-diamond-accent);
+            color: var(--color-gold);
         }
 
         img {
@@ -125,38 +132,40 @@
         /* Buttons */
         .btn {
             display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
+            padding: 0.75rem 1.75rem;
+            border-radius: 2px;
             font-weight: 500;
             text-decoration: none;
             text-align: center;
             cursor: pointer;
             transition: var(--transition-normal);
             font-size: 0.9375rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .btn-primary {
-            background-color: var(--color-diamond-blue);
-            color: var(--color-white);
-            border: 2px solid var(--color-diamond-blue);
+            background-color: var(--color-gold);
+            color: var(--color-black);
+            border: 1px solid var(--color-gold);
         }
         
         .btn-primary:hover {
-            background-color: var(--color-diamond-blue-dark);
-            border-color: var(--color-diamond-blue-dark);
+            background-color: var(--color-black);
+            color: var(--color-gold);
+            border-color: var(--color-black);
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
 
         .btn-secondary {
             background-color: transparent;
-            color: var(--color-diamond-blue-dark);
-            border: 2px solid var(--color-diamond-blue-dark);
+            color: var(--color-black);
+            border: 1px solid var(--color-black);
         }
         
         .btn-secondary:hover {
-            background-color: var(--color-diamond-blue-dark);
+            background-color: var(--color-black);
             color: var(--color-white);
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
@@ -165,17 +174,17 @@
         .btn-white {
             background-color: transparent;
             color: var(--color-white);
-            border: 2px solid var(--color-white);
+            border: 1px solid var(--color-white);
         }
         
         .btn-white:hover {
             background-color: var(--color-white);
-            color: var(--color-diamond-blue-dark);
+            color: var(--color-black);
         }
 
-        /* Header - Mobile First */
+        /* Top Contact Bar - Mobile First */
         .top-contact-bar {
-            background-color: var(--color-diamond-blue-dark);
+            background-color: var(--color-black);
             color: var(--color-white);
             padding: 0.5rem 0;
             font-size: 0.875rem;
@@ -183,14 +192,15 @@
         }
         
         .top-contact-bar a {
-            color: var(--color-white);
+            color: var(--color-gold-light);
             margin-left: var(--spacing-sm);
         }
         
         .top-contact-bar a:hover {
-            color: var(--color-champagne-light);
+            color: var(--color-white);
         }
 
+        /* Header - Mobile First */
         #main-header {
             position: sticky;
             top: 0;
@@ -213,9 +223,14 @@
             font-family: var(--font-primary);
             font-size: 1.75rem;
             font-weight: 700;
-            color: var(--color-diamond-blue-dark);
+            color: var(--color-black);
             text-decoration: none;
             transition: var(--transition-normal);
+            letter-spacing: 1px;
+        }
+
+        .logo-accent {
+            color: var(--color-gold);
         }
 
         /* Mobile Navigation */
@@ -225,7 +240,7 @@
             right: -100%;
             width: 80%;
             height: 100vh;
-            background-color: var(--color-white);
+            background-color: var(--color-black);
             box-shadow: var(--shadow-lg);
             transition: var(--transition-normal);
             padding: var(--spacing-2xl) var(--spacing-md);
@@ -245,11 +260,15 @@
             align-items: center;
             margin-bottom: var(--spacing-xl);
         }
+        
+        .nav-menu-header .logo-link {
+            color: var(--color-white);
+        }
 
         .nav-menu-close {
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--color-text-dark);
+            color: var(--color-white);
             background: none;
             border: none;
         }
@@ -262,22 +281,24 @@
         .nav-link {
             display: block;
             font-size: 1.125rem;
-            color: var(--color-text-dark);
+            color: var(--color-white);
             padding: var(--spacing-sm) 0;
-            border-bottom: 1px solid var(--color-champagne-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             transition: var(--transition-normal);
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .nav-link:hover,
         .nav-link.active {
-            color: var(--color-diamond-blue-dark);
-            border-bottom-color: var(--color-diamond-blue-dark);
+            color: var(--color-gold);
+            border-bottom-color: var(--color-gold);
         }
 
         .mobile-toggle-btn {
             display: block;
             font-size: 1.5rem;
-            color: var(--color-text-dark);
+            color: var(--color-black);
             background: none;
             border: none;
             cursor: pointer;
@@ -290,7 +311,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
@@ -314,7 +335,7 @@
             background-size: cover;
             background-position: center;
             padding: var(--spacing-3xl) 0;
-            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/Images/SalonMain.jpg');
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('/Images/SalonMain.jpg');
         }
 
         .hero-content {
@@ -326,11 +347,11 @@
 
         .hero-content .subheading {
             font-family: var(--font-secondary);
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--color-diamond-accent-soft);
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: var(--color-gold-light);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-bottom: var(--spacing-md);
             display: block;
         }
@@ -339,15 +360,16 @@
             font-size: 2.5rem;
             color: var(--color-white);
             margin-bottom: var(--spacing-lg);
-            font-weight: 700;
+            font-weight: 400;
             line-height: 1.2;
+            letter-spacing: 1px;
         }
 
         .hero-content p {
             font-size: 1.125rem;
             margin-bottom: var(--spacing-xl);
             font-weight: 300;
-            color: var(--color-champagne-light);
+            color: var(--color-light-text);
         }
 
         .hero-buttons {
@@ -390,11 +412,11 @@
 
         .section-title .subtitle-decorated {
             font-family: var(--font-secondary);
-            font-size: 0.9375rem;
-            font-weight: 500;
-            color: var(--color-diamond-blue-dark);
+            font-size: 0.8125rem;
+            font-weight: 400;
+            color: var(--color-gold);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 3px;
             margin-bottom: var(--spacing-xs);
             display: block;
             position: relative;
@@ -407,14 +429,16 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 50px;
-            height: 2px;
-            background-color: var(--color-diamond-accent);
+            width: 40px;
+            height: 1px;
+            background-color: var(--color-gold);
         }
 
         .section-title h2 {
             font-size: 2rem;
             margin-bottom: var(--spacing-md);
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
         .section-title p {
@@ -422,6 +446,7 @@
             margin-left: auto;
             margin-right: auto;
             font-size: 1rem;
+            color: var(--color-medium-gray);
         }
 
         /* About/Philosophy Section - Mobile First */
@@ -437,7 +462,7 @@
 
         .philosophy-image img {
             width: 100%;
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-sm);
             box-shadow: var(--shadow-md);
         }
 
@@ -452,8 +477,8 @@
         }
 
         .value-icon {
-            font-size: 1.5rem;
-            color: var(--color-diamond-accent);
+            font-size: 1.25rem;
+            color: var(--color-gold);
             margin-right: var(--spacing-md);
             padding-top: 0.25rem;
             flex-shrink: 0;
@@ -464,20 +489,20 @@
         .value-text h4 {
             font-size: 1.125rem;
             margin-bottom: var(--spacing-xs);
-            color: var(--color-text-dark);
-            font-family: var(--font-secondary);
+            color: var(--color-black);
+            font-family: var(--font-primary);
             font-weight: 600;
         }
 
         .value-text p {
             font-size: 0.9375rem;
-            color: var(--color-text-body);
+            color: var(--color-medium-gray);
             margin-bottom: 0;
         }
 
         /* Treatments Section - Mobile First */
         .treatments-section {
-            background-color: var(--color-champagne-light);
+            background-color: var(--color-light-gray);
         }
 
         .treatments-grid {
@@ -489,20 +514,22 @@
         .treatment-card {
             background-color: var(--color-white);
             padding: var(--spacing-xl);
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-sm);
             box-shadow: var(--shadow-md);
             transition: var(--transition-normal);
             text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .treatment-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-lg);
+            border-color: var(--color-gold);
         }
 
         .treatment-icon {
-            font-size: 2.5rem;
-            color: var(--color-diamond-blue);
+            font-size: 2rem;
+            color: var(--color-gold);
             margin-bottom: var(--spacing-md);
             line-height: 1;
         }
@@ -510,12 +537,14 @@
         .treatment-card h3 {
             font-size: 1.375rem;
             margin-bottom: var(--spacing-sm);
-            color: var(--color-text-dark);
+            color: var(--color-black);
+            font-weight: 500;
         }
 
         .treatment-card p {
             font-size: 0.9375rem;
             margin-bottom: var(--spacing-lg);
+            color: var(--color-medium-gray);
         }
 
         /* Gallery Section - Mobile First */
@@ -525,14 +554,14 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr;
             gap: var(--spacing-md);
         }
 
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-sm);
             aspect-ratio: 1 / 1;
             cursor: pointer;
             box-shadow: var(--shadow-sm);
@@ -546,7 +575,7 @@
         }
 
         .gallery-item:hover img {
-            transform: scale(1.08);
+            transform: scale(1.05);
             filter: brightness(0.8);
         }
 
@@ -556,7 +585,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 60%);
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0) 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -573,9 +602,9 @@
         }
 
         .gallery-item-overlay i {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             margin-bottom: var(--spacing-xs);
-            color: var(--color-diamond-accent-soft);
+            color: var(--color-gold-light);
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.3s 0.1s ease, transform 0.3s 0.1s ease;
@@ -588,7 +617,7 @@
 
         .gallery-item-overlay h4 {
             font-family: var(--font-secondary);
-            font-weight: 600;
+            font-weight: 500;
             font-size: 1rem;
             color: var(--color-white);
             margin-bottom: 0;
@@ -609,7 +638,7 @@
 
         /* Friends Bonus Section - Mobile First */
         .friends-bonus-section {
-            background-color: var(--color-champagne-light);
+            background-color: var(--color-light-gray);
         }
 
         .friends-bonus-content {
@@ -627,7 +656,7 @@
         .friends-bonus-image-wrapper img {
             max-width: 100%;
             height: auto;
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-sm);
             box-shadow: var(--shadow-md);
         }
 
@@ -635,13 +664,13 @@
             position: absolute;
             top: var(--spacing-lg);
             right: var(--spacing-lg);
-            background-color: var(--color-diamond-accent);
-            color: var(--color-white);
+            background-color: var(--color-gold);
+            color: var(--color-black);
             padding: 0.75rem 1rem;
-            border-radius: 50px;
+            border-radius: 2px;
             font-weight: 600;
             font-size: 0.875rem;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transform: rotate(5deg);
         }
 
@@ -659,7 +688,7 @@
         }
 
         .friends-bonus-steps .step-icon {
-            color: var(--color-diamond-blue);
+            color: var(--color-gold);
             font-size: 1.25rem;
             margin-right: var(--spacing-sm);
             flex-shrink: 0;
@@ -668,7 +697,13 @@
 
         /* Testimonials Section - Mobile First */
         .testimonials-section {
-            background-color: var(--color-champagne-light);
+            background-color: var(--color-black);
+            color: var(--color-white);
+        }
+        
+        .testimonials-section .section-title h2,
+        .testimonials-section .section-title p {
+            color: var(--color-white);
         }
 
         .testimonials-grid {
@@ -678,10 +713,10 @@
         }
 
         .testimonial-card {
-            background-color: var(--color-white);
+            background-color: rgba(255, 255, 255, 0.05);
             padding: var(--spacing-xl);
-            border-radius: var(--border-radius-md);
-            box-shadow: var(--shadow-md);
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             display: flex;
             flex-direction: column;
@@ -689,8 +724,8 @@
 
         .testimonial-quote-icon {
             font-size: 2.5rem;
-            color: var(--color-diamond-accent-soft);
-            opacity: 0.5;
+            color: var(--color-gold);
+            opacity: 0.3;
             position: absolute;
             top: var(--spacing-lg);
             left: var(--spacing-lg);
@@ -698,7 +733,7 @@
 
         .testimonial-stars {
             margin-top: 2rem; /* Space for quote icon */
-            color: var(--color-diamond-accent);
+            color: var(--color-gold);
             margin-bottom: var(--spacing-md);
             font-size: 0.875rem;
         }
@@ -708,17 +743,18 @@
             margin-bottom: var(--spacing-lg);
             font-size: 0.9375rem;
             flex-grow: 1;
+            color: var(--color-light-text);
         }
 
         .testimonial-author {
             font-weight: 600;
-            color: var(--color-text-dark);
+            color: var(--color-white);
             font-size: 1rem;
         }
 
         .testimonial-service {
             font-size: 0.8125rem;
-            color: var(--color-diamond-blue);
+            color: var(--color-gold-light);
         }
 
         .testimonials-button-wrapper {
@@ -739,21 +775,29 @@
         }
 
         .contact-card {
-            background-color: var(--color-champagne-light);
+            background-color: var(--color-light-gray);
             padding: var(--spacing-xl);
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-sm);
             text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: var(--transition-normal);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-gold);
         }
 
         .contact-icon {
-            font-size: 2.25rem;
-            color: var(--color-diamond-blue);
+            font-size: 1.75rem;
+            color: var(--color-gold);
             margin-bottom: var(--spacing-md);
             display: inline-block;
             background-color: var(--color-white);
-            width: 70px;
-            height: 70px;
-            line-height: 70px;
+            width: 60px;
+            height: 60px;
+            line-height: 60px;
             border-radius: 50%;
             box-shadow: var(--shadow-sm);
         }
@@ -761,12 +805,13 @@
         .contact-card h3 {
             font-size: 1.25rem;
             margin-bottom: var(--spacing-sm);
-            color: var(--color-text-dark);
+            color: var(--color-black);
+            font-weight: 500;
         }
 
         .contact-card p, .contact-card ul, .contact-card a {
             font-size: 0.9375rem;
-            color: var(--color-text-body);
+            color: var(--color-medium-gray);
         }
 
         .contact-card a {
@@ -775,7 +820,7 @@
         }
 
         .contact-card a:hover {
-            color: var(--color-diamond-blue);
+            color: var(--color-gold);
         }
 
         .contact-card ul {
@@ -800,19 +845,20 @@
             display: inline-block;
             margin: 0 var(--spacing-xs);
             font-size: 1.25rem;
-            color: var(--color-diamond-blue);
+            color: var(--color-black);
         }
 
         .social-links-contact a:hover {
-            color: var(--color-diamond-accent);
+            color: var(--color-gold);
         }
 
         .map-container {
             height: 300px;
             width: 100%;
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-sm);
             overflow: hidden;
             box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .map-container iframe {
@@ -823,8 +869,8 @@
 
         /* Footer - Mobile First */
         .site-footer {
-            background-color: var(--color-text-dark);
-            color: var(--color-champagne-bg);
+            background-color: var(--color-black);
+            color: var(--color-light-text);
             padding: var(--spacing-2xl) 0 var(--spacing-xl);
         }
 
@@ -837,20 +883,26 @@
 
         .footer-column h4 {
             font-size: 1.125rem;
-            color: var(--color-diamond-accent-soft);
+            color: var(--color-gold);
             margin-bottom: var(--spacing-md);
             padding-bottom: var(--spacing-xs);
-            border-bottom: 1px solid rgba(245, 239, 224, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-weight: 500;
         }
 
         .footer-logo-footer {
             font-family: var(--font-primary);
             font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--color-diamond-accent-soft);
+            font-weight: 600;
+            color: var(--color-white);
             text-decoration: none;
             display: block;
             margin-bottom: var(--spacing-md);
+            letter-spacing: 1px;
+        }
+        
+        .footer-logo-footer .logo-accent {
+            color: var(--color-gold);
         }
 
         .footer-column p, .footer-column li {
@@ -865,30 +917,30 @@
         }
 
         .footer-column a {
-            color: var(--color-champagne-bg);
+            color: var(--color-light-text);
             text-decoration: none;
             transition: var(--transition-normal);
         }
 
         .footer-column a:hover {
-            color: var(--color-diamond-accent-soft);
+            color: var(--color-gold);
         }
 
         .footer-social-icons a {
             display: inline-block;
             margin-right: var(--spacing-sm);
             font-size: 1.125rem;
-            color: var(--color-champagne-bg);
+            color: var(--color-light-text);
         }
 
         .footer-social-icons a:hover {
-            color: var(--color-diamond-accent-soft);
+            color: var(--color-gold);
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: var(--spacing-xl);
-            border-top: 1px solid rgba(245, 239, 224, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             font-size: 0.8125rem;
         }
 
@@ -902,7 +954,7 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.7);
             align-items: center;
             justify-content: center;
             padding: var(--spacing-md);
@@ -916,7 +968,7 @@
             background-color: var(--color-white);
             margin: auto;
             padding: var(--spacing-xl) var(--spacing-xl);
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-sm);
             width: 90%;
             max-width: 700px;
             max-height: 90vh;
@@ -924,6 +976,7 @@
             position: relative;
             box-shadow: var(--shadow-lg);
             animation: slideDownModal 0.4s ease-out;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         @keyframes slideDownModal {
@@ -932,7 +985,7 @@
         }
 
         .modal-close-btn {
-            color: var(--color-text-body);
+            color: var(--color-medium-gray);
             position: absolute;
             top: var(--spacing-md);
             right: var(--spacing-md);
@@ -943,14 +996,15 @@
         }
 
         .modal-close-btn:hover {
-            color: var(--color-diamond-blue);
+            color: var(--color-gold);
         }
 
         .modal-title {
             text-align: center;
             font-size: 1.75rem;
-            color: var(--color-text-dark);
+            color: var(--color-black);
             margin-bottom: var(--spacing-xl);
+            font-weight: 500;
         }
 
         .price-category {
@@ -958,11 +1012,12 @@
         }
 
         .price-category-title {
-            font-size: 1.375rem;
-            color: var(--color-diamond-blue);
+            font-size: 1.25rem;
+            color: var(--color-gold);
             margin-bottom: var(--spacing-md);
             padding-bottom: var(--spacing-xs);
-            border-bottom: 1px solid var(--color-champagne-bg);
+            border-bottom: 1px solid var(--color-light-gray);
+            font-weight: 500;
         }
 
         .price-item {
@@ -970,7 +1025,7 @@
             justify-content: space-between;
             align-items: flex-start;
             padding: var(--spacing-sm) 0;
-            border-bottom: 1px solid var(--color-champagne-light);
+            border-bottom: 1px solid var(--color-light-gray);
             font-size: 0.9375rem;
         }
 
@@ -985,28 +1040,28 @@
 
         .price-name {
             font-weight: 600;
-            color: var(--color-text-dark);
+            color: var(--color-black);
         }
 
         .price-description {
             font-size: 0.8125rem;
-            color: var(--color-text-body);
+            color: var(--color-medium-gray);
             margin-top: var(--spacing-xs);
         }
 
         .price-value {
             font-weight: 600;
-            color: var(--color-diamond-blue);
+            color: var(--color-gold);
             white-space: nowrap;
         }
 
         .price-disclaimer {
             margin-top: var(--spacing-xl);
             font-size: 0.8125rem;
-            color: var(--color-text-body);
+            color: var(--color-medium-gray);
             text-align: center;
             padding: var(--spacing-md);
-            background-color: var(--color-champagne-light);
+            background-color: var(--color-light-gray);
             border-radius: var(--border-radius-sm);
         }
 
@@ -1024,6 +1079,10 @@
             .hero-buttons .btn {
                 width: auto;
             }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (min-width: 768px) {
@@ -1031,12 +1090,12 @@
                 max-width: 720px;
             }
             
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
+            h1 { font-size: 2.75rem; }
+            h2 { font-size: 2.25rem; }
             h3 { font-size: 1.75rem; }
             
             .hero-content h1 {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             
             .treatments-grid,
@@ -1064,6 +1123,10 @@
             .map-container {
                 height: 400px;
             }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         @media (min-width: 992px) {
@@ -1071,12 +1134,12 @@
                 max-width: 960px;
             }
             
-            h1 { font-size: 3rem; }
-            h2 { font-size: 2.25rem; }
-            h3 { font-size: 1.75rem; }
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2.5rem; }
+            h3 { font-size: 2rem; }
             
             .hero-content h1 {
-                font-size: 3.5rem;
+                font-size: 4rem;
             }
             
             /* Desktop Navigation */
@@ -1104,14 +1167,16 @@
             }
             
             .nav-link {
-                font-size: 1rem;
+                font-size: 0.9375rem;
                 padding: var(--spacing-xs) 0;
                 border-bottom: 2px solid transparent;
+                color: var(--color-black);
             }
             
             .nav-link:hover,
             .nav-link.active {
-                border-bottom-color: var(--color-diamond-blue);
+                border-bottom-color: var(--color-gold);
+                color: var(--color-gold);
             }
             
             .treatments-grid {
@@ -1137,7 +1202,20 @@
             }
             
             .hero-content h1 {
-                font-size: 4rem;
+                font-size: 4.5rem;
+            }
+        }
+
+        /* Desktop-only and Mobile-only elements */
+        @media (max-width: 991px) {
+            .desktop-only {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .mobile-only {
+                display: none !important;
             }
         }
     </style>
@@ -1155,14 +1233,14 @@
     <header id="main-header">
         <div class="container">
             <div class="header-content">
-                <a href="#home" class="logo-link">Diamond</a>
+                <a href="#home" class="logo-link">Diamond<span class="logo-accent">.</span></a>
                 <button class="mobile-toggle-btn" id="mobile-menu-toggler" aria-label="Toggle navigatiemenu" aria-expanded="false">
                     <i class="fas fa-bars"></i>
                 </button>
                 <nav>
                     <ul class="nav-menu" id="nav-menu-list">
                         <div class="nav-menu-header">
-                            <a href="#home" class="logo-link">Diamond</a>
+                            <a href="#home" class="logo-link">Diamond<span class="logo-accent">.</span></a>
                             <button class="nav-menu-close" id="nav-close-btn" aria-label="Sluit menu">
                                 <i class="fas fa-times"></i>
                             </button>
@@ -1235,7 +1313,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#contact" class="btn btn-secondary mt-lg">Ervaar het Zelf</a>
+                        <a href="#contact" class="btn btn-primary mt-lg">Ervaar het Zelf</a>
                     </div>
                     <div class="philosophy-image">
                         <img src="/Images/Kapperstoelen.jpg" alt="Sfeervol detail van het Diamond Haarsalon interieur, met focus op luxe en comfort">
@@ -1304,7 +1382,7 @@
                             <h4>Elegante Boblijn</h4>
                         </div>
                     </a>
-                    <a href="/Images/Salon.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Lang, gezond haar met zachte golven en volume">
+                    <a href="/Images/Salon.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Modern salon interieur">
                         <img src="/Images/Salon.jpg" alt="Salon interieur">
                         <div class="gallery-item-overlay">
                             <i class="fas fa-search-plus"></i>
@@ -1318,7 +1396,7 @@
                             <h4>Bruids Updo</h4>
                         </div>
                     </a>
-                    <a href="/Images/Salon1.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Moderne, pittige korte coupe met textuur">
+                    <a href="/Images/Salon1.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Luxe salon ervaring">
                         <img src="/Images/Salon1.jpg" alt="Salon interieur detail">
                         <div class="gallery-item-overlay">
                             <i class="fas fa-search-plus"></i>
@@ -1406,7 +1484,7 @@
                     </div>
                 </div>
                 <div class="testimonials-button-wrapper">
-                     <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                     <a href="#" target="_blank" rel="noopener noreferrer" class="btn btn-white">
                         Lees Meer Reviews op Google
                     </a>
                 </div>
@@ -1467,7 +1545,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <a href="#home" class="footer-logo-footer">Diamond</a>
+                    <a href="#home" class="footer-logo-footer">Diamond<span class="logo-accent">.</span></a>
                     <p>Exclusieve haarkunst en persoonlijke verwennerij voor de moderne vrouw. Ervaar de stralende service van Diamond Haarsalon.</p>
                     <div class="footer-social-icons">
                         <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1502,7 +1580,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© <span id="current-year"></span> Diamond Haarsalon. Alle rechten voorbehouden. Ontworpen met <i class="fas fa-heart" style="color: var(--color-diamond-accent-soft);"></i>.</p>
+                <p>© <span id="current-year"></span> Diamond Haarsalon. Alle rechten voorbehouden. Ontworpen met <i class="fas fa-heart" style="color: var(--color-gold);"></i>.</p>
             </div>
         </div>
     </footer>
@@ -1767,24 +1845,6 @@
         if (currentYearSpan) {
             currentYearSpan.textContent = new Date().getFullYear();
         }
-
-        // Custom class for desktop/mobile elements
-        const updateResponsiveClasses = () => {
-            const desktopItems = document.querySelectorAll('.desktop-only');
-            const mobileItems = document.querySelectorAll('.mobile-only');
-            
-            if (window.innerWidth >= 992) { // Desktop
-                desktopItems.forEach(item => item.style.display = '');
-                mobileItems.forEach(item => item.style.display = 'none');
-            } else { // Mobile
-                desktopItems.forEach(item => item.style.display = 'none');
-                mobileItems.forEach(item => item.style.display = '');
-            }
-        };
-        
-        // Run on load and resize
-        updateResponsiveClasses();
-        window.addEventListener('resize', updateResponsiveClasses);
     });
     </script>
 </body>
