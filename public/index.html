@@ -3,1120 +3,1425 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luminous Haarsalon - Exclusieve Dameskapsalon</title>
-    <meta name="description" content="Ontdek pure elegantie en verfijning bij Luminous Haarsalon, dé exclusieve kapsalon voor dames. Persoonlijke aandacht, premium behandelingen en uw stralende look staan centraal. Maak vandaag nog uw afspraak.">
+    <title>Luminous Haarsalon | Exclusieve Haarkunst voor Dames</title>
+    <meta name="description" content="Ontdek Luminous Haarsalon, dé exclusieve salon waar uw schoonheid straalt. Persoonlijke aandacht, premium behandelingen en verfijnde haarkunst, speciaal voor dames.">
 
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-
-    <!-- Configure Tailwind colors -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: {
-                            light: '#fdf6e9', // Lichter, zachter goud
-                            DEFAULT: '#e6c283', // Hoofd goudkleur
-                            dark: '#c7a364'  // Donkerder goud
-                        },
-                        brand: {
-                            primary: '#c7a364', // Donker goud (was b8860b)
-                            secondary: '#e6c283', // Hoofd goudkleur (was d4af37)
-                            light: '#fdf6e9',    // Lichter, zachter goud (was f7eed9)
-                            dark: '#4a3b1c',    // Donkere tekstkleur (was 3a2d0c)
-                            darker: '#2d2310'   // Zeer donker (was 1c1605)
-                        },
-                        neutral: { // Aanpassing neutrale tinten voor wit-goud
-                            50: '#ffffff',
-                            100: '#fbfaf8', // Heel licht gebroken wit
-                            200: '#f5f2ed',
-                            // ... rest van de neutral scale indien nodig
-                            700: '#5c503a', // Donkerder voor tekst
-                            800: '#4a3b1c',
-                            900: '#382c15'
-                        }
-                    },
-                    fontFamily: {
-                        'playfair': ['Playfair Display', 'serif'],
-                        'poppins': ['Poppins', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Fancybox CSS & JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-
-    <!-- Axios for API calls (indien nodig, momenteel niet actief gebruikt) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
-
-    <!-- Custom Styles -->
     <style>
-        /* Base Typography & Smoothing */
+        :root {
+            --color-white: #FFFFFF;
+            --color-champagne-light: #F9F6F0; /* Zeer licht, warm */
+            --color-champagne-bg: #F5EFE0; /* Iets donkerder voor sectie achtergronden */
+            --color-gold-accent: #D4AF37; /* Klassiek goud */
+            --color-gold-soft: #E6C283;   /* Zachter goud */
+            --color-text-dark: #4A3B1C; /* Donker goudbruin voor titels */
+            --color-text-body: #5C503A; /* Warm grijs/bruin voor body */
+            --color-text-light: #FAF6F0; /* Voor op donkere achtergronden */
+            --font-primary: 'Playfair Display', serif;
+            --font-secondary: 'Poppins', sans-serif;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px; /* Basis lettergrootte */
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-secondary);
+            color: var(--color-text-body);
+            line-height: 1.7;
+            background-color: var(--color-white);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            scroll-behavior: smooth;
-            background-color: theme('colors.neutral.50'); /* Basis wit */
-            color: theme('colors.neutral.800'); /* Donkere tekst voor leesbaarheid */
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', serif;
-            color: theme('colors.brand.darker'); /* Donker goud/bruin voor titels */
+            font-family: var(--font-primary);
+            color: var(--color-text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.3;
         }
-        .text-brand-secondary { color: theme('colors.brand.secondary'); }
-        .text-brand-primary { color: theme('colors.brand.primary'); }
-        .bg-brand-primary { background-color: theme('colors.brand.primary'); }
-        .hover\:bg-brand-dark:hover { background-color: theme('colors.brand.dark'); }
-        .border-brand-light { border-color: theme('colors.brand.light'); }
-        .hover\:border-brand-light:hover { border-color: theme('colors.brand.light'); }
-        .bg-gold-light { background-color: theme('colors.gold.light'); }
-        .hover\:text-brand-light:hover { color: theme('colors.brand.light'); }
-
-
-        /* Custom scrollbar for price modal */
-        #price-modal-body::-webkit-scrollbar { width: 6px; }
-        #price-modal-body::-webkit-scrollbar-track { background: theme('colors.neutral.100'); border-radius: 10px; }
-        #price-modal-body::-webkit-scrollbar-thumb { background: theme('colors.brand.secondary'); border-radius: 10px; }
-        #price-modal-body::-webkit-scrollbar-thumb:hover { background: theme('colors.brand.primary'); }
-
-        /* Header shrink effect styling */
-        #main-header { transition: all 0.4s ease; }
-        #main-header.header-scrolled {
-            background-color: rgba(255, 255, 255, 0.98); /* Wit met lichte transparantie */
-            box-shadow: 0 4px 10px -1px rgba(0, 0, 0, 0.05); /* Subtiele schaduw */
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            backdrop-filter: blur(8px);
-        }
-        #main-header.header-scrolled nav a:not(.button-cta) { color: theme('colors.neutral.800'); }
-        #main-header.header-scrolled nav a:hover:not(.button-cta) { color: theme('colors.brand.primary'); }
-        #main-header.header-scrolled .logo-text { color: theme('colors.brand.secondary'); }
-        #main-header.header-scrolled .phone-link { color: theme('colors.brand.primary'); }
-        #main-header.header-scrolled .phone-link:hover { color: theme('colors.brand.dark'); }
-        #main-header.header-scrolled #mobile-menu-button { color: theme('colors.neutral.800'); }
-        #main-header.header-scrolled #mobile-menu-button:hover { color: theme('colors.brand.primary'); background-color: theme('colors.gold.light'); }
-
-        /* Improved Mobile Menu Animation */
-        .mobile-menu-container {
-            transform-origin: top center;
-            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-            transform: scaleY(0); opacity: 0; visibility: hidden; height: 0; overflow: hidden;
-        }
-        .mobile-menu-container.menu-open { transform: scaleY(1); opacity: 1; visibility: visible; height: auto; }
-
-        /* Animation Keyframes */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-        .animate-bounce { animation: bounce 1s infinite ease-in-out; }
-
-        /* Animation classes */
-        .animate-on-scroll { opacity: 0; }
-        .is-visible { opacity: 1; }
-        .animate-on-scroll { --animation-name: fadeIn; } /* Default */
-        .animate-fade-in { --animation-name: fadeIn; }
-        .animate-slide-up { --animation-name: slideUp; }
-        .animate-slide-in-left { --animation-name: slideInLeft; }
-        .animate-slide-in-right { --animation-name: slideInRight; }
-        .animate-scale-in { --animation-name: scaleIn; }
-
-        /* Subtle noise background for specific sections if desired */
-        .noise-bg {
-            /* background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E"); */
-             background-color: theme('colors.gold.light'); /* Lichte goud/creme achtergrond */
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.25rem; }
+        h3 { font-size: 1.75rem; }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.25rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.5rem; }
         }
 
-        /* Image hover effect */
-        .hover-filter { transition: filter 0.4s ease, transform 0.4s ease; }
-        .hover-filter:hover { filter: brightness(0.95) saturate(1.05); transform: scale(1.03); }
 
-        /* Gallery Item Hover Effects */
-        .gallery-item { transition: transform 0.4s ease, box-shadow 0.4s ease; position: relative; overflow: hidden; }
-        .gallery-item:hover { transform: scale(1.03); box-shadow: 0 8px 20px rgba(199, 163, 100, 0.2); } /* Gouden schaduw */
-        .gallery-item img { transition: transform 0.5s ease; }
-        .gallery-item:hover img { transform: scale(1.1); }
-        .gallery-overlay { @apply absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300 z-10 cursor-pointer; }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
 
-        /* Price Modal Transition Styles */
-        #price-modal { transition: opacity 0.3s ease-in-out; }
-        #price-modal > div { transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; }
+        .section-padding {
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+        @media (max-width: 768px) {
+            .section-padding {
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+        }
 
-        /* Service cards improved hover effect */
-        .service-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px -10px rgba(199, 163, 100, 0.2); } /* Gouden schaduw */
+        .text-center { text-align: center; }
+        .margin-bottom-md { margin-bottom: 2rem; }
+        .margin-bottom-lg { margin-bottom: 4rem; }
 
-        /* Improve accessibility - focus styles */
-        a:focus-visible, button:focus-visible { outline: 2px solid theme('colors.brand.primary'); outline-offset: 2px; }
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem; /* 14px 32px */
+            border-radius: 50px; /* Rond */
+            font-weight: 500;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9375rem; /* 15px */
+            letter-spacing: 0.5px;
+        }
 
-        /* Floating action buttons */
-        .floating-btn { filter: drop-shadow(0 4px 8px rgba(199, 163, 100, 0.25)); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .floating-btn:hover { transform: translateY(-5px) scale(1.05); filter: drop-shadow(0 10px 20px rgba(199, 163, 100, 0.3)); }
-
-        /* Testimonial card hover effect */
-        .testimonial-card { transition: all 0.3s ease; background-color: theme('colors.neutral.50'); /* Wit */}
-        .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px -5px rgba(199, 163, 100, 0.15); }
-
-        /* Improved button hover effects */
         .btn-primary {
-            @apply px-6 py-3 bg-brand-primary text-white rounded-full font-medium shadow-md transition-all duration-300;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: var(--color-gold-accent);
+            color: var(--color-white);
+            border: 2px solid var(--color-gold-accent);
         }
         .btn-primary:hover {
-            @apply bg-brand-dark text-white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px -3px rgba(199, 163, 100, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background-color: var(--color-text-dark);
+            border-color: var(--color-text-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
-        .btn-primary:active { transform: translateY(-1px); }
 
         .btn-secondary {
-             @apply px-6 py-3 border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white rounded-full transition-all duration-300 font-medium transform hover:-translate-y-1;
+            background-color: transparent;
+            color: var(--color-gold-accent);
+            border: 2px solid var(--color-gold-accent);
         }
-         .hero-btn-secondary { /* Special for hero on dark bg */
-            @apply px-6 py-3 border-2 border-white text-white hover:bg-white hover:text-brand-dark rounded-full transition-all duration-300 font-medium transform hover:-translate-y-1;
+        .btn-secondary:hover {
+            background-color: var(--color-gold-accent);
+            color: var(--color-white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+        .btn-secondary-white { /* Voor op donkere hero */
+            background-color: transparent;
+            color: var(--color-white);
+            border: 2px solid var(--color-white);
+        }
+        .btn-secondary-white:hover {
+            background-color: var(--color-white);
+            color: var(--color-text-dark);
         }
 
 
-        /* Aspect ratio utility */
-        .aspect-ratio-box { position: relative; }
-        .aspect-ratio-box::before { content: ""; display: block; padding-bottom: var(--aspect-ratio); }
-        .aspect-ratio-box > * { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-        .aspect-ratio-1x1 { --aspect-ratio: 100%; }
-        .aspect-ratio-4x3 { --aspect-ratio: 75%; }
-        .aspect-ratio-16x9 { --aspect-ratio: 56.25%; }
+        /* Header */
+        #main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+        }
+        #main-header.header-scrolled {
+            background-color: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            backdrop-filter: blur(5px);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-link {
+            font-family: var(--font-primary);
+            font-size: 1.875rem; /* 30px */
+            font-weight: 700;
+            color: var(--color-gold-soft);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        #main-header.header-scrolled .logo-link {
+            color: var(--color-gold-accent);
+        }
+
+        .nav-menu { display: flex; list-style: none; align-items: center; }
+        .nav-item { margin-left: 35px; }
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-white); /* Initial color for transparent header */
+            font-weight: 500;
+            font-size: 0.9375rem; /* 15px */
+            transition: color 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--color-gold-soft);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        #main-header.header-scrolled .nav-link {
+            color: var(--color-text-body);
+        }
+        #main-header.header-scrolled .nav-link:hover,
+        #main-header.header-scrolled .nav-link.active {
+            color: var(--color-gold-accent);
+        }
+        #main-header.header-scrolled .nav-link::after {
+             background-color: var(--color-gold-accent);
+        }
+
+
+        .header-actions { display: flex; align-items: center; }
+        .header-phone {
+            display: flex;
+            align-items: center;
+            color: var(--color-white);
+            font-size: 0.875rem; /* 14px */
+            margin-right: 25px;
+            text-decoration: none;
+        }
+        #main-header.header-scrolled .header-phone { color: var(--color-text-body); }
+        .header-phone i { margin-right: 8px; color: var(--color-gold-soft); }
+        #main-header.header-scrolled .header-phone i { color: var(--color-gold-accent); }
+
+        .mobile-toggle-btn { display: none; font-size: 1.5rem; color: var(--color-white); background: none; border: none; cursor: pointer; padding: 5px; }
+        #main-header.header-scrolled .mobile-toggle-btn { color: var(--color-text-dark); }
+
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white);
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            /* background-image: url('luminous-hero-dame-haar.jpg'); YOU NEED TO ADD THIS IMAGE */
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('/api/placeholder/1920/1080/FFFFFF/E6C283/Hero%20Image%20-%20Luminous%20Dame%20Haar');
+        }
+        .hero-section::before { /* Optional subtle overlay */
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%); */
+        }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; }
+        .hero-content .subheading {
+            font-family: var(--font-secondary);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-gold-soft);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem; /* 56px */
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .hero-content p {
+            font-size: 1.125rem; /* 18px */
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--color-champagne-light);
+        }
+        .hero-buttons .btn { margin: 0 0.5rem; }
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content p { font-size: 1rem; }
+            .hero-buttons { display: flex; flex-direction: column; align-items: center; }
+            .hero-buttons .btn { margin: 0.5rem 0; width: 80%; max-width: 300px; }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce-arrow 2s infinite;
+            color: var(--color-white);
+            opacity: 0.8;
+        }
+        .scroll-indicator i { font-size: 1.5rem; }
+        @keyframes bounce-arrow {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
+
+
+        /* Section Titles */
+        .section-title { text-align: center; margin-bottom: 3rem; }
+        .section-title .subtitle-decorated {
+            font-family: var(--font-secondary);
+            font-size: 0.9375rem; /* 15px */
+            font-weight: 500;
+            color: var(--color-gold-accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
+            display: block;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-title .subtitle-decorated::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--color-gold-soft);
+        }
+        .section-title h2 {
+            font-size: 2.5rem; /* 40px */
+            margin-bottom: 1rem;
+        }
+        .section-title p {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1rem;
+        }
+        @media (max-width: 768px) {
+             .section-title h2 { font-size: 2rem; }
+        }
+
+
+        /* Friends Bonus Section */
+        .friends-bonus-section { background-color: var(--color-champagne-light); }
+        .friends-bonus-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .friends-bonus-text h3 { font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--color-text-dark); }
+        .friends-bonus-steps { list-style: none; padding-left: 0; margin-top: 1.5rem; }
+        .friends-bonus-steps li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            font-size: 0.9375rem;
+        }
+        .friends-bonus-steps .step-icon {
+            color: var(--color-gold-accent);
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+            line-height: 1.5; /* Align with text */
+        }
+        .friends-bonus-image-wrapper { text-align: center; position: relative; }
+        .friends-bonus-image-wrapper img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .discount-badge-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--color-gold-accent);
+            color: var(--color-white);
+            padding: 0.75rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+            transform: rotate(5deg);
+        }
+        @media (max-width: 991px) {
+            .friends-bonus-content { grid-template-columns: 1fr; }
+            .friends-bonus-image-wrapper { order: -1; margin-bottom: 2rem; }
+        }
+
+
+        /* About Section / Philosophy */
+        .philosophy-section { background-color: var(--color-white); }
+        .philosophy-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .philosophy-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .philosophy-text h3 { color: var(--color-text-dark); }
+        .philosophy-values { margin-top: 2rem; }
+        .value-item { display: flex; align-items: flex-start; margin-bottom: 1.5rem; }
+        .value-icon {
+            font-size: 1.5rem; /* 24px */
+            color: var(--color-gold-accent);
+            margin-right: 1rem;
+            padding-top: 0.25rem; /* Align icon better with text */
+            flex-shrink: 0;
+            width: 30px; /* Ensure consistent width for icon container */
+            text-align: center;
+        }
+        .value-text h4 {
+            font-size: 1.125rem; /* 18px */
+            margin-bottom: 0.25rem;
+            color: var(--color-text-dark);
+            font-family: var(--font-secondary); /* Poppins for this title */
+            font-weight: 600;
+        }
+        .value-text p { font-size: 0.9375rem; color: var(--color-text-body); margin-bottom: 0;}
+
+
+        /* Treatments Section */
+        .treatments-section { background-color: var(--color-champagne-light); }
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        .treatment-card {
+            background-color: var(--color-white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        .treatment-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.1);
+        }
+        .treatment-icon {
+            font-size: 2.5rem; /* 40px */
+            color: var(--color-gold-accent);
+            margin-bottom: 1rem;
+            line-height: 1; /* Ensure icon is not too tall */
+        }
+        .treatment-card h3 {
+            font-size: 1.375rem; /* 22px */
+            margin-bottom: 0.75rem;
+            color: var(--color-text-dark);
+        }
+        .treatment-card p {
+            font-size: 0.9375rem; /* 15px */
+            margin-bottom: 1.5rem;
+        }
+
+
+        /* Gallery Section */
+        .gallery-section { background-color: var(--color-white); }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem; /* Slightly smaller gap for tighter grid */
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px; /* Softer radius */
+            aspect-ratio: 1 / 1; /* Square items */
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.4s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.08);
+            filter: brightness(0.8);
+        }
+        .gallery-item-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            color: var(--color-white);
+        }
+        .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+        .gallery-item-overlay i {
+            font-size: 1.75rem; /* 28px */
+            margin-bottom: 0.5rem;
+            color: var(--color-gold-soft);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s 0.1s ease, transform 0.3s 0.1s ease;
+        }
+        .gallery-item:hover .gallery-item-overlay i { opacity: 1; transform: translateY(0); }
+        .gallery-item-overlay h4 {
+            font-family: var(--font-secondary);
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-white);
+            margin-bottom: 0;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s 0.2s ease, transform 0.3s 0.2s ease;
+        }
+        .gallery-item:hover .gallery-item-overlay h4 { opacity: 1; transform: translateY(0); }
+        .gallery-button-wrapper { margin-top: 3rem; text-align: center; }
+
+
+        /* Testimonials Section */
+        .testimonials-section { background-color: var(--color-champagne-light); }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background-color: var(--color-white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 320px; /* Ensure cards have similar height */
+        }
+        .testimonial-quote-icon {
+            font-size: 2.5rem; /* 40px */
+            color: var(--color-gold-soft);
+            opacity: 0.5;
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+        }
+        .testimonial-stars {
+            margin-top: 2rem; /* Space for quote icon */
+            color: var(--color-gold-accent);
+            margin-bottom: 1rem;
+            font-size: 0.875rem; /* 14px */
+        }
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 0.9375rem; /* 15px */
+            flex-grow: 1;
+        }
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--color-text-dark);
+            font-size: 1rem;
+        }
+        .testimonial-service {
+            font-size: 0.8125rem; /* 13px */
+            color: var(--color-gold-accent);
+        }
+        .testimonials-button-wrapper { margin-top: 3rem; text-align: center; }
+
+
+        /* Contact Section */
+        .contact-section { background-color: var(--color-white); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .contact-card {
+            background-color: var(--color-champagne-light);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .contact-icon {
+            font-size: 2.25rem; /* 36px */
+            color: var(--color-gold-accent);
+            margin-bottom: 1rem;
+            display: inline-block;
+            background-color: var(--color-white);
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+        }
+        .contact-card h3 {
+            font-size: 1.25rem; /* 20px */
+            margin-bottom: 0.75rem;
+            color: var(--color-text-dark);
+        }
+        .contact-card p, .contact-card ul, .contact-card a {
+            font-size: 0.9375rem; /* 15px */
+            color: var(--color-text-body);
+        }
+        .contact-card a { text-decoration: none; transition: color 0.3s ease; }
+        .contact-card a:hover { color: var(--color-gold-accent); }
+        .contact-card ul { list-style: none; padding: 0; }
+        .contact-card li { margin-bottom: 0.5rem; }
+        .opening-hours li { display: flex; justify-content: space-between; }
+        .social-links-contact { margin-top: 1rem; }
+        .social-links-contact a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            font-size: 1.25rem;
+            color: var(--color-gold-soft);
+        }
+        .social-links-contact a:hover { color: var(--color-gold-accent); }
+        .map-container {
+            height: 450px;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .map-container iframe { border: 0; width: 100%; height: 100%; }
+
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--color-text-dark);
+            color: var(--color-champagne-bg);
+            padding: 4rem 0 2rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+        .footer-column h4 {
+            font-size: 1.125rem; /* 18px */
+            color: var(--color-gold-soft);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(245, 239, 224, 0.2); /* gold-light with opacity */
+        }
+        .footer-logo-footer {
+            font-family: var(--font-primary);
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            color: var(--color-gold-soft);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .footer-column p, .footer-column li {
+            font-size: 0.875rem; /* 14px */
+            margin-bottom: 0.6rem;
+            line-height: 1.6;
+        }
+        .footer-column ul { list-style: none; padding: 0; }
+        .footer-column a { color: var(--color-champagne-bg); text-decoration: none; transition: color 0.3s ease; }
+        .footer-column a:hover { color: var(--color-gold-soft); }
+        .footer-social-icons a {
+            display: inline-block;
+            margin-right: 0.8rem;
+            font-size: 1.125rem; /* 18px */
+            color: var(--color-champagne-bg);
+        }
+        .footer-social-icons a:hover { color: var(--color-gold-soft); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(245, 239, 224, 0.1); /* gold-light with opacity */
+            font-size: 0.8125rem; /* 13px */
+        }
+
+
+        /* Price Modal */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1100;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Dim background */
+            align-items: center; /* Vertical center */
+            justify-content: center; /* Horizontal center */
+            padding: 20px;
+        }
+        .modal.active { display: flex; } /* Use flex to center when active */
+
+        .modal-content {
+            background-color: var(--color-white);
+            margin: auto; /* Centering for older browsers if flex fails */
+            padding: 30px 40px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            animation: slideDownModal 0.4s ease-out;
+        }
+        @keyframes slideDownModal {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-close-btn {
+            color: var(--color-text-body);
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .modal-close-btn:hover { color: var(--color-gold-accent); }
+
+        .modal-title { text-align: center; font-size: 2rem; color: var(--color-text-dark); margin-bottom: 2rem; }
+        .price-category { margin-bottom: 2.5rem; }
+        .price-category-title {
+            font-size: 1.5rem;
+            color: var(--color-gold-accent);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-champagne-bg);
+        }
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* Align items to top if description is long */
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--color-champagne-light);
+            font-size: 0.9375rem;
+        }
+        .price-item:last-child { border-bottom: none; }
+        .price-item-details { flex-grow: 1; margin-right: 1rem; }
+        .price-name { font-weight: 600; color: var(--color-text-dark); }
+        .price-description { font-size: 0.8125rem; color: var(--color-text-body); margin-top: 0.2rem; }
+        .price-value { font-weight: 600; color: var(--color-gold-accent); white-space: nowrap; }
+        .price-disclaimer {
+            margin-top: 2rem;
+            font-size: 0.8125rem;
+            color: var(--color-text-body);
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--color-champagne-light);
+            border-radius: 5px;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 991px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px; /* Adjust based on scrolled header height */
+                left: 0;
+                width: 100%;
+                background-color: var(--color-white);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                padding: 1rem 0;
+                border-top: 1px solid var(--color-champagne-light);
+            }
+            #main-header.header-scrolled .nav-menu { top: 60px; } /* Adjust for scrolled header */
+            .nav-menu.active { display: flex; }
+            .nav-item { margin: 0; width: 100%; }
+            .nav-link {
+                display: block;
+                padding: 0.8rem 1.5rem;
+                color: var(--color-text-dark) !important; /* Override initial white for mobile */
+                border-bottom: 1px solid var(--color-champagne-light);
+            }
+            .nav-link::after { display: none; } /* No underline for mobile links */
+            .nav-link:hover { background-color: var(--color-champagne-light); color: var(--color-gold-accent) !important; }
+            .header-actions .btn-primary { display: none; } /* Hide CTA button in mobile header, can be in menu */
+            .header-phone { margin-right: 1rem; }
+            .mobile-toggle-btn { display: block; }
+        }
+
     </style>
 </head>
+<body>
 
-<body class="text-neutral-700 antialiased font-poppins">
-    <!-- Skip to main content link for accessibility -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white z-50 px-4 py-2 text-brand-primary font-medium rounded-md shadow">Skip to main content</a>
-
-    <!-- Header -->
-    <header id="main-header" class="fixed w-full top-0 z-50 py-3 md:py-4 bg-transparent transition-all duration-300">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#home" class="text-2xl md:text-3xl font-bold font-playfair text-brand-secondary hover:text-brand-light transition duration-300 logo-text" aria-label="Luminous Haarsalon Home">
-                Luminous
-            </a>
-
-            <!-- Desktop Navigation -->
-            <nav class="hidden lg:block" aria-label="Main Navigation">
-                <ul class="flex space-x-8">
-                    <li><a href="#home" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Home</a></li>
-                    <li><a href="#referral-program" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Vriendinnen Bonus</a></li>
-                    <li><a href="#over-ons" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Over Ons</a></li>
-                    <li><a href="#galerij" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Impressies</a></li>
-                    <li><a href="#contact" class="text-white hover:text-brand-light font-medium transition duration-300 pb-1 border-b-2 border-transparent hover:border-brand-light">Contact</a></li>
-                </ul>
-            </nav>
-
-            <!-- Call & Mobile Menu Button -->
-            <div class="flex items-center space-x-3">
-                <a href="tel:[JOUW_TELEFOONNUMMER]" class="phone-link hidden sm:inline-flex items-center text-white hover:text-brand-light font-medium transition duration-300">
-                    <i class="fas fa-phone-alt mr-2 text-sm" aria-hidden="true"></i> [Jouw Telefoonnummer]
-                </a>
-                <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-brand-secondary hover:text-brand-light hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-label="Open hoofdmenu" aria-controls="mobile-menu" aria-expanded="false">
-                    <i class="fas fa-bars text-xl" aria-hidden="true"></i>
-                </button>
-                <a href="#contact" class="button-cta hidden lg:inline-flex items-center justify-center px-6 py-3 rounded-full font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-brand-primary text-white hover:bg-brand-dark focus:ring-brand-primary shadow-md hover:shadow-lg">Afspraak Maken</a>
-            </div>
-        </div>
-
-        <!-- Improved Mobile Menu -->
-        <div id="mobile-menu" class="mobile-menu-container lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-neutral-100 z-50" role="navigation" aria-label="Mobiel menu">
-            <div class="container mx-auto px-4 py-5">
-                <ul class="space-y-1">
-                    <li><a href="#home" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Home</a></li>
-                    <li><a href="#referral-program" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Vriendinnen Bonus</a></li>
-                    <li><a href="#over-ons" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Over Ons</a></li>
-                    <li><a href="#galerij" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Impressies</a></li>
-                    <li><a href="#contact" class="mobile-menu-link block py-3 px-4 text-lg font-medium text-neutral-700 hover:bg-gold-light hover:text-brand-dark rounded-lg transition duration-300">Contact</a></li>
-                </ul>
-
-                <div class="mt-6 space-y-4">
-                    <a href="tel:[JOUW_TELEFOONNUMMER]" class="flex items-center py-3 px-4 text-lg text-brand-primary font-semibold hover:text-brand-dark transition duration-300 bg-gold-light/50 rounded-lg">
-                        <i class="fas fa-phone-alt mr-3" aria-hidden="true"></i> Bel [Jouw Telefoonnummer]
+    <header id="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#home" class="logo-link">Luminous</a>
+                <nav>
+                    <ul class="nav-menu" id="nav-menu-list">
+                        <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+                        <li class="nav-item"><a href="#philosophy" class="nav-link">Onze Filosofie</a></li>
+                        <li class="nav-item"><a href="#treatments" class="nav-link">Behandelingen</a></li>
+                        <li class="nav-item"><a href="#gallery" class="nav-link">Impressies</a></li>
+                        <li class="nav-item"><a href="#friends-bonus" class="nav-link">Vriendinnen Bonus</a></li>
+                        <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                        <!-- CTA can be added here for mobile menu if desired -->
+                         <li class="nav-item mobile-only-cta" style="padding: 1rem 1.5rem;"><a href="#contact" class="btn btn-primary" style="width: 100%;">Afspraak Maken</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <a href="tel:[UW_TELEFOONNUMMER]" class="header-phone">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>[UW_TELEFOONNUMMER]</span>
                     </a>
-                    <a href="#contact" class="mobile-menu-link button-cta inline-flex items-center justify-center px-6 py-4 rounded-lg font-medium transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-brand-primary text-white hover:bg-brand-dark focus:ring-brand-primary shadow-md hover:shadow-lg w-full">
-                        <i class="far fa-calendar-alt mr-2" aria-hidden="true"></i> Afspraak Maken
-                    </a>
-                </div>
-
-                <div class="mt-6 pt-4 border-t border-neutral-100">
-                    <p class="text-sm text-neutral-500 mb-3">Volg ons</p>
-                    <div class="flex space-x-4">
-                        <a href="[JOUW_FACEBOOK_LINK]" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-100 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Facebook">
-                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                        </a>
-                        <a href="[JOUW_INSTAGRAM_LINK]" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-100 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Instagram">
-                            <i class="fab fa-instagram" aria-hidden="true"></i>
-                        </a>
-                        <a href="[JOUW_PINTEREST_LINK]" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-neutral-100 hover:bg-gold-light text-neutral-600 hover:text-brand-primary flex items-center justify-center transition duration-300" aria-label="Pinterest">
-                            <i class="fab fa-pinterest" aria-hidden="true"></i>
-                        </a>
-                    </div>
+                    <a href="#contact" class="btn btn-primary desktop-cta">Afspraak Maken</a>
+                    <button class="mobile-toggle-btn" id="mobile-menu-toggler" aria-label="Toggle navigatiemenu" aria-expanded="false" aria-controls="nav-menu-list">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main id="main-content">
+    <main>
         <!-- Hero Section -->
-        <section id="home" class="relative min-h-screen pt-16 pb-16 md:pb-24 lg:pb-32 flex items-center bg-cover bg-center bg-neutral-800" style="background-image: url('/Images/SalonMain.jpg');">
-            <!-- Overlay: Zorg voor goed contrast met witte tekst -->
-            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/60 z-0"></div>
-
-            <!-- Hero Referral Banner -->
-            <div class="absolute top-20 sm:top-24 md:top-28 left-0 right-0 z-10">
-                <div class="container mx-auto px-4">
-                    <div class="bg-brand-primary text-white py-1.5 px-3 rounded-lg sm:rounded-xl max-w-3xl mx-auto shadow-lg">
-                        <div class="flex flex-col sm:flex-row items-center justify-center sm:space-y-0 sm:space-x-2 text-center sm:text-left">
-                            <div class="flex items-center">
-                                <i class="fas fa-gift text-sm mr-1.5 animate-pulse" aria-hidden="true"></i>
-                                <span class="font-medium text-xs sm:text-sm">Vriendinnen Bonus:</span>
-                            </div>
-                            <p class="text-xs">Breng een vriendin mee & ontvang beiden 10% korting!</p>
-                            <a href="#referral-program" class="ml-1 sm:ml-2 underline hover:text-brand-light font-medium whitespace-nowrap text-xs">Meer info</a>
-                        </div>
-                    </div>
+        <section class="hero-section" id="home" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('luminous-hero-dame-haar.jpg');">
+            <!-- Backup placeholder if image fails to load, or for development -->
+            <!-- <img src="/api/placeholder/1920/1080/FFFFFF/E6C283/Luminous%20Hero%20-%20Elegant%20Dameshaar" alt="Elegante dame met prachtig gestyled haar in Luminous Haarsalon" style="display:none;"> -->
+            <div class="hero-content">
+                <span class="subheading">Exclusief voor Dames</span>
+                <h1>Luminous Haarsalon</h1>
+                <p>Waar Uw Schoonheid Straalt. Exclusieve Haarkunst voor de Verfijnde Vrouw.</p>
+                <div class="hero-buttons">
+                    <a href="#treatments" class="btn btn-primary">Ontdek Onze Behandelingen</a>
+                    <a href="#contact" class="btn btn-secondary-white">Maak Direct Uw Afspraak</a>
                 </div>
             </div>
-
-            <!-- Hero Content Container -->
-            <div class="container mx-auto px-4 z-10 text-white relative mt-16 sm:mt-12">
-                <div class="max-w-3xl animate-on-scroll animate-fade-in">
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight font-playfair">Welkom bij Luminous, <span class="text-brand-secondary">Uw Exclusieve</span> Dames Haarsalon</h1>
-                    <p class="text-lg md:text-xl lg:text-2xl mb-8 font-light">Ervaar de kunst van haarstyling in een oase van luxe en persoonlijke aandacht, speciaal voor u.</p>
-
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#contact" class="btn-primary flex items-center justify-center">
-                            <i class="far fa-calendar-alt mr-2" aria-hidden="true"></i> Plan Uw Verwenmoment
-                        </a>
-                        <button id="open-price-modal-button" class="hero-btn-secondary flex items-center justify-center">
-                            <i class="fas fa-tags mr-2" aria-hidden="true"></i> Prijslijst
-                        </button>
-                    </div>
-
-                    <div class="mt-10 bg-white/10 backdrop-blur-sm py-3 px-5 rounded-lg inline-flex items-center">
-                        <div class="text-yellow-400 flex mr-3">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <div class="text-white">
-                            <span class="font-medium">Beoordeeld met 4.8</span>
-                            <span class="text-sm ml-1">door onze gewaardeerde klanten</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-center hidden sm:block">
-                    <a href="#over-ons" class="inline-block text-white animate-bounce" aria-label="Scroll naar over ons sectie">
-                        <span class="block mb-1 text-xs font-light">Ontdek Luminous</span>
-                        <i class="fas fa-chevron-down text-sm" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
+            <a href="#philosophy" class="scroll-indicator" aria-label="Scroll naar beneden">
+                <i class="fas fa-chevron-down"></i>
+            </a>
         </section>
 
-
-        <!-- Referral Program Section -->
-        <section id="referral-program" class="py-16 md:py-24 bg-gold-light"> {/* Aangepaste achtergrond */}
-            <div class="container mx-auto px-4">
-                <div class="max-w-5xl mx-auto">
-                    <div class="bg-white rounded-2xl p-6 md:p-10 lg:p-12 relative overflow-hidden shadow-lg border border-gold-light/50">
-                        <div class="relative z-10">
-                            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
-                                <div class="md:w-3/5 animate-on-scroll animate-slide-in-left">
-                                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-brand-darker">
-                                        <span class="block">Vriendinnen Bonus</span>
-                                        <span class="block mt-1 text-brand-primary text-2xl md:text-3xl">Deel de Luminous Ervaring & Bespaar!</span>
-                                    </h2>
-                                    <p class="text-neutral-700 mb-6 text-base md:text-lg">Introduceer een vriendin bij Luminous Haarsalon, en jullie ontvangen <strong>beiden 10% korting</strong> op de volgende behandeling.</p>
-
-                                    <h3 class="font-semibold text-lg md:text-xl mb-3 text-brand-darker">Hoe werkt het?</h3>
-                                    <ol class="space-y-3 text-neutral-700 mb-6 text-sm md:text-base">
-                                        <li class="flex items-start">
-                                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs">1</span>
-                                            <span>Vertel uw vriendinnen over de luxe van Luminous.</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs">2</span>
-                                            <span>Vraag hen uw naam te noemen bij hun eerste boeking.</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs">3</span>
-                                            <span>Zij ontvangen direct 10% korting op hun eerste behandeling.</span>
-                                        </li>
-                                        <li class="flex items-start">
-                                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-primary text-white flex items-center justify-center mr-3 mt-0.5 text-xs">4</span>
-                                            <span>U krijgt 10% korting op uw eerstvolgende bezoek.</span>
-                                        </li>
-                                    </ol>
-
-                                    <a href="#contact" class="btn-primary inline-flex items-center">
-                                        <i class="fas fa-users mr-2" aria-hidden="true"></i>
-                                        Begin met Delen
-                                    </a>
+        <!-- Philosophy Section -->
+        <section class="philosophy-section section-padding" id="philosophy">
+            <div class="container">
+                <div class="section-title">
+                    <span class="subtitle-decorated">Onze Kern</span>
+                    <h2>De Filosofie van Luminous</h2>
+                    <p>Passie, perfectie en persoonlijke aandacht vormen de essentie van elke Luminous ervaring.</p>
+                </div>
+                <div class="philosophy-content">
+                    <div class="philosophy-text">
+                        <h3>Een Toevluchtsoord voor Haar</h3>
+                        <p class="margin-bottom-md">Luminous Haarsalon is meer dan een kapsalon; het is een serene ruimte waar u kunt ontsnappen aan de dagelijkse drukte en uzelf kunt onderdompelen in luxe. Wij zijn toegewijd aan het creëren van een verfijnde en ontspannen sfeer waarin uw comfort en welzijn voorop staan.</p>
+                        <div class="philosophy-values">
+                            <div class="value-item">
+                                <div class="value-icon"><i class="fas fa-spa"></i></div>
+                                <div class="value-text">
+                                    <h4>Exclusiviteit & Privacy</h4>
+                                    <p>Een discrete en persoonlijke service, speciaal afgestemd op uw wensen.</p>
                                 </div>
-
-                                <div class="md:w-2/5 text-center animate-on-scroll animate-slide-in-right">
-                                    <div class="relative inline-block">
-                                        <div class="absolute inset-0 rounded-full bg-brand-primary/20 animate-ping opacity-50"></div>
-                                        <!-- Image "Friends.PNG": Overweeg een afbeelding met alleen dames voor een exclusieve damessalon. -->
-                                        <img src="/Images/Friends.PNG" alt="Twee elegante dames die genieten van hun Luminous ervaring" class="relative z-10 rounded-xl shadow-lg transform hover:rotate-2 transition-transform duration-500 w-full max-w-[250px] sm:max-w-xs mx-auto" loading="lazy">
-                                        <div class="absolute -bottom-3 -right-3 md:-bottom-4 md:-right-4 bg-white rounded-lg shadow-md px-3 py-1.5 md:px-4 md:py-2 transform rotate-3 z-20">
-                                            <span class="text-brand-primary font-bold text-lg md:text-xl">10%</span>
-                                            <span class="block text-xs text-neutral-600">VOOR BEIDEN</span>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon"><i class="fas fa-hand-sparkles"></i></div>
+                                <div class="value-text">
+                                    <h4>Maatwerk & Expertise</h4>
+                                    <p>Elke behandeling start met een diepgaand consult voor een resultaat dat uw unieke stijl benadrukt.</p>
+                                </div>
+                            </div>
+                            <div class="value-item">
+                                <div class="value-icon"><i class="fas fa-gem"></i></div>
+                                <div class="value-text">
+                                    <h4>Premium Kwaliteit</h4>
+                                    <p>Wij gebruiken uitsluitend hoogwaardige, zorgvuldig geselecteerde producten voor de beste zorg van uw haar.</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="absolute bottom-0 right-0 text-brand-primary/10 text-7xl md:text-9xl transform translate-x-1/4 translate-y-1/4 opacity-50 hidden lg:block">
-                            <i class="fas fa-gem" aria-hidden="true"></i> <!-- Icoon aangepast naar passender 'gem' of 'spa' -->
-                        </div>
+                         <a href="#contact" class="btn btn-secondary" style="margin-top: 1rem;">Ervaar het Zelf</a>
+                    </div>
+                    <div class="philosophy-image">
+                        <img src="luminous-salon-interieur-detail.jpg" alt="Sfeervol detail van het Luminous Haarsalon interieur, met focus op luxe en comfort">
+                        <!-- <img src="/api/placeholder/600/750/F5EFE0/D4AF37/Salon%20Interieur%20Detail" alt="Sfeervol detail van het Luminous Haarsalon interieur, met focus op luxe en comfort"> -->
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Us Section -->
-        <section id="over-ons" class="py-16 md:py-24 bg-neutral-50 overflow-hidden"> {/* Wit */}
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                    <div class="relative animate-on-scroll animate-slide-in-left">
-                        <div class="relative rounded-xl overflow-hidden shadow-xl">
-                            <img src="/Images/Kapperstoelen.jpg" alt="Elegant en licht interieur van Luminous Haarsalon" class="w-full h-auto aspect-ratio-box aspect-ratio-4x3 object-cover hover-filter" loading="lazy">
-                        </div>
-                        <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-brand-light rounded-xl -z-10 transform -rotate-6 hidden sm:block"></div>
-                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-brand-primary/10 rounded-xl -z-10 transform rotate-6 hidden sm:block"></div>
-                        <div class="absolute -right-3 bottom-1/4 sm:bottom-1/3 bg-white rounded-lg shadow-lg p-3 text-center w-32 transform transition-transform hover:scale-105">
-                            <div class="text-2xl font-bold text-brand-primary">10+</div>
-                            <div class="text-xs text-neutral-600">Jaar Expertise</div>
-                        </div>
+        <!-- Treatments Section -->
+        <section class="treatments-section section-padding" id="treatments">
+            <div class="container">
+                <div class="section-title">
+                    <span class="subtitle-decorated">Onze Diensten</span>
+                    <h2>Exclusieve Behandelingen</h2>
+                    <p>Van verfijnde coupes tot adembenemende kleurtransformaties, ontdek de kunst van Luminous.</p>
+                </div>
+                <div class="treatments-grid">
+                    <div class="treatment-card">
+                        <div class="treatment-icon"><i class="fas fa-cut"></i></div>
+                        <h3>Perfecte Coupes & Styling</h3>
+                        <p>Een meesterlijke snit die uw persoonlijkheid accentueert, afgestyled tot in perfectie voor elke gelegenheid.</p>
+                        <button class="btn btn-secondary open-price-modal-btn">Details & Prijzen</button>
                     </div>
-
-                    <div class="animate-on-scroll animate-slide-in-right">
-                        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-brand-darker">De Essentie van Luminous</h2>
-                        <p class="text-neutral-700 mb-6 text-base md:text-lg leading-relaxed">
-                            Luminous Haarsalon is een toevluchtsoord gecreëerd uit passie voor vrouwelijke schoonheid en de kunst van haarstyling. Wij bieden een exclusieve ervaring waar uw individualiteit wordt gevierd en uw haar met de grootste zorg wordt behandeld.
-                        </p>
-                        <p class="text-neutral-600 mb-8 text-sm md:text-base leading-relaxed">
-                            Wij geloven dat uw kapsel een verlengstuk is van uw persoonlijkheid. Ons team van ervaren stylisten is toegewijd aan het creëren van looks die niet alleen de laatste trends volgen, maar ook perfect aansluiten bij uw levensstijl en natuurlijke schoonheid.
-                        </p>
-
-                        <h3 class="text-xl font-semibold mb-4 text-brand-darker">Onze Belofte aan U:</h3>
-                        <ul class="space-y-4 mb-8">
-                            <li class="flex items-start">
-                                <div class="bg-brand-light p-2 rounded-full mr-3 mt-1 text-brand-primary flex-shrink-0">
-                                    <i class="fas fa-cut w-4 h-4 text-center" aria-hidden="true"></i> <!-- Icoon voor vakmanschap -->
-                                </div>
-                                <div>
-                                    <span class="font-semibold text-neutral-800 text-base">Meesterlijk Vakmanschap</span>
-                                    <p class="text-neutral-600 text-xs sm:text-sm">Gespecialiseerde training in de nieuwste technieken voor dameskapsels.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="bg-brand-light p-2 rounded-full mr-3 mt-1 text-brand-primary flex-shrink-0">
-                                    <i class="fas fa-spa w-4 h-4 text-center" aria-hidden="true"></i> <!-- Icoon voor persoonlijke aandacht -->
-                                </div>
-                                <div>
-                                    <span class="font-semibold text-neutral-800 text-base">Persoonlijke Verwennerij</span>
-                                    <p class="text-neutral-600 text-xs sm:text-sm">Uw wensen en comfort staan centraal in een serene omgeving.</p>
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <div class="bg-brand-light p-2 rounded-full mr-3 mt-1 text-brand-primary flex-shrink-0">
-                                    <i class="fas fa-hand-holding-heart w-4 h-4 text-center" aria-hidden="true"></i> <!-- Icoon voor luxe producten -->
-                                </div>
-                                <div>
-                                    <span class="font-semibold text-neutral-800 text-base">Luxe & Kwaliteit</span>
-                                    <p class="text-neutral-600 text-xs sm:text-sm">Exclusief gebruik van premium, haarvriendelijke producten.</p>
-                                </div>
-                            </li>
-                        </ul>
-                        <a href="#contact" class="btn-primary inline-flex items-center">
-                            <i class="fas fa-calendar-check mr-2" aria-hidden="true"></i>
-                            Reserveer Uw Ervaring
-                        </a>
+                    <div class="treatment-card">
+                        <div class="treatment-icon"><i class="fas fa-palette"></i></div>
+                        <h3>Kleurtransformaties</h3>
+                        <p>Subtiele balayage, stralende highlights of een complete kleurverandering met de meest verfijnde technieken.</p>
+                        <button class="btn btn-secondary open-price-modal-btn">Details & Prijzen</button>
+                    </div>
+                    <div class="treatment-card">
+                        <div class="treatment-icon"><i class="fas fa-leaf"></i></div>
+                        <h3>Luxe Haarverzorging</h3>
+                        <p>Voedende maskers, herstellende keratine treatments en hoofdhuidverzorging voor ultieme glans en gezondheid.</p>
+                        <button class="btn btn-secondary open-price-modal-btn">Details & Prijzen</button>
+                    </div>
+                    <div class="treatment-card">
+                        <div class="treatment-icon"><i class="fas fa-magic"></i></div> <!-- Icon for special occasions -->
+                        <h3>Speciale Gelegenheden</h3>
+                        <p>Elegante updo's, bruidskapsels en verfijnde styling om te stralen op uw belangrijkste momenten.</p>
+                        <button class="btn btn-secondary open-price-modal-btn">Details & Prijzen</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Gallery Section -->
-        <section id="galerij" class="py-16 md:py-24 bg-neutral-100 relative"> {/* Zeer licht gebroken wit/creme */}
-            <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-neutral-50 to-transparent"></div>
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in text-brand-darker">Stralende Impressies</h2>
-                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Laat u inspireren door de transformaties die we creëren.</p>
-
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
-                    <!-- Image "Haar.jpg" -->
-                    <a href="/Images/Haar.jpg" data-fancybox="gallery" data-caption="Zachte Balayage & Golvende Styling" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md">
-                        <img src="/Images/Haar.jpg" alt="Voorbeeld dameskapsel: Zachte balayage met golvende styling" loading="lazy" class="w-full h-full object-cover">
-                        <div class="gallery-overlay"><div class="text-white text-center p-2"><i class="fas fa-search-plus text-2xl mb-1"></i><p class="text-xs font-medium">Balayage & Golven</p></div></div>
+        <section class="gallery-section section-padding" id="gallery">
+            <div class="container">
+                <div class="section-title">
+                    <span class="subtitle-decorated">Portfolio</span>
+                    <h2>Luminous Impressies</h2>
+                    <p>Een glimp van onze haarkunst en de stralende resultaten die we voor onze klanten creëren.</p>
+                </div>
+                <div class="gallery-grid">
+                    <a href="luminous-balayage-zachtblond.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Zachte, natuurlijk ogende balayage op blond haar">
+                        <img src="luminous-balayage-zachtblond.jpg" alt="Dame met zachte blonde balayage en golvend haar">
+                        <!-- <img src="/api/placeholder/400/400/F9F6F0/D4AF37/Balayage%20Zachtblond" alt="Dame met zachte blonde balayage en golvend haar"> -->
+                        <div class="gallery-item-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h4>Zachte Balayage</h4>
+                        </div>
                     </a>
-                    <!-- Image "Salon.jpg" - Controleer of deze afbeelding geschikt is voor dames / neutraal genoeg. -->
-                    <a href="/Images/Salon.jpg" data-fancybox="gallery" data-caption="Chique Boblijn met Subtiele Highlights" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.05s">
-                        <img src="/Images/Salon.jpg" alt="Voorbeeld dameskapsel: Chique boblijn met highlights" loading="lazy" class="w-full h-full object-cover">
-                        <div class="gallery-overlay"><div class="text-white text-center p-2"><i class="fas fa-search-plus text-2xl mb-1"></i><p class="text-xs font-medium">Chique Boblijn</p></div></div>
+                    <a href="luminous-boblijn-elegant.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Elegante, scherp geknipte boblijn met glans">
+                        <img src="luminous-boblijn-elegant.jpg" alt="Dame met een elegante, strakke boblijn">
+                        <!-- <img src="/api/placeholder/400/400/F9F6F0/D4AF37/Boblijn%20Elegant" alt="Dame met een elegante, strakke boblijn"> -->
+                        <div class="gallery-item-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h4>Elegante Boblijn</h4>
+                        </div>
                     </a>
-                    <!-- Image "Salon1.jpg" - Controleer of deze afbeelding geschikt is voor dames / neutraal genoeg. -->
-                    <a href="/Images/Salon1.jpg" data-fancybox="gallery" data-caption="Stralende Kleurtransformatie voor Lang Haar" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.1s">
-                        <img src="/Images/Salon1.jpg" alt="Voorbeeld dameskapsel: Levendige haarkleuring voor lang haar" loading="lazy" class="w-full h-full object-cover">
-                        <div class="gallery-overlay"><div class="text-white text-center p-2"><i class="fas fa-search-plus text-2xl mb-1"></i><p class="text-xs font-medium">Levendige Kleuring</p></div></div>
+                    <a href="luminous-langhaar-golvend-styling.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Lang, gezond haar met zachte golven en volume">
+                        <img src="luminous-langhaar-golvend-styling.jpg" alt="Dame met lang, golvend gestyled haar">
+                        <!-- <img src="/api/placeholder/400/400/F9F6F0/D4AF37/Langhaar%20Golvend" alt="Dame met lang, golvend gestyled haar"> -->
+                        <div class="gallery-item-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h4>Golvende Styling</h4>
+                        </div>
                     </a>
-                    <!-- Image "Kapperstoelen.jpg" - Sfeerbeeld van de salon -->
-                    <a href="/Images/Kapperstoelen.jpg" data-fancybox="gallery" data-caption="Luxe Vlechtwerk & Elegante Updo's" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.15s">
-                        <img src="/Images/Kapperstoelen.jpg" alt="Voorbeeld dameskapsel: Elegant opgestoken feestkapsel of vlechtwerk" loading="lazy" class="w-full h-full object-cover">
-                        <div class="gallery-overlay"><div class="text-white text-center p-2"><i class="fas fa-search-plus text-2xl mb-1"></i><p class="text-xs font-medium">Elegante Updo</p></div></div>
+                    <a href="luminous-updo-bruidskapsel.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Verfijnd opgestoken bruidskapsel met subtiele accessoires">
+                        <img src="luminous-updo-bruidskapsel.jpg" alt="Elegant opgestoken bruidskapsel">
+                        <!-- <img src="/api/placeholder/400/400/F9F6F0/D4AF37/Updo%20Bruidskapsel" alt="Elegant opgestoken bruidskapsel"> -->
+                        <div class="gallery-item-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h4>Bruids Updo</h4>
+                        </div>
                     </a>
-                    <!-- Image "SalonMain.jpg" - Sfeerbeeld / detail -->
-                    <a href="/Images/SalonMain.jpg" data-fancybox="gallery" data-caption="Perfecte Kruldefinitie & Gezonde Glans" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.2s">
-                        <img src="/Images/SalonMain.jpg" alt="Voorbeeld dameskapsel: Goed gedefinieerde natuurlijke krullen" loading="lazy" class="w-full h-full object-cover">
-                        <div class="gallery-overlay"><div class="text-white text-center p-2"><i class="fas fa-search-plus text-2xl mb-1"></i><p class="text-xs font-medium">Natuurlijke Krullen</p></div></div>
+                    <a href="luminous-korte-coupe-modern.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Moderne, pittige korte coupe met textuur">
+                        <img src="luminous-korte-coupe-modern.jpg" alt="Dame met een moderne korte coupe">
+                        <!-- <img src="/api/placeholder/400/400/F9F6F0/D4AF37/Korte%20Coupe%20Modern" alt="Dame met een moderne korte coupe"> -->
+                        <div class="gallery-item-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h4>Moderne Korte Coupe</h4>
+                        </div>
                     </a>
-                    <!-- Tweede keer "Haar.jpg" -->
-                    <a href="/Images/Haar.jpg" data-fancybox="gallery" data-caption="Verfijnde Korte Coupe met Textuur" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.25s">
-                        <img src="/Images/Haar.jpg" alt="Voorbeeld dameskapsel: Verfijnde korte coupe met textuur" loading="lazy" class="w-full h-full object-cover">
-                        <div class="gallery-overlay"><div class="text-white text-center p-2"><i class="fas fa-search-plus text-2xl mb-1"></i><p class="text-xs font-medium">Korte Coupe</p></div></div>
-                    </a>
-                    <!-- Tweede keer "Salon.jpg" - Controleer of deze afbeelding geschikt is voor dames / neutraal genoeg. -->
-                    <a href="/Images/Salon.jpg" data-fancybox="gallery" data-caption="Glamoureus Blond met Zachte Lagen" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.3s">
-                        <img src="/Images/Salon.jpg" alt="Voorbeeld dameskapsel: Koel platinum blond haar of zacht blond" loading="lazy" class="w-full h-full object-cover">
-                        <div class="gallery-overlay"><div class="text-white text-center p-2"><i class="fas fa-search-plus text-2xl mb-1"></i><p class="text-xs font-medium">Glamoureus Blond</p></div></div>
-                    </a>
-                    <!-- Tweede keer "Salon1.jpg" - Controleer of deze afbeelding geschikt is voor dames / neutraal genoeg. -->
-                    <a href="/Images/Salon1.jpg" data-fancybox="gallery" data-caption="Elegante Styling voor Speciale Gelegenheden" class="gallery-item animate-on-scroll animate-scale-in block aspect-ratio-box aspect-ratio-1x1 rounded-xl overflow-hidden shadow-md" data-delay="0.35s">
-                        <img src="/Images/Salon1.jpg" alt="Voorbeeld dameskapsel: Elegante styling voor een speciale gelegenheid" loading="lazy" class="w-full h-full object-cover">
-                        <div class="gallery-overlay"><div class="text-white text-center p-2"><i class="fas fa-search-plus text-2xl mb-1"></i><p class="text-xs font-medium">Feestelijke Styling</p></div></div>
+                    <a href="luminous-kleurtransformatie-koper.jpg" class="gallery-item" data-fancybox="gallery" data-caption="Levendige koperkleur transformatie met glans">
+                        <img src="luminous-kleurtransformatie-koper.jpg" alt="Dame met een stralende koperen haarkleur">
+                        <!-- <img src="/api/placeholder/400/400/F9F6F0/D4AF37/Kleur%20Koper" alt="Dame met een stralende koperen haarkleur"> -->
+                        <div class="gallery-item-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <h4>Levendig Koper</h4>
+                        </div>
                     </a>
                 </div>
-
-                <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                    <a href="[JOUW_INSTAGRAM_LINK]" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
-                        <i class="fab fa-instagram mr-2 text-lg" aria-hidden="true"></i> Volg Luminous op Instagram
+                <div class="gallery-button-wrapper">
+                    <a href="[UW_INSTAGRAM_LINK]" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        <i class="fab fa-instagram" style="margin-right: 8px;"></i> Volg Ons op Instagram
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Testimonials Section -->
-        <section class="py-16 md:py-24 bg-white noise-bg"> {/* Was .noise-bg, nu wit met subtiele goud tinten in cards */ }
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in text-brand-darker">Ervaringen van Onze Klanten</h2>
-                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Ontdek waarom dames kiezen voor Luminous Haarsalon.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Testimonial 1 -->
-                    <div class="testimonial-card p-6 md:p-8 rounded-xl animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-gold-light">
-                        <div class="absolute -top-3 -left-3 text-brand-primary/20 text-5xl md:text-6xl z-0">
-                            <i class="fas fa-quote-left" aria-hidden="true"></i>
-                        </div>
-                        <div class="relative z-10">
-                            <div class="flex mb-4 text-brand-secondary">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
-                                "Een geweldige keratine behandeling gehad bij Luminous! Mijn haar voelt zo gezond en de service was perfect. Zeer vriendelijke en kundige stylisten!"
-                            </p>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full bg-gold-light flex items-center justify-center flex-shrink-0">
-                                    <span class="text-brand-primary font-playfair font-semibold text-lg">L</span>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="font-medium text-base md:text-lg text-neutral-800">Lana S.</p>
-                                    <p class="text-xs text-neutral-500">Keratine Behandeling</p>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Friends Bonus Section -->
+        <section class="friends-bonus-section section-padding" id="friends-bonus">
+            <div class="container">
+                <div class="section-title">
+                    <span class="subtitle-decorated">Samen Stralen</span>
+                    <h2>Luminous Vriendinnen Bonus</h2>
+                    <p>Deel de luxe van Luminous met een vriendin en geniet beiden van een exclusief voordeel.</p>
+                </div>
+                <div class="friends-bonus-content">
+                    <div class="friends-bonus-text">
+                        <h3>Deel de Ervaring, Deel het Voordeel</h3>
+                        <p>Bij Luminous geloven we in het delen van schoonheid en verwennerij. Introduceer een vriendin die Luminous nog niet kent, en als blijk van waardering ontvangen jullie beiden <strong>10% korting</strong> op jullie volgende behandeling.</p>
+                        <ul class="friends-bonus-steps">
+                            <li><span class="step-icon"><i class="fas fa-heart"></i></span> Vertel uw vriendin over uw stralende ervaring bij Luminous.</li>
+                            <li><span class="step-icon"><i class="fas fa-calendar-check"></i></span> Uw vriendin maakt haar eerste afspraak en vermeldt uw naam.</li>
+                            <li><span class="step-icon"><i class="fas fa-gift"></i></span> Jullie ontvangen beiden 10% korting als dank voor het delen!</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary" style="margin-top: 1rem;">Informeer een Vriendin</a>
                     </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial-card p-6 md:p-8 rounded-xl animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-gold-light" data-delay="0.15s">
-                        <div class="absolute -top-3 -left-3 text-brand-primary/20 text-5xl md:text-6xl z-0">
-                            <i class="fas fa-quote-left" aria-hidden="true"></i>
-                        </div>
-                        <div class="relative z-10">
-                            <div class="flex mb-4 text-brand-secondary">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                            </div>
-                            <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
-                                "De styliste bij Luminous begreep direct wat ik wilde. Ik kon meteen terecht en ben super blij. Ik kom zeker terug, ook voor mijn wenkbrauwen. Echt TOP!"
-                            </p>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full bg-gold-light flex items-center justify-center flex-shrink-0">
-                                    <span class="text-brand-primary font-playfair font-semibold text-lg">E</span>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="font-medium text-base md:text-lg text-neutral-800">Eva M.</p>
-                                    <p class="text-xs text-neutral-500">Kleur & Styling</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="testimonial-card p-6 md:p-8 rounded-xl animate-on-scroll animate-slide-up relative hover:shadow-xl transition-shadow duration-300 border border-gold-light" data-delay="0.3s">
-                        <div class="absolute -top-3 -left-3 text-brand-primary/20 text-5xl md:text-6xl z-0">
-                            <i class="fas fa-quote-left" aria-hidden="true"></i>
-                        </div>
-                        <div class="relative z-10">
-                            <div class="flex mb-4 text-brand-secondary">
-                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <p class="italic text-neutral-600 mb-6 text-sm md:text-base leading-relaxed">
-                                "Luminous Haarsalon is absoluut de beste salon waar ik ben geweest! Mijn kapsel is prachtig, precies zoals ik hoopte. Een echte aanrader."
-                            </p>
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 rounded-full bg-gold-light flex items-center justify-center flex-shrink-0">
-                                    <span class="text-brand-primary font-playfair font-semibold text-lg">A</span>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="font-medium text-base md:text-lg text-neutral-800">Aisha B.</p>
-                                    <p class="text-xs text-neutral-500">Knippen & Styling</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="friends-bonus-image-wrapper">
+                        <img src="luminous-vriendinnen-bonus.jpg" alt="Twee stijlvolle vriendinnen die genieten en lachen, symbool voor de Luminous vriendinnen bonus">
+                        <!-- <img src="/api/placeholder/550/650/F9F6F0/D4AF37/Vriendinnen%20Bonus" alt="Twee stijlvolle vriendinnen die genieten en lachen, symbool voor de Luminous vriendinnen bonus"> -->
+                        <div class="discount-badge-overlay">10% KORTING</div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="text-center mt-12 md:mt-16 animate-on-scroll animate-fade-in">
-                    <a href="[JOUW_GOOGLE_REVIEWS_LINK]" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 bg-white border border-neutral-300 hover:border-brand-primary text-neutral-700 hover:text-brand-primary rounded-full transition-all duration-300 font-medium shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
-                        <i class="fab fa-google mr-2 text-lg" aria-hidden="true"></i> Lees meer reviews op Google
+        <!-- Testimonials Section -->
+        <section class="testimonials-section section-padding" id="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <span class="subtitle-decorated">Echte Ervaringen</span>
+                    <h2>Wat Onze Klanten Zeggen</h2>
+                    <p>De woorden van onze gewaardeerde klanten spreken boekdelen over de Luminous ervaring.</p>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Absoluut de beste salonervaring die ik ooit heb gehad. Vanaf het moment dat je binnenstapt voel je de luxe en aandacht. Mijn haar is prachtig gekleurd en gestyled. Ik kom zeker terug!"</p>
+                        <div class="testimonial-author">Annelies V.</div>
+                        <div class="testimonial-service">Balayage & Styling</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="testimonial-text">"De stylisten bij Luminous zijn ware kunstenaars. Ze luisterden aandachtig naar mijn wensen en gaven deskundig advies. Het resultaat overtrof mijn verwachtingen. Een oase van rust en professionaliteit."</p>
+                        <div class="testimonial-author">Chantal de Bruin</div>
+                        <div class="testimonial-service">Kleurcorrectie & Keratine Treatment</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote-icon"><i class="fas fa-quote-left"></i></div>
+                        <div class="testimonial-stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Voor mijn bruiloft zocht ik een salon die perfectie kon leveren, en Luminous heeft dat gedaan. Mijn bruidskapsel was adembenemend en bleef de hele dag perfect. Enorme dank aan het team!"</p>
+                        <div class="testimonial-author">Linda H.</div>
+                        <div class="testimonial-service">Bruidskapsel & Styling</div>
+                    </div>
+                </div>
+                <div class="testimonials-button-wrapper">
+                     <a href="[UW_GOOGLE_REVIEWS_LINK]" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        Lees Meer Reviews op Google
                     </a>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-16 md:py-24 bg-neutral-50"> {/* Wit */}
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 animate-on-scroll animate-fade-in text-brand-darker">Plan Uw Luminous Moment</h2>
-                <p class="text-center text-neutral-600 max-w-3xl mx-auto mb-12 md:mb-16 text-base md:text-lg animate-on-scroll animate-fade-in">Neem contact op of kom langs in onze salon. We kijken ernaar uit u te verwelkomen.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12">
-                    <!-- Contact Info Card 1: Address -->
-                    <div class="animate-on-scroll animate-scale-in bg-gold-light/70 p-6 md:p-8 rounded-xl shadow-lg border border-gold-light">
-                        <div class="flex items-start mb-4">
-                            <div class="bg-brand-primary p-3 rounded-full mr-4 text-white">
-                                <i class="fas fa-map-marker-alt text-xl" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2 text-brand-darker">Bezoek Ons</h3>
-                                <p class="text-neutral-700 text-sm md:text-base">
-                                    [Uw Straatnaam Huisnummer]<br>
-                                    [Uw Postcode] [Uw Plaats]<br>
-                                    Nederland
-                                </p>
-                                <a href="https://maps.google.com/?q=[Uw Straatnaam Huisnummer],[Uw Postcode] [Uw Plaats]" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-brand-primary hover:text-brand-dark mt-3 text-sm font-medium">
-                                    <i class="fas fa-directions mr-2" aria-hidden="true"></i> Routebeschrijving
-                                </a>
-                            </div>
-                        </div>
+        <section class="contact-section section-padding" id="contact">
+            <div class="container">
+                <div class="section-title">
+                    <span class="subtitle-decorated">Bereik Ons</span>
+                    <h2>Plan Uw Luminous Moment</h2>
+                    <p>Wij kijken ernaar uit u te verwelkomen in onze salon voor een onvergetelijke ervaring.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3>Bezoek Adres</h3>
+                        <p>[Uw Straatnaam Huisnummer]<br>[Uw Postcode] [Uw Plaats]<br>Nederland</p>
+                        <a href="https://maps.google.com/?q=[UW_ADRES_URL_ENCODED]" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="margin-top:1rem;">Open Kaart</a>
                     </div>
-
-                    <!-- Contact Info Card 2: Hours -->
-                    <div class="animate-on-scroll animate-scale-in bg-gold-light/70 p-6 md:p-8 rounded-xl shadow-lg border border-gold-light" data-delay="0.15s">
-                        <div class="flex items-start mb-4">
-                            <div class="bg-brand-primary p-3 rounded-full mr-4 text-white">
-                                <i class="fas fa-clock text-xl" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2 text-brand-darker">Openingstijden</h3>
-                                <ul class="text-neutral-700 space-y-1 text-sm md:text-base">
-                                    <li class="flex justify-between"><span>Maandag:</span> <span>[Uw Tijd / Gesloten]</span></li>
-                                    <li class="flex justify-between"><span>Dinsdag:</span> <span>[Uw Tijd]</span></li>
-                                    <li class="flex justify-between"><span>Woensdag:</span> <span>[Uw Tijd]</span></li>
-                                    <li class="flex justify-between"><span>Donderdag:</span> <span>[Uw Tijd]</span></li>
-                                    <li class="flex justify-between"><span>Vrijdag:</span> <span>[Uw Tijd]</span></li>
-                                    <li class="flex justify-between"><span>Zaterdag:</span> <span>[Uw Tijd]</span></li>
-                                    <li class="flex justify-between"><span>Zondag:</span> <span>[Uw Tijd / Gesloten]</span></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <h3>Openingstijden</h3>
+                        <ul class="opening-hours">
+                            <li><span>Maandag:</span> <span>[Uw Tijd Ma / Gesloten]</span></li>
+                            <li><span>Dinsdag:</span> <span>[Uw Tijd Di]</span></li>
+                            <li><span>Woensdag:</span> <span>[Uw Tijd Wo]</span></li>
+                            <li><span>Donderdag:</span> <span>[Uw Tijd Do]</span></li>
+                            <li><span>Vrijdag:</span> <span>[Uw Tijd Vr]</span></li>
+                            <li><span>Zaterdag:</span> <span>[Uw Tijd Za]</span></li>
+                            <li><span>Zondag:</span> <span>[Gesloten]</span></li>
+                        </ul>
                     </div>
-
-                    <!-- Contact Info Card 3: Contact -->
-                    <div class="animate-on-scroll animate-scale-in bg-gold-light/70 p-6 md:p-8 rounded-xl shadow-lg border border-gold-light" data-delay="0.3s">
-                        <div class="flex items-start mb-4">
-                            <div class="bg-brand-primary p-3 rounded-full mr-4 text-white">
-                                <i class="fas fa-phone-alt text-xl" aria-hidden="true"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-semibold mb-2 text-brand-darker">Neem Contact Op</h3>
-                                <p class="text-neutral-700 mb-3 text-sm md:text-base">
-                                    Vragen of direct een afspraak maken? Bel of mail ons:
-                                </p>
-                                <div class="space-y-2">
-                                    <a href="tel:[JOUW_TELEFOONNUMMER]" class="flex items-center text-brand-primary hover:text-brand-dark">
-                                        <i class="fas fa-phone-alt mr-2 text-sm" aria-hidden="true"></i>
-                                        <span class="text-base font-medium">[Jouw Telefoonnummer]</span>
-                                    </a>
-                                    <a href="mailto:[JOUW_EMAILADRES]" class="flex items-center text-brand-primary hover:text-brand-dark">
-                                        <i class="fas fa-envelope mr-2 text-sm" aria-hidden="true"></i>
-                                        <span class="text-base font-medium">[Jouw Emailadres]</span>
-                                    </a>
-                                </div>
-                                <div class="mt-4 pt-4 border-t border-gold-dark/20">
-                                    <p class="text-sm text-neutral-500 mb-2">Volg ons voor inspiratie:</p>
-                                    <div class="flex space-x-3">
-                                        <a href="[JOUW_FACEBOOK_LINK]" class="text-neutral-400 hover:text-brand-primary text-xl transition-colors">
-                                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="[JOUW_INSTAGRAM_LINK]" class="text-neutral-400 hover:text-brand-primary text-xl transition-colors">
-                                            <i class="fab fa-instagram" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="[JOUW_PINTEREST_LINK]" class="text-neutral-400 hover:text-brand-primary text-xl transition-colors">
-                                            <i class="fab fa-pinterest-p" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="contact-card">
+                        <div class="contact-icon"><i class="fas fa-phone-volume"></i></div>
+                        <h3>Direct Contact</h3>
+                        <p><a href="tel:[UW_TELEFOONNUMMER]"><i class="fas fa-phone-alt"></i> [UW_TELEFOONNUMMER]</a></p>
+                        <p><a href="mailto:[UW_EMAILADRES]"><i class="fas fa-envelope"></i> [UW_EMAILADRES]</a></p>
+                        <div class="social-links-contact">
+                            <a href="[UW_INSTAGRAM_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="[UW_FACEBOOK_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="[UW_PINTEREST_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Map -->
-                <div class="mt-16 rounded-xl overflow-hidden shadow-lg animate-on-scroll animate-fade-in" style="height: 300px;">
+                <div class="map-container">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2448.7823472936173!2d4.4892576!3d52.150899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5c6b89a13b9cd%3A0xb6c38cf5a37a1e11!2s[UW ADRES HIER INVULLEN VOOR GOOGLE MAPS EMBED]%20Leiden!5e0!3m2!1snl!2snl!4v1712373424123!5m2!1snl!2snl"
-                        width="100%"
-                        height="100%"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Locatie Luminous Haarsalon - [Uw Adres]">
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.0000000000000!2d[UW_LONGITUDE]!3d[UW_LATITUDE]!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x[UW_GOOGLE_MAPS_PLACE_ID_HIER]!2sLuminous%20Haarsalon!5e0!3m2!1snl!2snl!4v[TIMESTAMP]"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Locatie Luminous Haarsalon">
                     </iframe>
-                    <div class="w-full h-full flex items-center justify-center bg-neutral-200 text-neutral-500 text-center p-4 absolute inset-0 -z-10">
-                        <p><i class="fas fa-map-marker-alt mr-2" aria-hidden="true"></i>Kaart kon niet worden geladen. Locatie: [Uw Adres], [Uw Plaats].</p>
-                    </div>
+                    <!-- Vervang de src hierboven met uw eigen Google Maps Embed code -->
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-brand-darker text-neutral-200 pt-16 pb-8 relative overflow-hidden"> {/* Donkerste goud/bruin */}
-        <div class="absolute inset-0 opacity-[0.03]"> <!-- Subtieler patroon -->
-            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="footerPattern" patternUnits="userSpaceOnUse" width="40" height="40"><circle cx="20" cy="20" r="1" fill="white"/></pattern></defs><rect width="100%" height="100%" fill="url(#footerPattern)"/></svg>
-        </div>
-
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-                <div class="lg:col-span-1 sm:col-span-2">
-                    <a href="#home" class="inline-flex items-center mb-4 text-2xl font-bold font-playfair text-brand-secondary">
-                        Luminous
-                    </a>
-                    <p class="text-neutral-300 text-sm mb-6 leading-relaxed">
-                        Uw exclusieve bestemming voor verfijnde haarstyling en persoonlijke verzorging voor dames.
-                    </p>
-                    <div class="flex space-x-3">
-                        <a href="[JOUW_FACEBOOK_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
-                            <i class="fab fa-facebook-f text-sm" aria-hidden="true"></i>
-                        </a>
-                        <a href="[JOUW_INSTAGRAM_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
-                            <i class="fab fa-instagram text-sm" aria-hidden="true"></i>
-                        </a>
-                        <a href="[JOUW_PINTEREST_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-brand-primary transition-all duration-300">
-                            <i class="fab fa-pinterest-p text-sm" aria-hidden="true"></i>
-                        </a>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="#home" class="footer-logo-footer">Luminous</a>
+                    <p>Exclusieve haarkunst en persoonlijke verwennerij voor de moderne vrouw. Ervaar de stralende service van Luminous Haarsalon.</p>
+                    <div class="footer-social-icons">
+                        <a href="[UW_INSTAGRAM_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="[UW_FACEBOOK_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="[UW_PINTEREST_LINK]" target="_blank" rel="noopener noreferrer" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
                     </div>
                 </div>
-
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-white">Navigatie</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#home" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Home</a></li>
-                        <li><a href="#referral-program" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Vriendinnen Bonus</a></li>
-                        <li><a href="#over-ons" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Over Ons</a></li>
-                        <li><a href="#galerij" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Impressies</a></li>
-                        <li><a href="#contact" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Contact</a></li>
-                        <li><a href="#" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Privacybeleid</a></li>
+                <div class="footer-column">
+                    <h4>Ontdek Luminous</h4>
+                    <ul>
+                        <li><a href="#philosophy">Onze Filosofie</a></li>
+                        <li><a href="#treatments">Behandelingen</a></li>
+                        <li><a href="#gallery">Impressies</a></li>
+                        <li><a href="#friends-bonus">Vriendinnen Bonus</a></li>
+                        <li><button class="open-price-modal-btn" style="background:none; border:none; padding:0; color:inherit; cursor:pointer; text-align:left;">Prijsindicaties</button></li>
                     </ul>
                 </div>
-
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-white">Onze Specialiteiten</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#home" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Knippen & Styling Dames</a></li>
-                        <li><a href="#home" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Balayage & Kleurcorrecties</a></li>
-                        <li><a href="#home" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Luxe Haar Treatments</a></li>
-                        <li><a href="#home" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Bruids- & Feestkapsels</a></li>
-                        <li><a href="#home" class="text-neutral-300 hover:text-brand-secondary transition-colors flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-brand-secondary/70"></i>Keratine Behandelingen</a></li>
+                <div class="footer-column">
+                    <h4>Klantenservice</h4>
+                    <ul>
+                        <li><a href="#contact">Contact & Route</a></li>
+                        <li><a href="#">Veelgestelde Vragen</a></li>
+                        <li><a href="#">Privacybeleid</a></li>
+                        <li><a href="#">Algemene Voorwaarden</a></li>
                     </ul>
                 </div>
-
-                <div>
-                    <h4 class="text-lg font-semibold mb-4 text-white">Contact</h4>
-                    <ul class="space-y-3 text-sm">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mr-3 text-brand-secondary mt-1 w-4 text-center flex-shrink-0"></i>
-                            <span class="text-neutral-300">
-                                [Uw Straatnaam Huisnummer],<br>[Uw Postcode] [Uw Plaats]
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-phone-alt mr-3 text-brand-secondary mt-1 w-4 text-center flex-shrink-0"></i>
-                            <a href="tel:[JOUW_TELEFOONNUMMER]" class="text-neutral-300 hover:text-brand-secondary transition-colors">[Jouw Telefoonnummer]</a>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-envelope mr-3 text-brand-secondary mt-1 w-4 text-center flex-shrink-0"></i>
-                            <a href="mailto:[JOUW_EMAILADRES]" class="text-neutral-300 hover:text-brand-secondary transition-colors break-all">[Jouw Emailadres]</a>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-clock mr-3 text-brand-secondary mt-1 w-4 text-center flex-shrink-0"></i>
-                            <span class="text-neutral-300">Di-Vr: [Tijd] | Za: [Tijd]</span>
-                        </li>
-                    </ul>
-                    <div class="mt-4 p-3 bg-white/5 rounded-lg border border-white/10">
-                        <span class="text-sm font-medium text-brand-secondary block mb-1">🌟 Vriendinnen Bonus</span>
-                        <p class="text-xs text-neutral-300 leading-snug">10% korting voor u & uw vriendin!</p>
-                    </div>
+                <div class="footer-column">
+                    <h4>Contactgegevens</h4>
+                    <p><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i>[Uw Straatnaam Huisnummer]<br>[Uw Postcode] [Uw Plaats]</p>
+                    <p><i class="fas fa-phone-alt" style="margin-right: 8px;"></i><a href="tel:[UW_TELEFOONNUMMER]">[UW_TELEFOONNUMMER]</a></p>
+                    <p><i class="fas fa-envelope" style="margin-right: 8px;"></i><a href="mailto:[UW_EMAILADRES]">[UW_EMAILADRES]</a></p>
                 </div>
             </div>
-
-            <div class="border-t border-neutral-700/50 mt-10 pt-6 text-center text-neutral-400 text-xs">
-                <p>© <span id="current-year"></span> Luminous Haarsalon. Alle rechten voorbehouden. | <a href="#" class="hover:text-white transition-colors">Privacy</a> | <a href="#" class="hover:text-white transition-colors">Voorwaarden</a></p>
+            <div class="footer-bottom">
+                <p>© <span id="current-year"></span> Luminous Haarsalon. Alle rechten voorbehouden. Ontworpen met <i class="fas fa-heart" style="color: var(--color-gold-soft);"></i>.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Floating Action Buttons -->
-    <div class="fixed bottom-4 left-4 z-50 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:flex-row-reverse">
-        <div id="floating-referral" class="transition-opacity duration-300 opacity-0 hidden">
-            <a href="#referral-program" class="floating-btn bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white rounded-full w-14 h-14 flex flex-col items-center justify-center shadow-lg" aria-label="Bekijk Vriendinnen Bonus">
-                <i class="fas fa-gift text-lg" aria-hidden="true"></i>
-                <span class="text-[9px] font-medium mt-0.5 block leading-none">Bonus</span>
-            </a>
-        </div>
-
-        <div id="scroll-top-btn" class="transition-opacity duration-300 opacity-0 hidden">
-            <button aria-label="Scroll naar boven" class="floating-btn bg-white text-brand-primary rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:bg-brand-light">
-                <i class="fas fa-chevron-up text-lg" aria-hidden="true"></i>
-            </button>
-        </div>
-    </div>
-
     <!-- Price List Modal -->
-    <div id="price-modal" class="fixed inset-0 z-[70] bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4 transition-opacity duration-300 ease-in-out opacity-0" aria-labelledby="price-modal-title" role="dialog" aria-modal="true">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-xl max-h-[90vh] flex flex-col overflow-hidden transform scale-95 transition-all duration-300 ease-in-out">
-            <div class="flex justify-between items-center p-4 sm:p-6 border-b border-neutral-200 flex-shrink-0">
-                <h2 id="price-modal-title" class="text-xl sm:text-2xl font-semibold font-playfair text-brand-darker">Prijslijst Luminous Haarsalon</h2>
-                <button id="close-price-modal-button" class="text-neutral-500 hover:text-neutral-800 transition-colors rounded-full w-8 h-8 flex items-center justify-center hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-brand-primary" aria-label="Sluit prijslijst">
-                    <i class="fas fa-times text-lg" aria-hidden="true"></i>
-                </button>
+    <div id="price-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close-btn" id="price-modal-close-icon">×</span>
+            <h2 class="modal-title">Prijsindicaties Luminous</h2>
+
+            <div class="price-category">
+                <h3 class="price-category-title">Knippen & Stylen Dames</h3>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Consult & Persoonlijk Advies</div>
+                    </div>
+                    <div class="price-value">Gratis</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Wassen, Knippen & Föhnen/Stylen</div>
+                        <div class="price-description">Perfecte coupe, inclusief luxe wasmassage en styling.</div>
+                    </div>
+                    <div class="price-value">vanaf € 75,-</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Wassen & Föhnen/Stylen (Luxe Blow-Dry)</div>
+                        <div class="price-description">Voor een gepolijste look, kort of lang haar.</div>
+                    </div>
+                    <div class="price-value">vanaf € 45,-</div>
+                </div>
+                 <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Updo / Feestkapsel</div>
+                        <div class="price-description">Elegante styling voor speciale gelegenheden.</div>
+                    </div>
+                    <div class="price-value">vanaf € 80,-</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Bruidskapsel (incl. proefsessie)</div>
+                        <div class="price-description">Een onvergetelijke look voor uw speciale dag.</div>
+                    </div>
+                    <div class="price-value">Op aanvraag</div>
+                </div>
             </div>
-            <div id="price-modal-body" class="p-4 sm:p-6 overflow-y-auto flex-grow space-y-6">
-                <div class="price-category">
-                    <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-gold-light">Haarverzorging & Styling Dames</h3>
-                    <ul class="space-y-2 text-sm text-neutral-600">
-                        <li class="flex justify-between"><span>Consultatie & Persoonlijk Advies</span> <span class="font-medium">Gratis</span></li>
-                        <li class="flex justify-between"><span>Wassen, Knippen, Drogen</span> <span class="font-medium">€ 59,50</span></li>
-                        <li class="flex justify-between"><span>Wassen, Knippen, Föhnen/Stylen</span> <span class="font-medium">€ 75,00</span></li>
-                        <li class="flex justify-between"><span>Pony Knippen / Contouren</span> <span class="font-medium">€ 18,00</span></li>
-                        <li class="flex justify-between"><span>Wassen & Föhnen/Stylen (kort haar)</span> <span class="font-medium">Vanaf € 40,00</span></li>
-                        <li class="flex justify-between"><span>Wassen & Föhnen/Stylen (lang haar)</span> <span class="font-medium">Vanaf € 55,00</span></li>
-                        <li class="flex justify-between"><span>Opsteken / Feestkapsel</span> <span class="font-medium">Vanaf € 70,00</span></li>
-                        <li class="flex justify-between"><span>Bruidskapsel (incl. proefkapsel)</span> <span class="font-medium">Op aanvraag</span></li>
-                    </ul>
+
+            <div class="price-category">
+                <h3 class="price-category-title">Kleurtransformaties Dames</h3>
+                 <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Uitgroei Kleuren (max. 2cm)</div>
+                        <div class="price-description">Naadloze dekking van uw uitgroei.</div>
+                    </div>
+                    <div class="price-value">vanaf € 65,-</div>
                 </div>
-                <div class="price-category border-t border-neutral-200 pt-6 mt-6">
-                    <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-gold-light">Kleuringen & Highlights Dames</h3>
-                    <ul class="space-y-2 text-sm text-neutral-600">
-                        <li class="flex justify-between"><span>Uitgroei Kleuren (max 2cm)</span> <span class="font-medium">Vanaf € 89,50</span></li>
-                        <li class="flex justify-between"><span>Volledige Kleuring (kort haar)</span> <span class="font-medium">Vanaf € 100,00</span></li>
-                        <li class="flex justify-between"><span>Volledige Kleuring (lang haar)</span> <span class="font-medium">Vanaf € 125,00</span></li>
-                        <li class="flex justify-between"><span>Highlights / Lowlights (Folies half hoofd)</span> <span class="font-medium">Vanaf € 115,00</span></li>
-                        <li class="flex justify-between"><span>Highlights / Lowlights (Folies heel hoofd)</span> <span class="font-medium">Vanaf € 155,00</span></li>
-                        <li class="flex justify-between"><span>Balayage / Ombre / Freelights</span> <span class="font-medium">Vanaf € 160,00</span></li>
-                        <li class="flex justify-between"><span>Toner / Glossing (na kleuring)</span> <span class="font-medium">Vanaf € 45,00</span></li>
-                        <li class="flex justify-between"><span>Toner / Glossing (losse behandeling)</span> <span class="font-medium">Vanaf € 60,00</span></li>
-                        <li class="flex justify-between"><span>Kleurcorrectie</span> <span class="font-medium">Prijs op consultatie</span></li>
-                    </ul>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Volledige Kleuring</div>
+                        <div class="price-description">Een nieuwe, egale kleur van aanzet tot punt.</div>
+                    </div>
+                    <div class="price-value">vanaf € 90,-</div>
                 </div>
-                                <div class="price-category border-t border-neutral-200 pt-6 mt-6">
-                    <h3 class="text-lg font-semibold mb-3 text-brand-primary border-b pb-1 border-gold-light">Extra's & Verzorging</h3>
-                    <ul class="space-y-2 text-sm text-neutral-600">
-                        <li class="flex justify-between"><span>Intensief Haarmasker op Maat</span> <span class="font-medium">€ 20,00</span></li>
-                        <li class="flex justify-between"><span>Luxe Hoofdhuid Treatment</span> <span class="font-medium">€ 25,00</span></li>
-                        <li class="flex justify-between"><span>Olaplex / K18 Herstelbehandeling (stand alone)</span> <span class="font-medium">Vanaf € 45,00</span></li>
-                        <li class="flex justify-between"><span>Olaplex / K18 Toevoeging aan Kleuring</span> <span class="font-medium">Vanaf € 30,00</span></li>
-                        <li class="flex justify-between"><span>Keratine Behandeling (gladmakend)</span> <span class="font-medium">Op aanvraag</span></li>
-                        <li class="flex justify-between"><span>Haar Extensions (advies & prijs)</span> <span class="font-medium">Op consultatie</span></li>
-                        <li class="flex justify-between"><span>Wenkbrauwen Modelleren (epileren/waxen)</span> <span class="font-medium">€ 15,00</span></li>
-                        <li class="flex justify-between"><span>Wenkbrauwen Verven</span> <span class="font-medium">€ 12,50</span></li>
-                        <li class="flex justify-between"><span>Wimpers Verven</span> <span class="font-medium">€ 12,50</span></li>
-                        <li class="flex justify-between"><span>Combi Wenkbrauwen & Wimpers Verven</span> <span class="font-medium">€ 22,00</span></li>
-                    </ul>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Balayage / Ombré / Freelights</div>
+                        <div class="price-description">Natuurlijke, sunkissed effecten of creatieve overgangen.</div>
+                    </div>
+                    <div class="price-value">vanaf € 150,-</div>
                 </div>
-                <p class="text-xs text-neutral-500 italic text-center mt-4">
-                    Alle prijzen zijn 'vanaf' en indicatief. Voor lang, dik of zeer bewerkelijk haar kan een toeslag gelden.
-                    Uw styliste zal altijd vooraf een duidelijke prijsopgave doen tijdens de consultatie.
-                    Afspraken die niet minimaal 24 uur van tevoren worden geannuleerd, kunnen in rekening worden gebracht.
-                </p>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Highlights / Lowlights (Folies)</div>
+                        <div class="price-description">Voor diepte en dimensie. Prijs voor half/heel hoofd.</div>
+                    </div>
+                    <div class="price-value">vanaf € 110,-</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Toner / Glossing</div>
+                        <div class="price-description">Voor kleurcorrectie, glans en verfrissing.</div>
+                    </div>
+                    <div class="price-value">vanaf € 40,-</div>
+                </div>
             </div>
-            <!-- Modal Footer -->
-            <div class="p-4 bg-gold-light/30 border-t border-neutral-200 text-right flex-shrink-0">
-                <button id="close-price-modal-button-footer" class="px-4 py-2 bg-neutral-200 text-neutral-700 rounded-md hover:bg-neutral-300 transition-colors text-sm font-medium">Sluiten</button>
+
+            <div class="price-category">
+                <h3 class="price-category-title">Luxe Verzorging & Extra's</h3>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Intensief Haarmasker op Maat</div>
+                        <div class="price-description">Diepe voeding en herstel, afgestemd op uw haartype.</div>
+                    </div>
+                    <div class="price-value">€ 25,-</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Keratine Behandeling (gladmakend)</div>
+                        <div class="price-description">Voor langdurig glad, pluisvrij en glanzend haar.</div>
+                    </div>
+                    <div class="price-value">Op aanvraag</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Olaplex / K18 Herstelbehandeling</div>
+                        <div class="price-description">Intensief herstel voor beschadigd haar.</div>
+                    </div>
+                    <div class="price-value">vanaf € 35,- (toevoeging)</div>
+                </div>
+                 <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Wenkbrauwen Modelleren & Stylen</div>
+                    </div>
+                    <div class="price-value">€ 18,-</div>
+                </div>
+                <div class="price-item">
+                    <div class="price-item-details">
+                        <div class="price-name">Wenkbrauwen Verven</div>
+                    </div>
+                    <div class="price-value">€ 15,-</div>
+                </div>
+            </div>
+
+            <div class="price-disclaimer">
+                <p>Alle prijzen zijn indicatief en 'vanaf'. De definitieve prijs wordt bepaald na een persoonlijk consult en is afhankelijk van haarlengte, dikte, benodigde tijd en productgebruik. Voor vragen of een exacte prijsopgave, neem gerust contact op.</p>
+                <p>Annuleringen dienen minimaal 24 uur van tevoren te worden doorgegeven. Bij latere annulering of no-show kunnen kosten in rekening worden gebracht.</p>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript - Improved & Organized -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Elements References ---
-            const header = document.getElementById('main-header');
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuLinks = mobileMenu?.querySelectorAll('.mobile-menu-link');
-            const menuIcon = mobileMenuButton?.querySelector('i');
-            const priceModal = document.getElementById('price-modal');
-            const openPriceModalButton = document.getElementById('open-price-modal-button');
-            const closePriceModalButton = document.getElementById('close-price-modal-button');
-            const closePriceModalButtonFooter = document.getElementById('close-price-modal-button-footer');
-            const priceModalContent = priceModal?.querySelector('.bg-white'); // div inside modal
-            const floatingReferral = document.getElementById('floating-referral');
-            const scrollTopBtn = document.getElementById('scroll-top-btn');
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- Elements ---
+        const header = document.getElementById('main-header');
+        const mobileToggleBtn = document.getElementById('mobile-menu-toggler');
+        const navMenuList = document.getElementById('nav-menu-list');
+        const navLinks = navMenuList.querySelectorAll('.nav-link');
+        const priceModal = document.getElementById('price-modal');
+        const openPriceModalBtns = document.querySelectorAll('.open-price-modal-btn');
+        const priceModalCloseIcon = document.getElementById('price-modal-close-icon');
+        const currentYearSpan = document.getElementById('current-year');
 
-            // --- Constants ---
-            const SCROLL_THRESHOLD = 50;
-            const FLOATING_REFERRAL_THRESHOLD = 300;
-            const SCROLL_TOP_THRESHOLD = 400;
-
-            // --- Header, Floating Buttons & Scroll Handling ---
-            const handleScrollEvents = () => {
-                if (!header) return;
-                const scrollY = window.scrollY;
-
-                // Header styling
-                if (scrollY > SCROLL_THRESHOLD) {
-                    header.classList.add('header-scrolled');
-                } else {
-                    header.classList.remove('header-scrolled');
-                }
-
-                // Floating Referral Button Visibility
-                if (floatingReferral) {
-                    if (scrollY > FLOATING_REFERRAL_THRESHOLD) {
-                        if (floatingReferral.classList.contains('hidden')) {
-                            floatingReferral.classList.remove('hidden');
-                            void floatingReferral.offsetWidth; // Force reflow
-                            floatingReferral.classList.remove('opacity-0');
-                            floatingReferral.classList.add('opacity-100');
-                        }
-                    } else {
-                        if (!floatingReferral.classList.contains('hidden') && !floatingReferral.classList.contains('opacity-0')) {
-                            floatingReferral.classList.remove('opacity-100');
-                            floatingReferral.classList.add('opacity-0');
-                            setTimeout(() => {
-                                if (window.scrollY <= FLOATING_REFERRAL_THRESHOLD) {
-                                    floatingReferral.classList.add('hidden');
-                                }
-                            }, 300); // Match transition duration
-                        }
-                    }
-                }
-
-                // Scroll To Top Button Visibility
-                if (scrollTopBtn) {
-                    if (scrollY > SCROLL_TOP_THRESHOLD) {
-                        if (scrollTopBtn.classList.contains('hidden')) {
-                            scrollTopBtn.classList.remove('hidden');
-                            void scrollTopBtn.offsetWidth; // Force reflow
-                            scrollTopBtn.classList.remove('opacity-0');
-                            scrollTopBtn.classList.add('opacity-100');
-                        }
-                    } else {
-                        if (!scrollTopBtn.classList.contains('hidden') && !scrollTopBtn.classList.contains('opacity-0')) {
-                            scrollTopBtn.classList.remove('opacity-100');
-                            scrollTopBtn.classList.add('opacity-0');
-                            setTimeout(() => {
-                                if (window.scrollY <= SCROLL_TOP_THRESHOLD) {
-                                    scrollTopBtn.classList.add('hidden');
-                                }
-                            }, 300); // Match transition duration
-                        }
-                    }
-                }
-            };
-
-            // Scroll to top function
-            const scrollToTop = () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            };
-
-            window.addEventListener('scroll', handleScrollEvents, { passive: true });
-            handleScrollEvents(); // Initial check
-
-            if (scrollTopBtn) {
-                scrollTopBtn.addEventListener('click', scrollToTop);
-            }
-
-            // --- Improved Mobile Menu ---
-            const toggleMobileMenu = () => {
-                if (!mobileMenu || !menuIcon || !mobileMenuButton) return;
-                const isOpen = mobileMenu.classList.toggle('menu-open');
-                mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
-
-                menuIcon.classList.toggle('fa-bars', !isOpen);
-                menuIcon.classList.toggle('fa-times', isOpen);
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-            };
-
-            if (mobileMenuButton && mobileMenu) {
-                mobileMenuButton.addEventListener('click', toggleMobileMenu);
-                mobileMenuLinks?.forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (mobileMenu.classList.contains('menu-open')) toggleMobileMenu();
-                    });
-                });
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && mobileMenu.classList.contains('menu-open')) toggleMobileMenu();
-                });
-                document.addEventListener('click', (e) => {
-                    if (mobileMenu.classList.contains('menu-open') &&
-                        !mobileMenu.contains(e.target) &&
-                        !mobileMenuButton.contains(e.target)) {
-                        toggleMobileMenu();
-                    }
-                });
-            }
-
-            // --- Price Modal Handling ---
-            const openPriceModal = () => {
-                if (!priceModal || !priceModalContent) return;
-                priceModal.classList.remove('hidden');
-                priceModal.classList.add('flex');
-                document.body.style.overflow = 'hidden';
-                requestAnimationFrame(() => { // Ensures transition fires after 'flex' is applied
-                    priceModal.classList.remove('opacity-0');
-                    priceModalContent.classList.remove('scale-95');
-                    priceModalContent.classList.add('scale-100'); // Add scale-100 for modal content itself
-                });
-                closePriceModalButton?.focus();
-            };
-
-            const closePriceModal = () => {
-                if (!priceModal || !priceModalContent || priceModal.classList.contains('hidden')) return;
-                priceModal.classList.add('opacity-0');
-                priceModalContent.classList.remove('scale-100'); // Remove scale-100
-                priceModalContent.classList.add('scale-95');     // Add scale-95 back
-
-                setTimeout(() => {
-                    priceModal.classList.add('hidden');
-                    priceModal.classList.remove('flex');
-                    document.body.style.overflow = '';
-                }, 300); // Match transition duration
-                openPriceModalButton?.focus();
-            };
-
-
-            if (openPriceModalButton && priceModal && closePriceModalButton && closePriceModalButtonFooter) {
-                openPriceModalButton.addEventListener('click', openPriceModal);
-                closePriceModalButton.addEventListener('click', closePriceModal);
-                closePriceModalButtonFooter.addEventListener('click', closePriceModal);
-                priceModal.addEventListener('click', (event) => {
-                    if (event.target === priceModal) closePriceModal();
-                });
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && !priceModal.classList.contains('hidden')) closePriceModal();
-                });
-            }
-
-            // --- Animation on Scroll ---
-            const animatedElements = document.querySelectorAll('.animate-on-scroll');
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
-
-            const animationObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const element = entry.target;
-                        const animationName = getComputedStyle(element).getPropertyValue('--animation-name').trim() || 'fadeIn';
-                        const delay = element.getAttribute('data-delay') || '0s';
-                        const duration = '0.8s';
-                        const fillMode = 'forwards';
-                        const easing = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-
-                        element.style.animation = `${animationName} ${duration} ${easing} ${delay} ${fillMode}`;
-                        element.classList.add('is-visible');
-                        observer.unobserve(element);
-                    }
-                });
-            }, observerOptions);
-            animatedElements.forEach(el => animationObserver.observe(el));
-
-            // --- Initialize Fancybox ---
-            if (typeof Fancybox !== 'undefined') {
-                Fancybox.bind("[data-fancybox]", {
-                    Thumbs: { showOnStart: false },
-                    Images: { zoom: false, wheel: false }, // Disable mouse wheel zoom on image
-                    Toolbar: {
-                        display: {
-                            left: ["infobar"],
-                            middle: [],
-                            right: ["close"],
-                        },
-                    },
-                    caption: function (fancybox, slide) {
-                        return slide.triggerEl?.dataset.caption || "";
-                    }
-                });
+        // --- Header Scroll Effect ---
+        const handleHeaderScroll = () => {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
             } else {
-                console.warn("Fancybox library not found or not loaded yet.");
+                header.classList.remove('header-scrolled');
             }
+        };
+        window.addEventListener('scroll', handleHeaderScroll);
+        handleHeaderScroll(); // Initial check
 
-            // --- Update Footer Year ---
-            const currentYearSpan = document.getElementById('current-year');
-            if (currentYearSpan) {
-                currentYearSpan.textContent = new Date().getFullYear();
-            }
+        // --- Mobile Menu Toggle ---
+        if (mobileToggleBtn && navMenuList) {
+            mobileToggleBtn.addEventListener('click', () => {
+                navMenuList.classList.toggle('active');
+                const isExpanded = navMenuList.classList.contains('active');
+                mobileToggleBtn.setAttribute('aria-expanded', isExpanded);
+                mobileToggleBtn.querySelector('i').classList.toggle('fa-bars', !isExpanded);
+                mobileToggleBtn.querySelector('i').classList.toggle('fa-times', isExpanded);
+            });
+        }
 
-            // --- Smooth Scroll for Internal Links ---
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#') { // Exclude empty hashes
-                        const targetId = href.substring(1);
-                        const targetElement = document.getElementById(targetId);
-                        if (targetElement) {
-                            e.preventDefault(); // Prevent default only if target exists
-                            const headerHeight = header ? header.offsetHeight : 70; // Get dynamic header height or fallback
-                            const elementPosition = targetElement.getBoundingClientRect().top;
-                            const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+        // --- Smooth Scroll & Active Nav Link & Close Mobile Menu ---
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#') && href.length > 1) {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        const headerHeight = header.offsetHeight;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
 
-                            window.scrollTo({
-                                top: offsetPosition,
-                                behavior: 'smooth'
-                            });
-                            // Optionally close mobile menu if open
-                            if (mobileMenu && mobileMenu.classList.contains('menu-open')) {
-                                toggleMobileMenu();
-                            }
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+
+                        // Update active link
+                        navLinks.forEach(nav => nav.classList.remove('active'));
+                        this.classList.add('active');
+
+                        // Close mobile menu if open
+                        if (navMenuList.classList.contains('active')) {
+                            navMenuList.classList.remove('active');
+                            mobileToggleBtn.setAttribute('aria-expanded', 'false');
+                            mobileToggleBtn.querySelector('i').classList.remove('fa-times');
+                            mobileToggleBtn.querySelector('i').classList.add('fa-bars');
                         }
                     }
-                });
+                }
             });
         });
+
+        // --- Price Modal ---
+        const openModal = () => {
+            if (priceModal) priceModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        };
+        const closeModal = () => {
+            if (priceModal) priceModal.classList.remove('active');
+            document.body.style.overflow = ''; // Restore background scroll
+        };
+
+        openPriceModalBtns.forEach(btn => {
+            btn.addEventListener('click', openModal);
+        });
+
+        if (priceModalCloseIcon) {
+            priceModalCloseIcon.addEventListener('click', closeModal);
+        }
+
+        if (priceModal) {
+            priceModal.addEventListener('click', (event) => { // Close on backdrop click
+                if (event.target === priceModal) {
+                    closeModal();
+                }
+            });
+        }
+        document.addEventListener('keydown', (event) => { // Close on Escape key
+            if (event.key === 'Escape' && priceModal && priceModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+        
+        // --- Update Active Nav Link on Scroll ---
+        const updateActiveNavLinkOnScroll = () => {
+            let currentSectionId = '';
+            const sections = document.querySelectorAll('main section[id]');
+            const scrollPosition = window.pageYOffset + header.offsetHeight + 50; // Offset for better accuracy
+
+            sections.forEach(section => {
+                if (scrollPosition >= section.offsetTop) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', updateActiveNavLinkOnScroll);
+        updateActiveNavLinkOnScroll(); // Initial check
+
+
+        // --- Footer Year ---
+        if (currentYearSpan) {
+            currentYearSpan.textContent = new Date().getFullYear();
+        }
+
+        // --- Fancybox Init (if you add it) ---
+        // Make sure Fancybox JS is linked in <head> if you use this
+        if (typeof Fancybox !== 'undefined') {
+            Fancybox.bind("[data-fancybox]", {
+                Thumbs: { showOnStart: false },
+                Images: { zoom: false, wheel: false },
+                Toolbar: {
+                    display: {
+                        left: ["infobar"],
+                        middle: [],
+                        right: ["close"],
+                    },
+                },
+                caption: function (fancybox, slide) {
+                    return slide.triggerEl?.dataset.caption || "";
+                }
+            });
+        } else {
+            // console.warn("Fancybox library not found or not loaded yet.");
+        }
+
+    });
     </script>
 </body>
 </html>
